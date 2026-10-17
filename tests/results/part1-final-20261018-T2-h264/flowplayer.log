@@ -1,0 +1,232 @@
+2026-10-17T19:24:58.918Z [21052] START Qt=6.12.0 PID=12524
+2026-10-17T19:24:58.918Z [21052] QT_APP_READY_MS=21
+2026-10-17T19:24:59.182Z [21052] threaded render loop
+2026-10-17T19:24:59.182Z [21052] Using sg animation driver
+2026-10-17T19:24:59.182Z [21052] Animation Driver: using vsync: 13.34 ms
+2026-10-17T19:24:59.183Z [21052] WINDOW_CREATED_MS=286
+2026-10-17T19:24:59.192Z [21052] SHOW_CALLED_MS=295
+2026-10-17T19:24:59.306Z [20788] Animation Driver: using vsync: 13.34 ms
+2026-10-17T19:24:59.306Z [20788] Creating QRhi with backend OpenGL for window 0x38af7f690 (wflags 0xC20C80B)
+  Graphics API debug/validation layers: 0
+  Debug markers: 0
+  Timestamps: 0
+  Prefer software device: 0
+  Shader/pipeline cache collection: 0
+2026-10-17T19:24:59.332Z [20788] Created OpenGL context QSurfaceFormat(version 4.6, options QFlags<QSurfaceFormat::FormatOption>(DeprecatedFunctions), depthBufferSize 24, redBufferSize 8, greenBufferSize 8, blueBufferSize 8, alphaBufferSize 8, stencilBufferSize 8, samples 0, swapBehavior QSurfaceFormat::DoubleBuffer, swapInterval 1, colorSpace QColorSpace(QColorSpace::SRgb, QColorSpace::Primaries::SRgb, QColorSpace::TransferFunction::SRgb), profile  QSurfaceFormat::CompatibilityProfile)
+2026-10-17T19:24:59.334Z [20788] OpenGL VENDOR: NVIDIA Corporation RENDERER: NVIDIA GeForce RTX 3070/PCIe/SSE2 VERSION: 4.6.0 NVIDIA 617.42
+2026-10-17T19:24:59.335Z [20788] Created QRhi 0x17c6d8f1aa0 for window 0x38af7f690
+2026-10-17T19:24:59.336Z [20788] Attempting to seed pipeline cache for QRhi 0x17c6d8f1aa0 from 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-17T19:24:59.336Z [20788] Seeded pipeline cache with 5 program binaries
+2026-10-17T19:24:59.336Z [20788] MSAA sample count for the swapchain is 1. Alpha channel requested = no.
+2026-10-17T19:24:59.336Z [20788] rhi texture atlas dimensions: 2048x1024
+2026-10-17T19:24:59.336Z [21052] FIRST_SWAP_MS=440
+2026-10-17T19:24:59.357Z [21052] QML_LOADED_MS=460
+2026-10-17T19:24:59.366Z [20684] option config=no: success
+2026-10-17T19:24:59.367Z [20684] option vo=libmpv: success
+2026-10-17T19:24:59.367Z [20684] option idle=yes: success
+2026-10-17T19:24:59.367Z [20684] option keep-open=yes: success
+2026-10-17T19:24:59.367Z [20684] option terminal=no: success
+2026-10-17T19:24:59.367Z [20684] option load-scripts=no: success
+2026-10-17T19:24:59.367Z [20684] option ytdl=no: success
+2026-10-17T19:24:59.367Z [20684] option osc=no: success
+2026-10-17T19:24:59.367Z [20684] option osd-level=0: success
+2026-10-17T19:24:59.367Z [20684] option osd-font-provider=none: success
+2026-10-17T19:24:59.367Z [20684] option input-default-bindings=no: success
+2026-10-17T19:24:59.367Z [20684] option input-vo-keyboard=no: success
+2026-10-17T19:24:59.367Z [20684] option input-cursor=no: success
+2026-10-17T19:24:59.367Z [20684] option cursor-autohide=no: success
+2026-10-17T19:24:59.367Z [20684] option resume-playback=no: success
+2026-10-17T19:24:59.367Z [20684] option save-position-on-quit=no: success
+2026-10-17T19:24:59.367Z [20684] option hwdec=nvdec,d3d11va-copy: success
+2026-10-17T19:24:59.367Z [20684] option hwdec-codecs=all: success
+2026-10-17T19:24:59.367Z [20684] option hwdec-threads=1: success
+2026-10-17T19:24:59.367Z [20684] option gpu-hwdec-interop=cuda: success
+2026-10-17T19:24:59.367Z [20684] option vd-lavc-dr=yes: success
+2026-10-17T19:24:59.367Z [20684] option scale=bilinear: success
+2026-10-17T19:24:59.367Z [20684] option cscale=bilinear: success
+2026-10-17T19:24:59.367Z [20684] option dscale=bilinear: success
+2026-10-17T19:24:59.367Z [20684] option correct-downscaling=no: success
+2026-10-17T19:24:59.367Z [20684] option deband=no: success
+2026-10-17T19:24:59.367Z [20684] option interpolation=no: success
+2026-10-17T19:24:59.367Z [20684] option video-sync=audio: success
+2026-10-17T19:24:59.367Z [20684] option tone-mapping=bt.2390: success
+2026-10-17T19:24:59.367Z [20684] option hdr-compute-peak=no: success
+2026-10-17T19:24:59.367Z [20684] option cache=yes: success
+2026-10-17T19:24:59.367Z [20684] option cache-secs=20: success
+2026-10-17T19:24:59.367Z [20684] option demuxer-donate-buffer=no: success
+2026-10-17T19:24:59.367Z [20684] option demuxer-max-bytes=150MiB: success
+2026-10-17T19:24:59.367Z [20684] option demuxer-max-back-bytes=50MiB: success
+2026-10-17T19:24:59.367Z [20684] option demuxer-readahead-secs=20: success
+2026-10-17T19:24:59.367Z [20684] option ao=wasapi: success
+2026-10-17T19:24:59.367Z [20684] option audio-exclusive=no: success
+2026-10-17T19:24:59.367Z [20684] option audio-channels=auto-safe: success
+2026-10-17T19:24:59.367Z [20684] option volume-max=150: success
+2026-10-17T19:24:59.367Z [20684] option sub-auto=fuzzy: success
+2026-10-17T19:24:59.367Z [20684] option sub-file-paths=Subs:subs:Subtitles:Sub: success
+2026-10-17T19:24:59.367Z [20684] option sub-ass=yes: success
+2026-10-17T19:24:59.367Z [20684] option blend-subtitles=no: success
+2026-10-17T19:24:59.367Z [20684] option msg-level=vd=v,vo=v: success
+2026-10-17T19:24:59.371Z [20684] mpv [cplayer/v] Waiting for scripts...
+2026-10-17T19:24:59.374Z [20684] mpv [cplayer/v] Done loading scripts.
+2026-10-17T19:24:59.414Z [20684] mpv [libmpv_render/v] GL_VERSION='4.6.0 NVIDIA 617.42'
+2026-10-17T19:24:59.414Z [20684] mpv [libmpv_render/v] Detected desktop OpenGL 4.6.
+2026-10-17T19:24:59.414Z [20684] mpv [libmpv_render/v] GL_VENDOR='NVIDIA Corporation'
+2026-10-17T19:24:59.414Z [20684] mpv [libmpv_render/v] GL_RENDERER='NVIDIA GeForce RTX 3070/PCIe/SSE2'
+2026-10-17T19:24:59.414Z [20684] mpv [libmpv_render/v] GL_SHADING_LANGUAGE_VERSION='4.60 NVIDIA'
+2026-10-17T19:24:59.415Z [20684] mpv [libmpv_render/v] Loaded extension WGL_EXT_swap_control.
+2026-10-17T19:24:59.415Z [20684] mpv [libmpv_render/v] Loaded extension GL_KHR_debug.
+2026-10-17T19:24:59.415Z [20684] mpv [libmpv_render/v] GL_*_swap_control extension missing.
+2026-10-17T19:24:59.415Z [20684] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-17T19:24:59.416Z [20684] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-17T19:24:59.416Z [20684] mpv [libmpv_render/v] Loading hwdec driver 'cuda'
+2026-10-17T19:24:59.479Z [20788] Render context created: OpenGL, threaded Qt Quick, same scene
+2026-10-17T19:24:59.480Z [21052] OPEN_FILE E:\Codes\FlowPlayer\tests\media\h264-1080p60.mkv
+2026-10-17T19:24:59.480Z [20684] mpv [cplayer/v] Set property: demuxer-max-bytes=150MiB -> 1
+2026-10-17T19:24:59.480Z [20684] mpv [cplayer/v] Running hook: auto_profiles/on_before_start_file
+2026-10-17T19:24:59.480Z [20684] mpv [cplayer/v] Failed sending hook command auto_profiles/on_before_start_file. Removing hook.
+2026-10-17T19:24:59.480Z [20684] mpv [cplayer/v] Running hook: auto_profiles/on_load
+2026-10-17T19:24:59.480Z [20684] mpv [cplayer/v] Failed sending hook command auto_profiles/on_load. Removing hook.
+2026-10-17T19:24:59.481Z [20684] mpv [ifo_dvda/v] Opening E:\Codes\FlowPlayer\tests\media\h264-1080p60.mkv
+2026-10-17T19:24:59.481Z [20684] mpv [ifo_dvdnav/v] Opening E:\Codes\FlowPlayer\tests\media\h264-1080p60.mkv
+2026-10-17T19:24:59.481Z [20684] mpv [bdmv/bluray/v] Opening E:\Codes\FlowPlayer\tests\media\h264-1080p60.mkv
+2026-10-17T19:24:59.481Z [20684] mpv [file/v] Opening E:\Codes\FlowPlayer\tests\media\h264-1080p60.mkv
+2026-10-17T19:24:59.481Z [20684] mpv [demux/v] Trying demuxers for level=normal.
+2026-10-17T19:24:59.481Z [20684] mpv [mkv/v] Deferring reading cues.
+2026-10-17T19:24:59.481Z [20684] mpv [mkv/v] All headers are parsed!
+2026-10-17T19:24:59.482Z [20684] mpv [demux/v] Detected file format: Matroska
+2026-10-17T19:24:59.482Z [20684] mpv [cplayer/v] Opening done: E:\Codes\FlowPlayer\tests\media\h264-1080p60.mkv
+2026-10-17T19:24:59.482Z [20684] mpv [find_files/v] Loading external files in E:\Codes\FlowPlayer\tests\media\
+2026-10-17T19:24:59.482Z [20684] mpv [cplayer/v] Running hook: auto_profiles/on_preloaded
+2026-10-17T19:24:59.482Z [20684] mpv [cplayer/v] Failed sending hook command auto_profiles/on_preloaded. Removing hook.
+2026-10-17T19:24:59.482Z [20684] mpv [cplayer/v] Running hook: auto_profiles/on_loaded
+2026-10-17T19:24:59.482Z [20684] mpv [cplayer/v] Failed sending hook command auto_profiles/on_loaded. Removing hook.
+2026-10-17T19:24:59.482Z [20684] mpv [mkv/v] select track 0
+2026-10-17T19:24:59.482Z [20684] mpv [mkv/v] select track 1
+2026-10-17T19:24:59.482Z [20684] mpv [cplayer/info] ● Video  --vid=1  (h264 1920x1080 60 fps)
+2026-10-17T19:24:59.482Z [20684] mpv [cplayer/info] ● Audio  --aid=1  (aac 1ch 48000 Hz)
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Container reported FPS: 60.000002
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Codec list:
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] h264 - H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] h264_qsv (h264) - H264 video (Intel Quick Sync Video acceleration)
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] h264_amf (h264) - H264 AMD AMF video decoder
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] h264_cuvid (h264) - Nvidia CUVID H264 decoder
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Opening decoder h264
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Looking at hwdec h264-nvdec...
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Trying hardware decoding via h264-nvdec.
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Requesting 1 threads for decoding.
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Pixel formats supported by decoder: vulkan cuda cuarray dxva2_vld d3d11va_vld d3d11 d3d12 vaapi yuv420p
+2026-10-17T19:24:59.483Z [20684] mpv [vd/v] Codec profile: High (0x64)
+2026-10-17T19:24:59.484Z [20684] mpv [vd/v] Allocated a fixed pool of 10 hw surfaces.
+2026-10-17T19:24:59.484Z [20684] mpv [vd/v] Requesting pixfmt 'cuda' from decoder.
+2026-10-17T19:24:59.503Z [20684] mpv [vd/v] Selected decoder: h264 - H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10
+2026-10-17T19:24:59.503Z [20684] mpv [vf/v] User filter list:
+2026-10-17T19:24:59.503Z [20684] mpv [vf/v] (empty)
+2026-10-17T19:24:59.503Z [20684] mpv [ad/v] Codec list:
+2026-10-17T19:24:59.503Z [20684] mpv [ad/v] aac - AAC (Advanced Audio Coding)
+2026-10-17T19:24:59.503Z [20684] mpv [ad/v] aac_fixed (aac) - AAC (Advanced Audio Coding)
+2026-10-17T19:24:59.503Z [20684] mpv [ad/v] Opening decoder aac
+2026-10-17T19:24:59.503Z [20684] mpv [ad/v] Requesting 1 threads for decoding.
+2026-10-17T19:24:59.504Z [20684] mpv [ad/v] Selected decoder: aac - AAC (Advanced Audio Coding)
+2026-10-17T19:24:59.504Z [20684] mpv [af/v] User filter list:
+2026-10-17T19:24:59.504Z [20684] mpv [af/v] (empty)
+2026-10-17T19:24:59.504Z [20684] mpv [cplayer/v] Starting playback...
+2026-10-17T19:24:59.504Z [21052] PLAYBACK_TIMER_POLICY active=1 success=1 error=0
+2026-10-17T19:24:59.506Z [20684] mpv [vd/info] Using hardware decoding (nvdec).
+2026-10-17T19:24:59.506Z [20684] mpv [vd/v] Decoder format: 1920x1080 cuda[nv12] auto/auto/auto/auto/auto CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.506Z [20684] mpv [vd/v] Using container aspect ratio.
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [in] 1920x1080 cuda[nv12] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [userdeint] 1920x1080 cuda[nv12] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [userdeint] (disabled)
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [autovflip] 1920x1080 cuda[nv12] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [autovflip] (disabled)
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [autorotate] 1920x1080 cuda[nv12] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [autorotate] (disabled)
+2026-10-17T19:24:59.506Z [20684] mpv [vf/v] [convert] 1920x1080 cuda[nv12] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.509Z [20684] mpv [vf/v] [out] 1920x1080 cuda[nv12] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.510Z [20684] mpv [af/v] [in] 48000Hz mono 1ch floatp
+2026-10-17T19:24:59.510Z [20684] mpv [af/v] [userspeed] 48000Hz mono 1ch floatp
+2026-10-17T19:24:59.510Z [20684] mpv [af/v] [userspeed] (disabled)
+2026-10-17T19:24:59.510Z [20684] mpv [af/v] [convert] 48000Hz mono 1ch floatp
+2026-10-17T19:24:59.510Z [20684] mpv [ao/v] Trying audio driver 'wasapi'
+2026-10-17T19:24:59.510Z [20684] mpv [ao/wasapi/v] requested format: 48000 Hz, mono channels, floatp
+2026-10-17T19:24:59.512Z [20684] mpv [ao/wasapi/v] No device specified. Selecting default.
+2026-10-17T19:24:59.514Z [20684] mpv [ao/wasapi/v] Selecting device '{84718fb8-0198-410b-9f81-65523877ac07}' (Speakers (Realtek(R) Audio))
+2026-10-17T19:24:59.514Z [20684] mpv [ao/wasapi/v] Monitoring changes in device {0.0.0.00000000}.{84718fb8-0198-410b-9f81-65523877ac07}
+2026-10-17T19:24:59.521Z [20684] mpv [ao/wasapi/v] Trying mono float (32/32 bits) @ 48000hz (shared) -> ok
+2026-10-17T19:24:59.521Z [20684] mpv [ao/wasapi/v] Accepted as mono float @ 48000hz -> mono float (32/32 bits) @ 48000hz (shared)
+2026-10-17T19:24:59.522Z [20684] mpv [ao/wasapi/v] Device period: default 10000 us, minimum 3000 us
+2026-10-17T19:24:59.532Z [20684] mpv [ao/wasapi/v] Buffer frame count: 1056 (22000 us)
+2026-10-17T19:24:59.532Z [20684] mpv [ao/wasapi/v] IAudioClock::GetFrequency gave a frequency of 192000.
+2026-10-17T19:24:59.532Z [20684] mpv [ao/wasapi/v] device buffer: 1056 samples.
+2026-10-17T19:24:59.532Z [20684] mpv [ao/wasapi/v] using soft-buffer of 9600 samples.
+2026-10-17T19:24:59.532Z [20684] mpv [cplayer/info] AO: [wasapi] 48000Hz mono 1ch float
+2026-10-17T19:24:59.532Z [20684] mpv [cplayer/v] AO: Description: Windows WASAPI audio output (event mode)
+2026-10-17T19:24:59.533Z [20684] mpv [autoconvert/v] inserting resampler
+2026-10-17T19:24:59.533Z [20684] mpv [swresample/v] format change, reinitializing resampler
+2026-10-17T19:24:59.533Z [20684] mpv [swresample/v] 48000Hz mono floatp -> 48000Hz mono float
+2026-10-17T19:24:59.533Z [20684] mpv [af/v] [out] 48000Hz mono 1ch float
+2026-10-17T19:24:59.535Z [20684] mpv [cplayer/info] VO: [libmpv] 1920x1080 cuda[nv12]
+2026-10-17T19:24:59.535Z [20684] mpv [cplayer/v] VO: Description: render API for libmpv
+2026-10-17T19:24:59.535Z [20684] mpv [vo/libmpv/v] reconfig to 1920x1080 cuda[nv12] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=1920x1080+0+0 A=none
+2026-10-17T19:24:59.548Z [20684] mpv [libmpv_render/v] Window size: 1468x826 (Borders: l=0 t=0 r=0 b=0)
+2026-10-17T19:24:59.548Z [20684] mpv [libmpv_render/v] Video source: 1920x1080 (1:1)
+2026-10-17T19:24:59.548Z [20684] mpv [libmpv_render/v] Video display: (0, 0) 1920x1080 -> (0, 0) 1468x826
+2026-10-17T19:24:59.548Z [20684] mpv [libmpv_render/v] Video scale: 0.764583/0.764815
+2026-10-17T19:24:59.548Z [20684] mpv [libmpv_render/v] OSD borders: l=0 t=0 r=0 b=0
+2026-10-17T19:24:59.548Z [20684] mpv [libmpv_render/v] Video borders: l=0 t=0 r=0 b=0
+2026-10-17T19:24:59.548Z [20684] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-17T19:24:59.550Z [20684] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-17T19:24:59.551Z [20684] mpv [libmpv_render/v] Dither to 8.
+2026-10-17T19:24:59.568Z [20684] mpv [cplayer/v] first video frame after restart shown
+2026-10-17T19:24:59.568Z [21052] FIRST_VIDEO_SWAP_MS=673
+2026-10-17T19:24:59.568Z [21052] ACTIVE_HWDEC=nvdec
+2026-10-17T19:24:59.571Z [20684] mpv [osd/libass/v] libass API version: 0x1705000
+2026-10-17T19:24:59.571Z [20684] mpv [osd/libass/v] libass source: meson, commit: 0.17.5-11-gf61db567e6593df3470e91594bcd4ad2d0473aff
+2026-10-17T19:24:59.572Z [20684] mpv [osd/libass/v] Shaper: FriBidi 1.0.17 (SIMPLE) HarfBuzz-ng 14.6.0 (COMPLEX)
+2026-10-17T19:24:59.572Z [20684] mpv [osd/libass/v] Setting up fonts...
+2026-10-17T19:24:59.572Z [20684] mpv [osd/libass/v] Done.
+2026-10-17T19:24:59.572Z [20684] mpv [cplayer/v] audio ready
+2026-10-17T19:24:59.572Z [20684] mpv [cplayer/v] starting audio playback
+2026-10-17T19:24:59.572Z [20684] mpv [cplayer/v] playback restart complete @ 0.000000, audio=playing, video=playing
+2026-10-17T19:25:09.191Z [21052] METRIC {"avSyncSeconds":1.6999999951083922e-06,"cacheBytes":33495632,"callbackToRenderMaxUs":20099,"callbacks":579,"dropped":0,"elapsedMs":10294,"hwdec":"nvdec","mpvRenderCallMaxUs":29093,"mute":true,"pause":false,"position":9.616999999999999,"renders":579,"windowActive":false}
+2026-10-17T19:25:19.181Z [21052] METRIC {"avSyncSeconds":1.9000000099356207e-06,"cacheBytes":44719872,"callbackToRenderMaxUs":22666,"callbacks":1179,"dropped":0,"elapsedMs":20284,"hwdec":"nvdec","mpvRenderCallMaxUs":20166,"mute":true,"pause":false,"position":19.617,"renders":1178,"windowActive":false}
+2026-10-17T19:25:29.182Z [21052] METRIC {"avSyncSeconds":1.5000000107290301e-06,"cacheBytes":55659872,"callbackToRenderMaxUs":19452,"callbacks":1779,"dropped":0,"elapsedMs":30285,"hwdec":"nvdec","mpvRenderCallMaxUs":14634,"mute":true,"pause":false,"position":29.616999999999997,"renders":1778,"windowActive":false}
+2026-10-17T19:25:39.183Z [21052] METRIC {"avSyncSeconds":2.099999983434797e-06,"cacheBytes":66319552,"callbackToRenderMaxUs":23430,"callbacks":2379,"dropped":0,"elapsedMs":40286,"hwdec":"nvdec","mpvRenderCallMaxUs":14407,"mute":true,"pause":false,"position":39.617,"renders":2378,"windowActive":false}
+2026-10-17T19:25:49.191Z [21052] METRIC {"avSyncSeconds":1.799999983453926e-06,"cacheBytes":72780432,"callbackToRenderMaxUs":19935,"callbacks":2980,"dropped":0,"elapsedMs":50294,"hwdec":"nvdec","mpvRenderCallMaxUs":18433,"mute":true,"pause":false,"position":49.617,"renders":2979,"windowActive":false}
+2026-10-17T19:25:59.181Z [21052] METRIC {"avSyncSeconds":1.7999999815110357e-06,"cacheBytes":70697856,"callbackToRenderMaxUs":20412,"callbacks":3579,"dropped":0,"elapsedMs":60284,"hwdec":"nvdec","mpvRenderCallMaxUs":38604,"mute":true,"pause":false,"position":59.617,"renders":3578,"windowActive":false}
+2026-10-17T19:26:09.190Z [21052] METRIC {"avSyncSeconds":4.799999979210323e-06,"cacheBytes":73454816,"callbackToRenderMaxUs":20417,"callbacks":4180,"dropped":0,"elapsedMs":70293,"hwdec":"nvdec","mpvRenderCallMaxUs":14264,"mute":true,"pause":false,"position":69.61699999999999,"renders":4179,"windowActive":false}
+2026-10-17T19:26:19.188Z [21052] METRIC {"avSyncSeconds":1.7999999783469e-06,"cacheBytes":75061920,"callbackToRenderMaxUs":21010,"callbacks":4779,"dropped":0,"elapsedMs":80291,"hwdec":"nvdec","mpvRenderCallMaxUs":14565,"mute":true,"pause":false,"position":79.61699999999999,"renders":4778,"windowActive":false}
+2026-10-17T19:26:29.190Z [21052] METRIC {"avSyncSeconds":1.9999999790465406e-06,"cacheBytes":72758208,"callbackToRenderMaxUs":19839,"callbacks":5380,"dropped":0,"elapsedMs":90293,"hwdec":"nvdec","mpvRenderCallMaxUs":18142,"mute":true,"pause":false,"position":89.61699999999999,"renders":5379,"windowActive":false}
+2026-10-17T19:26:39.181Z [21052] METRIC {"avSyncSeconds":1.399999973672461e-06,"cacheBytes":70476992,"callbackToRenderMaxUs":20291,"callbacks":5979,"dropped":0,"elapsedMs":100284,"hwdec":"nvdec","mpvRenderCallMaxUs":19784,"mute":true,"pause":false,"position":99.61699999999999,"renders":5978,"windowActive":false}
+2026-10-17T19:26:49.188Z [21052] METRIC {"avSyncSeconds":2.49999997647965e-06,"cacheBytes":72653200,"callbackToRenderMaxUs":19701,"callbacks":6579,"dropped":0,"elapsedMs":110291,"hwdec":"nvdec","mpvRenderCallMaxUs":17581,"mute":true,"pause":false,"position":109.61699999999999,"renders":6578,"windowActive":false}
+2026-10-17T19:26:59.181Z [21052] METRIC {"avSyncSeconds":1.6999999846167846e-06,"cacheBytes":70537456,"callbackToRenderMaxUs":36754,"callbacks":7179,"dropped":0,"elapsedMs":120284,"hwdec":"nvdec","mpvRenderCallMaxUs":14531,"mute":true,"pause":false,"position":119.61699999999999,"renders":7178,"windowActive":false}
+2026-10-17T19:27:09.189Z [21052] METRIC {"avSyncSeconds":1.8999999790714206e-06,"cacheBytes":73420432,"callbackToRenderMaxUs":21203,"callbacks":7779,"dropped":0,"elapsedMs":130292,"hwdec":"nvdec","mpvRenderCallMaxUs":14106,"mute":true,"pause":false,"position":129.617,"renders":7778,"windowActive":false}
+2026-10-17T19:27:19.184Z [21052] METRIC {"avSyncSeconds":1.4999999906062378e-06,"cacheBytes":75044640,"callbackToRenderMaxUs":20685,"callbacks":8379,"dropped":0,"elapsedMs":140287,"hwdec":"nvdec","mpvRenderCallMaxUs":14495,"mute":true,"pause":false,"position":139.617,"renders":8378,"windowActive":false}
+2026-10-17T19:27:29.190Z [21052] METRIC {"avSyncSeconds":3.2999999708682726e-06,"cacheBytes":73147664,"callbackToRenderMaxUs":22667,"callbacks":8980,"dropped":0,"elapsedMs":150293,"hwdec":"nvdec","mpvRenderCallMaxUs":14430,"mute":true,"pause":false,"position":149.617,"renders":8979,"windowActive":false}
+2026-10-17T19:27:39.190Z [21052] METRIC {"avSyncSeconds":2.0999999821580406e-06,"cacheBytes":70511728,"callbackToRenderMaxUs":20634,"callbacks":9579,"dropped":0,"elapsedMs":160293,"hwdec":"nvdec","mpvRenderCallMaxUs":27366,"mute":true,"pause":false,"position":159.617,"renders":9578,"windowActive":false}
+2026-10-17T19:27:49.189Z [21052] METRIC {"avSyncSeconds":2.299999997790181e-06,"cacheBytes":72817120,"callbackToRenderMaxUs":24656,"callbacks":10179,"dropped":0,"elapsedMs":170292,"hwdec":"nvdec","mpvRenderCallMaxUs":27178,"mute":true,"pause":false,"position":169.617,"renders":10178,"windowActive":false}
+2026-10-17T19:27:59.190Z [21052] METRIC {"avSyncSeconds":1.4999999796982966e-06,"cacheBytes":70608192,"callbackToRenderMaxUs":20393,"callbacks":10779,"dropped":0,"elapsedMs":180293,"hwdec":"nvdec","mpvRenderCallMaxUs":17188,"mute":true,"pause":false,"position":179.617,"renders":10778,"windowActive":false}
+2026-10-17T19:28:09.183Z [21052] METRIC {"avSyncSeconds":1.6999999949973699e-06,"cacheBytes":73454864,"callbackToRenderMaxUs":22972,"callbacks":11379,"dropped":0,"elapsedMs":190286,"hwdec":"nvdec","mpvRenderCallMaxUs":14400,"mute":true,"pause":false,"position":189.617,"renders":11378,"windowActive":false}
+2026-10-17T19:28:19.184Z [21052] METRIC {"avSyncSeconds":1.6999999877531646e-06,"cacheBytes":71403952,"callbackToRenderMaxUs":19786,"callbacks":11979,"dropped":0,"elapsedMs":200287,"hwdec":"nvdec","mpvRenderCallMaxUs":18487,"mute":true,"pause":false,"position":199.617,"renders":11978,"windowActive":false}
+2026-10-17T19:28:29.184Z [21052] METRIC {"avSyncSeconds":3.1999999793308476e-06,"cacheBytes":72910640,"callbackToRenderMaxUs":20268,"callbacks":12579,"dropped":0,"elapsedMs":210287,"hwdec":"nvdec","mpvRenderCallMaxUs":25571,"mute":true,"pause":false,"position":209.617,"renders":12578,"windowActive":false}
+2026-10-17T19:28:39.180Z [21052] METRIC {"avSyncSeconds":4.699999977930691e-06,"cacheBytes":70338336,"callbackToRenderMaxUs":22255,"callbacks":13179,"dropped":0,"elapsedMs":220283,"hwdec":"nvdec","mpvRenderCallMaxUs":31557,"mute":true,"pause":false,"position":219.617,"renders":13178,"windowActive":false}
+2026-10-17T19:28:49.190Z [21052] METRIC {"avSyncSeconds":2.4999999883312807e-06,"cacheBytes":72689968,"callbackToRenderMaxUs":19719,"callbacks":13780,"dropped":0,"elapsedMs":230293,"hwdec":"nvdec","mpvRenderCallMaxUs":18288,"mute":true,"pause":false,"position":229.617,"renders":13779,"windowActive":false}
+2026-10-17T19:28:59.189Z [21052] METRIC {"avSyncSeconds":1.7999999821216583e-06,"cacheBytes":70698768,"callbackToRenderMaxUs":19844,"callbacks":14379,"dropped":0,"elapsedMs":240292,"hwdec":"nvdec","mpvRenderCallMaxUs":15034,"mute":true,"pause":false,"position":239.617,"renders":14378,"windowActive":false}
+2026-10-17T19:29:09.180Z [21052] METRIC {"avSyncSeconds":1.7999999881446183e-06,"cacheBytes":73403024,"callbackToRenderMaxUs":23036,"callbacks":14979,"dropped":0,"elapsedMs":250283,"hwdec":"nvdec","mpvRenderCallMaxUs":14224,"mute":true,"pause":false,"position":249.617,"renders":14978,"windowActive":false}
+2026-10-17T19:29:19.188Z [21052] METRIC {"avSyncSeconds":2.00000019046076e-06,"cacheBytes":71512128,"callbackToRenderMaxUs":20033,"callbacks":15579,"dropped":0,"elapsedMs":260291,"hwdec":"nvdec","mpvRenderCallMaxUs":28390,"mute":true,"pause":false,"position":259.61699999999996,"renders":15578,"windowActive":false}
+2026-10-17T19:29:29.184Z [21052] METRIC {"avSyncSeconds":2.30000021039789e-06,"cacheBytes":73093712,"callbackToRenderMaxUs":20002,"callbacks":16179,"dropped":0,"elapsedMs":270287,"hwdec":"nvdec","mpvRenderCallMaxUs":28775,"mute":true,"pause":false,"position":269.61699999999996,"renders":16178,"windowActive":false}
+2026-10-17T19:29:39.181Z [21052] METRIC {"avSyncSeconds":1.3000002108132236e-06,"cacheBytes":70356288,"callbackToRenderMaxUs":22732,"callbacks":16779,"dropped":0,"elapsedMs":280284,"hwdec":"nvdec","mpvRenderCallMaxUs":14352,"mute":true,"pause":false,"position":279.61699999999996,"renders":16778,"windowActive":false}
+2026-10-17T19:29:49.185Z [21052] METRIC {"avSyncSeconds":1.7000002303368955e-06,"cacheBytes":72744976,"callbackToRenderMaxUs":39975,"callbacks":17379,"dropped":0,"elapsedMs":290288,"hwdec":"nvdec","mpvRenderCallMaxUs":14268,"mute":true,"pause":false,"position":289.61699999999996,"renders":17378,"windowActive":false}
+2026-10-17T19:29:59.192Z [21052] METRIC {"avSyncSeconds":2.1000001913240585e-06,"cacheBytes":70536800,"callbackToRenderMaxUs":19679,"callbacks":17979,"dropped":0,"elapsedMs":300295,"hwdec":"nvdec","mpvRenderCallMaxUs":14220,"mute":true,"pause":false,"position":299.61699999999996,"renders":17978,"windowActive":false}
+2026-10-17T19:30:09.190Z [21052] METRIC {"avSyncSeconds":1.4000001770930748e-06,"cacheBytes":73560416,"callbackToRenderMaxUs":23316,"callbacks":18580,"dropped":0,"elapsedMs":310293,"hwdec":"nvdec","mpvRenderCallMaxUs":14025,"mute":true,"pause":false,"position":309.61699999999996,"renders":18579,"windowActive":false}
+2026-10-17T19:30:19.185Z [21052] METRIC {"avSyncSeconds":1.8000002001417048e-06,"cacheBytes":71330720,"callbackToRenderMaxUs":25436,"callbacks":19179,"dropped":0,"elapsedMs":320288,"hwdec":"nvdec","mpvRenderCallMaxUs":15229,"mute":true,"pause":false,"position":319.61699999999996,"renders":19178,"windowActive":false}
+2026-10-17T19:30:19.192Z [21052] CLOSE_REQUEST stop playback asynchronously before releasing the scene graph
+2026-10-17T19:30:19.195Z [20684] mpv [cplayer/v] EOF code: 4
+2026-10-17T19:30:19.197Z [20684] mpv [cplayer/v] finished playback, success (reason 2)
+2026-10-17T19:30:19.216Z [21052] METRIC {"avSyncSeconds":1.6000001988314416e-06,"cacheBytes":71330720,"callbackToRenderMaxUs":11859,"callbacks":19180,"dropped":0,"elapsedMs":320320,"hwdec":"nvdec","mpvRenderCallMaxUs":14235,"mute":true,"pause":false,"position":319.633,"renders":19180,"windowActive":false}
+2026-10-17T19:30:19.216Z [21052] PLAYBACK_TIMER_POLICY active=0 success=1 error=0
+2026-10-17T19:30:19.221Z [20788] mpv_render_context_free on render thread; GL current=1
+2026-10-17T19:30:19.247Z [20788] Total time spent on pipeline creation during the lifetime of the QRhi 0x17c6d8f1aa0 was 0 ms
+2026-10-17T19:30:19.247Z [20788] Writing pipeline cache contents (52063 bytes) for QRhi 0x17c6d8f1aa0 to 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-17T19:30:19.262Z [20684] mpv_terminate_destroy on event worker (render context must already be freed)
+2026-10-17T19:30:19.264Z [21052] CLEAN_EXIT

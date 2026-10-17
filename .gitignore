@@ -1,0 +1,11 @@
+/.tools/
+/deps/
+/build/
+/out/
+/tests/media/
+/tests/results/
+/tests/reference-f8e3/*.exe
+/tests/*.log
+/qt-repository.html
+/aqtinstall.log
+__pycache__/

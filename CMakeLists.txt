@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 3.25)
+project(FlowPlayer VERSION 0.1.0 LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+find_package(Qt6 6.12.0 EXACT REQUIRED COMPONENTS Core Gui Qml Quick)
+qt_policy(SET QTP0004 NEW)
+set(MPV_ROOT "${CMAKE_SOURCE_DIR}/deps/mpv" CACHE PATH "Pinned libmpv development build")
+add_library(mpv SHARED IMPORTED)
+set_target_properties(mpv PROPERTIES IMPORTED_IMPLIB "${MPV_ROOT}/mpv.lib" IMPORTED_LOCATION "${MPV_ROOT}/libmpv-2.dll" INTERFACE_INCLUDE_DIRECTORIES "${MPV_ROOT}/include")
+add_executable(FlowPlayerSpike WIN32 tests/spike.cpp)
+target_link_libraries(FlowPlayerSpike PRIVATE Qt6::Quick Qt6::OpenGL mpv)
+target_compile_definitions(FlowPlayerSpike PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+add_custom_command(TARGET FlowPlayerSpike POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MPV_ROOT}/libmpv-2.dll" "$<TARGET_FILE_DIR:FlowPlayerSpike>")
+qt_add_executable(FlowPlayer WIN32
+    src/main.cpp src/core/Log.cpp src/core/Log.h
+    src/core/MpvController.cpp src/core/MpvController.h
+    src/core/MpvRenderItem.cpp src/core/MpvRenderItem.h
+    src/window/FramelessWindow.cpp src/window/FramelessWindow.h
+    src/window/NativeEventFilter.cpp src/window/NativeEventFilter.h)
+target_link_libraries(FlowPlayer PRIVATE Qt6::Core Qt6::Gui Qt6::Qml Qt6::Quick Qt6::OpenGL mpv dwmapi ole32 shell32 uuid delayimp)
+target_link_options(FlowPlayer PRIVATE "/DELAYLOAD:libmpv-2.dll")
+target_link_options(FlowPlayer PRIVATE "/MAP:${CMAKE_BINARY_DIR}/FlowPlayer.map")
+target_compile_definitions(FlowPlayer PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
+set_source_files_properties(src/ui/Main.qml PROPERTIES QT_RESOURCE_ALIAS "ui/Main.qml")
+qt_add_qml_module(FlowPlayer
+    URI FlowPlayerUi VERSION 1.0 NO_PLUGIN
+    RESOURCE_PREFIX "/" NO_RESOURCE_TARGET_PATH
+    QML_FILES src/ui/Main.qml)
+add_custom_command(TARGET FlowPlayer POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MPV_ROOT}/libmpv-2.dll" "$<TARGET_FILE_DIR:FlowPlayer>")

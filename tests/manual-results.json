@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-18",
+  "source": "User reported: my tests passed",
+  "executableSha256": "879f8ceaa913567c1dcdafd21d9253a028d121c9f13cc76cfea3769b0d3b3269",
+  "overlayAndInput": "passed",
+  "fileOpening": "passed",
+  "dragResizeAspect": "passed",
+  "snapLayouts": "passed",
+  "pauseMinimizeRestore": "passed",
+  "note": "User-reported visual/functional results; no instrumented timing, frame-drop or CPU figures inferred. Audio tests were muted."
+}

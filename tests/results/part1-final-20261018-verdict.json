@@ -1,0 +1,43 @@
+{
+  "accepted": false,
+  "checks": {
+    "singleTestedExecutable": true,
+    "hevcFiveMinutesZeroDrops": true,
+    "allPlaybackNoDrops": false,
+    "hevcCpuBelowFivePercent": true,
+    "ramWithinUser500MBLimit": true,
+    "pauseSixtySecondsIdle": true,
+    "twentyCleanExits": true,
+    "startupWithinUserApprovedTarget": true,
+    "localOpenFirstFrameWithin300Ms": true,
+    "manualChecksUserReportedPassed": true,
+    "allAutomatedRunsMutedAndNonActivating": true
+  },
+  "executableSha256": "f8e3d330c6898ea46bda22d06c0d06e830739cad7d15efe1077b80ec5ebf4e7c",
+  "cases": [
+    "part1-final-20261018-T1-hevc",
+    "part1-final-20261018-T2-h264",
+    "part1-final-20261018-T2-vp9"
+  ],
+  "pauseCase": "part1-final-20261018-T6-pause",
+  "exitCase": "part1-final-20261018-T8-exit",
+  "manualEvidence": {
+    "date": "2026-10-18",
+    "source": "User reported: my tests passed",
+    "executableSha256": "879f8ceaa913567c1dcdafd21d9253a028d121c9f13cc76cfea3769b0d3b3269",
+    "overlayAndInput": "passed",
+    "fileOpening": "passed",
+    "dragResizeAspect": "passed",
+    "snapLayouts": "passed",
+    "pauseMinimizeRestore": "passed",
+    "note": "User-reported visual/functional results; no instrumented timing, frame-drop or CPU figures inferred. Audio tests were muted."
+  },
+  "limits": {
+    "residentRamLimitBytes": 500000000,
+    "residentRamSource": "User on 2026-10-18 explicitly accepted RAM under 500 megabytes and requested no further RAM investigation.",
+    "startupTargetMs": 500,
+    "allowFirstDeploymentStartupDelay": true,
+    "firstFrameAfterOpenTargetMs": 300,
+    "startupExceptionSource": "User on 2026-10-18: Accept the first-deployment exception; keep normal launches under 500 ms."
+  }
+}

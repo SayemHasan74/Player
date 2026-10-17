@@ -1,0 +1,8 @@
+{
+  "residentRamLimitBytes": 500000000,
+  "residentRamSource": "User on 2026-10-18 explicitly accepted RAM under 500 megabytes and requested no further RAM investigation.",
+  "startupTargetMs": 500,
+  "allowFirstDeploymentStartupDelay": true,
+  "firstFrameAfterOpenTargetMs": 300,
+  "startupExceptionSource": "User on 2026-10-18: Accept the first-deployment exception; keep normal launches under 500 ms."
+}

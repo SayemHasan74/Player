@@ -1,0 +1,96 @@
+{
+  "file": "E:\\Codes\\FlowPlayer\\tests\\media\\hevc-4k60-main10.mkv",
+  "executable": "E:\\Codes\\FlowPlayer\\out\\FlowPlayer\\FlowPlayer.exe",
+  "executableSha256": "f8e3d330c6898ea46bda22d06c0d06e830739cad7d15efe1077b80ec5ebf4e7c",
+  "testMode": "muted, non-activating bottom window; desktop interaction not tested",
+  "exitCode": 0,
+  "wallSeconds": 321.1717506999994,
+  "samples": 293,
+  "logicalProcessors": 16,
+  "gpuScope": "whole adapter, includes desktop and other applications",
+  "cpuTotalPercent": {
+    "mean": 0.6895264505119454,
+    "max": 1.68125,
+    "min": 0.09375
+  },
+  "workingSetMiB": {
+    "mean": 451.3223522824232,
+    "max": 457.5234375,
+    "min": 416.48046875
+  },
+  "privateMiB": {
+    "mean": 1688.5785249573378,
+    "max": 1709.6875,
+    "min": 1669.15234375
+  },
+  "privateWorkingSetMiB": {
+    "mean": 381.00438619880543,
+    "max": 386.86328125,
+    "min": 346.22265625
+  },
+  "adapterGpuPercent": {
+    "mean": 27.47098976109215,
+    "max": 87.0,
+    "min": 6.0
+  },
+  "adapterDecoderPercent": {
+    "mean": 22.761092150170647,
+    "max": 41.0,
+    "min": 11.0
+  },
+  "timings": {
+    "QT_APP_READY_MS": 20,
+    "WINDOW_CREATED_MS": 283,
+    "SHOW_CALLED_MS": 292,
+    "FIRST_SWAP_MS": 438,
+    "QML_LOADED_MS": 458,
+    "FIRST_VIDEO_SWAP_MS": 717,
+    "externalLaunchToFirstSwapMs": 465.063,
+    "openToFirstVideoSwapMs": 127.0
+  },
+  "mpvFirst": {
+    "avSyncSeconds": 1.499999996212864e-06,
+    "cacheBytes": 82929952,
+    "callbackToRenderMaxUs": 19703,
+    "callbacks": 577,
+    "dropped": 0,
+    "elapsedMs": 10285,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 22865,
+    "mute": true,
+    "pause": false,
+    "position": 9.583,
+    "renders": 576,
+    "windowActive": false
+  },
+  "mpvLast": {
+    "avSyncSeconds": 3.000000198066788e-06,
+    "cacheBytes": 98491824,
+    "callbackToRenderMaxUs": 0,
+    "callbacks": 19177,
+    "dropped": 0,
+    "elapsedMs": 320309,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 0,
+    "mute": true,
+    "pause": false,
+    "position": 319.58299999999997,
+    "renders": 19177,
+    "windowActive": false
+  },
+  "cleanExit": true,
+  "diagnosticOnly": false,
+  "mutedThroughoutSamples": true,
+  "neverActivated": true,
+  "completedRequestedDuration": true,
+  "packetCacheEstimateMiB": 96.76251410045764,
+  "privateWsMinusPacketQueueMiB": {
+    "mean": 285.2085169214402,
+    "max": 293.80133056640625
+  },
+  "totalWsMinusPacketQueueMiB": {
+    "mean": 355.53687002362994,
+    "max": 364.46148681640625
+  },
+  "cacheAccountingNote": "Subtracts mpv packet-queue estimate, not measured allocator overhead; approximate only."
+}

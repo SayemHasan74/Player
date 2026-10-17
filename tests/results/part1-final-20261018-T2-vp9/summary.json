@@ -1,0 +1,96 @@
+{
+  "file": "E:\\Codes\\FlowPlayer\\tests\\media\\vp9-4k30.webm",
+  "executable": "E:\\Codes\\FlowPlayer\\out\\FlowPlayer\\FlowPlayer.exe",
+  "executableSha256": "f8e3d330c6898ea46bda22d06c0d06e830739cad7d15efe1077b80ec5ebf4e7c",
+  "testMode": "muted, non-activating bottom window; desktop interaction not tested",
+  "exitCode": 0,
+  "wallSeconds": 320.80618060000415,
+  "samples": 293,
+  "logicalProcessors": 16,
+  "gpuScope": "whole adapter, includes desktop and other applications",
+  "cpuTotalPercent": {
+    "mean": 0.3606655290102389,
+    "max": 1.375,
+    "min": 0.0
+  },
+  "workingSetMiB": {
+    "mean": 385.7307620520478,
+    "max": 389.125,
+    "min": 342.93359375
+  },
+  "privateMiB": {
+    "mean": 1264.3121267064846,
+    "max": 1270.56640625,
+    "min": 1224.37109375
+  },
+  "privateWorkingSetMiB": {
+    "mean": 317.169541915529,
+    "max": 320.41796875,
+    "min": 274.46875
+  },
+  "adapterGpuPercent": {
+    "mean": 31.761092150170647,
+    "max": 92.0,
+    "min": 2.0
+  },
+  "adapterDecoderPercent": {
+    "mean": 30.976109215017065,
+    "max": 57.0,
+    "min": 8.0
+  },
+  "timings": {
+    "QT_APP_READY_MS": 19,
+    "WINDOW_CREATED_MS": 262,
+    "SHOW_CALLED_MS": 270,
+    "FIRST_SWAP_MS": 407,
+    "QML_LOADED_MS": 426,
+    "FIRST_VIDEO_SWAP_MS": 653,
+    "externalLaunchToFirstSwapMs": 429.848,
+    "openToFirstVideoSwapMs": 105.0
+  },
+  "mpvFirst": {
+    "avSyncSeconds": 0,
+    "cacheBytes": 36578768,
+    "callbackToRenderMaxUs": 18694,
+    "callbacks": 291,
+    "dropped": 0,
+    "elapsedMs": 10282,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 31578,
+    "mute": true,
+    "pause": false,
+    "position": 9.633,
+    "renders": 290,
+    "windowActive": false
+  },
+  "mpvLast": {
+    "avSyncSeconds": 0,
+    "cacheBytes": 73885824,
+    "callbackToRenderMaxUs": 0,
+    "callbacks": 9589,
+    "dropped": 2,
+    "elapsedMs": 320297,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 0,
+    "mute": true,
+    "pause": false,
+    "position": 319.633,
+    "renders": 9589,
+    "windowActive": false
+  },
+  "cleanExit": true,
+  "diagnosticOnly": false,
+  "mutedThroughoutSamples": true,
+  "neverActivated": true,
+  "completedRequestedDuration": true,
+  "packetCacheEstimateMiB": 71.19206933905609,
+  "privateWsMinusPacketQueueMiB": {
+    "mean": 248.49694183795123,
+    "max": 257.51123046875
+  },
+  "totalWsMinusPacketQueueMiB": {
+    "mean": 317.07168807426507,
+    "max": 326.01904296875
+  },
+  "cacheAccountingNote": "Subtracts mpv packet-queue estimate, not measured allocator overhead; approximate only."
+}
