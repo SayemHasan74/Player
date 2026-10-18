@@ -57,7 +57,6 @@ public:
     Q_INVOKABLE void adjustSpeed(double delta);
     Q_INVOKABLE void resetSpeed();
     Q_INVOKABLE void frameStep(bool backward);
-    void setMiniVideoDisabled(bool disabled);
     void setRenderReady(bool ready);
     void command(const QList<QByteArray> &arguments);
 signals:
@@ -88,8 +87,7 @@ private:
     QString m_title="FlowPlayer",m_hwdec="none";
     QVariantList m_tracks;
     QVariantMap m_videoInfo;
-    QString m_vid="auto",m_savedVid="auto";
-    bool m_miniVideoDisabled=false,m_miniRequested=false;
+    QString m_vid="auto";
     bool m_renderReady=false;
     QString m_pendingFile;
 };

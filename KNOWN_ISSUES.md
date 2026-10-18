@@ -1,30 +1,11 @@
-# Remaining Part 1 issues
+# Current limitations
 
-## Confirmed acceptance failure
+Part 2 now uses the user-approved hide-only Mini policy in prompt2-amendments.md. The current report is tests/PART2_RESULTS.md.
 
-- VP9 4K30 with NVDEC dropped 2 frames in 319.633 seconds on the packaged, fully tested executable. The cause has not been established. Neither restoring default decoder concurrency nor the discarded render scheduling experiment resolved it. Full Part 1 acceptance remains incomplete.
+- The short packaged HEVC 4K60 hide/reveal check passed with zero dropped frames, no A/V desync warning, continuous timeline, selected video track, clean exit and peak resident working set 477.64 MB. This is a short check, not a long playback benchmark.
+- Actual native mode transitions, fullscreen control visibility/clicks, visible tearing, flashes, audible continuity, rapid desktop toggles, monitor/DPI changes and drag/resize remain user tests by explicit request. No current-build manual pass is claimed yet.
+- Normal-launch startup and long idle metrics have not been remeasured for this new executable. The approved first-deployment startup exception remains in effect.
+- The original Part 1 VP9 test had two drops in five minutes on an earlier executable; it has not been rerun on this build.
+- Earlier decoder-off Mini restoration produced 67 drops, an A/V desync warning and a 512.09 MB transient working set. That rejected design has been removed, not hidden behind reset counters. Its report remains in tests/PART2_DECODER_RESTART_RESULTS.md and raw evidence remains in tests/results/part2-final-basic-20261018. Those are historical results, not measurements of the current executable.
 
-## Verification limits
-
-- The user passed the five manual functional checks on an earlier executable. Their hash is preserved in tests/manual-results.json; later performance changes have not been visually rechecked by automation.
-- Current-build minimized CPU was not instrumented because automated desktop minimize/restore was prohibited while the user worked. Manual minimize/restore passed; pause measured 0.0130% mean CPU over 60.001 seconds, with zero video renders/callbacks.
-- All automated playback tests were muted. Audible continuity during drag/resize has not been verified.
-- The deployment's first video frame took 3337.955 ms from process launch. Once the engine was ready, local open-to-first-video-swap measured 88–127 ms. These are different measurements; only first-deployment window startup has an explicit user-approved exception.
-
-## Passed checks and approved changes
-
-- HEVC 4K60 Main 10 and H.264 1080p60: zero dropped frames over more than five minutes each, using NVDEC.
-- Peak resident RAM 479.75 MB, below the user-approved 500 MB limit including cache.
-- Normal fully closed launches: 414.714–474.325 ms. Initial deployment launch 1745.955 ms, explicitly accepted as a one-time exception.
-- Twenty consecutive clean exits, with render context freed before mpv termination.
-
-See tests/RESULTS.md and the retained JSON evidence for complete numbers. Part 2 is not implemented. Generated binaries, downloaded SDKs and media are excluded from Git; see README.md to build locally.
-
-# Part 2 current limitations
-
-Part 2 implementation is available; tests/PART2_RESULTS.md is the authoritative current report. The Part 1 numbers above apply only to its earlier executable.
-
-- State-model unit tests and the short background functional check passed. Real fullscreen UI, tearing, flashes, audible continuity, rapid native transitions and multi-monitor/DPI behavior remain user tests by explicit request.
-- The final decoder-disable/restore/pause smoke recorded 67 raw dropped frames: zero before decoder disable, 60 at the paused sample after restore and 67 at exit. mpv logged a track refresh seek and an Audio/Video desynchronisation warning during restoration. Mini restore has an unresolved playback regression; do not claim a zero-drop or seamless transition pass.
-- Transient peak resident working set was 512.09 MB including cache, above the user-approved 500 MB limit. No further RAM profiling was performed.
-- Silent files keep decoding behind Mini's cover so their playback clock does not stop. With selected audio, vid=no is applied as requested.
+Mini now continues decoding while its video is hidden. It therefore does not claim the old decoder-off resource savings. No Part 3 implementation has started.

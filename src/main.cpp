@@ -75,16 +75,14 @@ int main(int argc,char **argv) {
                 bool ok=false;const int quitMs=qEnvironmentVariableIntValue("FLOW_QUIT_MS",&ok);
                 if(ok&&quitMs>0)QTimer::singleShot(quitMs,Qt::PreciseTimer,&window,&QWindow::close);
                 const auto scenario=qEnvironmentVariable("FLOW_SCENARIO");
-                if(scenario=="part2-basic") {
-                    // Controller-only smoke: never fullscreen, raise, minimize,
+                if(scenario=="part2-warm-mini") {
+                    // Presentation-only smoke: never fullscreen, raise, minimize,
                     // move or resize the background window on the user's desktop.
                     auto armed=std::make_shared<bool>(false);
                     QObject::connect(&controller,&MpvController::videoFramePresented,&window,[&,armed]{
-                        if(*armed)return;*armed=true;Log::write("PART2_BASIC_STARTED_AFTER_FIRST_FRAME");
-                        QTimer::singleShot(6000,Qt::PreciseTimer,&window,[&]{controller.setMiniVideoDisabled(true);});
-                        QTimer::singleShot(12000,Qt::PreciseTimer,&window,[&]{controller.setMiniVideoDisabled(false);});
-                        QTimer::singleShot(18000,Qt::PreciseTimer,&window,[&]{controller.setPause(true);});
-                        QTimer::singleShot(22000,Qt::PreciseTimer,&window,[&]{controller.setPause(false);});
+                        if(*armed)return;*armed=true;Log::write("PART2_WARM_MINI_STARTED_AFTER_FIRST_FRAME");
+                        QTimer::singleShot(6000,Qt::PreciseTimer,&window,[&]{window.setDiagnosticVideoHidden(true);});
+                        QTimer::singleShot(12000,Qt::PreciseTimer,&window,[&]{window.setDiagnosticVideoHidden(false);});
                     });
                 }
                 if(scenario=="pause") {
@@ -114,6 +112,7 @@ int main(int argc,char **argv) {
                             {"hwdec",controller.hwdecCurrent()},{"dropped",double(controller.droppedFrames())},
                             {"mute",controller.mute()},{"windowActive",window.isActive()},
                             {"videoTrack",controller.videoTrack()},
+                            {"videoHidden",window.videoHidden()},
                             {"callbackToRenderMaxUs",double(MpvRenderItem::callbackDelayMaxUs.exchange(0))},
                             {"mpvRenderCallMaxUs",double(MpvRenderItem::renderCallMaxUs.exchange(0))},
                             {"renders",double(MpvRenderItem::renderedFrames.load())},{"callbacks",double(MpvRenderItem::updateCallbacks.load())},

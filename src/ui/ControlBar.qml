@@ -39,7 +39,7 @@ Rectangle {
     Row {
         anchors {right: parent.right; rightMargin: 12; top: parent.top; topMargin: 12}
         Action { glyph: "ⓘ"; glyphSize: 21; onActivated: playerWindow.toggleInfo() }
-        Action { glyph: "▱"; onActivated: playerWindow.toggleMini() }
+        Action { glyph: playerWindow.mini?"↗":"▱"; onActivated: playerWindow.toggleMini() }
         Action { glyph: "⛶"; onActivated: playerWindow.toggleFullscreen() }
     }
     Text { id: elapsed; anchors {left: parent.left; leftMargin: 20; bottom: parent.bottom; bottomMargin: 13} text: controls.stamp(mpv.position); color: "#f1f0df"; font.pixelSize: 14 }

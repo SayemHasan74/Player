@@ -13,11 +13,10 @@ Item {
         }
     }
     // Keep the same video item alive. A plain scene item covers it in Mini;
-    // vid=no stops decoder/render updates without replacing the native window.
-    Rectangle { anchors.fill: parent; color: "#252831"; visible: playerWindow.mini && !playerWindow.tinyPreview }
+    // Playback and decoding continue normally under the cover, including audio.
+    Rectangle { anchors.fill: parent; color: "#252831"; visible: playerWindow.videoHidden }
     TitleBar { id: title; anchors {left: parent.left; right: parent.right; top: parent.top} z: 10 }
-    ControlBar { anchors {horizontalCenter: parent.horizontalCenter; bottom: parent.bottom; bottomMargin: 22} visible: !playerWindow.mini; z: 10 }
-    SeekBar { anchors {left: parent.left; right: parent.right; top: title.bottom; leftMargin: 12; rightMargin: 12} height: 26; visible: playerWindow.mini; z: 10 }
+    ControlBar { anchors {horizontalCenter: parent.horizontalCenter; bottom: parent.bottom; bottomMargin: playerWindow.mini?8:22} z: 10 }
     Text {
         anchors.centerIn: parent
         visible: !playerWindow.mini && (root.failure.length>0||mpv.duration===0)

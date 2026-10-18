@@ -31,7 +31,7 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
             minHeight=std::max(minHeight,minWidth/m_window->videoAspect());
         }
         info->ptMinTrackSize={qRound(minWidth*dpr),qRound(minHeight*dpr)};
-        if(m_window->mini())info->ptMaxTrackSize.y=qRound(64*dpr);
+        if(m_window->mini())info->ptMaxTrackSize.y=qRound(FramelessWindow::MiniHeight*dpr);
         *result=0;return true;
     }
     case WM_NCHITTEST: {
@@ -59,7 +59,7 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
     case WM_NCLBUTTONDOWN:if(msg->wParam==HTMAXBUTTON){*result=0;return true;}break;
     case WM_NCLBUTTONUP:if(msg->wParam==HTMAXBUTTON){m_window->toggleMaximized();*result=0;return true;}break;
     case WM_SIZING: {
-        if(m_window->mini()) {auto *r=reinterpret_cast<RECT*>(msg->lParam);r->bottom=r->top+qRound(64*m_window->devicePixelRatio());*result=TRUE;return true;}
+        if(m_window->mini()) {auto *r=reinterpret_cast<RECT*>(msg->lParam);r->bottom=r->top+qRound(FramelessWindow::MiniHeight*m_window->devicePixelRatio());*result=TRUE;return true;}
         if(m_window->fullscreen())break;
         if(!m_window->lockAspectRatio())break;
         auto *r=reinterpret_cast<RECT*>(msg->lParam);const double a=m_window->videoAspect();

@@ -92,7 +92,6 @@ void MpvController::run() {
     m_handle=mpv;
     QMetaObject::invokeMethod(this,[this]{
         m_ready=true;
-        if(m_miniVideoDisabled)command({"set","vid","no"});
         emit readyChanged();
     });
     while(!m_stop) {
@@ -146,7 +145,7 @@ void MpvController::apply(const QString &n,const QVariant &v) {
     else if(n=="mute")m_mute=v.toBool();
     else if(n=="speed")m_speed=v.toDouble();
     else if(n=="media-title")m_title=v.toString();
-    else if(n=="track-list") {m_tracks=v.toList();setMiniVideoDisabled(m_miniRequested);}
+    else if(n=="track-list")m_tracks=v.toList();
     else if(n=="hwdec-current") {m_hwdec=v.toString();Log::write("ACTIVE_HWDEC="+m_hwdec);}
     else if(n=="frame-drop-count")m_dropped=v.toLongLong();
     emit stateChanged();
@@ -194,16 +193,3 @@ void MpvController::adjustSpeed(double delta) {
 }
 void MpvController::resetSpeed() {command({"set","speed","1"});emit toast("Speed 1.0×");}
 void MpvController::frameStep(bool backward) {if(m_pause)command({backward?"frame-back-step":"frame-step"});}
-void MpvController::setMiniVideoDisabled(bool disabled) {
-    m_miniRequested=disabled;
-    // With no selected audio there is no playback clock after vid=no. Keep
-    // silent-video playback alive under Mini's cover rather than freezing it.
-    bool audio=false;
-    for(const auto &entry:m_tracks) {const auto track=entry.toMap();if(track.value("type")=="audio"&&track.value("selected").toBool())audio=true;}
-    disabled=disabled&&audio;
-    if(disabled==m_miniVideoDisabled)return;
-    m_miniVideoDisabled=disabled;
-    if(disabled) {m_savedVid=(m_vid=="no"?QString("auto"):m_vid);command({"set","vid","no"});}
-    else command({"set","vid",m_savedVid.toUtf8()});
-    Log::write(QString("MINI_VIDEO disabled=%1 saved=%2 position=%3").arg(disabled).arg(m_savedVid).arg(m_position));
-}

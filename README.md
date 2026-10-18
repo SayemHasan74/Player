@@ -118,7 +118,7 @@ Stub modules reserve the complete requested structure. History, playlists, SMTC,
 
 ## Part 2: modes and input
 
-The same `FramelessWindow`/HWND, mpv controller, render context and QML scene serve Windowed, Maximized, Fullscreen and Mini. Fullscreen uses Qt's `showFullScreen()` plus the current monitor's full native rectangle; it does not request an exclusive display mode. Mini uses native z-order changes rather than recreating the window through Qt flags. Geometry is recorded in Qt logical coordinates with screen name and DPI in each state snapshot. If the original monitor disappears or its work area shrinks, restoration clamps to an available screen.
+The same `FramelessWindow`/HWND, mpv controller, render context and QML scene serve Windowed, Maximized, Fullscreen and Mini. [Part 2 amendments](prompt2-amendments.md) record the user-approved hide-only Mini policy and supersede the original vid=no/64-pixel layout requirements. Fullscreen uses Qt's `showFullScreen()` plus the current monitor's full native rectangle; it does not request an exclusive display mode. Mini uses native z-order changes rather than recreating the window through Qt flags. Geometry is recorded in Qt logical coordinates with screen name and DPI in each state snapshot. If the original monitor disappears or its work area shrinks, restoration clamps to an available screen.
 
 The title bar and temporary transport bar follow `design/references/player-controls.png`; no IINA logo is used. The welcome page and final Part 3 styling are deferred. Video, title bar, seek bars, info and toasts are ordinary items in this one scene in every mode.
 
@@ -141,7 +141,7 @@ The title bar and temporary transport bar follow `design/references/player-contr
 | I | Resolution, codec, decoder, FPS, dropped-frame count and bitrate |
 | Ctrl+O; file drop; command line | Open a file |
 
-Mini is initially 420 x 64 logical pixels at the work area's bottom-right and remembers its position/width. Only horizontal resize is enabled. Its title and seek bar remain interactive; the same video item stays alive underneath an opaque plain-QML cover. With an audio track selected, `vid=no` disables video decoding while the audio timeline continues; restoring reselects the saved video track without issuing an application seek or pausing audio. mpv may refresh-seek and discard frames while bringing video back into sync. Silent files retain hidden decoding because disabling their only selected stream would stop playback. The default-off tiny-preview setting keeps video decoding enabled. With the app closed, enable it using:
+Mini starts at **560 x 160 logical pixels** at the work area's bottom-right, remembers its position/width, and resizes horizontally. It shows the full title button row and bottom playback/volume/seek controls. Per the user's amendment, it **hides only the video**: video decoding, audio and the timeline keep running normally. Entering/leaving Mini never changes vid, seeks or pauses the engine. The same framebuffer item remains alive under a plain QML cover. Tiny preview defaults off; enabling it reveals video behind the compact UI. With the app closed, enable it using:
 
 ```powershell
 Set-ItemProperty HKCU:\Software\FlowPlayer\FlowPlayer\window -Name tinyPreview -Type String -Value true

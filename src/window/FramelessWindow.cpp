@@ -157,7 +157,7 @@ void FramelessWindow::rememberModeGeometry() {
 void FramelessWindow::toggleMode(WindowStateMachine::Mode target) {
     rememberModeGeometry();
     const auto work=screen()->availableGeometry();
-    QRect firstMini(work.right()-420-20,work.bottom()-64-20,420,64);
+    QRect firstMini(work.right()-560-20,work.bottom()-MiniHeight-20,560,MiniHeight);
     if(!m_modes.miniGeometry().isValid()) {
         QSettings settings;const auto saved=settings.value("window/miniGeometry").toRect();
         if(saved.isValid())firstMini=saved;
@@ -185,9 +185,8 @@ void FramelessWindow::applyPin() {
 void FramelessWindow::applyMode() {
     m_applyingMode=true;
     const auto oldId=winId();
-    setMaximumHeight(16777215);setMinimumSize(mini()?QSize(280,64):QSize(320,180));
-    if(mini())setMaximumHeight(64);
-    m_controller->setMiniVideoDisabled(mini()&&!m_tinyPreview);
+    setMaximumHeight(16777215);setMinimumSize(mini()?QSize(520,MiniHeight):QSize(320,180));
+    if(mini())setMaximumHeight(MiniHeight);
     emit modeChanged();
     if(fullscreen()) {
         for(auto *candidate:QGuiApplication::screens()) {
@@ -207,7 +206,7 @@ void FramelessWindow::applyMode() {
         for(auto *candidate:QGuiApplication::screens())if(candidate->name()==m_modes.current().screen)destination=candidate;
         if(!destination)destination=screen();
         const auto work=destination->availableGeometry();
-        if(mini())desired.setHeight(64);
+        if(mini()) {desired.setHeight(MiniHeight);desired.setWidth(std::max(520,desired.width()));}
         if(!work.contains(desired)) {
             desired.setSize(desired.size().boundedTo(work.size()));
             desired.moveLeft(std::clamp(desired.left(),work.left(),work.right()-desired.width()+1));
@@ -227,7 +226,12 @@ void FramelessWindow::togglePinned() {m_pinned=!m_pinned;applyPin();emit modeCha
 void FramelessWindow::toggleInfo() {m_infoVisible=!m_infoVisible;emit modeChanged();}
 void FramelessWindow::setTinyPreview(bool enabled) {
     if(m_tinyPreview==enabled)return;m_tinyPreview=enabled;
-    m_controller->setMiniVideoDisabled(mini()&&!enabled);emit modeChanged();
+    emit modeChanged();
+}
+void FramelessWindow::setDiagnosticVideoHidden(bool hidden) {
+    if(!qEnvironmentVariableIsSet("FLOW_TEST_BACKGROUND"))return;
+    m_diagnosticVideoHidden=hidden;emit modeChanged();
+    Log::write(QString("MINI_VIDEO_COVER hidden=%1 track=%2 position=%3").arg(hidden).arg(m_controller->videoTrack()).arg(m_controller->position()));
 }
 void FramelessWindow::pointerActivity() {
     setCursor(Qt::ArrowCursor);m_cursorTimer.stop();

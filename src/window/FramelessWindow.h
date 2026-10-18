@@ -13,7 +13,9 @@ class FramelessWindow final : public QQuickWindow {
     Q_PROPERTY(bool pinned READ pinned NOTIFY modeChanged)
     Q_PROPERTY(bool infoVisible READ infoVisible NOTIFY modeChanged)
     Q_PROPERTY(bool tinyPreview READ tinyPreview WRITE setTinyPreview NOTIFY modeChanged)
+    Q_PROPERTY(bool videoHidden READ videoHidden NOTIFY modeChanged)
 public:
+    static constexpr int MiniHeight=160;
     explicit FramelessWindow(MpvController *controller);
     ~FramelessWindow() override;
     void prepareNativeFrame();
@@ -35,6 +37,8 @@ public:
     bool infoVisible() const {return m_infoVisible;}
     bool tinyPreview() const {return m_tinyPreview;}
     void setTinyPreview(bool enabled);
+    bool videoHidden() const {return (mini()&&!m_tinyPreview)||m_diagnosticVideoHidden;}
+    void setDiagnosticVideoHidden(bool hidden);
     void pointerActivity();
     bool seekAt(const QPointF &point) const;
     bool titleAt(const QPointF &point) const;
@@ -65,6 +69,7 @@ private:
     WindowStateMachine m_modes;
     bool m_applyingMode=false,m_pinned=false,m_infoVisible=false,m_tinyPreview=false;
     bool m_cursorPaused=true,m_dragCandidate=false;
+    bool m_diagnosticVideoHidden=false;
     QPointF m_pressPosition;
     QTimer m_cursorTimer;
     void rememberModeGeometry();

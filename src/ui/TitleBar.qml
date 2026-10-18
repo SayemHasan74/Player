@@ -11,7 +11,7 @@ Rectangle {
         id: buttons
         anchors.right: parent.right
         Repeater {
-            model: playerWindow.mini ? [1,5] : [0,1,2,3,4,5]
+            model: [0,1,2,3,4,5]
             Rectangle {
                 required property int modelData
                 property string inputRole: "button"
@@ -19,7 +19,7 @@ Rectangle {
                 color: hit.containsMouse || (modelData===4 && playerWindow.maxHovered) ? (modelData===5 ? "#b83341" : "#596067") : "transparent"
                 Text {
                     anchors.centerIn: parent; color: "#f2f1df"; font.pixelSize: 17
-                    text: [playerWindow.pinned ? "●" : "♧", playerWindow.mini ? "↗" : "▱", "⛶", "−", "□", "×"][modelData]
+                    text: [(playerWindow.pinned||playerWindow.mini) ? "●" : "♧", playerWindow.mini ? "↗" : "▱", "⛶", "−", "□", "×"][modelData]
                 }
                 MouseArea {
                     id: hit; anchors.fill: parent; hoverEnabled: true

@@ -7,13 +7,13 @@ using Mode=Model::Mode;
 static int checks=0;
 static void require(bool value,const char *label) {++checks;if(!value){std::cerr<<"FAIL: "<<label<<'\n';std::exit(1);}}
 int main() {
-    const QRect windowed(123,87,960,540),full(-2560,0,2560,1440),mini(-460,1250,420,64);
+    const QRect windowed(123,87,960,540),full(-2560,0,2560,1440),mini(-600,1100,560,160);
     for(auto base:{Mode::Windowed,Mode::Maximized}) {
         for(auto first:{Mode::Fullscreen,Mode::Mini}) {
             Model model(windowed);model.setBaseMode(base);model.observe(windowed,"left",1.5);
             const auto original=model.current();
             model.toggle(first,full,mini);require(model.previous()&&*model.previous()==original,"explicit previous state");
-            model.observe(QRect(-700,300,first==Mode::Mini?500:2560,first==Mode::Mini?64:1440),"right",2);
+            model.observe(QRect(-700,300,first==Mode::Mini?600:2560,first==Mode::Mini?160:1440),"right",2);
             model.toggle(first,full,mini);require(model.current()==original,"exact direct round trip including screen and DPR");
             require(model.depth()==0,"direct round trip history empty");
         }
@@ -21,7 +21,7 @@ int main() {
     {
         Model model(windowed);model.observe(windowed,"primary",1);
         model.toggle(Mode::Fullscreen,full,mini);const auto fullscreen=model.current();
-        model.toggle(Mode::Mini,full,mini);model.observe(QRect(20,30,480,64),"secondary",1.5);const auto small=model.current();
+        model.toggle(Mode::Mini,full,mini);model.observe(QRect(20,30,600,160),"secondary",1.5);const auto small=model.current();
         model.toggle(Mode::Fullscreen,full,mini);require(model.previous()&&*model.previous()==small,"mini fullscreen previous mini");
         model.exitFullscreen();require(model.current()==small,"escape restores mini geometry");
         model.toggle(Mode::Mini,full,mini);require(model.current()==fullscreen,"mini restores fullscreen origin");

@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "stateUnitTests": true,
+    "hideAndReveal": true,
+    "timelineContinues": true,
+    "videoRemainsSelected": true,
+    "zeroDroppedFrames": true,
+    "noAvSyncWarning": true,
+    "cleanExitRenderFreedFirst": true,
+    "mutedAndNonActivating": true
+  },
+  "shortSmokePassed": true,
+  "manualVisualAcceptance": "pending user tests",
+  "executableSha256": "c9e5eb68e4b934ab95aada5b746deb9a29674c7f54c0aae2ec6a59fbb29be3b6",
+  "rawDroppedFrames": 0,
+  "peakWorkingSetMB": 477.642752,
+  "coverMarkers": [
+    [
+      "1",
+      "1",
+      "6.017"
+    ],
+    [
+      "0",
+      "1",
+      "12.017"
+    ]
+  ]
+}

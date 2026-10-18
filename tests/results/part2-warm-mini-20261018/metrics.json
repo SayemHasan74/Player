@@ -1,0 +1,53 @@
+[
+  {
+    "avSyncSeconds": 1.49999999674022e-06,
+    "cacheBytes": 78697632,
+    "callbackToRenderMaxUs": 27667,
+    "callbacks": 495,
+    "dropped": 0,
+    "elapsedMs": 10256,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 20703,
+    "mute": true,
+    "pause": false,
+    "position": 8.2,
+    "renders": 494,
+    "videoHidden": true,
+    "videoTrack": "1",
+    "windowActive": false
+  },
+  {
+    "avSyncSeconds": 8.40000001076091e-06,
+    "cacheBytes": 107088608,
+    "callbackToRenderMaxUs": 30259,
+    "callbacks": 1095,
+    "dropped": 0,
+    "elapsedMs": 20258,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 16331,
+    "mute": true,
+    "pause": false,
+    "position": 18.2,
+    "renders": 1094,
+    "videoHidden": false,
+    "videoTrack": "1",
+    "windowActive": false
+  },
+  {
+    "avSyncSeconds": 8.300000010341702e-06,
+    "cacheBytes": 99648464,
+    "callbackToRenderMaxUs": 28772,
+    "callbacks": 1454,
+    "dropped": 0,
+    "elapsedMs": 26267,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 16784,
+    "mute": true,
+    "pause": false,
+    "position": 24.2,
+    "renders": 1454,
+    "videoHidden": false,
+    "videoTrack": "auto",
+    "windowActive": false
+  }
+]

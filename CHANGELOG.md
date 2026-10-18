@@ -1,5 +1,12 @@
 # Changelog
 
+## Part 2 Mini revision — user approved hide-only playback
+
+- Removed decoder disabling, video track reselection and Mini-related engine commands. Video/audio and decoding continue normally beneath the existing scene's cover, avoiding the rejected decoder restart path.
+- Kept all title buttons and the bottom playback/volume/seek controls in Mini; adjusted compact size to 560 × 160 logical pixels, fixed height and horizontal resize.
+- Recorded the requirement change in prompt2-amendments.md. Archived the failed decoder-off report and retained its raw counters.
+- One short muted background hide/reveal check: zero drops, no A/V desync warning, continuous timeline, clean exit and 477.64 MB peak resident RAM. State tests passed; actual visual/native transitions remain user tests.
+
 ## Part 2 window modes and input — implementation, manual acceptance pending
 
 - Saved prompt2.md after pushing the Part 1 project and visual references to GitHub.

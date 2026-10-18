@@ -1,0 +1,90 @@
+{
+  "file": "tests\\media\\hevc-4k60-main10.mkv",
+  "executable": "E:\\Codes\\FlowPlayer\\out\\FlowPlayer\\FlowPlayer.exe",
+  "executableSha256": "c9e5eb68e4b934ab95aada5b746deb9a29674c7f54c0aae2ec6a59fbb29be3b6",
+  "testMode": "muted, non-activating bottom window; desktop interaction not tested",
+  "exitCode": 0,
+  "wallSeconds": 29.0210206999991,
+  "samples": 15,
+  "logicalProcessors": 16,
+  "gpuScope": "whole adapter, includes desktop and other applications",
+  "cpuTotalPercent": {
+    "mean": 0.76,
+    "max": 1.4,
+    "min": 0.28125
+  },
+  "workingSetMiB": {
+    "mean": 435.67005208333336,
+    "max": 455.515625,
+    "min": 416.25390625
+  },
+  "privateMiB": {
+    "mean": 1697.27734375,
+    "max": 1714.66015625,
+    "min": 1678.05859375
+  },
+  "privateWorkingSetMiB": {
+    "mean": 366.45885416666664,
+    "max": 386.29296875,
+    "min": 347.0546875
+  },
+  "adapterGpuPercent": {
+    "mean": 22.6,
+    "max": 69.0,
+    "min": 6.0
+  },
+  "adapterDecoderPercent": {
+    "mean": 21.066666666666666,
+    "max": 33.0,
+    "min": 11.0
+  },
+  "timings": {
+    "QT_APP_READY_MS": 16,
+    "WINDOW_CREATED_MS": 256,
+    "SHOW_CALLED_MS": 263,
+    "FIRST_SWAP_MS": 391,
+    "QML_LOADED_MS": 431,
+    "FIRST_VIDEO_SWAP_MS": 2061,
+    "externalLaunchToFirstSwapMs": 2217.8900000000003,
+    "openToFirstVideoSwapMs": 141.0
+  },
+  "mpvFirst": {
+    "avSyncSeconds": 1.49999999674022e-06,
+    "cacheBytes": 78697632,
+    "callbackToRenderMaxUs": 27667,
+    "callbacks": 495,
+    "dropped": 0,
+    "elapsedMs": 10256,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 20703,
+    "mute": true,
+    "pause": false,
+    "position": 8.2,
+    "renders": 494,
+    "videoHidden": true,
+    "videoTrack": "1",
+    "windowActive": false
+  },
+  "mpvLast": {
+    "avSyncSeconds": 8.300000010341702e-06,
+    "cacheBytes": 99648464,
+    "callbackToRenderMaxUs": 28772,
+    "callbacks": 1454,
+    "dropped": 0,
+    "elapsedMs": 26267,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 16784,
+    "mute": true,
+    "pause": false,
+    "position": 24.2,
+    "renders": 1454,
+    "videoHidden": false,
+    "videoTrack": "auto",
+    "windowActive": false
+  },
+  "cleanExit": true,
+  "diagnosticOnly": false,
+  "mutedThroughoutSamples": true,
+  "neverActivated": true,
+  "completedRequestedDuration": true
+}

@@ -1,73 +1,58 @@
-"""Report the bounded Part 2 smoke; never certify unperformed visual checks."""
-import hashlib, json, pathlib, statistics
-ROOT = pathlib.Path(__file__).resolve().parents[1]
-CASE = ROOT / 'tests/results/part2-final-basic-20261018'
-def read(path): return path.read_text(encoding='utf-8-sig')
-s = json.loads(read(CASE/'summary.json'))
-samples = json.loads(read(CASE/'samples.json'))
-log = read(CASE/'flowplayer.log')
-t = s['timings']
-first = (t['externalLaunchToFirstSwapMs']-t['FIRST_SWAP_MS']+t['FIRST_VIDEO_SWAP_MS'])/1000
-phases = {}
-for label, lo, hi in [('video',first+1,first+5), ('video disabled',first+7,first+11), ('paused',first+19,first+21)]:
-    rows = [v for v in samples if lo <= v['seconds'] <= hi]
-    phases[label] = dict(samples=len(rows), **{key: statistics.mean(v[key] for v in rows) if rows else None for key in ('cpuTotalPercent','adapterGpuPercent','adapterDecoderPercent')})
-checks = {
-    'stateUnitTests': '100% tests passed' in read(ROOT/'tests/part2-unit-results.txt'),
-    'qmlLoaded': t.get('QML_LOADED_MS',0)>0,
-    'firstVideoFrame': t.get('FIRST_VIDEO_SWAP_MS',0)>0,
-    'vidNoObserved': 'VIDEO_TRACK=no' in log,
-    'videoRestored': 'disabled=0' in log and s['mpvLast']['videoTrack']=='1',
-    'cleanExitRenderFreedFirst': s['cleanExit'] and log.index('mpv_render_context_free')<log.index('mpv_terminate_destroy on event worker'),
-    'mutedAndNonActivating': s['mutedThroughoutSamples'] and s['neverActivated'],
-    'noAvSyncWarning': 'Audio/Video desynchronisation detected' not in log,
+"""Summarize the approved hide-only Mini smoke without certifying visual tests."""
+import hashlib,json,pathlib,re
+ROOT=pathlib.Path(__file__).resolve().parents[1]
+CASE=ROOT/'tests/results/part2-warm-mini-20261018'
+s=json.loads((CASE/'summary.json').read_text(encoding='utf-8-sig'))
+log=(CASE/'flowplayer.log').read_text(encoding='utf-8-sig')
+markers=re.findall(r'MINI_VIDEO_COVER hidden=(\d) track=(\S+) position=([\d.]+)',log)
+checks={
+ 'stateUnitTests':'100% tests passed' in (ROOT/'tests/part2-unit-results.txt').read_text(encoding='utf-8-sig'),
+ 'hideAndReveal':len(markers)==2 and [m[0] for m in markers]==['1','0'],
+ 'timelineContinues':len(markers)==2 and float(markers[1][2])-float(markers[0][2])>=5.5,
+ 'videoRemainsSelected':'VIDEO_TRACK=no' not in log and all(m[1]!='no' for m in markers),
+ 'zeroDroppedFrames':s['mpvLast']['dropped']==0,
+ 'noAvSyncWarning':'Audio/Video desynchronisation detected' not in log,
+ 'cleanExitRenderFreedFirst':s['cleanExit'] and log.index('mpv_render_context_free')<log.index('mpv_terminate_destroy on event worker'),
+ 'mutedAndNonActivating':s['mutedThroughoutSamples'] and s['neverActivated'],
 }
-ram = s['workingSetMiB']['max']*1048576/1e6
-result = dict(implementationChecks=checks, manualAcceptance='pending user tests',
-              playbackAcceptance='not established; drops observed after video restore',
-              executableSha256=s['executableSha256'], phases=phases,
-              rawDroppedFrames=s['mpvLast']['dropped'], peakWorkingSetMB=ram)
+ram=s['workingSetMiB']['max']*1048576/1e6
+result=dict(checks=checks,shortSmokePassed=all(checks.values()),manualVisualAcceptance='pending user tests',executableSha256=s['executableSha256'],rawDroppedFrames=s['mpvLast']['dropped'],peakWorkingSetMB=ram,coverMarkers=markers)
 (CASE/'basic-checks.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
-lines = ['# Part 2 implementation and basic verification — 2026-10-18','',
-    '**Implementation available; visual and transition acceptance pending.** The user requested minimal automated checks and will perform visual playback tests. No Part 3 work is included.', '',
-    'The pre-Part-2 project was pushed to GitHub main at `64391a06c0c719282c8dd5f9af182450bd1e2173` before saving prompt2.md and starting implementation.', '',
-    '## Automated results','',
-    '- Release application and all four compiled QML components build successfully.',
-    '- State tests: 61,341 checks, exact direct/nested restoration, independent Mini geometry, screen/DPI snapshots, twenty rapid state toggles and 100 seeded random sequences of 200 actions with full unwind. CTest: 1/1 passed in 0.02 seconds. These are model tests, not display transitions.',
-    '- Final packaged smoke: HEVC 4K60 Main 10 with AAC; 35-second app timer. QML and NVDEC loaded, vid=no was observed, the timeline advanced while video was disabled, the saved video track was restored, pause/resume worked, and shutdown freed the GL renderer before terminating mpv.',
-    '- All automated launches were muted and non-activating. No fullscreen, raising, minimizing, moving or resizing of the user desktop was automated.',
-    '- The first diagnostic fired before first video presentation on a slow initial launch. The scenario was corrected to arm after first presentation; failed/intermediate evidence remains in its result folders. No repeated long suite was run.', '',
-    f"Executable SHA-256: `{s['executableSha256']}`.", '',
-    '| Measurement | Result |','|---|---:|',
-    f"| Wall time including loader/startup | {s['wallSeconds']:.3f} s |",
-    f"| Open request to first video swap | {t['openToFirstVideoSwapMs']:.3f} ms |",
-    f"| First window swap after deployment | {t['externalLaunchToFirstSwapMs']:.3f} ms |",
-    f"| Process CPU mean / max | {s['cpuTotalPercent']['mean']:.3f}% / {s['cpuTotalPercent']['max']:.3f}% |",
-    f'| Peak resident RAM, including cache | {ram:.2f} MB |',
-    '| Drops before disabling video | 0 |',
-    '| Drops at first paused sample after restoring video | 60 |',
-    f"| Raw final dropped frames | {s['mpvLast']['dropped']} |", '',
-    'The final counter is retained without resets or subtraction. mpv logged a video-track refresh seek about one second behind the audio clock when video was reselected, followed by an **Audio/Video desynchronisation detected warning**. Mini restore therefore has an unresolved playback regression; it is not an acceptance pass. Seven further drops appeared after pause/resume. Adapter GPU reached 99% and includes other applications; no cause is established for every drop. The transient resident peak exceeds the revised 500 MB limit. No additional RAM profiling was performed.', '',
-    '### Short resource samples','',
-    '| Phase | Samples | CPU mean | Adapter GPU mean | Adapter decoder mean |',
-    '|---|---:|---:|---:|---:|']
-for label,p in phases.items():
-    lines.append(f"| {label} | {p['samples']} | {p['cpuTotalPercent']:.3f}% | {p['adapterGpuPercent']:.2f}% | {p['adapterDecoderPercent']:.2f}% |")
-lines += ['', 'These small samples exercise decoder disable/restore without changing window mode. They are not actual Mini/fullscreen display measurements. Adapter GPU figures include other apps.', '',
-    '## Architecture and scope','',
-    'One existing QQuickWindow/HWND, engine, render context and scene serve all modes. Fullscreen uses showFullScreen plus the full monitor rectangle, without exclusive resolution switching. Mini changes the same window size/z-order; a plain QML item covers the existing framebuffer item. Controls remain above video in that scene. No video HWND or overlay window was added.', '',
-    'With selected audio, Mini applies vid=no and reselects the saved video track on restore without an application seek or audio pause. Silent files retain hidden decoding to preserve their only playback clock; this is an explicit resource-saving exception. Tiny preview defaults off. OpenGL, threaded rendering, physical-pixel FBOs, swap interval 1 and swap reporting remain enabled. No render polling timer was added.', '',
-    'Visible tearing, black flashes and audible continuity are not independently verified. It is not yet verified that **in fullscreen, every UI element is visible and working**. That statement requires the manual test below. Earlier Part 1 manual results apply to an earlier executable.', '',
-    '## Five manual checks (T2–T9)','',
-    '1. **Fullscreen/UI:** play 4K, press F, click play/pause, scrub, hover and change volume; use keyboard shortcuts. Watch for tearing, lag and black flashes. Repeat from maximized. Capture windowed/fullscreen screenshots if useful.',
-    '2. **Exact return:** from Windowed, Maximized and Mini, middle-click over video, seek bar, title, buttons and resize edges. Toggle again/Esc; compare size, position and state. Mode logs include geometry and hwndUnchanged in %LOCALAPPDATA%/FlowPlayer/logs/flowplayer.log.',
-    '3. **Mini/nesting:** Ctrl+M from each mode; title+seek only, horizontal resize, remembered position, always-on-top, seeking, wheel and Space. Mini → fullscreen → Mini must restore exactly. Check audible continuity yourself if desired; automation stays muted. Try a silent clip and optional tiny preview.',
-    '4. **Input/cursor:** video/empty-area double-click pauses; title double-click maximizes/restores; button double-click does not pause. Try the README key map. Cursor hides after 2.5 seconds playing, stays visible paused/in Mini, returns on movement.',
-    '5. **Rapid transitions/regression:** twenty actual fullscreen toggles during 4K, then drag/resize, pause/minimize/restore and exit. Check persistent stutter, black borders and responsiveness. Try another monitor/DPI if available. No physical multi-monitor test was performed here.', '',
-    'Manual display tests, screenshots, actual transition HWND stability, 20 real fullscreen toggles and a long idle regression were deliberately not automated under the user\'s latest testing instructions. Full acceptance is not claimed.']
+lines=['# Part 2 current verification — Mini hides video, keeps playback running','',
+ 'The user approved this change on 2026-10-18; prompt2-amendments.md supersedes the original vid=no/title-and-seek-only Mini requirements. Part 3 is not started.','',
+ '## Current implementation','',
+ '- One existing native window, Qt Quick scene, framebuffer video item and mpv engine in every mode. Fullscreen does not create a video or overlay HWND.',
+ '- Mini hides video behind an ordinary scene item. Decoding, audio and the playback timeline continue unchanged. No vid=no, track reselection, seek or pause occurs when entering/leaving Mini.',
+ '- Mini starts at 560 × 160 logical pixels, resizes horizontally, and retains the full title button row and bottom playback/volume/seek controls. It is always on top. The height accommodates the requested controls. Tiny preview remains off by default.',
+ '- OpenGL, threaded rendering, physical-pixel FBOs, swap interval 1 and swap reporting remain enabled. No render polling timer.','',
+ '## Automated basic results','',
+ '- State-model tests passed, including 100 random sequences of 200 actions, direct/nested exact restoration, geometry/screen/DPI snapshots and twenty model fullscreen toggles. CTest output is in part2-unit-results.txt. These are model tests, not actual desktop transitions.',
+ '- One short muted non-activating packaged HEVC 4K60 Main 10/AAC smoke hid and revealed the same video scene item. No desktop fullscreen, topmost, minimize, move or resize was automated.','',
+ f"Executable SHA-256: `{s['executableSha256']}`.",'',
+ '| Measurement | Result |','|---|---:|',
+ f"| Wall time including startup | {s['wallSeconds']:.3f} s |",
+ f"| Video played | {s['mpvLast']['position']:.3f} s |",
+ f"| Decoder | {s['mpvLast']['hwdec']} |",
+ f"| Dropped frames | {s['mpvLast']['dropped']} |",
+ f"| CPU mean / max | {s['cpuTotalPercent']['mean']:.3f}% / {s['cpuTotalPercent']['max']:.3f}% |",
+ f"| Adapter GPU mean / max | {s['adapterGpuPercent']['mean']:.2f}% / {s['adapterGpuPercent']['max']:.2f}% |",
+ f'| Peak resident RAM including cache | {ram:.2f} MB |',
+ f"| Open request to first video frame | {s['timings']['openToFirstVideoSwapMs']:.3f} ms |",
+ '| A/V desync warning | None |','| Clean exit, renderer freed before mpv | Yes |','| Muted, never activated | Yes |','',
+ f"Cover markers: {markers}. The position advanced continuously by {float(markers[1][2])-float(markers[0][2]):.3f} seconds while hidden, with the video track still selected.",'',
+ 'GPU readings cover the entire adapter, including other apps. Resident RAM is decimal MB. This short check validates the hide/reveal path, not a five-minute playback benchmark or visible tearing test.', '',
+ 'The prior decoder-off design produced 67 drops and an A/V desync warning. That failed design/results are archived in PART2_DECODER_RESTART_RESULTS.md and its original raw result folder. Its vid=no path has been removed; do not present old failed measurements as measurements of this executable.','',
+ '## Five manual checks','',
+ '1. **Fullscreen UI/tearing:** play 4K, press F and test every visible control, hover, seek, volume and keyboard. Repeat from maximized; watch for tearing, lag and flashes.',
+ '2. **Middle-click/exact return:** from Windowed, Maximized and Mini, middle-click over video, seek, title, buttons and resize edges, then again/Esc. Compare previous position/size/state. Mode logs include geometry and hwndUnchanged.',
+ '3. **Mini:** Ctrl+M instantly hides video; playback/time/audio continue. Title buttons and bottom controls remain visible and work. Test horizontal resize, topmost, nested Mini → fullscreen → Mini and restore. Audio continuity is your manual check; automation is muted.',
+ '4. **Input/cursor:** video double-click pauses; button double-click does not. Title double-click maximizes/restores. Try the README shortcuts; cursor hides after 2.5 seconds playing and stays visible paused/in Mini.',
+ '5. **Rapid transitions/regression:** twenty actual fullscreen toggles, drag/resize, pause/minimize/restore and exit. Try another monitor/DPI if available. Check for persistent stutter, flashes or hangs.','',
+ 'Actual mode transitions, screenshots, visible tearing, audible continuity and physical multi-monitor behavior remain user tests under the explicit minimal-automation instruction. We cannot yet certify that in fullscreen every UI element is visible and working. The single-scene implementation is preserved specifically to keep those controls with the video.']
 (ROOT/'tests/PART2_RESULTS.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
-manifest = dict(part='2',part2Accepted=False,executableSha256=s['executableSha256'],report='tests/PART2_RESULTS.md',qt='6.12.0',msvc='19.44.35228',libmpv='dde0671072',sourceSha256={})
+manifest=dict(part='2',part2Accepted=False,manualAcceptance='pending',automatedBasicPassed=all(checks.values()),executableSha256=s['executableSha256'],report='tests/PART2_RESULTS.md',qt='6.12.0',msvc='19.44.35228',libmpv='dde0671072',miniPolicy='hide-only; decoding and audio continue',sourceSha256={})
 for p in sorted((ROOT/'src').rglob('*')):
-    if p.is_file(): manifest['sourceSha256'][str(p.relative_to(ROOT))]=hashlib.sha256(p.read_bytes()).hexdigest()
+ if p.is_file():manifest['sourceSha256'][str(p.relative_to(ROOT))]=hashlib.sha256(p.read_bytes()).hexdigest()
 (ROOT/'out/FlowPlayer/build-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n',encoding='utf-8')
 print(json.dumps(result,indent=2))
+if not all(checks.values()):raise SystemExit(1)

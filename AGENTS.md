@@ -11,3 +11,4 @@
 - User reported all five manual checks passed on 2026-10-18; evidence is in tests/manual-results.json. Preserve their reported status.
 - User explicitly accepted a first-deployment-only startup exception on 2026-10-18. Normal fully closed launches must remain under 500 ms; retain measured initial timing in reports.
 - Part 2 testing revision: automate state-machine unit tests and minimal muted, non-activating basic checks only. User performs visual playback, fullscreen, tearing, dragging, resizing and audible-continuity checks. Never substitute screenshot claims for unperformed manual tests.
+- User revision on 2026-10-18: Mini hides only the video; video/audio playback and decoding continue normally. This supersedes Part 2's vid=no requirement. Keep the title buttons (including minimize/restore/close), always-on-top behavior and bottom playback/seek controls available in Mini. Favor smooth instant hide/restore over decoder resource savings.
