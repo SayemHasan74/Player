@@ -219,6 +219,7 @@ void MpvController::open(const QString &path) {
     loadResolved(path,{});
 }
 void MpvController::loadResolved(const QString &path,const QVariantMap &options) {
+    if(!m_surfaceRequested){m_surfaceRequested=true;emit surfaceRequestedChanged();}
     if(!m_ready||!m_renderReady) {m_pendingFile=path;m_pendingLoadOptions=options;return;}
     const QUrl url(path);const auto file=url.isLocalFile()?url.toLocalFile():path;
     m_network=!url.scheme().isEmpty()&&!url.isLocalFile()&&url.scheme().size()>1;emit metadataChanged();
@@ -237,7 +238,7 @@ void MpvController::loadResolved(const QString &path,const QVariantMap &options)
     mpv_node_list list{5,nodes,nullptr};mpv_node commandNode{};commandNode.format=MPV_FORMAT_NODE_ARRAY;commandNode.u.list=&list;
     int rc=mpv_command_node_async(handle(),0,&commandNode);if(rc<0)emit error(QString::fromUtf8(mpv_error_string(rc)));
 }
-void MpvController::stop(){emit beforeStop();if(m_idle){emit playbackIdle();return;}command({"stop"});}
+void MpvController::stop(){m_pendingFile.clear();m_pendingLoadOptions.clear();m_exactSeekTarget=-1;emit beforeStop();command({"stop"});if(m_idle)emit playbackIdle();}
 void MpvController::setRenderReady(bool ready) {
     m_renderReady=ready;
     if(ready&&!m_pendingFile.isEmpty()) {auto path=m_pendingFile;auto opts=m_pendingLoadOptions;m_pendingFile.clear();m_pendingLoadOptions.clear();loadResolved(path,opts);}

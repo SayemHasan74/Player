@@ -1,0 +1,110 @@
+2026-10-18T13:37:35.385Z [17420] START Qt=6.12.0 PID=2064
+2026-10-18T13:37:35.385Z [17420] QT_APP_READY_MS=17
+2026-10-18T13:37:35.408Z [12876] HISTORY_RECENT rows=10 workerMs=0
+2026-10-18T13:37:35.408Z [12876] HISTORY_METADATA rows=10 workerMs=0
+2026-10-18T13:37:35.632Z [17420] threaded render loop
+2026-10-18T13:37:35.632Z [17420] Using sg animation driver
+2026-10-18T13:37:35.632Z [17420] Animation Driver: using vsync: 13.34 ms
+2026-10-18T13:37:35.632Z [17420] WINDOW_CREATED_MS=264
+2026-10-18T13:37:35.639Z [17420] SHOW_CALLED_MS=270
+2026-10-18T13:37:35.745Z [18900] Animation Driver: using vsync: 13.34 ms
+2026-10-18T13:37:35.745Z [18900] Creating QRhi with backend OpenGL for window 0x19070fee50 (wflags 0xC20C80B)
+  Graphics API debug/validation layers: 0
+  Debug markers: 0
+  Timestamps: 0
+  Prefer software device: 0
+  Shader/pipeline cache collection: 0
+2026-10-18T13:37:35.769Z [18900] Created OpenGL context QSurfaceFormat(version 4.6, options QFlags<QSurfaceFormat::FormatOption>(DeprecatedFunctions), depthBufferSize 24, redBufferSize 8, greenBufferSize 8, blueBufferSize 8, alphaBufferSize 8, stencilBufferSize 8, samples 0, swapBehavior QSurfaceFormat::DoubleBuffer, swapInterval 1, colorSpace QColorSpace(QColorSpace::SRgb, QColorSpace::Primaries::SRgb, QColorSpace::TransferFunction::SRgb), profile  QSurfaceFormat::CompatibilityProfile)
+2026-10-18T13:37:35.770Z [18900] OpenGL VENDOR: NVIDIA Corporation RENDERER: NVIDIA GeForce RTX 3070/PCIe/SSE2 VERSION: 4.6.0 NVIDIA 617.42
+2026-10-18T13:37:35.771Z [18900] Created QRhi 0x2145209f2c0 for window 0x19070fee50
+2026-10-18T13:37:35.772Z [18900] Attempting to seed pipeline cache for QRhi 0x2145209f2c0 from 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-18T13:37:35.772Z [18900] Seeded pipeline cache with 5 program binaries
+2026-10-18T13:37:35.772Z [18900] MSAA sample count for the swapchain is 1. Alpha channel requested = no.
+2026-10-18T13:37:35.772Z [18900] rhi texture atlas dimensions: 2048x1024
+2026-10-18T13:37:35.772Z [17420] FIRST_SWAP_MS=404
+2026-10-18T13:37:35.803Z [17420] HOME_SCENE_READY_MS=434 rows=10
+2026-10-18T13:37:35.804Z [17420] QML_LOADED_MS=435
+2026-10-18T13:37:35.812Z [16292] option config=no: success
+2026-10-18T13:37:35.812Z [16292] option vo=libmpv: success
+2026-10-18T13:37:35.812Z [16292] option idle=yes: success
+2026-10-18T13:37:35.812Z [16292] option keep-open=yes: success
+2026-10-18T13:37:35.812Z [16292] option terminal=no: success
+2026-10-18T13:37:35.812Z [16292] option load-scripts=no: success
+2026-10-18T13:37:35.812Z [16292] option ytdl=no: success
+2026-10-18T13:37:35.812Z [16292] option osc=no: success
+2026-10-18T13:37:35.812Z [16292] option osd-level=0: success
+2026-10-18T13:37:35.812Z [16292] option osd-font-provider=none: success
+2026-10-18T13:37:35.812Z [16292] option input-default-bindings=no: success
+2026-10-18T13:37:35.812Z [16292] option input-vo-keyboard=no: success
+2026-10-18T13:37:35.812Z [16292] option input-cursor=no: success
+2026-10-18T13:37:35.812Z [16292] option cursor-autohide=no: success
+2026-10-18T13:37:35.812Z [16292] option resume-playback=no: success
+2026-10-18T13:37:35.812Z [16292] option save-position-on-quit=no: success
+2026-10-18T13:37:35.812Z [16292] option hwdec=nvdec,d3d11va-copy: success
+2026-10-18T13:37:35.812Z [16292] option hwdec-codecs=all: success
+2026-10-18T13:37:35.812Z [16292] option hwdec-threads=1: success
+2026-10-18T13:37:35.812Z [16292] option gpu-hwdec-interop=cuda: success
+2026-10-18T13:37:35.812Z [16292] option vd-lavc-dr=yes: success
+2026-10-18T13:37:35.813Z [16292] option scale=bilinear: success
+2026-10-18T13:37:35.813Z [16292] option cscale=bilinear: success
+2026-10-18T13:37:35.813Z [16292] option dscale=bilinear: success
+2026-10-18T13:37:35.813Z [16292] option correct-downscaling=no: success
+2026-10-18T13:37:35.813Z [16292] option deband=no: success
+2026-10-18T13:37:35.813Z [16292] option interpolation=no: success
+2026-10-18T13:37:35.813Z [16292] option video-sync=audio: success
+2026-10-18T13:37:35.813Z [16292] option tone-mapping=bt.2390: success
+2026-10-18T13:37:35.813Z [16292] option hdr-compute-peak=no: success
+2026-10-18T13:37:35.813Z [16292] option cache=yes: success
+2026-10-18T13:37:35.813Z [16292] option cache-secs=20: success
+2026-10-18T13:37:35.813Z [16292] option demuxer-donate-buffer=no: success
+2026-10-18T13:37:35.813Z [16292] option demuxer-max-bytes=150MiB: success
+2026-10-18T13:37:35.813Z [16292] option demuxer-max-back-bytes=50MiB: success
+2026-10-18T13:37:35.813Z [16292] option demuxer-readahead-secs=20: success
+2026-10-18T13:37:35.813Z [16292] option ao=wasapi: success
+2026-10-18T13:37:35.813Z [16292] option audio-exclusive=no: success
+2026-10-18T13:37:35.813Z [16292] option audio-channels=auto-safe: success
+2026-10-18T13:37:35.813Z [16292] option volume-max=150: success
+2026-10-18T13:37:35.813Z [16292] option sub-auto=fuzzy: success
+2026-10-18T13:37:35.813Z [16292] option sub-file-paths=Subs;Subtitles;Sub: success
+2026-10-18T13:37:35.813Z [16292] option sub-ass=yes: success
+2026-10-18T13:37:35.813Z [16292] option blend-subtitles=no: success
+2026-10-18T13:37:35.813Z [16292] option audio-display=embedded-first: success
+2026-10-18T13:37:35.813Z [16292] option msg-level=vd=v,vo=v: success
+2026-10-18T13:37:35.816Z [16292] mpv [cplayer/v] Waiting for scripts...
+2026-10-18T13:37:35.816Z [16292] mpv [cplayer/v] Set property: alang=en,eng -> 1
+2026-10-18T13:37:35.816Z [16292] mpv [cplayer/v] Set property: speed=1 -> 1
+2026-10-18T13:37:35.816Z [16292] mpv [cplayer/v] Set property: hwdec=nvdec,d3d11va-copy -> 1
+2026-10-18T13:37:35.816Z [17420] VIDEO_TRACK=auto
+2026-10-18T13:37:35.817Z [16292] mpv [cplayer/v] Set property: scale=bilinear -> 1
+2026-10-18T13:37:35.817Z [16292] mpv [cplayer/v] Set property: cscale=bilinear -> 1
+2026-10-18T13:37:35.817Z [16292] mpv [cplayer/v] Set property: video-sync=audio -> 1
+2026-10-18T13:37:35.817Z [16292] mpv [cplayer/v] Set property: interpolation=no -> 1
+2026-10-18T13:37:35.817Z [16292] mpv [cplayer/v] Set property: slang=en,eng -> 1
+2026-10-18T13:37:35.817Z [16292] mpv [cplayer/v] Set property: volume=100 -> 1
+2026-10-18T13:37:35.818Z [16292] mpv [cplayer/v] Done loading scripts.
+2026-10-18T13:37:36.260Z [1728] QThread::start: Failed to set thread priority (The parameter is incorrect.)
+2026-10-18T13:37:36.260Z [1728] QThread::start: Failed to set thread priority (The parameter is incorrect.)
+2026-10-18T13:37:36.260Z [1728] QThread::start: Failed to set thread priority (The parameter is incorrect.)
+2026-10-18T13:37:36.286Z [1728] THUMBNAIL workerMs=464 success=1 deferredDuringPlayback=0
+2026-10-18T13:37:36.318Z [12876] HISTORY_RECENT rows=10 workerMs=0
+2026-10-18T13:37:36.319Z [12876] HISTORY_METADATA rows=10 workerMs=0
+2026-10-18T13:37:36.381Z [1728] THUMBNAIL workerMs=94 success=1 deferredDuringPlayback=0
+2026-10-18T13:37:36.382Z [12876] HISTORY_RECENT rows=10 workerMs=0
+2026-10-18T13:37:36.382Z [12876] HISTORY_METADATA rows=10 workerMs=0
+2026-10-18T13:37:36.469Z [1728] THUMBNAIL workerMs=87 success=1 deferredDuringPlayback=0
+2026-10-18T13:37:36.473Z [12876] HISTORY_RECENT rows=10 workerMs=0
+2026-10-18T13:37:36.473Z [12876] HISTORY_METADATA rows=10 workerMs=0
+2026-10-18T13:37:36.564Z [1728] THUMBNAIL workerMs=95 success=1 deferredDuringPlayback=0
+2026-10-18T13:37:36.567Z [12876] HISTORY_RECENT rows=10 workerMs=0
+2026-10-18T13:37:36.567Z [12876] HISTORY_METADATA rows=10 workerMs=0
+2026-10-18T13:37:36.613Z [1728] THUMBNAIL workerMs=48 success=1 deferredDuringPlayback=0
+2026-10-18T13:37:36.620Z [12876] HISTORY_RECENT rows=10 workerMs=0
+2026-10-18T13:37:36.620Z [12876] HISTORY_METADATA rows=10 workerMs=0
+2026-10-18T13:37:37.140Z [17420] PART4_HOME_INPUT caption=1 client=1 focusHome=1
+2026-10-18T13:37:40.145Z [17420] PART4_HOME_INPUT caption=1 client=1 focusHome=1
+2026-10-18T13:37:41.639Z [17420] PART4_UI maxEventLoopGapMs=133.847 maxSceneSyncRenderMs=13.702
+2026-10-18T13:37:41.639Z [17420] METRIC {"avSyncSeconds":0,"cacheBytes":-1,"callbackToRenderMaxUs":0,"callbacks":0,"controlsVisible":true,"dropped":0,"elapsedMs":6270,"highQuality":false,"hwdec":"none","mpvRenderCallMaxUs":0,"mute":true,"pause":false,"position":0,"renders":0,"sceneSwaps":76,"videoHidden":false,"videoTrack":"auto","volume":100,"windowActive":false}
+2026-10-18T13:37:41.644Z [18900] Total time spent on pipeline creation during the lifetime of the QRhi 0x2145209f2c0 was 0 ms
+2026-10-18T13:37:41.644Z [18900] Writing pipeline cache contents (52063 bytes) for QRhi 0x2145209f2c0 to 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-18T13:37:41.667Z [16292] mpv_terminate_destroy on event worker (render context must already be freed)
+2026-10-18T13:37:42.834Z [17420] CLEAN_EXIT

@@ -1,5 +1,7 @@
 # FlowPlayer — Windows media player
 
+Latest: [Part 4 outage audit](tests/PART4_AUDIT.md), [locked interaction preferences](design/interaction-preferences.md). Previous/next transport buttons now open adjacent media files; speed is in More. Plain arrows seek exactly five seconds. The physical key above Tab, Ctrl+M and the title button toggle Mini. Vertical edge resizing can collapse/expand it. The reference-based controls/home UI was rebuilt with cached drawn icons and compact rows. Visual/native acceptance and the measured pause/resume frame-drop issue remain open.
+
 Windows 11 x64. C++20 / CMake / MSVC 2022. Video is rendered by libmpv's OpenGL render API into a `QQuickFramebufferObject`, which Qt Quick composites with plain QML controls inside the same `QQuickWindow`. No native child video window or overlay window exists.
 
 **Part 4 resume, history and home screen are implemented; visual acceptance remains pending.** See [Part 4 results](tests/PART4_RESULTS.md) for current measurements and manual checks. Reports for earlier parts apply to their own executable hashes. Part 5 has not started.
@@ -143,7 +145,7 @@ The title bar and temporary transport bar follow `design/references/player-contr
 | I | Resolution, codec, decoder, FPS, dropped-frame count and bitrate |
 | Ctrl+O; file drop; command line | Open a file |
 
-Mini starts at **560 x 160 logical pixels** at the work area's bottom-right, remembers its position/width, and resizes horizontally. It shows the full title button row and bottom playback/volume/seek controls. Per the user's amendment, it **hides only the video**: video decoding, audio and the timeline keep running normally. Entering/leaving Mini never changes vid, seeks or pauses the engine. The same framebuffer item remains alive under a plain QML cover. Tiny preview defaults off; enabling it reveals video behind the compact UI. With the app closed, enable it using:
+Mini starts at **560 x 160 logical pixels** at the work area's bottom-right and remembers its position/width. The latest preference also allows vertical edge resizing: collapse a normal window to 200 px and release to enter Mini; expand Mini to 240 px to return to a normal window. Caption dragging moves the window. It shows the full title button row and bottom playback/volume/seek controls. Per the user's amendment, it **hides only the video**: video decoding, audio and the timeline keep running normally. Entering/leaving Mini never changes vid, seeks or pauses the engine. The same framebuffer item remains alive under a plain QML cover. Tiny preview defaults off; enabling it reveals video behind the compact UI. With the app closed, enable it using:
 
 ```powershell
 Set-ItemProperty HKCU:\Software\FlowPlayer\FlowPlayer\window -Name tinyPreview -Type String -Value true
@@ -167,7 +169,7 @@ See `tests/PART2_RESULTS.md` for actual results and the compact manual checklist
 
 ## Part 3: controls, tracks and settings
 
-The saved player reference guides the transport layout. The new dark gradient bar has previous/next placeholders, play/pause, audio/subtitle/speed menus, volume up to150, playlist placeholder, fullscreen and More/Settings. Time display switches remaining/total on click. Mini uses the same controls and seek component while video and audio continue normally beneath its plain scene cover. There is no copied IINA logo, blur, shadow, separate overlay window or native popup menu.
+The saved player reference guides the transport layout. The audited bar has working previous/next media-file buttons, play/pause, volume up to150, subtitles/audio/playlist/More actions and a stable lower timeline. Speed and settings are in More; fullscreen is in the title bar and More. The playlist panel remains a placeholder. Time display switches remaining/total on click. Mini uses the same controls and seek component while video and audio continue normally beneath its plain scene cover. There is no copied IINA logo, blur, shadow, separate overlay window or native popup menu.
 
 The shared seek bar previews the cursor/drag target, marks chapters and shows actual cached seek ranges for network sources. Dragging sends coalesced keyframe seeks at most every65ms; release sends one exact seek. Its timer runs only during a drag and does not drive video rendering. Exact seek measurements use an asynchronous post-restart property read.
 
@@ -179,7 +181,7 @@ Right-click opens the scene menu, including over native caption zones. Audio/sub
 - Subtitle file drop or menu loading uses mpv sub-add/select; SRT, ASS/SSA, VTT and image subtitle formats are handled by mpv/libass. Full styled rendering is a manual check, especially bitmap subtitle size/position limitations.
 - Matching sidecars and Subs/subs/Subtitles/Sub folders use Windows semicolon-separated paths, as specified by the [mpv manual](https://mpv.io/manual/master/#options-sub-file-paths).
 - Embedded cover art is drawn by mpv through the same framebuffer item for audio files using audio-display=embedded-first; no second image/video window is created.
-- **I** includes resolution, codec, decoder, FPS, drops, bitrate and cache. Playlist navigation/panel remain placeholders for Part5.
+- **I** includes resolution, codec, decoder, FPS, drops, bitrate and cache. Transport neighbors are authorized and implemented; the full playlist panel and automatic next-file playback remain Part5.
 
 Open **More → Settings** (or right-click → Settings) for language order, auto-resume defaultoff, autoplay-next defaulton, aspect lock, live HQ/hardware decoding, seek steps, tiny Mini preview and default speed. Auto-resume is implemented in Part4; autoplay-next remains Part5. The panel is created only when opened.
 

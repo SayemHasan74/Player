@@ -1,4 +1,5 @@
 #include "WindowStateMachine.h"
+void WindowStateMachine::resizeToWindowed(QRect geometry) {m_current.mode=Mode::Windowed;m_current.geometry=geometry;m_windowed=geometry;m_history.clear();}
 void WindowStateMachine::observe(QRect geometry,QString screen,qreal dpr) {
     m_current.geometry=geometry;m_current.screen=std::move(screen);m_current.dpr=dpr;
     if(m_current.mode==Mode::Windowed)m_windowed=geometry;

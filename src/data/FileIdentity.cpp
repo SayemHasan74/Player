@@ -13,7 +13,7 @@ QVariantMap FileIdentity::inspect(const QString &input) {
     QVariantMap result{{"path",path},{"size",info.size()},{"mtime",info.lastModified().toMSecsSinceEpoch()},{"available",info.exists()}};
     HANDLE file=CreateFileW(reinterpret_cast<LPCWSTR>(QDir::toNativeSeparators(path).utf16()),GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,nullptr,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL|FILE_FLAG_RANDOM_ACCESS,nullptr);
     if(file==INVALID_HANDLE_VALUE) {result["identityError"]=int(GetLastError());return result;}
-    LARGE_INTEGER size{};GetFileSizeEx(file,&size);result["size"]=size.QuadPart;
+    LARGE_INTEGER size{};if(!GetFileSizeEx(file,&size)){result["identityError"]=int(GetLastError());CloseHandle(file);return result;}result["size"]=size.QuadPart;
     QCryptographicHash hash(QCryptographicHash::Sha256);bool valid=true;
     auto read=[&](qint64 offset,DWORD bytes) {
         LARGE_INTEGER pos{};pos.QuadPart=offset;DWORD received=0;QByteArray buffer(bytes,Qt::Uninitialized);

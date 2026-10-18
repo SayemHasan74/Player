@@ -1,5 +1,6 @@
 #include "NativeEventFilter.h"
 #include "FramelessWindow.h"
+#include "CompactResizePolicy.h"
 #include <windows.h>
 #include <windowsx.h>
 #include <cmath>
@@ -11,6 +12,8 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
     auto *msg=static_cast<MSG*>(opaque);
     if(!m_window->nativeId()||msg->hwnd!=reinterpret_cast<HWND>(m_window->nativeId()))return false;
     switch(msg->message) {
+    case WM_ENTERSIZEMOVE:m_window->beginInteractiveResize();break;
+    case WM_EXITSIZEMOVE:m_window->endInteractiveResize();break;
     case WM_NCRBUTTONDOWN:case WM_CONTEXTMENU: {
         POINT point{GET_X_LPARAM(msg->lParam),GET_Y_LPARAM(msg->lParam)};
         if(msg->lParam==-1) {point.x=m_window->width()/2;point.y=m_window->height()/2;}
@@ -35,10 +38,10 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
         double minWidth=m_window->minimumWidth(),minHeight=m_window->minimumHeight();
         if(m_window->lockAspectRatio()&&!m_window->mini()) {
             minWidth=std::max(minWidth,minHeight*m_window->videoAspect());
-            minHeight=std::max(minHeight,minWidth/m_window->videoAspect());
+            // Vertical edges may collapse into compact mode; do not enforce
+            // an aspect-derived minimum height that prevents the threshold.
         }
         info->ptMinTrackSize={qRound(minWidth*dpr),qRound(minHeight*dpr)};
-        if(m_window->mini())info->ptMaxTrackSize.y=qRound(FramelessWindow::MiniHeight*dpr);
         *result=0;return true;
     }
     case WM_NCHITTEST: {
@@ -47,7 +50,7 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
         RECT rect;GetClientRect(msg->hwnd,&rect);
         const auto dpr=m_window->devicePixelRatio();const int edge=qRound(6*dpr);
         if(!IsZoomed(msg->hwnd)) {
-            bool l=p.x<edge,r=p.x>=rect.right-edge,t=!m_window->mini()&&p.y<edge,b=!m_window->mini()&&p.y>=rect.bottom-edge;
+            bool l=p.x<edge,r=p.x>=rect.right-edge,t=p.y<edge,b=p.y>=rect.bottom-edge;
             if(t||b||l||r) {
                 *result=t?(l?HTTOPLEFT:r?HTTOPRIGHT:HTTOP):b?(l?HTBOTTOMLEFT:r?HTBOTTOMRIGHT:HTBOTTOM):l?HTLEFT:HTRIGHT;
                 return true;
@@ -66,8 +69,11 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
     case WM_NCLBUTTONDOWN:if(msg->wParam==HTMAXBUTTON){*result=0;return true;}break;
     case WM_NCLBUTTONUP:if(msg->wParam==HTMAXBUTTON){m_window->toggleMaximized();*result=0;return true;}break;
     case WM_SIZING: {
-        if(m_window->mini()) {auto *r=reinterpret_cast<RECT*>(msg->lParam);r->bottom=r->top+qRound(FramelessWindow::MiniHeight*m_window->devicePixelRatio());*result=TRUE;return true;}
+        m_window->noteInteractiveResize(int(msg->wParam));
+        if(m_window->mini())break;
         if(m_window->fullscreen())break;
+        auto *proposed=reinterpret_cast<RECT*>(msg->lParam);
+        if((msg->wParam==WMSZ_TOP||msg->wParam==WMSZ_BOTTOM)&&CompactResizePolicy::collapse(false,qRound((proposed->bottom-proposed->top)/m_window->devicePixelRatio())))break;
         if(!m_window->lockAspectRatio())break;
         auto *r=reinterpret_cast<RECT*>(msg->lParam);const double a=m_window->videoAspect();
         const int w=r->right-r->left,h=r->bottom-r->top;

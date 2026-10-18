@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QPainter>
 #include <QFileInfo>
+#include <QFile>
 #include <QSaveFile>
 #include <QDir>
 #include <QElapsedTimer>
@@ -13,7 +14,7 @@ ThumbnailService::ThumbnailService(QString dir,QObject *p):QObject(p),m_director
 ThumbnailService::~ThumbnailService(){{std::lock_guard l(m_mutex);m_stop=true;}m_cv.notify_one();m_worker.join();}
 void ThumbnailService::setAllowed(bool allowed){{std::lock_guard l(m_mutex);if(m_allowed==allowed)return;m_allowed=allowed;}m_cv.notify_one();}
 void ThumbnailService::request(const QVariantMap &r) {
-    const QString key=r.value("file_key").toString();if(key.isEmpty()||!r.value("available").toBool()||!r.value("thumbnail").toString().isEmpty()||r.value("path").toString().contains("://"))return;
+    const QString key=r.value("file_key").toString();if(r.value("metadataPending").toBool()||key.isEmpty()||!r.value("available").toBool()||!r.value("thumbnail").toString().isEmpty()||r.value("path").toString().contains("://"))return;
     {std::lock_guard l(m_mutex);if(m_pending.contains(key))return;m_cancelled.remove(key);m_pending.insert(key);m_queue.push_back(r);}m_cv.notify_one();
 }
 void ThumbnailService::forget(const QString &key){std::lock_guard l(m_mutex);m_cancelled.insert(key);}
@@ -37,11 +38,14 @@ void ThumbnailService::run() {
                 QElapsedTimer timer;timer.start();
                 auto input=record.value("path").toString().toUtf8();auto options=QByteArray("start=")+QByteArray::number(record.value("duration").toDouble()*.1,'f',3);
                 const char *load[]{"loadfile",input.constData(),"replace","-1",options.constData(),nullptr};mpv_command_async(mpv,1,load);
-                bool frame=false;
+                bool frame=false,loaded=false;
                 while(!m_stop&&m_allowed&&timer.elapsed()<10000) {
                     auto *e=mpv_wait_event(mpv,.05);
-                    if(e->event_id==MPV_EVENT_PLAYBACK_RESTART){frame=true;break;}
-                    if(e->event_id==MPV_EVENT_END_FILE)break;
+                    if(e->event_id==MPV_EVENT_FILE_LOADED)loaded=true;
+                    if(e->event_id==MPV_EVENT_PLAYBACK_RESTART&&loaded){frame=true;break;}
+                    // The previous asynchronous stop can still be queued.
+                    // It must not terminate the next thumbnail's load.
+                    if(e->event_id==MPV_EVENT_END_FILE){const auto *end=static_cast<mpv_event_end_file*>(e->data);if(loaded||end->reason==MPV_END_FILE_REASON_ERROR)break;}
                 }
                 if(frame&&m_allowed&&!m_stop) {
                     mpv_node node{};const char *args[]{"screenshot-raw","video","bgra",nullptr};
@@ -52,8 +56,13 @@ void ThumbnailService::run() {
                             QImage source(static_cast<const uchar*>(pixels->data),w,h,stride,QImage::Format_ARGB32);
                             QImage image(320,180,QImage::Format_RGB32);image.fill(QColor("#20242c"));
                             auto scaled=source.scaled(320,180,Qt::KeepAspectRatio,Qt::SmoothTransformation);{QPainter painter(&image);painter.drawImage((320-scaled.width())/2,(180-scaled.height())/2,scaled);}
-                            std::lock_guard l(m_mutex);
-                            if(!m_cancelled.contains(key)&&m_allowed){QDir().mkpath(m_directory);QSaveFile file(path);success=file.open(QIODevice::WriteOnly)&&image.save(&file,"JPG",80)&&file.commit();}
+                            bool cancelled;
+                            {std::lock_guard l(m_mutex);cancelled=m_cancelled.contains(key);}
+                            // Never hold the queue mutex during disk/image IO:
+                            // the UI uses it briefly to suspend thumbnail work.
+                            if(!cancelled&&m_allowed){QDir().mkpath(m_directory);QSaveFile file(path);success=file.open(QIODevice::WriteOnly)&&image.save(&file,"JPG",80)&&file.commit();}
+                            {std::lock_guard l(m_mutex);cancelled=m_cancelled.contains(key);}
+                            if(cancelled){QFile::remove(path);success=false;}
                         }
                     }
                     mpv_free_node_contents(&node);

@@ -15,7 +15,7 @@ Item {
     function submitUrl(text) {if(text.trim().length>0){closePopups();mpv.open(text.trim())}}
     function menuItems(kind) {
         let rows=[]
-        if(kind==="context")return [entry("Open file · Ctrl+O",()=>playerWindow.openDialog()),entry("Open URL · Ctrl+U",()=>playerWindow.requestUrl()),entry("Audio tracks / delay",()=>openMenu("audio",12,height-12)),entry("Subtitles / delay / size",()=>openMenu("sub",12,height-12)),entry("Playback speed",()=>openMenu("speed",12,height-12)),entry("Aspect ratio",()=>openMenu("aspect",12,height-12)),entry("Video information · I",()=>playerWindow.toggleInfo()),entry("Always on top · Ctrl+T",()=>playerWindow.togglePinned(),playerWindow.pinned||playerWindow.mini),entry("Settings",()=>openSettings())]
+        if(kind==="context")return [entry("Open file · Ctrl+O",()=>playerWindow.openDialog()),entry("Open URL · Ctrl+U",()=>playerWindow.requestUrl()),entry("Audio tracks / delay",()=>openMenu("audio",12,height-12)),entry("Subtitles / delay / size",()=>openMenu("sub",12,height-12)),entry("Playback speed",()=>openMenu("speed",12,height-12)),entry("Fullscreen · F",()=>playerWindow.toggleFullscreen()),entry("Home / History",()=>history.showHome()),entry("Aspect ratio",()=>openMenu("aspect",12,height-12)),entry("Video information · I",()=>playerWindow.toggleInfo()),entry("Always on top · Ctrl+T",()=>playerWindow.togglePinned(),playerWindow.pinned||playerWindow.mini),entry("Settings",()=>openSettings())]
         rows.push(entry("‹ Back",()=>openMenu("context",sceneMenu.originX,sceneMenu.originY)))
         if(kind==="audio"||kind==="sub") {
             if(kind==="sub")rows.push(entry("Off",()=>mpv.selectTrack("sub",-1),Number(mpv.playbackOptions.sid||0)<=0))
@@ -44,6 +44,7 @@ Item {
         return rows
     }
     function openMenu(kind,px,py) {sceneMenu.open(kind,menuItems(kind),px,py)}
+    function diagnosticLayoutChecks(){return JSON.stringify({layouts:controls.diagnosticLayout(),homeSameScene:homeLoader.parent===root,menusSameScene:sceneMenu.parent===root})}
     // Bounded in-process diagnostic: no native mode changes, screenshots or focus activation.
     function diagnosticPopupChecks() {
         let result={}
@@ -54,7 +55,7 @@ Item {
         closePopups();return JSON.stringify(result)
     }
     Loader {
-        anchors.fill:parent;active:mpv.ready&&enableVideoSurface
+        anchors.fill:parent;active:mpv.ready&&mpv.surfaceRequested&&enableVideoSurface
         sourceComponent:Component {MpvRenderItem {controller:mpv;onFirstFrame:appDiagnostics.firstFrame()}}
     }
     Rectangle {anchors.fill:parent;color:"#252831";visible:playerWindow.videoHidden}

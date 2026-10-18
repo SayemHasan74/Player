@@ -1,5 +1,7 @@
 # User constraints
 
+- Latest audit/input/UI preferences are locked in design/interaction-preferences.md. Previous/next media-file navigation is now authorized as a scoped addition; do not build the full Part 5 playlist/auto-advance. Implement resize-driven compact transitions and the grave/backtick key. Preserve native caption dragging.
+
 - Part 4 is now authorized and saved as prompt4.md. Earlier deferrals of Part 4 below are superseded. The playlist panel/folder navigation remain Part 5; do not start Part 5. Keep history databases and thumbnail caches isolated in automated tests.
 
 - All future tests must be muted and run in the background while the user works.

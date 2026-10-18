@@ -1,4 +1,5 @@
 #include "WindowStateMachine.h"
+#include "CompactResizePolicy.h"
 #include <iostream>
 #include <random>
 #include <cstdlib>
@@ -45,5 +46,10 @@ int main() {
     Model rapid(windowed);for(int i=0;i<20;++i)rapid.toggle(Mode::Fullscreen,full,mini);
     require(rapid.current().mode==Mode::Windowed&&rapid.current().geometry==windowed,"twenty rapid fullscreen transitions");
     rapid.exitFullscreen();require(rapid.depth()==0,"escape outside fullscreen no op");
+    require(CompactResizePolicy::collapse(false,200)&&!CompactResizePolicy::collapse(false,201),"compact collapse boundary");
+    require(CompactResizePolicy::expand(true,240)&&!CompactResizePolicy::expand(true,239),"compact expansion hysteresis");
+    rapid.toggle(Mode::Mini,full,mini);const QRect expanded(12,34,800,450);rapid.resizeToWindowed(expanded);
+    require(rapid.current().mode==Mode::Windowed&&rapid.current().geometry==expanded&&rapid.depth()==0,"manual compact expansion starts normal geometry");
+    rapid.toggle(Mode::Mini,full,mini);rapid.toggle(Mode::Mini,full,mini);require(rapid.current().geometry==expanded,"button still restores expanded geometry exactly");
     std::cout<<"PASS: "<<checks<<" checks; all mode round trips, nesting, geometry/DPI and 100 random sequences of 200 actions\n";
 }

@@ -1,5 +1,7 @@
 # Locked visual references
 
+Latest audit: the player surface uses the reference's 694×106 rounded layout, cream drawn transport icons, left volume and four right actions; the welcome uses a 28% branding column and compact recent rows. Required history details remain accessible in its focus/hover footer. There is no IINA logo, copied red annotation, blur or shader effect. Running-player pixel-level matching remains a manual check; code/layout checks alone are not a visual acceptance claim.
+
 Part 4 is authorized. HomeScreen.qml uses the welcome reference's left branding column and teal/purple opening/history area, with the thumbnails and progress required by Part 4. Branding is text only; no IINA logo is copied. The playlist slide-over remains for Part 5.
 
 User instruction, 2026-10-18: retain these two images as the visual prompt for the later UI part. Do not implement the UI now.

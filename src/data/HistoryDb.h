@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QVariantMap>
 #include <QVariantList>
+#include <QHash>
 #include <functional>
 #include <deque>
 #include <mutex>
@@ -15,6 +16,7 @@ public:
     explicit HistoryDb(QString path={},QString thumbs={},QObject *parent=nullptr);
     ~HistoryDb() override;
     void lookup(QString path,quint64 token);
+    void neighbor(QString path,int direction,quint64 token);
     void save(QVariantMap record);
     void recent();
     void remove(QString key);
@@ -28,10 +30,12 @@ signals:
     void committed(const QVariantMap &record);
     void drained();
     void folderReady(const QString &path);
+    void neighborReady(quint64 token,const QString &origin,const QString &path);
 private:
     void enqueue(std::function<void()> work);
     void run();
     void runIdentity();
+    void runMetadata();
     void resolveIdentity(QVariantMap identity,quint64 token,qint64 elapsedMs);
     void publishRecent();
     void prune();
@@ -42,10 +46,16 @@ private:
     std::mutex m_mutex;
     std::condition_variable m_cv;
     std::condition_variable m_identityCv;
+    std::condition_variable m_metadataCv;
     std::deque<std::function<void()>> m_queue;
-    std::deque<std::pair<QString,quint64>> m_identityQueue;
+    std::deque<std::function<void()>> m_identityQueue;
+    std::deque<std::function<void()>> m_metadataQueue;
     bool m_stop=false;
     bool m_identityStop=false;
+    bool m_metadataStop=false;
     std::thread m_worker;
     std::thread m_identityWorker;
+    std::thread m_metadataWorker;
+    quint64 m_recentGeneration=0;
+    QHash<QString,QVariantMap> m_recentMetadata;
 };

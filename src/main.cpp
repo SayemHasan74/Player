@@ -17,6 +17,7 @@
 #include <QFile>
 #include <QFont>
 #include <QQuickItem>
+#include <QKeyEvent>
 #include <windows.h>
 #include <objbase.h>
 #include <clocale>
@@ -106,6 +107,37 @@ int main(int argc,char **argv) {
                 }
                 if(scenario=="part4-pause") {
                     QObject::connect(&controller,&MpvController::fileLoaded,&window,[&](const QString &){controller.setPause(true);});
+                }
+                if(scenario=="part4-audit-cancel") {
+                    QObject::connect(&controller,&MpvController::readyChanged,&window,[&]{QTimer::singleShot(0,&window,[&]{resume.showHome();});QTimer::singleShot(1000,&window,[&]{controller.open(app.arguments()[1]);QTimer::singleShot(0,&window,[&]{resume.showHome();});});});
+                }
+                if(scenario=="part4-audit-keys") {
+                    QObject::connect(&controller,&MpvController::fileLoaded,&window,[&](const QString &){
+                        controller.setPause(true);settings.setValue("seekStep",17);
+                        QTimer::singleShot(600,&window,[&]{controller.seekTo(12.123);});
+                        QTimer::singleShot(1300,&window,[&]{QKeyEvent event(QEvent::KeyPress,Qt::Key_Left,Qt::NoModifier);QCoreApplication::sendEvent(&window,&event);});
+                        QTimer::singleShot(2000,&window,[&]{QKeyEvent event(QEvent::KeyPress,Qt::Key_Right,Qt::NoModifier);QCoreApplication::sendEvent(&window,&event);});
+                    });
+                }
+                if(scenario=="part4-audit-nav") {
+                    auto stage=std::make_shared<int>(0);
+                    QObject::connect(&controller,&MpvController::fileLoaded,&window,[&,stage](const QString &path){
+                        const int index=(*stage)++;controller.setPause(true);Log::write("AUDIT_NAV "+path);
+                        if(index<3)QTimer::singleShot(500,&window,[&,index]{resume.navigate(index==0?-1:1);});
+                    });
+                }
+                if(scenario=="part4-audit-ui") {
+                    QObject::connect(&controller,&MpvController::videoFramePresented,&window,[&]{
+                        auto *root=window.contentItem()->findChild<QObject*>("sceneRoot",Qt::FindDirectChildrenOnly);QVariant result;
+                        if(root)QMetaObject::invokeMethod(root,"diagnosticLayoutChecks",Q_RETURN_ARG(QVariant,result));Log::write("AUDIT_LAYOUT "+result.toString());
+                        auto mark=[&](const QString &phase){Log::write("AUDIT_FRAME "+QString::fromUtf8(QJsonDocument(QJsonObject{{"phase",phase},{"renders",double(MpvRenderItem::renderedFrames.load())},{"swaps",double(diagnostics.swaps.load())},{"dropped",double(controller.droppedFrames())},{"position",controller.position()},{"hidden",!window.controlsVisible()}}).toJson(QJsonDocument::Compact)));};
+                        QTimer::singleShot(6000,&window,[mark]{mark("hidden_begin");});
+                        QTimer::singleShot(10000,&window,[&,mark]{mark("hidden_end");controller.setPause(true);});
+                        QTimer::singleShot(12000,&window,[mark]{mark("paused_begin");});
+                        QTimer::singleShot(16000,&window,[&,mark]{mark("paused_end");controller.setPause(false);});
+                        QTimer::singleShot(18000,&window,[mark]{mark("resume_begin");});
+                        QTimer::singleShot(22000,&window,[mark]{mark("resume_end");});
+                    });
                 }
                 if(scenario=="part4-switch") {
                     auto stage=std::make_shared<int>(0);

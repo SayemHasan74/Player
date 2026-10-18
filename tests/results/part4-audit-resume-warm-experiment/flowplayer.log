@@ -1,0 +1,254 @@
+2026-10-18T13:08:53.197Z [14620] START Qt=6.12.0 PID=16832
+2026-10-18T13:08:53.197Z [14620] QT_APP_READY_MS=74
+2026-10-18T13:08:53.441Z [14620] threaded render loop
+2026-10-18T13:08:53.441Z [14620] Using sg animation driver
+2026-10-18T13:08:53.441Z [14620] Animation Driver: using vsync: 13.34 ms
+2026-10-18T13:08:53.441Z [14620] WINDOW_CREATED_MS=318
+2026-10-18T13:08:53.448Z [14620] SHOW_CALLED_MS=325
+2026-10-18T13:08:53.532Z [6288] HISTORY_RECENT rows=0 workerMs=0
+2026-10-18T13:08:53.558Z [3436] Animation Driver: using vsync: 13.34 ms
+2026-10-18T13:08:53.558Z [3436] Creating QRhi with backend OpenGL for window 0x6e924ff050 (wflags 0xC20C80B)
+  Graphics API debug/validation layers: 0
+  Debug markers: 0
+  Timestamps: 0
+  Prefer software device: 0
+  Shader/pipeline cache collection: 0
+2026-10-18T13:08:53.582Z [3436] Created OpenGL context QSurfaceFormat(version 4.6, options QFlags<QSurfaceFormat::FormatOption>(DeprecatedFunctions), depthBufferSize 24, redBufferSize 8, greenBufferSize 8, blueBufferSize 8, alphaBufferSize 8, stencilBufferSize 8, samples 0, swapBehavior QSurfaceFormat::DoubleBuffer, swapInterval 1, colorSpace QColorSpace(QColorSpace::SRgb, QColorSpace::Primaries::SRgb, QColorSpace::TransferFunction::SRgb), profile  QSurfaceFormat::CompatibilityProfile)
+2026-10-18T13:08:53.584Z [3436] OpenGL VENDOR: NVIDIA Corporation RENDERER: NVIDIA GeForce RTX 3070/PCIe/SSE2 VERSION: 4.6.0 NVIDIA 617.42
+2026-10-18T13:08:53.585Z [3436] Created QRhi 0x24e784bb420 for window 0x6e924ff050
+2026-10-18T13:08:53.585Z [3436] Attempting to seed pipeline cache for QRhi 0x24e784bb420 from 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-18T13:08:53.585Z [3436] Seeded pipeline cache with 5 program binaries
+2026-10-18T13:08:53.585Z [3436] MSAA sample count for the swapchain is 1. Alpha channel requested = no.
+2026-10-18T13:08:53.585Z [3436] rhi texture atlas dimensions: 2048x1024
+2026-10-18T13:08:53.586Z [14620] FIRST_SWAP_MS=463
+2026-10-18T13:08:53.645Z [14620] QML_LOADED_MS=523
+2026-10-18T13:08:54.981Z [13672] option config=no: success
+2026-10-18T13:08:54.981Z [13672] option vo=libmpv: success
+2026-10-18T13:08:54.981Z [13672] option idle=yes: success
+2026-10-18T13:08:54.981Z [13672] option keep-open=yes: success
+2026-10-18T13:08:54.981Z [13672] option terminal=no: success
+2026-10-18T13:08:54.981Z [13672] option load-scripts=no: success
+2026-10-18T13:08:54.981Z [13672] option ytdl=no: success
+2026-10-18T13:08:54.981Z [13672] option osc=no: success
+2026-10-18T13:08:54.981Z [13672] option osd-level=0: success
+2026-10-18T13:08:54.981Z [13672] option osd-font-provider=none: success
+2026-10-18T13:08:54.981Z [13672] option input-default-bindings=no: success
+2026-10-18T13:08:54.981Z [13672] option input-vo-keyboard=no: success
+2026-10-18T13:08:54.981Z [13672] option input-cursor=no: success
+2026-10-18T13:08:54.981Z [13672] option cursor-autohide=no: success
+2026-10-18T13:08:54.981Z [13672] option resume-playback=no: success
+2026-10-18T13:08:54.981Z [13672] option save-position-on-quit=no: success
+2026-10-18T13:08:54.981Z [13672] option hwdec=nvdec,d3d11va-copy: success
+2026-10-18T13:08:54.981Z [13672] option hwdec-codecs=all: success
+2026-10-18T13:08:54.981Z [13672] option hwdec-threads=1: success
+2026-10-18T13:08:54.981Z [13672] option gpu-hwdec-interop=cuda: success
+2026-10-18T13:08:54.981Z [13672] option vd-lavc-dr=yes: success
+2026-10-18T13:08:54.981Z [13672] option scale=bilinear: success
+2026-10-18T13:08:54.981Z [13672] option cscale=bilinear: success
+2026-10-18T13:08:54.981Z [13672] option dscale=bilinear: success
+2026-10-18T13:08:54.981Z [13672] option correct-downscaling=no: success
+2026-10-18T13:08:54.981Z [13672] option deband=no: success
+2026-10-18T13:08:54.981Z [13672] option interpolation=no: success
+2026-10-18T13:08:54.981Z [13672] option video-sync=audio: success
+2026-10-18T13:08:54.981Z [13672] option tone-mapping=bt.2390: success
+2026-10-18T13:08:54.981Z [13672] option hdr-compute-peak=no: success
+2026-10-18T13:08:54.981Z [13672] option cache=yes: success
+2026-10-18T13:08:54.982Z [13672] option cache-secs=20: success
+2026-10-18T13:08:54.982Z [13672] option demuxer-donate-buffer=no: success
+2026-10-18T13:08:54.982Z [13672] option demuxer-max-bytes=150MiB: success
+2026-10-18T13:08:54.982Z [13672] option demuxer-max-back-bytes=50MiB: success
+2026-10-18T13:08:54.982Z [13672] option demuxer-readahead-secs=20: success
+2026-10-18T13:08:54.982Z [13672] option ao=wasapi: success
+2026-10-18T13:08:54.982Z [13672] option audio-exclusive=no: success
+2026-10-18T13:08:54.982Z [13672] option audio-channels=auto-safe: success
+2026-10-18T13:08:54.982Z [13672] option volume-max=150: success
+2026-10-18T13:08:54.982Z [13672] option sub-auto=fuzzy: success
+2026-10-18T13:08:54.982Z [13672] option sub-file-paths=Subs;Subtitles;Sub: success
+2026-10-18T13:08:54.982Z [13672] option sub-ass=yes: success
+2026-10-18T13:08:54.982Z [13672] option blend-subtitles=no: success
+2026-10-18T13:08:54.982Z [13672] option audio-display=embedded-first: success
+2026-10-18T13:08:54.982Z [13672] option msg-level=vd=v,vo=v: success
+2026-10-18T13:08:54.986Z [13672] mpv [cplayer/v] Waiting for scripts...
+2026-10-18T13:08:54.987Z [14620] VIDEO_TRACK=auto
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: alang=en,eng -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: speed=1 -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: hwdec=nvdec,d3d11va-copy -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: scale=bilinear -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: cscale=bilinear -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: video-sync=audio -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: interpolation=no -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: slang=en,eng -> 1
+2026-10-18T13:08:54.987Z [13672] mpv [cplayer/v] Set property: volume=100 -> 1
+2026-10-18T13:08:54.992Z [13672] mpv [cplayer/v] Done loading scripts.
+2026-10-18T13:08:54.997Z [6288] HISTORY_LOOKUP token=1 workerMs=9 start=0.000 known=0
+2026-10-18T13:08:54.997Z [14620] RESUME_LOAD {"aid":"auto","pause":"no","sid":"auto","speed":"1","start":"0.000","sub-delay":"0","volume":"100"}
+2026-10-18T13:08:55.006Z [13672] mpv [libmpv_render/v] GL_VERSION='4.6.0 NVIDIA 617.42'
+2026-10-18T13:08:55.006Z [13672] mpv [libmpv_render/v] Detected desktop OpenGL 4.6.
+2026-10-18T13:08:55.006Z [13672] mpv [libmpv_render/v] GL_VENDOR='NVIDIA Corporation'
+2026-10-18T13:08:55.006Z [13672] mpv [libmpv_render/v] GL_RENDERER='NVIDIA GeForce RTX 3070/PCIe/SSE2'
+2026-10-18T13:08:55.006Z [13672] mpv [libmpv_render/v] GL_SHADING_LANGUAGE_VERSION='4.60 NVIDIA'
+2026-10-18T13:08:55.007Z [13672] mpv [libmpv_render/v] Loaded extension WGL_EXT_swap_control.
+2026-10-18T13:08:55.007Z [13672] mpv [libmpv_render/v] Loaded extension GL_KHR_debug.
+2026-10-18T13:08:55.007Z [13672] mpv [libmpv_render/v] GL_*_swap_control extension missing.
+2026-10-18T13:08:55.007Z [13672] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T13:08:55.007Z [13672] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T13:08:55.007Z [13672] mpv [libmpv_render/v] Loading hwdec driver 'cuda'
+2026-10-18T13:08:55.086Z [3436] Render context created: OpenGL, threaded Qt Quick, same scene
+2026-10-18T13:08:55.086Z [14620] OPEN_FILE E:/Codes/FlowPlayer/tests/media/hevc-4k60-main10.mkv
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Set property: demuxer-max-bytes=150MiB -> 1
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Running hook: auto_profiles/on_before_start_file
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Failed sending hook command auto_profiles/on_before_start_file. Removing hook.
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Setting option 'aid' = 'auto' (flags = 16)
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Setting option 'pause' = 'no' (flags = 16)
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Setting option 'sid' = 'auto' (flags = 16)
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Setting option 'speed' = '1' (flags = 16)
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Setting option 'start' = '0.000' (flags = 16)
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Setting option 'sub-delay' = '0' (flags = 16)
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Setting option 'volume' = '100' (flags = 16)
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Running hook: auto_profiles/on_load
+2026-10-18T13:08:55.086Z [13672] mpv [cplayer/v] Failed sending hook command auto_profiles/on_load. Removing hook.
+2026-10-18T13:08:55.087Z [13672] mpv [ifo_dvda/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T13:08:55.087Z [13672] mpv [ifo_dvdnav/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T13:08:55.087Z [13672] mpv [bdmv/bluray/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T13:08:55.087Z [13672] mpv [file/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T13:08:55.087Z [13672] mpv [demux/v] Trying demuxers for level=normal.
+2026-10-18T13:08:55.088Z [13672] mpv [mkv/v] Deferring reading cues.
+2026-10-18T13:08:55.088Z [13672] mpv [mkv/v] All headers are parsed!
+2026-10-18T13:08:55.088Z [13672] mpv [demux/v] Detected file format: Matroska
+2026-10-18T13:08:55.088Z [13672] mpv [cplayer/v] Opening done: E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T13:08:55.089Z [13672] mpv [find_files/v] Loading external files in E:\Codes\FlowPlayer\tests\media\
+2026-10-18T13:08:55.089Z [13672] mpv [find_files/v] Loading external files in E:\Codes\FlowPlayer\tests\media\Subs
+2026-10-18T13:08:55.089Z [13672] mpv [cplayer/v] Running hook: auto_profiles/on_preloaded
+2026-10-18T13:08:55.089Z [13672] mpv [cplayer/v] Failed sending hook command auto_profiles/on_preloaded. Removing hook.
+2026-10-18T13:08:55.089Z [13672] mpv [cplayer/v] Running hook: auto_profiles/on_loaded
+2026-10-18T13:08:55.089Z [13672] mpv [cplayer/v] Failed sending hook command auto_profiles/on_loaded. Removing hook.
+2026-10-18T13:08:55.089Z [13672] mpv [mkv/v] select track 0
+2026-10-18T13:08:55.089Z [13672] mpv [mkv/v] select track 1
+2026-10-18T13:08:55.089Z [13672] mpv [cplayer/info] ● Video  --vid=1  (hevc 3840x2160 60 fps)
+2026-10-18T13:08:55.089Z [13672] mpv [cplayer/info] ● Audio  --aid=1  (aac 1ch 48000 Hz)
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] Container reported FPS: 60.000002
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] Codec list:
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] hevc - HEVC (High Efficiency Video Coding)
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] hevc_qsv (hevc) - HEVC video (Intel Quick Sync Video acceleration)
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] hevc_amf (hevc) - HEVC AMD AMF video decoder
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] hevc_cuvid (hevc) - Nvidia CUVID HEVC decoder
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] Opening decoder hevc
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] Looking at hwdec hevc-nvdec...
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] Trying hardware decoding via hevc-nvdec.
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] Requesting 1 threads for decoding.
+2026-10-18T13:08:55.090Z [13672] mpv [vd/v] Selected decoder: hevc - HEVC (High Efficiency Video Coding)
+2026-10-18T13:08:55.092Z [13672] mpv [vf/v] User filter list:
+2026-10-18T13:08:55.092Z [13672] mpv [vf/v] (empty)
+2026-10-18T13:08:55.092Z [13672] mpv [ad/v] Codec list:
+2026-10-18T13:08:55.093Z [13672] mpv [ad/v] aac - AAC (Advanced Audio Coding)
+2026-10-18T13:08:55.093Z [13672] mpv [ad/v] aac_fixed (aac) - AAC (Advanced Audio Coding)
+2026-10-18T13:08:55.093Z [13672] mpv [ad/v] Opening decoder aac
+2026-10-18T13:08:55.093Z [13672] mpv [ad/v] Requesting 1 threads for decoding.
+2026-10-18T13:08:55.094Z [13672] mpv [ad/v] Selected decoder: aac - AAC (Advanced Audio Coding)
+2026-10-18T13:08:55.094Z [13672] mpv [af/v] User filter list:
+2026-10-18T13:08:55.094Z [13672] mpv [af/v] (empty)
+2026-10-18T13:08:55.094Z [13672] mpv [cplayer/v] Starting playback...
+2026-10-18T13:08:55.094Z [13672] mpv [mkv/v] queuing seek to 0.000000
+2026-10-18T13:08:55.094Z [13672] mpv [cplayer/v] hr-seek, skipping to 0.000000
+2026-10-18T13:08:55.094Z [13672] mpv [mkv/v] execute seek (to 0.000000 flags 32)
+2026-10-18T13:08:55.094Z [13672] mpv [mkv/v] Seeking to 975413575 to read header element 0x1c53bb6b.
+2026-10-18T13:08:55.094Z [13672] mpv [file/v] stream level seek from 266773 to 975413575
+2026-10-18T13:08:55.094Z [13672] mpv [mkv/v] Parsing cues...
+2026-10-18T13:08:55.094Z [13672] mpv [file/v] stream level seek from 975415456 to 865
+2026-10-18T13:08:55.094Z [13672] mpv [mkv/v] seek done
+2026-10-18T13:08:55.094Z [14620] PLAYBACK_TIMER_POLICY active=1 success=1 error=0
+2026-10-18T13:08:55.094Z [14620] VIDEO_TRACK=1
+2026-10-18T13:08:55.096Z [13672] mpv [vd/v] Pixel formats supported by decoder: dxva2_vld d3d11va_vld d3d11 d3d12 vaapi vulkan cuda cuarray yuv420p10le
+2026-10-18T13:08:55.096Z [13672] mpv [vd/v] Codec profile: Main 10 (0x2)
+2026-10-18T13:08:55.100Z [13672] mpv [vd/v] Allocated a fixed pool of 13 hw surfaces.
+2026-10-18T13:08:55.100Z [13672] mpv [vd/v] Requesting pixfmt 'cuda' from decoder.
+2026-10-18T13:08:55.195Z [13672] mpv [vd/info] Using hardware decoding (nvdec).
+2026-10-18T13:08:55.195Z [13672] mpv [vd/v] Decoder format: 3840x2160 cuda[p010] auto/auto/auto/limited/auto CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.195Z [13672] mpv [vd/v] Using container aspect ratio.
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [in] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [userdeint] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [userdeint] (disabled)
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [autovflip] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [autovflip] (disabled)
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [autorotate] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [autorotate] (disabled)
+2026-10-18T13:08:55.195Z [13672] mpv [vf/v] [convert] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.200Z [13672] mpv [vf/v] [out] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.200Z [13672] mpv [af/v] [in] 48000Hz mono 1ch floatp
+2026-10-18T13:08:55.200Z [13672] mpv [af/v] [userspeed] 48000Hz mono 1ch floatp
+2026-10-18T13:08:55.200Z [13672] mpv [af/v] [userspeed] (disabled)
+2026-10-18T13:08:55.200Z [13672] mpv [af/v] [convert] 48000Hz mono 1ch floatp
+2026-10-18T13:08:55.200Z [13672] mpv [ao/v] Trying audio driver 'wasapi'
+2026-10-18T13:08:55.200Z [13672] mpv [ao/wasapi/v] requested format: 48000 Hz, mono channels, floatp
+2026-10-18T13:08:55.207Z [13672] mpv [ao/wasapi/v] No device specified. Selecting default.
+2026-10-18T13:08:55.210Z [13672] mpv [ao/wasapi/v] Selecting device '{84718fb8-0198-410b-9f81-65523877ac07}' (Speakers (Realtek(R) Audio))
+2026-10-18T13:08:55.210Z [13672] mpv [ao/wasapi/v] Monitoring changes in device {0.0.0.00000000}.{84718fb8-0198-410b-9f81-65523877ac07}
+2026-10-18T13:08:55.224Z [13672] mpv [ao/wasapi/v] Trying mono float (32/32 bits) @ 48000hz (shared) -> ok
+2026-10-18T13:08:55.224Z [13672] mpv [ao/wasapi/v] Accepted as mono float @ 48000hz -> mono float (32/32 bits) @ 48000hz (shared)
+2026-10-18T13:08:55.225Z [13672] mpv [ao/wasapi/v] Device period: default 10000 us, minimum 3000 us
+2026-10-18T13:08:55.242Z [13672] mpv [ao/wasapi/v] Buffer frame count: 1056 (22000 us)
+2026-10-18T13:08:55.242Z [13672] mpv [ao/wasapi/v] IAudioClock::GetFrequency gave a frequency of 192000.
+2026-10-18T13:08:55.243Z [13672] mpv [ao/wasapi/v] device buffer: 1056 samples.
+2026-10-18T13:08:55.243Z [13672] mpv [ao/wasapi/v] using soft-buffer of 9600 samples.
+2026-10-18T13:08:55.243Z [13672] mpv [cplayer/info] AO: [wasapi] 48000Hz mono 1ch float
+2026-10-18T13:08:55.243Z [13672] mpv [cplayer/v] AO: Description: Windows WASAPI audio output (event mode)
+2026-10-18T13:08:55.243Z [13672] mpv [autoconvert/v] inserting resampler
+2026-10-18T13:08:55.243Z [13672] mpv [swresample/v] format change, reinitializing resampler
+2026-10-18T13:08:55.243Z [13672] mpv [swresample/v] 48000Hz mono floatp -> 48000Hz mono float
+2026-10-18T13:08:55.243Z [13672] mpv [af/v] [out] 48000Hz mono 1ch float
+2026-10-18T13:08:55.243Z [14620] ACTIVE_HWDEC=nvdec
+2026-10-18T13:08:55.248Z [13672] mpv [cplayer/info] VO: [libmpv] 3840x2160 cuda[p010]
+2026-10-18T13:08:55.248Z [13672] mpv [cplayer/v] VO: Description: render API for libmpv
+2026-10-18T13:08:55.248Z [13672] mpv [vo/libmpv/v] reconfig to 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T13:08:55.269Z [13672] mpv [libmpv_render/v] Window size: 1468x826 (Borders: l=0 t=0 r=0 b=0)
+2026-10-18T13:08:55.269Z [13672] mpv [libmpv_render/v] Video source: 3840x2160 (1:1)
+2026-10-18T13:08:55.269Z [13672] mpv [libmpv_render/v] Video display: (0, 0) 3840x2160 -> (0, 0) 1468x826
+2026-10-18T13:08:55.269Z [13672] mpv [libmpv_render/v] Video scale: 0.382292/0.382407
+2026-10-18T13:08:55.269Z [13672] mpv [libmpv_render/v] OSD borders: l=0 t=0 r=0 b=0
+2026-10-18T13:08:55.269Z [13672] mpv [libmpv_render/v] Video borders: l=0 t=0 r=0 b=0
+2026-10-18T13:08:55.269Z [13672] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T13:08:55.270Z [13672] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T13:08:55.273Z [13672] mpv [libmpv_render/v] Dither to 8.
+2026-10-18T13:08:55.289Z [13672] mpv [cplayer/v] first video frame after restart shown
+2026-10-18T13:08:55.289Z [14620] AUDIT_LAYOUT {"layouts":[{"width":336,"volumeClear":true,"actionsClear":true,"seekWidth":183},{"width":496,"volumeClear":true,"actionsClear":true,"seekWidth":343},{"width":694,"volumeClear":true,"actionsClear":true,"seekWidth":541}],"homeSameScene":true,"menusSameScene":true}
+2026-10-18T13:08:55.289Z [14620] FIRST_VIDEO_SWAP_MS=2167
+2026-10-18T13:08:55.289Z [13672] mpv [osd/libass/v] libass API version: 0x1705000
+2026-10-18T13:08:55.289Z [13672] mpv [osd/libass/v] libass source: meson, commit: 0.17.5-11-gf61db567e6593df3470e91594bcd4ad2d0473aff
+2026-10-18T13:08:55.291Z [13672] mpv [osd/libass/v] Shaper: FriBidi 1.0.17 (SIMPLE) HarfBuzz-ng 14.6.0 (COMPLEX)
+2026-10-18T13:08:55.291Z [13672] mpv [osd/libass/v] Setting up fonts...
+2026-10-18T13:08:55.291Z [13672] mpv [osd/libass/v] Done.
+2026-10-18T13:08:55.291Z [13672] mpv [cplayer/v] audio ready
+2026-10-18T13:08:55.291Z [13672] mpv [cplayer/v] starting audio playback
+2026-10-18T13:08:55.291Z [13672] mpv [cplayer/v] playback restart complete @ 0.000000, audio=playing, video=playing
+2026-10-18T13:08:55.292Z [14620] PART4_SETTLED {"duration":360.021,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"position":0,"speed":1,"volume":100}
+2026-10-18T13:08:55.302Z [14620] PART4_COMMIT {"audio_track":1,"available":true,"duration":360.021,"file_key":"975415456:865b0f0d1bd3afe72682ba5a530c70c00329ae4596c02b217b77eabb10c3e3df","finished":false,"known":false,"last_played":1792328935292,"mtime":1792246622042,"path":"E:/Codes/FlowPlayer/tests/media/hevc-4k60-main10.mkv","position":0,"size":975415456,"speed":1,"sub_delay":0,"sub_track":-1,"volume":100}
+2026-10-18T13:09:00.891Z [14620] PART4_COMMIT {"audio_track":1,"available":true,"duration":360.021,"file_key":"975415456:865b0f0d1bd3afe72682ba5a530c70c00329ae4596c02b217b77eabb10c3e3df","finished":false,"known":false,"last_played":1792328940100,"mtime":1792246622042,"path":"E:/Codes/FlowPlayer/tests/media/hevc-4k60-main10.mkv","position":4.817,"size":975415456,"speed":1,"sub_delay":0,"sub_track":-1,"volume":100}
+2026-10-18T13:09:01.292Z [14620] AUDIT_FRAME {"dropped":0,"hidden":true,"phase":"hidden_begin","position":6,"renders":362,"swaps":372}
+2026-10-18T13:09:03.446Z [14620] METRIC {"avSyncSeconds":1.999999996143975e-06,"cacheBytes":78697632,"callbackToRenderMaxUs":26655,"callbacks":492,"controlsVisible":false,"dropped":0,"elapsedMs":10323,"highQuality":false,"hwdec":"nvdec","mpvRenderCallMaxUs":20475,"mute":true,"pause":false,"position":8.167,"renders":491,"sceneSwaps":501,"videoHidden":false,"videoTrack":"1","volume":100,"windowActive":false}
+2026-10-18T13:09:05.105Z [14620] PART4_COMMIT {"audio_track":1,"available":true,"duration":360.021,"file_key":"975415456:865b0f0d1bd3afe72682ba5a530c70c00329ae4596c02b217b77eabb10c3e3df","finished":false,"known":false,"last_played":1792328945095,"mtime":1792246622042,"path":"E:/Codes/FlowPlayer/tests/media/hevc-4k60-main10.mkv","position":9.799999999999999,"size":975415456,"speed":1,"sub_delay":0,"sub_track":-1,"volume":100}
+2026-10-18T13:09:05.292Z [14620] AUDIT_FRAME {"dropped":0,"hidden":true,"phase":"hidden_end","position":10,"renders":601,"swaps":611}
+2026-10-18T13:09:05.292Z [13672] mpv [cplayer/v] Set property: pause=yes -> 1
+2026-10-18T13:09:05.292Z [14620] PLAYBACK_TIMER_POLICY active=0 success=1 error=0
+2026-10-18T13:09:05.309Z [14620] PART4_COMMIT {"audio_track":1,"available":true,"duration":360.021,"file_key":"975415456:865b0f0d1bd3afe72682ba5a530c70c00329ae4596c02b217b77eabb10c3e3df","finished":false,"known":false,"last_played":1792328945292,"mtime":1792246622042,"path":"E:/Codes/FlowPlayer/tests/media/hevc-4k60-main10.mkv","position":10,"size":975415456,"speed":1,"sub_delay":0,"sub_track":-1,"volume":100}
+2026-10-18T13:09:07.298Z [14620] AUDIT_FRAME {"dropped":0,"hidden":false,"phase":"paused_begin","position":10,"renders":604,"swaps":624}
+2026-10-18T13:09:11.291Z [14620] AUDIT_FRAME {"dropped":0,"hidden":false,"phase":"paused_end","position":10,"renders":604,"swaps":624}
+2026-10-18T13:09:11.307Z [14620] AUDIT_RESUME_AFTER_SCENE_SWAP
+2026-10-18T13:09:11.307Z [13672] mpv [cplayer/v] Set property: pause=no -> 1
+2026-10-18T13:09:11.308Z [14620] PLAYBACK_TIMER_POLICY active=1 success=1 error=0
+2026-10-18T13:09:13.291Z [14620] AUDIT_FRAME {"dropped":9,"hidden":false,"phase":"resume_begin","position":12,"renders":713,"swaps":739}
+2026-10-18T13:09:13.449Z [14620] METRIC {"avSyncSeconds":5.899999995506722e-06,"cacheBytes":89555504,"callbackToRenderMaxUs":50826,"callbacks":723,"controlsVisible":true,"dropped":9,"elapsedMs":20326,"highQuality":false,"hwdec":"nvdec","mpvRenderCallMaxUs":50431,"mute":true,"pause":false,"position":12.149999999999999,"renders":722,"sceneSwaps":748,"videoHidden":false,"videoTrack":"1","volume":100,"windowActive":false}
+2026-10-18T13:09:17.153Z [14620] PART4_COMMIT {"audio_track":1,"available":true,"duration":360.021,"file_key":"975415456:865b0f0d1bd3afe72682ba5a530c70c00329ae4596c02b217b77eabb10c3e3df","finished":false,"known":false,"last_played":1792328956308,"mtime":1792246622042,"path":"E:/Codes/FlowPlayer/tests/media/hevc-4k60-main10.mkv","position":15.017,"size":975415456,"speed":1,"sub_delay":0,"sub_track":-1,"volume":100}
+2026-10-18T13:09:17.299Z [14620] AUDIT_FRAME {"dropped":9,"hidden":true,"phase":"resume_end","position":16,"renders":953,"swaps":983}
+2026-10-18T13:09:18.448Z [14620] CLOSE_REQUEST stop playback asynchronously before releasing the scene graph
+2026-10-18T13:09:18.448Z [13672] mpv [cplayer/v] EOF code: 4
+2026-10-18T13:09:18.451Z [13672] mpv [cplayer/v] finished playback, success (reason 2)
+2026-10-18T13:09:18.462Z [14620] PART4_COMMIT {"audio_track":1,"available":true,"duration":360.021,"file_key":"975415456:865b0f0d1bd3afe72682ba5a530c70c00329ae4596c02b217b77eabb10c3e3df","finished":false,"known":false,"last_played":1792328958448,"mtime":1792246622042,"path":"E:/Codes/FlowPlayer/tests/media/hevc-4k60-main10.mkv","position":17.15,"size":975415456,"speed":1,"sub_delay":0,"sub_track":-1,"volume":100}
+2026-10-18T13:09:18.462Z [14620] VIDEO_TRACK=auto
+2026-10-18T13:09:18.464Z [14620] PART4_UI maxEventLoopGapMs=137.877 maxSceneSyncRenderMs=92.007
+2026-10-18T13:09:18.464Z [14620] METRIC {"avSyncSeconds":1.5000000074538722e-06,"cacheBytes":104329328,"callbackToRenderMaxUs":26475,"callbacks":1023,"controlsVisible":false,"dropped":9,"elapsedMs":25341,"highQuality":false,"hwdec":"nvdec","mpvRenderCallMaxUs":13781,"mute":true,"pause":false,"position":17.15,"renders":1023,"sceneSwaps":1053,"videoHidden":false,"videoTrack":"auto","volume":100,"windowActive":false}
+2026-10-18T13:09:18.464Z [14620] PLAYBACK_TIMER_POLICY active=0 success=1 error=0
+2026-10-18T13:09:18.468Z [3436] mpv_render_context_free on render thread; GL current=1
+2026-10-18T13:09:18.506Z [3436] Total time spent on pipeline creation during the lifetime of the QRhi 0x24e784bb420 was 8 ms
+2026-10-18T13:09:18.506Z [3436] Writing pipeline cache contents (52063 bytes) for QRhi 0x24e784bb420 to 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-18T13:09:18.522Z [13672] mpv_terminate_destroy on event worker (render context must already be freed)
+2026-10-18T13:09:18.543Z [14620] CLEAN_EXIT

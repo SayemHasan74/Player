@@ -1,0 +1,23 @@
+[
+  {
+    "avSyncSeconds": 0,
+    "cacheBytes": -1,
+    "callbackToRenderMaxUs": 0,
+    "callbacks": 0,
+    "controlsVisible": true,
+    "dropped": 0,
+    "elapsedMs": 5273,
+    "highQuality": false,
+    "hwdec": "none",
+    "mpvRenderCallMaxUs": 0,
+    "mute": true,
+    "pause": false,
+    "position": 0,
+    "renders": 0,
+    "sceneSwaps": 6,
+    "videoHidden": false,
+    "videoTrack": "auto",
+    "volume": 100,
+    "windowActive": false
+  }
+]

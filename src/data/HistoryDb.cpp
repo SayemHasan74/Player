@@ -1,5 +1,6 @@
 #include "HistoryDb.h"
 #include "FileIdentity.h"
+#include "../playlist/FolderScanner.h"
 #include "../core/Log.h"
 #include <sqlite3.h>
 #include <QDir>
@@ -27,11 +28,13 @@ HistoryDb::HistoryDb(QString path,QString thumbs,QObject *parent):QObject(parent
     m_thumbs=thumbs.isEmpty()?qEnvironmentVariable("FLOW_THUMBS_DIR",qEnvironmentVariable("LOCALAPPDATA")+"/FlowPlayer/thumbs"):thumbs;
     m_worker=std::thread(&HistoryDb::run,this);
     m_identityWorker=std::thread(&HistoryDb::runIdentity,this);
+    m_metadataWorker=std::thread(&HistoryDb::runMetadata,this);
 }
 HistoryDb::~HistoryDb() {
-    {std::lock_guard l(m_mutex);m_identityStop=true;m_identityQueue.clear();}m_identityCv.notify_one();
+    {std::lock_guard l(m_mutex);m_identityStop=true;m_metadataStop=true;m_identityQueue.clear();m_metadataQueue.clear();}m_identityCv.notify_one();m_metadataCv.notify_one();
     // Cancel only identity reads; never cancel queued database transactions.
     CancelSynchronousIo(m_identityWorker.native_handle());m_identityWorker.join();
+    CancelSynchronousIo(m_metadataWorker.native_handle());m_metadataWorker.join();
     {std::lock_guard l(m_mutex);m_stop=true;}m_cv.notify_one();m_worker.join();
 }
 void HistoryDb::enqueue(std::function<void()> w) {{std::lock_guard l(m_mutex);m_queue.push_back(std::move(w));}m_cv.notify_one();}
@@ -61,23 +64,37 @@ QVariantMap HistoryDb::row(void *p) {
     }
     return r;
 }
-void HistoryDb::lookup(QString path,quint64 token) {{std::lock_guard l(m_mutex);m_identityQueue.emplace_back(path,token);}m_identityCv.notify_one();}
+void HistoryDb::lookup(QString path,quint64 token) {
+    {std::lock_guard l(m_mutex);m_identityQueue.emplace_back([this,path,token]{QElapsedTimer timer;timer.start();auto identity=FileIdentity::inspect(path);const auto elapsed=timer.elapsed();enqueue([this,identity,token,elapsed]{resolveIdentity(identity,token,elapsed);});});}m_identityCv.notify_one();
+}
+void HistoryDb::neighbor(QString path,int direction,quint64 token) {
+    {std::lock_guard l(m_mutex);m_identityQueue.emplace_back([this,path,direction,token]{const auto target=FolderScanner::neighbor(path,direction);QMetaObject::invokeMethod(this,[this,path,target,token]{emit neighborReady(token,path,target);});});}m_identityCv.notify_one();
+}
 void HistoryDb::runIdentity() {
     for(;;) {
-        std::pair<QString,quint64> request;
+        std::function<void()> request;
         {std::unique_lock l(m_mutex);m_identityCv.wait(l,[this]{return m_identityStop||!m_identityQueue.empty();});if(m_identityStop)break;request=std::move(m_identityQueue.front());m_identityQueue.pop_front();}
-        QElapsedTimer timer;timer.start();auto identity=FileIdentity::inspect(request.first);const auto elapsed=timer.elapsed();
-        enqueue([this,identity,token=request.second,elapsed]{resolveIdentity(identity,token,elapsed);});
+        request();
     }
+}
+void HistoryDb::runMetadata() {
+    SetThreadPriority(GetCurrentThread(),THREAD_MODE_BACKGROUND_BEGIN);
+    for(;;){std::function<void()> job;{std::unique_lock l(m_mutex);m_metadataCv.wait(l,[this]{return m_metadataStop||!m_metadataQueue.empty();});if(m_metadataStop)break;job=std::move(m_metadataQueue.front());m_metadataQueue.pop_front();}job();}
+    SetThreadPriority(GetCurrentThread(),THREAD_MODE_BACKGROUND_END);
 }
 void HistoryDb::resolveIdentity(QVariantMap identity,quint64 token,qint64 elapsedMs) {
     QVariantMap found;
-    if(m_db) {
+    try {if(m_db) {
         Statement s(m_db,QByteArray("SELECT ")+columns+" FROM history WHERE file_key=? OR path=? COLLATE NOCASE ORDER BY (file_key=?) DESC LIMIT 1");
         s.text(1,identity.value("file_key").toString());s.text(2,identity.value("path").toString());s.text(3,identity.value("file_key").toString());
         if(s.step()==SQLITE_ROW)found=row(s.s);
-        if(!found.isEmpty()&&identity.contains("file_key")&&found.value("file_key")!=identity.value("file_key"))found.clear();
-    }
+        if(!found.isEmpty()&&identity.contains("file_key")&&found.value("file_key")!=identity.value("file_key")) {
+            if(found.value("file_key").toString().startsWith("path:")&&found.value("size")==identity.value("size")) {
+                Statement promote(m_db,"UPDATE history SET file_key=? WHERE file_key=?");promote.text(1,identity.value("file_key").toString());promote.text(2,found.value("file_key").toString());if(promote.step()!=SQLITE_DONE)throw std::runtime_error(sqlite3_errmsg(m_db));
+            } else found.clear();
+        }
+        if(!found.isEmpty()&&!identity.contains("file_key")&&identity.value("available").toBool()&&identity.value("size")!=found.value("size"))found.clear();
+    }}catch(const std::exception &e){found.clear();const QString message=e.what();QMetaObject::invokeMethod(this,[this,message]{emit failed(message);});}
     if(!identity.contains("file_key")&&!found.isEmpty())identity["file_key"]=found.value("file_key");
     if(!identity.contains("file_key"))identity["file_key"]="path:"+identity.value("path").toString().toCaseFolded();
     found.insert("known",!found.isEmpty());
@@ -98,11 +115,20 @@ void HistoryDb::publishRecent() {
     if(!m_db)return;QElapsedTimer timer;timer.start();QVariantList list;
     Statement s(m_db,QByteArray("SELECT ")+columns+" FROM history ORDER BY last_played DESC LIMIT 10");
     while(s.step()==SQLITE_ROW) {
-        auto r=row(s.s);QFileInfo f(r.value("path").toString());r["title"]=f.fileName();r["folder"]=f.dir().dirName();r["available"]=r.value("path").toString().contains("://")||f.exists();
-        auto thumb=flowThumbnailPath(m_thumbs,r.value("file_key").toString());r["thumbnail"]=QFileInfo::exists(thumb)?QUrl::fromLocalFile(thumb).toString():QString();list.append(r);
+        auto r=row(s.s);QFileInfo f(r.value("path").toString());r["title"]=f.fileName();r["folder"]=f.dir().dirName();
+        const auto prior=m_recentMetadata.value(r.value("file_key").toString());
+        r["available"]=prior.value("path")==r.value("path")?prior.value("available",true):QVariant(true);
+        r["thumbnail"]=prior.value("thumbnail",QString());r["metadataPending"]=true;list.append(r);
     }
     Log::write(QString("HISTORY_RECENT rows=%1 workerMs=%2").arg(list.size()).arg(timer.elapsed()));
     QMetaObject::invokeMethod(this,[this,list]{emit recentReady(list);});
+    const auto generation=++m_recentGeneration;
+    {std::lock_guard l(m_mutex);m_metadataQueue.clear();m_metadataQueue.emplace_back([this,list,generation]{
+        QVariantList decorated;QElapsedTimer metadataTime;metadataTime.start();
+        for(const auto &entry:list){auto r=entry.toMap();const auto path=r.value("path").toString();r["available"]=path.contains("://")||QFileInfo::exists(path);const auto thumbnail=flowThumbnailPath(m_thumbs,r.value("file_key").toString());r["thumbnail"]=QFileInfo::exists(thumbnail)?QUrl::fromLocalFile(thumbnail).toString():QString();r["metadataPending"]=false;decorated.append(r);}
+        const auto elapsed=metadataTime.elapsed();
+        enqueue([this,decorated,generation,elapsed]{if(generation!=m_recentGeneration)return;m_recentMetadata.clear();for(const auto &entry:decorated){auto r=entry.toMap();m_recentMetadata.insert(r.value("file_key").toString(),r);}Log::write(QString("HISTORY_METADATA rows=%1 workerMs=%2").arg(decorated.size()).arg(elapsed));QMetaObject::invokeMethod(this,[this,decorated]{emit recentReady(decorated);});});
+    });}m_metadataCv.notify_one();
 }
 void HistoryDb::recent(){enqueue([this]{publishRecent();});}
 void HistoryDb::prune() {

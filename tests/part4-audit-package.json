@@ -1,0 +1,14 @@
+{
+  "executableSha256": "38904d45ac82d9ff835558a5d4aba893aee499cd7aecc9f50c1a2df4d0f42b29",
+  "focusedReleaseChecks": true,
+  "thumbnailDimensionsVerified": 5,
+  "unitTestsPassed": 3,
+  "fullAcceptance": false,
+  "nativeVisualTests": "manual pending",
+  "resumeDropsUnresolved": [
+    9,
+    17
+  ],
+  "concurrent4kThumbnailGeneration": "deferred/unverified",
+  "fullPart5Started": false
+}

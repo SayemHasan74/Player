@@ -26,6 +26,9 @@ public:
     bool maxHovered() const {return m_maxHovered;}
     void setMaxHovered(bool value);
     void fitVideo(int width,int height);
+    void beginInteractiveResize();
+    void noteInteractiveResize(int edge) {m_resizeEdge=edge;}
+    void endInteractiveResize();
     Q_INVOKABLE void toggleMaximized();
     Q_INVOKABLE void toggleFullscreen();
     Q_INVOKABLE void exitFullscreen();
@@ -85,6 +88,9 @@ private:
     bool m_controlsVisible=true,m_uiHeld=false,m_controllerPaused=true;
     bool m_popupOpen=false,m_nativeHover=false;
     QPointF m_pressPosition;
+    bool m_interactiveSizing=false;
+    int m_resizeEdge=0;
+    WindowStateMachine::Snapshot m_resizeOrigin;
     QTimer m_cursorTimer;
     void rememberModeGeometry();
     void applyMode();

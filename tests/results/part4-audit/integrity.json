@@ -1,0 +1,6 @@
+{
+  "gitSource": "clean at audit start",
+  "deployedHashBefore": "03912a7bb346bdbadfacd8653aadfe496f0a8822f8bb403af2651488fa8ba774",
+  "sqliteSourcesIntact": true,
+  "userDb": "not present"
+}

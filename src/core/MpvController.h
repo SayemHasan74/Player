@@ -13,6 +13,7 @@ class ResumeStore;
 class MpvController final : public QObject {
     Q_OBJECT
     Q_PROPERTY(bool ready READ ready NOTIFY readyChanged)
+    Q_PROPERTY(bool surfaceRequested READ surfaceRequested NOTIFY surfaceRequestedChanged)
     Q_PROPERTY(double position READ position NOTIFY stateChanged)
     Q_PROPERTY(double duration READ duration NOTIFY stateChanged)
     Q_PROPERTY(bool pause READ pause NOTIFY stateChanged)
@@ -44,6 +45,7 @@ public:
     Q_INVOKABLE void stop();
     mpv_handle *handle() const { return m_handle.load(); }
     bool ready() const {return m_ready;}
+    bool surfaceRequested() const {return m_surfaceRequested;}
     bool idleActive() const {return m_idle;}
     double position() const {return m_position;}
     double duration() const {return m_duration;}
@@ -86,6 +88,7 @@ public:
     void setRenderReady(bool ready);
     void command(const QList<QByteArray> &arguments);
 signals:
+    void surfaceRequestedChanged();
     void openRequested(const QString &path);
     void fileLoaded(const QString &path);
     void positionSettled();
@@ -124,6 +127,7 @@ private:
     QVariantMap m_videoInfo;
     QString m_vid="auto";
     bool m_renderReady=false;
+    bool m_surfaceRequested=false;
     QString m_pendingFile;
     QVariantMap m_pendingLoadOptions;
     ResumeStore *m_resumeStore=nullptr;

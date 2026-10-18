@@ -3,6 +3,8 @@ Rectangle {
     id: button
     property string inputRole: "button"
     property string label: ""
+    property string icon: ""
+    property int iconSize:22
     property string hint: ""
     property bool checked: false
     property int textSize: 19
@@ -10,7 +12,8 @@ Rectangle {
     signal activated()
     width: 34; height: 36; radius: 5
     color: hit.containsMouse ? "#3d424b" : checked ? "#313c4b" : "transparent"
-    Text { anchors.centerIn: parent; text: button.label; color: button.enabled?"#f0efdf":"#707784"; font.pixelSize: button.textSize }
+    PlayerIcon {anchors.centerIn:parent;width:button.iconSize;height:button.iconSize;name:button.icon;visible:button.icon.length>0;tint:button.enabled?"#f0efdf":"#707784"}
+    Text { anchors.centerIn: parent;visible:button.icon.length===0; text: button.label; color: button.enabled?"#f0efdf":"#707784"; font.pixelSize: button.textSize }
     MouseArea { id: hit; anchors.fill: parent; hoverEnabled: true; onClicked: button.activated(); onDoubleClicked: event => {event.accepted=true} }
     Rectangle {
         visible: hit.containsMouse && button.hint.length>0

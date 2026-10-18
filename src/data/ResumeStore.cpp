@@ -18,7 +18,9 @@ ResumeStore::ResumeStore(MpvController *c,AppSettings *s,HistoryDb *db):m_contro
     connect(&m_saveTimer,&QTimer::timeout,this,&ResumeStore::save);
     connect(c,&MpvController::openRequested,this,[this](const QString &p){open(p);});
     connect(c,&MpvController::fileLoaded,this,[this](const QString &path){
+        if(!m_loadExpected)return;
         if(QDir::fromNativeSeparators(path).compare(QDir::fromNativeSeparators(m_active.value("path").toString()),Qt::CaseInsensitive)!=0)return;
+        m_loadExpected=false;
         m_loaded=true;m_home=false;emit homeChanged();updateActivity();
         if(m_resumeStart>0){int seconds=int(m_resumeStart);emit m_controller->toast(QString("Resumed from %1:%2").arg(seconds/60).arg(seconds%60,2,10,QChar('0')));}
         // Wait for the first observed time-pos before committing a loaded resume.
@@ -28,9 +30,9 @@ ResumeStore::ResumeStore(MpvController *c,AppSettings *s,HistoryDb *db):m_contro
         m_lastPause=m_controller->pause();updateActivity();
     });
     connect(c,&MpvController::positionSettled,this,[this]{if(m_loaded){m_positionReady=true;save();}});
-    connect(c,&MpvController::beforeStop,this,[this]{save();m_loaded=false;updateActivity();});
+    connect(c,&MpvController::beforeStop,this,[this]{save();m_loaded=false;m_loadExpected=false;m_openPending=false;m_autoLaunch=false;++m_generation;++m_navigationToken;updateActivity();});
     connect(c,&MpvController::playbackFinished,this,&ResumeStore::finish);
-    connect(QCoreApplication::instance(),&QCoreApplication::aboutToQuit,this,&ResumeStore::save);
+    connect(QCoreApplication::instance(),&QCoreApplication::aboutToQuit,this,[this]{m_controller->stop();});
     connect(db,&HistoryDb::resolved,this,[this](quint64 token,const QVariantMap &r){
         if(token!=m_generation)return;m_openPending=false;
         if(!r.value("available").toBool()){m_home=!m_loaded;emit homeChanged();emit m_controller->toast("File unavailable");updateActivity();m_db->recent();return;}
@@ -43,16 +45,20 @@ ResumeStore::ResumeStore(MpvController *c,AppSettings *s,HistoryDb *db):m_contro
             }
         }
         Log::write("RESUME_LOAD "+QString::fromUtf8(QJsonDocument(QJsonObject::fromVariantMap(opts)).toJson(QJsonDocument::Compact)));
-        m_controller->loadResolved(r.value("path").toString(),opts);
+        m_loadExpected=true;m_controller->loadResolved(r.value("path").toString(),opts);
     });
     connect(db,&HistoryDb::recentReady,this,[this](const QVariantList &list){
-        m_haveRecent=true;m_items=list;emit itemsChanged();
+        m_haveRecent=list.isEmpty()||!list.first().toMap().value("metadataPending").toBool();m_items=list;m_recentModel.replace(list);emit itemsChanged();
         for(const auto &r:list)m_thumbnails.request(r.toMap());
-        if(m_launchReady&&m_autoLaunch){m_autoLaunch=false;int i=continueIndex();if(i>=0)open(m_items[i].toMap().value("path").toString());}
+        if(m_launchReady&&m_autoLaunch&&m_haveRecent){m_autoLaunch=false;int i=continueIndex();if(i>=0)open(m_items[i].toMap().value("path").toString());}
     });
     connect(&m_thumbnails,&ThumbnailService::available,db,[db](const QString &){db->recent();});
     connect(db,&HistoryDb::failed,this,[this](const QString &message){emit m_controller->toast("History: "+message);Log::write("HISTORY_ERROR "+message);});
     connect(db,&HistoryDb::folderReady,this,[](const QString &p){QDesktopServices::openUrl(QUrl::fromLocalFile(p));});
+    connect(db,&HistoryDb::neighborReady,this,[this](quint64 token,const QString &origin,const QString &path){
+        if(token!=m_navigationToken||m_openPending||origin!=m_active.value("path").toString())return;
+        if(path.isEmpty())emit m_controller->toast("No adjacent media file");else open(path);
+    });
     m_db->recent();
 }
 ResumeStore::~ResumeStore(){save();m_thumbnails.setAllowed(false);}
@@ -65,11 +71,14 @@ void ResumeStore::launch(bool noFile) {
     updateActivity();
 }
 void ResumeStore::open(const QString &path,bool fromStart) {
-    save();m_openPending=true;m_fromStart=fromStart;m_home=false;emit homeChanged();m_thumbnails.setAllowed(false);m_db->lookup(path,++m_generation);
+    m_autoLaunch=false;save();m_openPending=true;m_fromStart=fromStart;m_home=false;emit homeChanged();m_thumbnails.setAllowed(false);m_db->lookup(path,++m_generation);
 }
 void ResumeStore::save() {
     if(!m_loaded||!m_positionReady||m_active.isEmpty()||m_controller->duration()<=0)return;
     auto r=m_active;r["duration"]=m_controller->duration();r["position"]=m_controller->position();
+    // Keep the completed marker at the initial replay frame, then start a
+    // fresh unfinished session once the replay makes meaningful progress.
+    if(m_controller->position()>2&&m_controller->position()/m_controller->duration()<=.95)m_active["finished"]=false;
     r["finished"]=m_active.value("finished").toBool()||m_controller->position()/m_controller->duration()>.95;
     r["last_played"]=QDateTime::currentMSecsSinceEpoch();r["volume"]=m_controller->volume();r["speed"]=m_controller->speed();
     const auto options=m_controller->playbackOptions();r["audio_track"]=options.value("aid",-1);r["sub_track"]=options.value("sid",-1);r["sub_delay"]=options.value("sub-delay",0);
@@ -84,3 +93,4 @@ void ResumeStore::finish() {if(!m_loaded)return;m_active["finished"]=true;save()
 void ResumeStore::showHome(){save();m_loaded=false;m_openPending=false;++m_generation;m_controller->stop();m_home=true;emit homeChanged();updateActivity();m_db->recent();}
 void ResumeStore::remove(const QString &key){m_thumbnails.forget(key);m_db->remove(key);}
 void ResumeStore::openFolder(const QString &path){m_db->locate(path);}
+void ResumeStore::navigate(int direction){if(!m_loaded||m_openPending){emit m_controller->toast("Open a media file first");return;}save();m_db->neighbor(m_active.value("path").toString(),direction,++m_navigationToken);}

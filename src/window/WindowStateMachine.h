@@ -24,6 +24,7 @@ public:
     void setBaseMode(Mode mode);
     Snapshot toggle(Mode target,QRect fullscreen,QRect firstMini);
     Snapshot exitFullscreen();
+    void resizeToWindowed(QRect geometry);
 private:
     Snapshot m_current;
     QRect m_windowed,m_mini;

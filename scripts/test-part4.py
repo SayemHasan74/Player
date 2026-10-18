@@ -8,7 +8,7 @@ OUT=ROOT/'tests/results'/args.name;OUT.mkdir(parents=True,exist_ok=True)
 EXE=ROOT/'out/FlowPlayer/FlowPlayer.exe'
 if any(p.info['name']=='FlowPlayer.exe' for p in psutil.process_iter(['name'])):raise SystemExit('Player is open; refusing to disturb your session.')
 DB=OUT/'flow.db';THUMBS=OUT/'thumbs';SETTINGS=OUT/'settings.ini'
-if DB.exists():raise SystemExit('Results already exist. Preserve evidence and use a new result directory.')
+if DB.exists() or (OUT/'cases.json').exists():raise SystemExit('Results already exist. Preserve evidence and use a new result directory.')
 cases=[]
 def run(name,file=None,seconds=6,scenario='part4-pause',kill=False,extra=None):
     env=os.environ.copy();env.update(FLOW_TEST_MUTE='1',FLOW_TEST_BACKGROUND='1',FLOW_METRICS='1',FLOW_QUIT_MS=str(seconds*1000),FLOW_SCENARIO=scenario,FLOW_HISTORY_DB=str(DB),FLOW_THUMBS_DIR=str(THUMBS),FLOW_SETTINGS_FILE=str(SETTINGS))

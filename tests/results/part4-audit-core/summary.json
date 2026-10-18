@@ -1,0 +1,9 @@
+{
+  "executableSha256": "0da27b2b933a84671fddd36a072261c356a119a073cee37550baa1962d5a8caf",
+  "crashSaveAgeSeconds": 2.49838623046875,
+  "caseCount": 8,
+  "allBasicChecks": true,
+  "peakResidentMB": 391.876608,
+  "manualVisualAcceptance": "pending",
+  "fullAcceptance": false
+}

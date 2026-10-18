@@ -1,2 +1,6 @@
 #pragma once
-// Reserved for a later authorized part: FolderScanner.
+#include <QString>
+namespace FolderScanner {
+// Worker-only, user-authorized transport neighbors; no playlist panel/advance.
+QString neighbor(const QString &path,int direction);
+}

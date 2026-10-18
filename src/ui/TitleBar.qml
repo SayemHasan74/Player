@@ -17,10 +17,7 @@ Rectangle {
                 property string inputRole: "button"
                 width: playerWindow.mini ? 36 : 42; height: 38
                 color: hit.containsMouse || (modelData===4 && playerWindow.maxHovered) ? (modelData===5 ? "#b83341" : "#596067") : "transparent"
-                Text {
-                    anchors.centerIn: parent; color: "#f2f1df"; font.pixelSize: 17
-                    text: [(playerWindow.pinned||playerWindow.mini) ? "●" : "♧", playerWindow.mini ? "↗" : "▱", "⛶", "−", "□", "×"][modelData]
-                }
+                PlayerIcon {anchors.centerIn:parent;width:17;height:17;tint:(parent.modelData===0&&(playerWindow.pinned||playerWindow.mini))?"#73b6da":"#f0efdf";name:["pin",playerWindow.mini?"restore":"mini","fullscreen","minimize","maximize","close"][parent.modelData]}
                 MouseArea {
                     id: hit; anchors.fill: parent; hoverEnabled: true
                     onClicked: {

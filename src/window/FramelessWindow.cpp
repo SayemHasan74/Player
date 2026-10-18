@@ -1,4 +1,5 @@
 #include "FramelessWindow.h"
+#include "CompactResizePolicy.h"
 #include "../core/MpvController.h"
 #include "../core/Log.h"
 #include "../core/AppSettings.h"
@@ -35,7 +36,7 @@ FramelessWindow::FramelessWindow(MpvController *c):m_controller(c) {
     // Keep the render API attached while hidden/minimized; destruction still
     // releases the renderer on Qt's render thread before controller teardown.
     setPersistentGraphics(true);setPersistentSceneGraph(true);
-    setMinimumSize(QSize(360,240));
+    setMinimumSize(QSize(360,CompactResizePolicy::height));
     QSettings settings;m_lockAspect=settings.value("window/lockAspectRatio",true).toBool();
     const auto work=screen()->availableGeometry();
     auto geometry=settings.value("window/geometry",QRect(work.center()-QPoint(480,270),QSize(960,540))).toRect();
@@ -167,11 +168,28 @@ QString FramelessWindow::inputRoleAt(const QPointF &point) const {
 bool FramelessWindow::seekAt(const QPointF &point) const {return inputRoleAt(point)=="seek";}
 bool FramelessWindow::titleAt(const QPointF &point) const {return controlsVisible()&&point.y()<38&&!controlAt(point);}
 void FramelessWindow::rememberModeGeometry() {
-    if(m_applyingMode)return;
+    if(m_applyingMode||m_interactiveSizing)return;
     if(!mini()&&!fullscreen()&&m_nativeId)
         m_modes.setBaseMode(IsZoomed(reinterpret_cast<HWND>(m_nativeId))?WindowStateMachine::Mode::Maximized:WindowStateMachine::Mode::Windowed);
     m_modes.observe(geometry(),screen()->name(),devicePixelRatio());
     if(m_modes.current().mode==WindowStateMachine::Mode::Windowed)m_lastNormalGeometry=geometry();
+}
+void FramelessWindow::beginInteractiveResize(){rememberModeGeometry();m_resizeOrigin=m_modes.current();m_resizeOrigin.geometry=geometry();m_resizeEdge=0;m_interactiveSizing=true;}
+void FramelessWindow::endInteractiveResize(){
+    const auto resized=geometry();m_interactiveSizing=false;
+    const bool vertical=m_resizeEdge==WMSZ_TOP||m_resizeEdge==WMSZ_BOTTOM||m_resizeEdge==WMSZ_TOPLEFT||m_resizeEdge==WMSZ_TOPRIGHT||m_resizeEdge==WMSZ_BOTTOMLEFT||m_resizeEdge==WMSZ_BOTTOMRIGHT;
+    if(!vertical||fullscreen()){rememberModeGeometry();return;}
+    if(CompactResizePolicy::collapse(mini(),resized.height())&&m_resizeOrigin.mode==WindowStateMachine::Mode::Windowed){
+        m_modes.observe(m_resizeOrigin.geometry,m_resizeOrigin.screen,m_resizeOrigin.dpr);m_lastNormalGeometry=m_resizeOrigin.geometry;
+        auto compact=resized;compact.setHeight(MiniHeight);compact.setWidth(std::max(520,compact.width()));
+        m_modes.toggle(WindowStateMachine::Mode::Mini,screen()->geometry(),compact);m_modes.observe(compact,screen()->name(),devicePixelRatio());applyMode();
+    }else if(CompactResizePolicy::expand(mini(),resized.height())){
+        auto expanded=resized;
+        if(m_lockAspect){const int h=std::max(expanded.height(),qRound(expanded.width()/m_aspect));expanded.setSize(QSize(qRound(h*m_aspect),h));if(m_resizeEdge==WMSZ_TOP||m_resizeEdge==WMSZ_TOPLEFT||m_resizeEdge==WMSZ_TOPRIGHT)expanded.moveBottom(resized.bottom());if(m_resizeEdge==WMSZ_TOPLEFT||m_resizeEdge==WMSZ_BOTTOMLEFT)expanded.moveRight(resized.right());}
+        m_modes.resizeToWindowed(expanded);m_lastNormalGeometry=expanded;applyMode();
+    }
+    else if(mini()){auto compact=resized;compact.setHeight(MiniHeight);m_modes.observe(compact,screen()->name(),devicePixelRatio());applyMode();}
+    else rememberModeGeometry();
 }
 void FramelessWindow::toggleMode(WindowStateMachine::Mode target) {
     rememberModeGeometry();
@@ -204,8 +222,7 @@ void FramelessWindow::applyPin() {
 void FramelessWindow::applyMode() {
     m_applyingMode=true;
     const auto oldId=winId();
-    setMaximumHeight(16777215);setMinimumSize(mini()?QSize(520,MiniHeight):QSize(360,240));
-    if(mini())setMaximumHeight(MiniHeight);
+    setMaximumHeight(16777215);setMinimumSize(mini()?QSize(520,MiniHeight):QSize(360,CompactResizePolicy::height));
     emit modeChanged();
     if(fullscreen()) {
         for(auto *candidate:QGuiApplication::screens()) {
@@ -298,10 +315,12 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
         if(activeFocusItem()&&activeFocusItem()->property("textEntry").toBool())return false;
         if(m_controller->resumeStore()&&m_controller->resumeStore()->homeVisible()&&!mini()&&
            (key->key()==Qt::Key_Return||key->key()==Qt::Key_Enter||key->key()==Qt::Key_Space||key->key()==Qt::Key_Up||key->key()==Qt::Key_Down||key->key()==Qt::Key_Left||key->key()==Qt::Key_Right))return false;
-        if(m_popupOpen&&(key->key()==Qt::Key_Tab||key->key()==Qt::Key_Return||key->key()==Qt::Key_Enter||key->key()==Qt::Key_Up||key->key()==Qt::Key_Down))return false;
+        if(m_popupOpen&&(key->key()==Qt::Key_Tab||key->key()==Qt::Key_Return||key->key()==Qt::Key_Enter||key->key()==Qt::Key_Up||key->key()==Qt::Key_Down||key->key()==Qt::Key_Left||key->key()==Qt::Key_Right))return false;
+        if((key->nativeScanCode()&0xff)==0x29&&!ctrl&&!mods.testFlag(Qt::AltModifier)&&!mods.testFlag(Qt::MetaModifier)){if(!key->isAutoRepeat())toggleMini();return true;}
         switch(key->key()) {
         case Qt::Key_Space:if(!key->isAutoRepeat())m_controller->togglePause();break;
         case Qt::Key_F:if(!key->isAutoRepeat())toggleFullscreen();break;
+        case Qt::Key_QuoteLeft:case Qt::Key_AsciiTilde:if(!key->isAutoRepeat())toggleMini();break;
         case Qt::Key_Escape:exitFullscreen();break;
         case Qt::Key_M:if(!key->isAutoRepeat()){if(ctrl)toggleMini();else m_controller->toggleMute();}break;
         case Qt::Key_T:if(!ctrl)return false;if(!key->isAutoRepeat())togglePinned();break;
@@ -312,7 +331,7 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
         case Qt::Key_Z:case Qt::Key_X:m_controller->setPlaybackOption("sub-delay",m_controller->playbackOptions().value("sub-delay",0).toDouble()+(key->key()==Qt::Key_Z?-.1:.1));break;
         case Qt::Key_Left:case Qt::Key_Right: {
             const auto values=m_controller->settings()->values();
-            m_controller->seek((key->key()==Qt::Key_Left?-1:1)*values.value(ctrl?"largeSeekStep":shift?"exactSeekStep":"seekStep",ctrl?30:shift?1:5).toDouble(),shift);break;
+            m_controller->seek((key->key()==Qt::Key_Left?-1:1)*(ctrl?values.value("largeSeekStep",30).toDouble():shift?values.value("exactSeekStep",1).toDouble():5.0),true);break;
         }
         case Qt::Key_Up:case Qt::Key_Down:m_controller->adjustVolume(key->key()==Qt::Key_Up?5:-5);break;
         case Qt::Key_BracketLeft:case Qt::Key_BracketRight:m_controller->adjustSpeed(key->key()==Qt::Key_BracketLeft?-.1:.1);break;

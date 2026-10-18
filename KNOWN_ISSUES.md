@@ -1,5 +1,13 @@
 # Current limitations — Part 4
 
+Latest authority: tests/PART4_AUDIT.md and tests/part4-audit-package.json. The outage audit repaired thumbnail lock/event bugs, replay state, metadata-worker blocking and pending-open/shutdown races. Input/UI preferences are implemented and documented in design/interaction-preferences.md.
+
+- Audit 4K checks still measured 9 and 17 drops around pause/resume on their named pre-release hashes. A single warm-swap diagnostic failed and was removed. Stable resume cadence is not certified for the final release; no drop suppression or exception was introduced.
+- Final release passed seven focused cases and a canceled-open check; older core/performance cases retain their own hashes. Native top-edge Mini collapse, expansion, fullscreen interaction, tearing and final visual matching need manual checks. Resize transitions commit when the edge is released.
+- Thumbnail jobs defer during active playback; strict simultaneous-generation-on-4K remains unverified. Physical SMB availability timing and a real power-cut experiment were not performed. The tracked source survived; unknown unsaved work or absent pre-outage history cannot be reconstructed from the audit.
+
+Earlier findings below remain scoped to their earlier binaries:
+
 Part 4 implementation and basic storage/home checks are available. See tests/PART4_RESULTS.md and tests/part4-package.json for exact executable scopes. Full acceptance is false.
 
 - One 20-second 4K queued-thumbnail run recorded 408 drops and 3,079.70 ms normal startup; the unchanged confirmation recorded zero drops and 456.94 ms startup. No thumbnail ran during either playing interval. Cause is undetermined; the failure is retained rather than called fixed.

@@ -1,0 +1,326 @@
+[
+  {
+    "name": "finished-replay",
+    "exit": 0,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "0.000",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "nav": [],
+    "homeInput": [],
+    "errors": []
+  },
+  {
+    "name": "replay-resumes",
+    "exit": 0,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "4.783",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 4.7829999999999995,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "nav": [],
+    "homeInput": [],
+    "errors": []
+  },
+  {
+    "name": "five-second-keys",
+    "exit": 0,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "2.783",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 2.783,
+        "speed": 1.25,
+        "volume": 61
+      },
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 12.133,
+        "speed": 1.25,
+        "volume": 61
+      },
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 7.133,
+        "speed": 1.25,
+        "volume": 61
+      },
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 12.133,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "nav": [],
+    "homeInput": [],
+    "errors": []
+  },
+  {
+    "name": "empty-home",
+    "exit": 0,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [],
+    "settled": [],
+    "nav": [],
+    "homeInput": [
+      "PART4_HOME_INPUT caption=1 client=1 focusHome=1",
+      "PART4_HOME_INPUT caption=1 client=1 focusHome=1"
+    ],
+    "errors": []
+  },
+  {
+    "name": "previous-next",
+    "exit": 0,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "no",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 2.026,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0,
+        "speed": 1,
+        "volume": 100
+      },
+      {
+        "duration": 2.026,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0,
+        "speed": 1,
+        "volume": 100
+      },
+      {
+        "duration": 2.026,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0,
+        "speed": 1,
+        "volume": 100
+      },
+      {
+        "duration": 2.026,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0,
+        "speed": 1,
+        "volume": 100
+      }
+    ],
+    "nav": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part4-audit-accepted-rows\\series\\Episode 2.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part4-audit-accepted-rows\\series\\Episode 1.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part4-audit-accepted-rows\\series\\Episode 2.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part4-audit-accepted-rows\\series\\Episode 10.mkv"
+    ],
+    "homeInput": [],
+    "errors": []
+  },
+  {
+    "name": "auto-resume",
+    "exit": 0,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "10.133",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 10.133,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "nav": [],
+    "homeInput": [],
+    "errors": []
+  },
+  {
+    "name": "thumbnail-queue",
+    "exit": 0,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [],
+    "settled": [],
+    "nav": [],
+    "homeInput": [
+      "PART4_HOME_INPUT caption=1 client=1 focusHome=1",
+      "PART4_HOME_INPUT caption=1 client=1 focusHome=1"
+    ],
+    "errors": []
+  }
+]

@@ -1,5 +1,15 @@
 # Changelog
 
+## Part 4 outage audit and user interaction revision
+
+- Verified tracked source, previous deployed hash and pinned SQLite sources; no user database existed at the configured path at audit start. Saved the audit and locked preferences; no unverified data-recovery claim.
+- Removed JPEG/disk I/O from the thumbnail scheduling mutex and filtered stale stop/restart events between thumbnail jobs. Verified five fresh 320×180 JPEGs in sequence.
+- Moved recent-file metadata checks to their own background worker, independent of SQLite writes and identity/open requests. Added generation guards and cached metadata. Replayed finished videos now retain new unfinished progress; corrupt-history fallback, empty selection, delayed auto-resume and canceled-open/stop races are handled.
+- Thumbnail/availability changes now update stable history-model rows instead of recreating the list, preserving selection and pointer interaction. Added a persistent-index test.
+- Added exact ±5-second plain arrows, working naturally sorted previous/next media-file transport, grave/physical-above-Tab Mini toggle and native resize-driven collapse/expansion. The full Part5 playlist/auto-advance remains deferred.
+- Rebuilt the control/welcome layouts around the saved references using cached drawn icons, stable timeline label widths and compact metadata-aware history rows. Deferred initial framebuffer creation until a file opens; retained the same renderer thereafter.
+- Expanded bounded tests. Kept pause/resume drop failures, rejected warm-swap experiment and unperformed visual/physical tests explicit in tests/PART4_AUDIT.md; full acceptance is false.
+
 ## Part 4 resume, history and home — manual/performance acceptance pending
 
 - Saved prompt4.md; added SQLite 3.53.4 amalgamation with WAL/FULL transactions and schema versioning. All SQLite access uses a queued writer; file identity hashing uses a separate worker.
