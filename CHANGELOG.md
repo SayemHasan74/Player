@@ -1,5 +1,13 @@
 # Changelog
 
+## Part 4 resume, history and home — manual/performance acceptance pending
+
+- Saved prompt4.md; added SQLite 3.53.4 amalgamation with WAL/FULL transactions and schema versioning. All SQLite access uses a queued writer; file identity hashing uses a separate worker.
+- Added independent content-based per-file resume, two-second load-time preroll, finished detection, track/delay/speed/volume restoration and saves on pause, five-second playback intervals, settled seeks, replacement, stop and exit.
+- Added the reference-based Loader home screen: last ten entries, progress/time left, Continue watching, keyboard focus/navigation, missing state and scene context actions. Auto-resume is off by default; EOF returns to home. No IINA logo or extra window is used.
+- Added serial low-priority headless libmpv screenshot-raw JPEG thumbnails, deferred during playback; retained 200 resume records and removed thumbnails with pruned/removed entries. Added the Qt JPEG plugin to deployment.
+- Fixed home caption hit-testing and idle close handling; isolated all automated history/cache files. Bounded storage/home checks pass. Retained the failed 4K run, successful unchanged confirmation and unperformed visual/concurrent-generation checks in tests/PART4_RESULTS.md. Part 5 remains unstarted.
+
 ## Part 3 controls, tracks and settings — manual acceptance pending
 
 - Saved prompt3.md and retained the single native window/Qt Quick scene in every mode, including hide-only Mini playback.

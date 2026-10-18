@@ -1,0 +1,98 @@
+{
+  "file": "tests\\media\\hevc-4k60-main10.mkv",
+  "executable": "E:\\Codes\\FlowPlayer\\out\\FlowPlayer\\FlowPlayer.exe",
+  "executableSha256": "b5ce773c0036198849f9eb218e867ada1374b7a5eb7df08ad581684757b443b8",
+  "testMode": "muted, non-activating bottom window; desktop interaction not tested",
+  "exitCode": 0,
+  "wallSeconds": 21.03735400000005,
+  "samples": 10,
+  "logicalProcessors": 16,
+  "gpuScope": "whole adapter, includes desktop and other applications",
+  "cpuTotalPercent": {
+    "mean": 0.943125,
+    "max": 1.93125,
+    "min": 0.4625
+  },
+  "workingSetMiB": {
+    "mean": 436.988671875,
+    "max": 449.50390625,
+    "min": 424.96484375
+  },
+  "privateMiB": {
+    "mean": 1693.83984375,
+    "max": 1706.3828125,
+    "min": 1681.79296875
+  },
+  "privateWorkingSetMiB": {
+    "mean": 366.640234375,
+    "max": 379.140625,
+    "min": 354.6171875
+  },
+  "adapterGpuPercent": {
+    "mean": 22.8,
+    "max": 81.0,
+    "min": 6.0
+  },
+  "adapterDecoderPercent": {
+    "mean": 21.7,
+    "max": 50.0,
+    "min": 12.0
+  },
+  "timings": {
+    "QT_APP_READY_MS": 16,
+    "WINDOW_CREATED_MS": 261,
+    "SHOW_CALLED_MS": 268,
+    "FIRST_SWAP_MS": 404,
+    "QML_LOADED_MS": 447,
+    "FIRST_VIDEO_SWAP_MS": 713,
+    "externalLaunchToFirstSwapMs": 456.93699999999995,
+    "openToFirstVideoSwapMs": 141.0
+  },
+  "mpvFirst": {
+    "avSyncSeconds": 3.899999996059833e-06,
+    "cacheBytes": 82346032,
+    "callbackToRenderMaxUs": 30322,
+    "callbacks": 576,
+    "controlsVisible": true,
+    "dropped": 0,
+    "elapsedMs": 10263,
+    "highQuality": false,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 22042,
+    "mute": true,
+    "pause": false,
+    "position": 9.549999999999999,
+    "renders": 575,
+    "sceneSwaps": 583,
+    "videoHidden": false,
+    "videoTrack": "1",
+    "volume": 100,
+    "windowActive": false
+  },
+  "mpvLast": {
+    "avSyncSeconds": 2.300000009891612e-06,
+    "cacheBytes": 98614048,
+    "callbackToRenderMaxUs": 5360,
+    "callbacks": 1176,
+    "controlsVisible": true,
+    "dropped": 0,
+    "elapsedMs": 20288,
+    "highQuality": false,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 10859,
+    "mute": true,
+    "pause": false,
+    "position": 19.567,
+    "renders": 1176,
+    "sceneSwaps": 1197,
+    "videoHidden": false,
+    "videoTrack": "auto",
+    "volume": 100,
+    "windowActive": false
+  },
+  "cleanExit": true,
+  "diagnosticOnly": false,
+  "mutedThroughoutSamples": true,
+  "neverActivated": true,
+  "completedRequestedDuration": true
+}

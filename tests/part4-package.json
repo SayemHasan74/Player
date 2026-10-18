@@ -1,0 +1,14 @@
+{
+  "currentExecutableSha256": "03912a7bb346bdbadfacd8653aadfe496f0a8822f8bb403af2651488fa8ba774",
+  "storageSuiteExecutableSha256": "b5ce773c0036198849f9eb218e867ada1374b7a5eb7df08ad581684757b443b8",
+  "coreCasesPassed": true,
+  "finalHomeCasesPassed": true,
+  "fullAcceptance": false,
+  "unresolved": [
+    "failed 4K queued run retained",
+    "simultaneous thumbnail generation during 4K not exercised",
+    "strict no-hitch / native visual regressions manual",
+    "earlier pause/resume drops not claimed fixed"
+  ],
+  "part5Started": false
+}

@@ -8,6 +8,7 @@
 #include <thread>
 #include <mpv/client.h>
 class AppSettings;
+class ResumeStore;
 
 class MpvController final : public QObject {
     Q_OBJECT
@@ -37,8 +38,13 @@ public:
     void start();
     void configure(AppSettings *settings);
     AppSettings *settings() const {return m_settings;}
+    ResumeStore *resumeStore() const {return m_resumeStore;}
+    void setResumeStore(ResumeStore *store) {m_resumeStore=store;}
+    void loadResolved(const QString &path,const QVariantMap &options);
+    Q_INVOKABLE void stop();
     mpv_handle *handle() const { return m_handle.load(); }
     bool ready() const {return m_ready;}
+    bool idleActive() const {return m_idle;}
     double position() const {return m_position;}
     double duration() const {return m_duration;}
     bool pause() const {return m_pause;}
@@ -80,6 +86,11 @@ public:
     void setRenderReady(bool ready);
     void command(const QList<QByteArray> &arguments);
 signals:
+    void openRequested(const QString &path);
+    void fileLoaded(const QString &path);
+    void positionSettled();
+    void playbackFinished();
+    void beforeStop();
     void readyChanged();
     void stateChanged();
     void videoSizeChanged(int width,int height);
@@ -102,7 +113,7 @@ private:
     std::condition_variable m_wakeup;
     bool m_pending=false;
     std::thread m_thread;
-    bool m_ready=false,m_pause=true,m_mute=false,m_highQuality=false;
+    bool m_ready=false,m_pause=true,m_mute=false,m_highQuality=false,m_idle=true;
     double m_position=0,m_duration=0,m_volume=100,m_speed=1;
     double m_avSync=0;
     qint64 m_dropped=0;
@@ -114,6 +125,8 @@ private:
     QString m_vid="auto";
     bool m_renderReady=false;
     QString m_pendingFile;
+    QVariantMap m_pendingLoadOptions;
+    ResumeStore *m_resumeStore=nullptr;
     AppSettings *m_settings=nullptr;
     QVariantMap m_initialSettings,m_options;
     QVariantList m_chapters,m_buffered;

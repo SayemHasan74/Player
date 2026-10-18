@@ -1,0 +1,74 @@
+{
+  "executableSha256": "03912a7bb346bdbadfacd8653aadfe496f0a8822f8bb403af2651488fa8ba774",
+  "cases": [
+    {
+      "name": "home-caption-focus",
+      "exit": 0,
+      "loads": [],
+      "clean": true,
+      "neverActivated": true,
+      "input": [
+        "PART4_HOME_INPUT caption=1 client=1 focusHome=1",
+        "PART4_HOME_INPUT caption=1 client=1 focusHome=1"
+      ],
+      "ui": [
+        "PART4_UI maxEventLoopGapMs=126.262 maxSceneSyncRenderMs=10.106"
+      ],
+      "home": [
+        "HOME_SCENE_READY_MS=430 rows=10"
+      ]
+    },
+    {
+      "name": "auto-resume",
+      "exit": 0,
+      "loads": [
+        {
+          "aid": "1",
+          "pause": "no",
+          "sid": "no",
+          "speed": "1",
+          "start": "5.983",
+          "sub-delay": "0",
+          "volume": "61"
+        }
+      ],
+      "clean": true,
+      "neverActivated": true,
+      "input": [],
+      "ui": [
+        "PART4_UI maxEventLoopGapMs=131.588 maxSceneSyncRenderMs=61.82"
+      ],
+      "home": [
+        "HOME_SCENE_READY_MS=436 rows=10"
+      ]
+    },
+    {
+      "name": "eof-home-close",
+      "exit": 0,
+      "loads": [
+        {
+          "aid": "auto",
+          "pause": "no",
+          "sid": "auto",
+          "speed": "1",
+          "start": "0.000",
+          "sub-delay": "0",
+          "volume": "61"
+        }
+      ],
+      "clean": true,
+      "neverActivated": true,
+      "input": [
+        "PART4_HOME_INPUT caption=1 client=1 focusHome=1"
+      ],
+      "ui": [
+        "PART4_UI maxEventLoopGapMs=131.52 maxSceneSyncRenderMs=63.427"
+      ],
+      "home": [
+        "HOME_SCENE_READY_MS=2569 rows=10"
+      ]
+    }
+  ],
+  "allBasicChecks": true,
+  "manualVisualAcceptance": "pending"
+}

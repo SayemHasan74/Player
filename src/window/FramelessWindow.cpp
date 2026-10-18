@@ -2,6 +2,7 @@
 #include "../core/MpvController.h"
 #include "../core/Log.h"
 #include "../core/AppSettings.h"
+#include "../data/ResumeStore.h"
 #include <QScreen>
 #include <QKeyEvent>
 #include <QMimeData>
@@ -92,6 +93,7 @@ bool FramelessWindow::initializeUi(QObject *diagnostics,bool enableVideo) {
     context->setContextProperty("appDiagnostics",diagnostics);
     context->setContextProperty("enableVideoSurface",enableVideo);
     context->setContextProperty("preferences",m_controller->settings());
+    context->setContextProperty("history",m_controller->resumeStore());
     QQmlComponent component(engine,QUrl("qrc:/ui/Main.qml"));
     auto *object=component.create();
     auto *root=qobject_cast<QQuickItem*>(object);
@@ -123,14 +125,14 @@ FramelessWindow::~FramelessWindow() {
     if(m_modes.miniGeometry().isValid())s.setValue("window/miniGeometry",m_modes.miniGeometry());
 }
 void FramelessWindow::closeEvent(QCloseEvent *event) {
-    if(m_closeReady||!m_controller->ready()||m_controller->duration()==0) {
+    if(m_closeReady||!m_controller->ready()||m_controller->duration()==0||m_controller->idleActive()) {
         QQuickWindow::closeEvent(event);return;
     }
     event->ignore();
     if(m_closeRequested)return;
     m_closeRequested=true;
     Log::write("CLOSE_REQUEST stop playback asynchronously before releasing the scene graph");
-    m_controller->command({"stop"});
+    m_controller->stop();
 }
 void FramelessWindow::prepareNativeFrame() {
     HWND hwnd=reinterpret_cast<HWND>(winId());
@@ -157,7 +159,10 @@ QString FramelessWindow::inputRoleAt(const QPointF &point) const {
         for(auto i=children.crbegin();i!=children.crend();++i) {auto role=self(self,*i);if(!role.isEmpty())return role;}
         return item->property("inputRole").toString();
     };
-    return visit(visit,contentItem());
+    const auto role=visit(visit,contentItem());
+    // Home fills the scene behind the title overlay. Its fallback input role
+    // must not turn the native caption drag area into a client control.
+    return role=="home"&&point.y()<38?QString():role;
 }
 bool FramelessWindow::seekAt(const QPointF &point) const {return inputRoleAt(point)=="seek";}
 bool FramelessWindow::titleAt(const QPointF &point) const {return controlsVisible()&&point.y()<38&&!controlAt(point);}
@@ -260,7 +265,7 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
     if(e->type()==QEvent::Leave){setCursor(Qt::ArrowCursor);m_cursorTimer.stop();}
     if(e->type()==QEvent::MouseButtonPress||e->type()==QEvent::MouseButtonRelease||e->type()==QEvent::MouseButtonDblClick) {
         auto *mouse=static_cast<QMouseEvent*>(e);pointerActivity();
-        if(mouse->button()==Qt::RightButton&&e->type()==QEvent::MouseButtonPress) {emit contextMenuRequested(mouse->position());return true;}
+        if(mouse->button()==Qt::RightButton&&e->type()==QEvent::MouseButtonPress) {if(inputRoleAt(mouse->position())=="home")return false;emit contextMenuRequested(mouse->position());return true;}
         if(mouse->button()==Qt::MiddleButton) {
             if(e->type()!=QEvent::MouseButtonRelease)toggleFullscreen();
             return true;
@@ -291,6 +296,8 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
         pointerActivity();
         if(m_popupOpen&&key->key()==Qt::Key_Escape) {emit dismissPopup();return true;}
         if(activeFocusItem()&&activeFocusItem()->property("textEntry").toBool())return false;
+        if(m_controller->resumeStore()&&m_controller->resumeStore()->homeVisible()&&!mini()&&
+           (key->key()==Qt::Key_Return||key->key()==Qt::Key_Enter||key->key()==Qt::Key_Space||key->key()==Qt::Key_Up||key->key()==Qt::Key_Down||key->key()==Qt::Key_Left||key->key()==Qt::Key_Right))return false;
         if(m_popupOpen&&(key->key()==Qt::Key_Tab||key->key()==Qt::Key_Return||key->key()==Qt::Key_Enter||key->key()==Qt::Key_Up||key->key()==Qt::Key_Down))return false;
         switch(key->key()) {
         case Qt::Key_Space:if(!key->isAutoRepeat())m_controller->togglePause();break;
@@ -328,6 +335,7 @@ void FramelessWindow::requestMinimize() {
 void FramelessWindow::fitVideo(int w,int h) {
     if(w<=0||h<=0)return;
     m_aspect=double(w)/h;
+    if(qEnvironmentVariableIsSet("FLOW_TEST_BACKGROUND"))return;
     if(mini()||m_modes.current().mode==WindowStateMachine::Mode::Maximized||fullscreen())return;
     const QRect work=screen()->availableGeometry();
     const double logicalWidth=w/devicePixelRatio(),logicalHeight=h/devicePixelRatio();

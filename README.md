@@ -2,7 +2,9 @@
 
 Windows 11 x64. C++20 / CMake / MSVC 2022. Video is rendered by libmpv's OpenGL render API into a `QQuickFramebufferObject`, which Qt Quick composites with plain QML controls inside the same `QQuickWindow`. No native child video window or overlay window exists.
 
-**Part 3 controls, tracks and settings are implemented; visual acceptance remains pending.** See [Part 3 results](tests/PART3_RESULTS.md) for current measurements and manual checks. Reports for Parts 1 and 2 apply to their earlier executables. No Part 4 work is implemented.
+**Part 4 resume, history and home screen are implemented; visual acceptance remains pending.** See [Part 4 results](tests/PART4_RESULTS.md) for current measurements and manual checks. Reports for earlier parts apply to their own executable hashes. Part 5 has not started.
+
+History uses SQLite **3.53.4 amalgamation**, compiled statically with WAL, synchronous FULL and schema version 1. The [official amalgamation](https://www.sqlite.org/amalgamation.html) archive and SHA-256 are pinned in scripts/dependencies.lock.json and fetched by scripts/fetch-deps.py. History lives at `%APPDATA%/FlowPlayer/flow.db`; JPEG thumbnails at `%LOCALAPPDATA%/FlowPlayer/thumbs`. The home screen shows 10 recent entries; 200 retain independent resume state. Database access, identity hashing and thumbnail work run on workers. Thumbnail jobs wait during playback to protect frame timing.
 
 User revisions on 2026-10-18: resident RAM below **500 MB** is accepted, including cache; the earlier 150/300 MB limits are superseded. A first-deployment-only startup exception is accepted; subsequent fully closed launches must stay below 500 ms. All five manual checks were reported passed. Their original executable hash is retained in `tests/manual-results.json`. No elevated RAM profiling is needed.
 
@@ -179,7 +181,7 @@ Right-click opens the scene menu, including over native caption zones. Audio/sub
 - Embedded cover art is drawn by mpv through the same framebuffer item for audio files using audio-display=embedded-first; no second image/video window is created.
 - **I** includes resolution, codec, decoder, FPS, drops, bitrate and cache. Playlist navigation/panel remain placeholders for Part5.
 
-Open **More → Settings** (or right-click → Settings) for language order, auto-resume defaultoff, autoplay-next defaulton, aspect lock, live HQ/hardware decoding, seek steps, tiny Mini preview and default speed. Auto-resume/autoplay behavior is reserved for Parts4/5. The panel is created only when opened.
+Open **More → Settings** (or right-click → Settings) for language order, auto-resume defaultoff, autoplay-next defaulton, aspect lock, live HQ/hardware decoding, seek steps, tiny Mini preview and default speed. Auto-resume is implemented in Part4; autoplay-next remains Part5. The panel is created only when opened.
 
 Part3 preferences and volume are in `%LOCALAPPDATA%/FlowPlayer/settings.ini`. The model reads at startup and flushes writes on a worker thread, including shutdown. Older registry instructions above apply to earlier builds; use the current settings panel for aspect lock and tiny preview. Legacy window geometry is still remembered separately. Automated benchmarks use isolated settings files under each result folder; they do not change your preferences.
 
@@ -196,3 +198,19 @@ $env:FLOW_TEST_MUTE = '1'
 ```
 
 `generate-part3-media.ps1` creates the multi-audio/subtitle/chapter and MP3-cover fixtures after the Part1 media script. PGS/VobSub samples are not generated and remain manual. Test reports distinguish real measurements from unperformed visual/audio checks; zero counters after a seek are never treated as evidence of zero earlier drops.
+
+## Part 4 build and checks
+
+```powershell
+Set-Location E:\Codes\FlowPlayer
+.\scripts\build.ps1 -Target FlowPlayer
+.\scripts\build.ps1 -Target HistoryTests
+$env:PATH = "$PWD\deps\Qt\bin;$env:PATH"
+.\.tools\Scripts\ctest.exe --test-dir build --output-on-failure
+.\scripts\deploy.ps1
+.\out\FlowPlayer\FlowPlayer.exe
+# Or open a file directly:
+.\out\FlowPlayer\FlowPlayer.exe 'D:\Videos\movie.mkv'
+```
+
+`scripts/test-part4.py --name <new-result-name>` runs bounded, muted background checks against the generated Part3 fixtures. It refuses to disturb an already running player and preserves existing result folders. It requires those fixture files; dependency/build setup is above. `tests/PART4_RESULTS.md` has the five manual checks and all retained failures. Resume/startup measurements are scoped to the named executable; the stored first-deployment exception does not excuse slow ordinary launches.

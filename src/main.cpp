@@ -2,6 +2,8 @@
 #include "core/MpvRenderItem.h"
 #include "core/Log.h"
 #include "core/AppSettings.h"
+#include "data/HistoryDb.h"
+#include "data/ResumeStore.h"
 #include "window/FramelessWindow.h"
 #include "window/NativeEventFilter.h"
 #include <QGuiApplication>
@@ -29,6 +31,7 @@ public:
     Diagnostics() {clock.start();}
     Q_INVOKABLE void firstFrame() {if(!hadFrame) {hadFrame=true;Log::write("FIRST_VIDEO_SWAP_MS="+QString::number(clock.elapsed()));}}
     Q_INVOKABLE void overlayClick() {Log::write("OVERLAY_CLICK");}
+    Q_INVOKABLE void homeReady(int rows) {Log::write(QString("HOME_SCENE_READY_MS=%1 rows=%2").arg(clock.elapsed()).arg(rows));}
 };
 int main(int argc,char **argv) {
     Diagnostics diagnostics;
@@ -50,7 +53,9 @@ int main(int argc,char **argv) {
     int exitCode=0;
     {
         AppSettings settings;
+        HistoryDb history;
         MpvController controller;controller.configure(&settings);
+        ResumeStore resume(&controller,&settings,&history);
         {
             FramelessWindow window(&controller);
             QObject::connect(&window,&QQuickWindow::frameSwapped,&window,[&]{++diagnostics.swaps;},Qt::DirectConnection);
@@ -75,12 +80,50 @@ int main(int argc,char **argv) {
                     Log::write(QString("WINDOW_ACTIVE=%1 elapsedMs=%2").arg(window.isActive()).arg(diagnostics.clock.elapsed()));
                 });
                 QObject::connect(&controller,&MpvController::readyChanged,&app,[&]{
+                    resume.launch(profile.isEmpty()&&app.arguments().size()==1);
                     if(profile.isEmpty()&&app.arguments().size()>1)controller.open(app.arguments()[1]);
                 });
                 // Explicit diagnostics only; never used for rendering or normal idle work.
                 bool ok=false;const int quitMs=qEnvironmentVariableIntValue("FLOW_QUIT_MS",&ok);
                 if(ok&&quitMs>0)QTimer::singleShot(quitMs,Qt::PreciseTimer,&window,&QWindow::close);
                 const auto scenario=qEnvironmentVariable("FLOW_SCENARIO");
+                QTimer uiHeartbeat;
+                QElapsedTimer heartbeatClock;
+                double maximumUiGapMs=0;
+                struct SceneTimes {std::atomic<qint64> begin{0},maximum{0};};
+                auto sceneTimes=std::make_shared<SceneTimes>();
+                if(scenario.startsWith("part4")) {
+                    auto checkHome=[&]{if(resume.homeVisible())Log::write(QString("PART4_HOME_INPUT caption=%1 client=%2 focusHome=%3").arg(window.titleAt(QPointF(100,20))).arg(window.controlAt(QPointF(100,100))).arg(window.activeFocusItem()&&window.activeFocusItem()->property("inputRole")=="home"));};
+                    QTimer::singleShot(1500,&window,checkHome);QTimer::singleShot(4500,&window,checkHome);
+                    heartbeatClock.start();uiHeartbeat.setTimerType(Qt::PreciseTimer);uiHeartbeat.setInterval(16);
+                    QObject::connect(&uiHeartbeat,&QTimer::timeout,&window,[&]{maximumUiGapMs=qMax(maximumUiGapMs,heartbeatClock.nsecsElapsed()/1e6);heartbeatClock.restart();});uiHeartbeat.start();
+                    QObject::connect(&window,&QQuickWindow::beforeSynchronizing,&window,[&diagnostics,sceneTimes]{sceneTimes->begin=diagnostics.clock.nsecsElapsed()/1000;},Qt::DirectConnection);
+                    QObject::connect(&window,&QQuickWindow::afterRendering,&window,[&diagnostics,sceneTimes]{auto elapsed=diagnostics.clock.nsecsElapsed()/1000-sceneTimes->begin.load();auto old=sceneTimes->maximum.load();while(old<elapsed&&!sceneTimes->maximum.compare_exchange_weak(old,elapsed)){}},Qt::DirectConnection);
+                    QObject::connect(&window,&QQuickWindow::closing,&window,[&,sceneTimes]{Log::write(QString("PART4_UI maxEventLoopGapMs=%1 maxSceneSyncRenderMs=%2").arg(maximumUiGapMs).arg(sceneTimes->maximum.load()/1000.0));});
+                }
+                if(scenario=="part4-playing") {
+                    QObject::connect(&controller,&MpvController::videoFramePresented,&window,[&]{window.setUiHeld(true);});
+                }
+                if(scenario=="part4-pause") {
+                    QObject::connect(&controller,&MpvController::fileLoaded,&window,[&](const QString &){controller.setPause(true);});
+                }
+                if(scenario=="part4-switch") {
+                    auto stage=std::make_shared<int>(0);
+                    QObject::connect(&controller,&MpvController::fileLoaded,&window,[&,stage](const QString &){
+                        const int current=(*stage)++;
+                        if(current==0)QTimer::singleShot(700,&window,[&]{controller.setPause(true);controller.seekTo(12.123);controller.setVolume(61);controller.setPlaybackOption("speed",1.25);controller.selectTrack("audio",2);controller.selectTrack("sub",2);controller.setPlaybackOption("sub-delay",.3);});
+                        if(current==0)QTimer::singleShot(1700,&window,[&]{controller.open(qEnvironmentVariable("FLOW_PART4_OTHER"));});
+                        if(current==1)QTimer::singleShot(700,&window,[&]{controller.setPause(true);controller.seekTo(7.123);});
+                        if(current==1)QTimer::singleShot(1700,&window,[&]{controller.open(app.arguments()[1]);});
+                        if(current==2)QTimer::singleShot(400,&window,[&]{controller.setPause(true);});
+                    });
+                }
+                if(scenario.startsWith("part4")) {
+                    QObject::connect(&controller,&MpvController::positionSettled,&window,[&]{
+                        Log::write("PART4_SETTLED "+QString::fromUtf8(QJsonDocument(QJsonObject{{"position",controller.position()},{"duration",controller.duration()},{"volume",controller.volume()},{"speed",controller.speed()},{"options",QJsonObject::fromVariantMap(controller.playbackOptions())}}).toJson(QJsonDocument::Compact)));
+                    });
+                    QObject::connect(&history,&HistoryDb::committed,&window,[](const QVariantMap &r){Log::write("PART4_COMMIT "+QString::fromUtf8(QJsonDocument(QJsonObject::fromVariantMap(r)).toJson(QJsonDocument::Compact)));});
+                }
                 if(scenario=="part3-controls"||scenario=="part3-tracks") {
                     auto armed=std::make_shared<bool>(false);
                     QObject::connect(&controller,&MpvController::videoFramePresented,&window,[&,armed,scenario]{

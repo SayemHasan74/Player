@@ -34,4 +34,9 @@ for package in ['microsoft.windows.sdk.cpp','microsoft.windows.sdk.cpp.x64']:
 for name, filename in [('mpv','mpv-dev-x86_64-20261017-git-dde0671072.7z'),('ffmpeg','ffmpeg-x86_64-git-2d49d0e62.7z')]:
     archive = fetch(('mpv-dev' if name=='mpv' else name)+'.7z', 'https://github.com/shinchiro/mpv-winbuild-cmake/releases/download/20261017/'+filename)
     unpack7(archive, DEPS/name)
+archive=fetch('sqlite-amalgamation-3530400.zip','https://www.sqlite.org/2026/sqlite-amalgamation-3530400.zip')
+(DEPS/'sqlite').mkdir(exist_ok=True)
+with zipfile.ZipFile(archive) as z:
+    for name in ['sqlite3.c','sqlite3.h']:
+        (DEPS/'sqlite'/name).write_bytes(z.read('sqlite-amalgamation-3530400/'+name))
 print('Dependencies verified and extracted.', flush=True)

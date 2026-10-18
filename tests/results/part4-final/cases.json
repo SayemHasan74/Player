@@ -1,0 +1,2097 @@
+[
+  {
+    "name": "switch-A-B-A",
+    "exit": 0,
+    "killed": false,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "61"
+      },
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "10.133",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": 3,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0,
+        "speed": 1,
+        "volume": 100
+      },
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 12.133,
+        "speed": 1.25,
+        "volume": 61
+      },
+      {
+        "duration": 360.021,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0.016999999999999998,
+        "speed": 1,
+        "volume": 61
+      },
+      {
+        "duration": 360.021,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 7.133,
+        "speed": 1,
+        "volume": 61
+      },
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 10.15,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "commits": [
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326591600,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 0,
+        "size": 25505908,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": 3,
+        "volume": 100
+      },
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326592221,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 12.123,
+        "size": 25505908,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": 3,
+        "volume": 100
+      },
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326593183,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 12.133,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      },
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326593219,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 12.133,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      },
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326593274,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 12.133,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      },
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326593333,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 0.016999999999999998,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      },
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326594016,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 7.123,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      },
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326594246,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 7.133,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      },
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326595017,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 7.133,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      },
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": false,
+        "last_played": 1792326595035,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 7.133,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      },
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": true,
+        "last_played": 1792326595250,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 10.15,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      },
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": true,
+        "last_played": 1792326595469,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 10.417,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      }
+    ],
+    "metrics": [
+      {
+        "avSyncSeconds": -1.6388060838090635e-06,
+        "cacheBytes": 17242272,
+        "callbackToRenderMaxUs": 21824,
+        "callbacks": 107,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 8273,
+        "highQuality": false,
+        "hwdec": "nvdec",
+        "mpvRenderCallMaxUs": 36400,
+        "mute": true,
+        "pause": false,
+        "position": 10.417,
+        "renders": 107,
+        "sceneSwaps": 117,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 100,
+        "windowActive": false
+      }
+    ],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 393,
+      "QML_LOADED_MS": 435,
+      "externalFirstSwapMs": 1755.1476955413818
+    },
+    "samples": [
+      {
+        "seconds": 0.8403935432434082,
+        "cpuTotal": 0.3875,
+        "rss": 1961984
+      },
+      {
+        "seconds": 1.0906660556793213,
+        "cpuTotal": 0.0,
+        "rss": 1961984
+      },
+      {
+        "seconds": 1.341050624847412,
+        "cpuTotal": 0.0,
+        "rss": 1961984
+      },
+      {
+        "seconds": 1.591606855392456,
+        "cpuTotal": 7.425,
+        "rss": 70012928
+      },
+      {
+        "seconds": 1.8419711589813232,
+        "cpuTotal": 5.075,
+        "rss": 119603200
+      },
+      {
+        "seconds": 2.092526435852051,
+        "cpuTotal": 0.0,
+        "rss": 119603200
+      },
+      {
+        "seconds": 2.3431012630462646,
+        "cpuTotal": 0.0,
+        "rss": 119603200
+      },
+      {
+        "seconds": 2.5936357975006104,
+        "cpuTotal": 0.0,
+        "rss": 119603200
+      },
+      {
+        "seconds": 2.844106912612915,
+        "cpuTotal": 4.3,
+        "rss": 119603200
+      },
+      {
+        "seconds": 3.094618320465088,
+        "cpuTotal": 4.6875,
+        "rss": 119603200
+      },
+      {
+        "seconds": 3.345125913619995,
+        "cpuTotal": 3.66875,
+        "rss": 129687552
+      },
+      {
+        "seconds": 3.595379114151001,
+        "cpuTotal": 7.425,
+        "rss": 304549888
+      },
+      {
+        "seconds": 3.84559965133667,
+        "cpuTotal": 1.175,
+        "rss": 313782272
+      },
+      {
+        "seconds": 4.095722198486328,
+        "cpuTotal": 0.78125,
+        "rss": 315879424
+      },
+      {
+        "seconds": 4.345924377441406,
+        "cpuTotal": 2.34375,
+        "rss": 319688704
+      },
+      {
+        "seconds": 4.596216201782227,
+        "cpuTotal": 0.78125,
+        "rss": 321814528
+      },
+      {
+        "seconds": 4.846622467041016,
+        "cpuTotal": 0.0,
+        "rss": 321814528
+      },
+      {
+        "seconds": 5.096726894378662,
+        "cpuTotal": 0.78125,
+        "rss": 321814528
+      },
+      {
+        "seconds": 5.34726357460022,
+        "cpuTotal": 1.95,
+        "rss": 318214144
+      },
+      {
+        "seconds": 5.597713232040405,
+        "cpuTotal": 0.0,
+        "rss": 334823424
+      },
+      {
+        "seconds": 5.84805965423584,
+        "cpuTotal": 0.0,
+        "rss": 335163392
+      },
+      {
+        "seconds": 6.0986597537994385,
+        "cpuTotal": 1.5625,
+        "rss": 342925312
+      },
+      {
+        "seconds": 6.349236488342285,
+        "cpuTotal": 0.0,
+        "rss": 342925312
+      },
+      {
+        "seconds": 6.605082750320435,
+        "cpuTotal": 0.0,
+        "rss": 342925312
+      },
+      {
+        "seconds": 6.857134580612183,
+        "cpuTotal": 0.0,
+        "rss": 342925312
+      },
+      {
+        "seconds": 7.1075708866119385,
+        "cpuTotal": 0.78125,
+        "rss": 338354176
+      },
+      {
+        "seconds": 7.357977867126465,
+        "cpuTotal": 1.95,
+        "rss": 337321984
+      },
+      {
+        "seconds": 7.6084301471710205,
+        "cpuTotal": 0.0,
+        "rss": 337321984
+      },
+      {
+        "seconds": 7.859121561050415,
+        "cpuTotal": 0.0,
+        "rss": 337321984
+      },
+      {
+        "seconds": 8.109290361404419,
+        "cpuTotal": 0.3875,
+        "rss": 337321984
+      },
+      {
+        "seconds": 8.359563827514648,
+        "cpuTotal": 0.0,
+        "rss": 337321984
+      },
+      {
+        "seconds": 8.609944343566895,
+        "cpuTotal": 0.0,
+        "rss": 337330176
+      },
+      {
+        "seconds": 8.86013150215149,
+        "cpuTotal": 0.0,
+        "rss": 337330176
+      },
+      {
+        "seconds": 9.1106595993042,
+        "cpuTotal": 0.0,
+        "rss": 337330176
+      },
+      {
+        "seconds": 9.361162185668945,
+        "cpuTotal": 0.0,
+        "rss": 337330176
+      },
+      {
+        "seconds": 9.612300157546997,
+        "cpuTotal": 0.0,
+        "rss": 337330176
+      },
+      {
+        "seconds": 9.862836599349976,
+        "cpuTotal": 0.0,
+        "rss": 198295552
+      }
+    ],
+    "thumbnailSuccesses": 0
+  },
+  {
+    "name": "restart-A",
+    "exit": 0,
+    "killed": false,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "8.417",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 8.417,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "commits": [
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": true,
+        "last_played": 1792326599258,
+        "mtime": 1792313305751,
+        "path": "E:/Codes/FlowPlayer/tests/media/part3-multi.mkv",
+        "position": 8.417,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      }
+    ],
+    "metrics": [
+      {
+        "avSyncSeconds": 0,
+        "cacheBytes": 21643824,
+        "callbackToRenderMaxUs": 59150,
+        "callbacks": 4,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 6279,
+        "highQuality": false,
+        "hwdec": "nvdec",
+        "mpvRenderCallMaxUs": 23552,
+        "mute": true,
+        "pause": false,
+        "position": 8.417,
+        "renders": 4,
+        "sceneSwaps": 9,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 100,
+        "windowActive": false
+      }
+    ],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 394,
+      "QML_LOADED_MS": 433,
+      "externalFirstSwapMs": 411.7467403411865
+    },
+    "samples": [
+      {
+        "seconds": 0.25212550163269043,
+        "cpuTotal": 5.46875,
+        "rss": 71241728
+      },
+      {
+        "seconds": 0.5027422904968262,
+        "cpuTotal": 10.9375,
+        "rss": 130150400
+      },
+      {
+        "seconds": 0.7531414031982422,
+        "cpuTotal": 10.9375,
+        "rss": 337903616
+      },
+      {
+        "seconds": 1.0037212371826172,
+        "cpuTotal": 6.6375,
+        "rss": 337911808
+      },
+      {
+        "seconds": 1.2540795803070068,
+        "cpuTotal": 1.95,
+        "rss": 326221824
+      },
+      {
+        "seconds": 1.504490613937378,
+        "cpuTotal": 0.0,
+        "rss": 326221824
+      },
+      {
+        "seconds": 1.7547197341918945,
+        "cpuTotal": 0.0,
+        "rss": 326221824
+      },
+      {
+        "seconds": 2.0052382946014404,
+        "cpuTotal": 0.0,
+        "rss": 326221824
+      },
+      {
+        "seconds": 2.2554826736450195,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 2.506187915802002,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 2.7564468383789062,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 3.0070157051086426,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 3.257240056991577,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 3.507579803466797,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 3.7578470706939697,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 4.008272647857666,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 4.259054899215698,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 4.509532451629639,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 4.760082721710205,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 5.010538101196289,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 5.2607245445251465,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 5.510933876037598,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 5.761491060256958,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 6.011847496032715,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 6.26203179359436,
+        "cpuTotal": 0.0,
+        "rss": 328335360
+      },
+      {
+        "seconds": 6.512677907943726,
+        "cpuTotal": 1.95,
+        "rss": 182501376
+      }
+    ],
+    "thumbnailSuccesses": 1
+  },
+  {
+    "name": "moved-A",
+    "exit": 0,
+    "killed": false,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "6.417",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 6.417,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "commits": [
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": false,
+        "known": true,
+        "last_played": 1792326605806,
+        "mtime": 1792326604953,
+        "path": "E:/Codes/FlowPlayer/tests/results/part4-final/moved/renamed.mkv",
+        "position": 6.417,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      }
+    ],
+    "metrics": [
+      {
+        "avSyncSeconds": 0,
+        "cacheBytes": 21643824,
+        "callbackToRenderMaxUs": 10519,
+        "callbacks": 4,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 6266,
+        "highQuality": false,
+        "hwdec": "nvdec",
+        "mpvRenderCallMaxUs": 22210,
+        "mute": true,
+        "pause": false,
+        "position": 6.417,
+        "renders": 4,
+        "sceneSwaps": 9,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 100,
+        "windowActive": false
+      }
+    ],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 375,
+      "QML_LOADED_MS": 413,
+      "externalFirstSwapMs": 391.69907569885254
+    },
+    "samples": [
+      {
+        "seconds": 0.25218868255615234,
+        "cpuTotal": 6.6375,
+        "rss": 71675904
+      },
+      {
+        "seconds": 0.5025742053985596,
+        "cpuTotal": 7.8125,
+        "rss": 194183168
+      },
+      {
+        "seconds": 0.7532286643981934,
+        "cpuTotal": 2.7375,
+        "rss": 313647104
+      },
+      {
+        "seconds": 1.0034751892089844,
+        "cpuTotal": 0.78125,
+        "rss": 320339968
+      },
+      {
+        "seconds": 1.2539942264556885,
+        "cpuTotal": 0.0,
+        "rss": 320339968
+      },
+      {
+        "seconds": 1.5044567584991455,
+        "cpuTotal": 0.0,
+        "rss": 320339968
+      },
+      {
+        "seconds": 1.7552433013916016,
+        "cpuTotal": 0.0,
+        "rss": 320339968
+      },
+      {
+        "seconds": 2.005514621734619,
+        "cpuTotal": 0.0,
+        "rss": 320339968
+      },
+      {
+        "seconds": 2.256124496459961,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 2.5065059661865234,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 2.756695508956909,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 3.0069706439971924,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 3.2575583457946777,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 3.508162498474121,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 3.760328769683838,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 4.0106751918792725,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 4.260907888412476,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 4.513058185577393,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 4.763424873352051,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 5.013753890991211,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 5.264270067214966,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 5.514781475067139,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 5.765316486358643,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 6.015552043914795,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 6.266275882720947,
+        "cpuTotal": 0.0,
+        "rss": 322453504
+      },
+      {
+        "seconds": 6.519277572631836,
+        "cpuTotal": 1.5625,
+        "rss": 181006336
+      },
+      {
+        "seconds": 6.771183013916016,
+        "cpuTotal": 0.3875,
+        "rss": 156917760
+      }
+    ],
+    "thumbnailSuccesses": 1
+  },
+  {
+    "name": "finished-96",
+    "exit": 0,
+    "killed": false,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "0.000",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 24.021,
+        "options": {
+          "aid": 2,
+          "audio-delay": 0,
+          "sid": 2,
+          "sub-delay": 0.3,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 0,
+        "speed": 1.25,
+        "volume": 61
+      }
+    ],
+    "commits": [
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": true,
+        "known": true,
+        "last_played": 1792326612652,
+        "mtime": 1792326604953,
+        "path": "E:/Codes/FlowPlayer/tests/results/part4-final/moved/renamed.mkv",
+        "position": 0,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      },
+      {
+        "audio_track": 2,
+        "available": true,
+        "duration": 24.021,
+        "file_key": "25505908:e35ad468f29a7ba598e3040dfce0e0ebbf5badb2cedd7b6ee754f99bdb6c43e6",
+        "finished": true,
+        "known": true,
+        "last_played": 1792326618289,
+        "mtime": 1792326604953,
+        "path": "E:/Codes/FlowPlayer/tests/results/part4-final/moved/renamed.mkv",
+        "position": 0,
+        "size": 25505908,
+        "speed": 1.25,
+        "sub_delay": 0.3,
+        "sub_track": 2,
+        "volume": 61
+      }
+    ],
+    "metrics": [
+      {
+        "avSyncSeconds": 0,
+        "cacheBytes": 22764496,
+        "callbackToRenderMaxUs": 14171,
+        "callbacks": 3,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 6276,
+        "highQuality": false,
+        "hwdec": "nvdec",
+        "mpvRenderCallMaxUs": 18902,
+        "mute": true,
+        "pause": false,
+        "position": 0,
+        "renders": 3,
+        "sceneSwaps": 9,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 100,
+        "windowActive": false
+      }
+    ],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 384,
+      "QML_LOADED_MS": 425,
+      "externalFirstSwapMs": 399.74069595336914
+    },
+    "samples": [
+      {
+        "seconds": 0.25351786613464355,
+        "cpuTotal": 5.46875,
+        "rss": 71483392
+      },
+      {
+        "seconds": 0.5040521621704102,
+        "cpuTotal": 8.59375,
+        "rss": 148250624
+      },
+      {
+        "seconds": 0.7543120384216309,
+        "cpuTotal": 3.5125,
+        "rss": 306999296
+      },
+      {
+        "seconds": 1.004810094833374,
+        "cpuTotal": 0.0,
+        "rss": 307212288
+      },
+      {
+        "seconds": 1.2549591064453125,
+        "cpuTotal": 0.0,
+        "rss": 307212288
+      },
+      {
+        "seconds": 1.5053367614746094,
+        "cpuTotal": 0.0,
+        "rss": 307212288
+      },
+      {
+        "seconds": 1.7560453414916992,
+        "cpuTotal": 0.0,
+        "rss": 307212288
+      },
+      {
+        "seconds": 2.006695032119751,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 2.257344961166382,
+        "cpuTotal": 0.3875,
+        "rss": 309362688
+      },
+      {
+        "seconds": 2.5081911087036133,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 2.7584362030029297,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 3.0088062286376953,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 3.2590572834014893,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 3.5095267295837402,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 3.7597479820251465,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 4.010108470916748,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 4.260327339172363,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 4.510705947875977,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 4.760963439941406,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 5.011490821838379,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 5.261672735214233,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 5.512173652648926,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 5.762749671936035,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 6.013437271118164,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      },
+      {
+        "seconds": 6.263915061950684,
+        "cpuTotal": 0.0,
+        "rss": 309362688
+      }
+    ],
+    "thumbnailSuccesses": 0
+  },
+  {
+    "name": "crash",
+    "exit": 1,
+    "killed": true,
+    "clean": false,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "no",
+        "speed": "1",
+        "start": "5.133",
+        "sub-delay": "0",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 360.021,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 5.1499999999999995,
+        "speed": 1,
+        "volume": 61
+      }
+    ],
+    "commits": [
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": true,
+        "last_played": 1792326619212,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 5.1499999999999995,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      },
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": true,
+        "last_played": 1792326624057,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 9.982999999999999,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      }
+    ],
+    "metrics": [],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 365,
+      "QML_LOADED_MS": 405,
+      "externalFirstSwapMs": 379.44746017456055
+    },
+    "samples": [
+      {
+        "seconds": 0.25314784049987793,
+        "cpuTotal": 5.50625,
+        "rss": 71266304
+      },
+      {
+        "seconds": 0.5034902095794678,
+        "cpuTotal": 7.425,
+        "rss": 248463360
+      },
+      {
+        "seconds": 0.7540104389190674,
+        "cpuTotal": 3.125,
+        "rss": 308588544
+      },
+      {
+        "seconds": 1.0042638778686523,
+        "cpuTotal": 0.0,
+        "rss": 309030912
+      },
+      {
+        "seconds": 1.2544324398040771,
+        "cpuTotal": 0.78125,
+        "rss": 309501952
+      },
+      {
+        "seconds": 1.504657506942749,
+        "cpuTotal": 0.78125,
+        "rss": 309911552
+      },
+      {
+        "seconds": 1.7551355361938477,
+        "cpuTotal": 1.175,
+        "rss": 312791040
+      },
+      {
+        "seconds": 2.005765676498413,
+        "cpuTotal": 0.78125,
+        "rss": 312864768
+      },
+      {
+        "seconds": 2.2559573650360107,
+        "cpuTotal": 0.3875,
+        "rss": 313405440
+      },
+      {
+        "seconds": 2.5066189765930176,
+        "cpuTotal": 2.7375,
+        "rss": 313630720
+      },
+      {
+        "seconds": 2.7567927837371826,
+        "cpuTotal": 1.5625,
+        "rss": 314617856
+      },
+      {
+        "seconds": 3.0071604251861572,
+        "cpuTotal": 1.175,
+        "rss": 314757120
+      },
+      {
+        "seconds": 3.2577433586120605,
+        "cpuTotal": 3.90625,
+        "rss": 314826752
+      },
+      {
+        "seconds": 3.5081443786621094,
+        "cpuTotal": 0.0,
+        "rss": 315179008
+      },
+      {
+        "seconds": 3.758521556854248,
+        "cpuTotal": 0.0,
+        "rss": 315490304
+      },
+      {
+        "seconds": 4.009096622467041,
+        "cpuTotal": 1.175,
+        "rss": 315744256
+      },
+      {
+        "seconds": 4.259585618972778,
+        "cpuTotal": 0.78125,
+        "rss": 316035072
+      },
+      {
+        "seconds": 4.5102386474609375,
+        "cpuTotal": 0.0,
+        "rss": 316305408
+      },
+      {
+        "seconds": 4.7607200145721436,
+        "cpuTotal": 0.3875,
+        "rss": 316538880
+      },
+      {
+        "seconds": 5.010909557342529,
+        "cpuTotal": 0.78125,
+        "rss": 316796928
+      },
+      {
+        "seconds": 5.261275291442871,
+        "cpuTotal": 0.3875,
+        "rss": 317063168
+      },
+      {
+        "seconds": 5.511427402496338,
+        "cpuTotal": 0.3875,
+        "rss": 317321216
+      },
+      {
+        "seconds": 5.7616355419158936,
+        "cpuTotal": 0.0,
+        "rss": 317579264
+      },
+      {
+        "seconds": 6.012041330337524,
+        "cpuTotal": 0.3875,
+        "rss": 317853696
+      },
+      {
+        "seconds": 6.262413024902344,
+        "cpuTotal": 1.95,
+        "rss": 318140416
+      },
+      {
+        "seconds": 6.512992858886719,
+        "cpuTotal": 0.78125,
+        "rss": 318382080
+      },
+      {
+        "seconds": 6.764354228973389,
+        "cpuTotal": 0.78125,
+        "rss": 318656512
+      },
+      {
+        "seconds": 7.015018463134766,
+        "cpuTotal": 1.175,
+        "rss": 318955520
+      },
+      {
+        "seconds": 7.265725135803223,
+        "cpuTotal": 0.0,
+        "rss": 319242240
+      },
+      {
+        "seconds": 7.516564846038818,
+        "cpuTotal": 1.10625,
+        "rss": 319467520
+      },
+      {
+        "seconds": 7.766958951950073,
+        "cpuTotal": 1.5625,
+        "rss": 319815680
+      },
+      {
+        "seconds": 8.017550706863403,
+        "cpuTotal": 0.78125,
+        "rss": 319037440
+      }
+    ],
+    "thumbnailSuccesses": 0
+  },
+  {
+    "name": "crash-reopen",
+    "exit": 0,
+    "killed": false,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "no",
+        "speed": "1",
+        "start": "7.983",
+        "sub-delay": "0",
+        "volume": "61"
+      }
+    ],
+    "settled": [
+      {
+        "duration": 360.021,
+        "options": {
+          "aid": 1,
+          "audio-delay": 0,
+          "sid": -1,
+          "sub-delay": 0,
+          "sub-pos": 100,
+          "sub-scale": 1
+        },
+        "position": 7.983,
+        "speed": 1,
+        "volume": 61
+      }
+    ],
+    "commits": [
+      {
+        "audio_track": 1,
+        "available": true,
+        "duration": 360.021,
+        "file_key": "379333557:3bcae5bfc9b7139b49e391031b28b9970e813ac6be1a6e0c4cca43d01957b4dc",
+        "finished": false,
+        "known": true,
+        "last_played": 1792326627563,
+        "mtime": 1792246627921,
+        "path": "E:/Codes/FlowPlayer/tests/media/h264-1080p60.mkv",
+        "position": 7.983,
+        "size": 379333557,
+        "speed": 1,
+        "sub_delay": 0,
+        "sub_track": -1,
+        "volume": 61
+      }
+    ],
+    "metrics": [
+      {
+        "avSyncSeconds": 0,
+        "cacheBytes": 26723888,
+        "callbackToRenderMaxUs": 17840,
+        "callbacks": 4,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 6268,
+        "highQuality": false,
+        "hwdec": "nvdec",
+        "mpvRenderCallMaxUs": 21579,
+        "mute": true,
+        "pause": false,
+        "position": 7.983,
+        "renders": 4,
+        "sceneSwaps": 10,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 61,
+        "windowActive": false
+      }
+    ],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 381,
+      "QML_LOADED_MS": 419,
+      "externalFirstSwapMs": 397.23968505859375
+    },
+    "samples": [
+      {
+        "seconds": 0.2528727054595947,
+        "cpuTotal": 5.1375,
+        "rss": 71446528
+      },
+      {
+        "seconds": 0.5030438899993896,
+        "cpuTotal": 8.59375,
+        "rss": 237334528
+      },
+      {
+        "seconds": 0.7535905838012695,
+        "cpuTotal": 3.125,
+        "rss": 302194688
+      },
+      {
+        "seconds": 1.0036935806274414,
+        "cpuTotal": 0.3875,
+        "rss": 309350400
+      },
+      {
+        "seconds": 1.254396915435791,
+        "cpuTotal": 0.0,
+        "rss": 309354496
+      },
+      {
+        "seconds": 1.504748821258545,
+        "cpuTotal": 0.0,
+        "rss": 309354496
+      },
+      {
+        "seconds": 1.7554869651794434,
+        "cpuTotal": 0.0,
+        "rss": 309354496
+      },
+      {
+        "seconds": 2.006401538848877,
+        "cpuTotal": 0.0,
+        "rss": 309354496
+      },
+      {
+        "seconds": 2.2565996646881104,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 2.507255792617798,
+        "cpuTotal": 0.3875,
+        "rss": 311508992
+      },
+      {
+        "seconds": 2.7583367824554443,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 3.0090513229370117,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 3.2595465183258057,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 3.5101871490478516,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 3.760829210281372,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 4.010978937149048,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 4.261212348937988,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 4.51140832901001,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 4.762302398681641,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 5.012525796890259,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 5.262688636779785,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 5.512973308563232,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 5.763543367385864,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 6.013761520385742,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 6.264020919799805,
+        "cpuTotal": 0.0,
+        "rss": 311508992
+      },
+      {
+        "seconds": 6.514246225357056,
+        "cpuTotal": 0.78125,
+        "rss": 148979712
+      }
+    ],
+    "thumbnailSuccesses": 0
+  },
+  {
+    "name": "home",
+    "exit": 0,
+    "killed": false,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [],
+    "settled": [],
+    "commits": [],
+    "metrics": [
+      {
+        "avSyncSeconds": 0,
+        "cacheBytes": -1,
+        "callbackToRenderMaxUs": 898,
+        "callbacks": 1,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 10254,
+        "highQuality": false,
+        "hwdec": "none",
+        "mpvRenderCallMaxUs": 6,
+        "mute": true,
+        "pause": false,
+        "position": 0,
+        "renders": 1,
+        "sceneSwaps": 6,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 61,
+        "windowActive": false
+      },
+      {
+        "avSyncSeconds": 0,
+        "cacheBytes": -1,
+        "callbackToRenderMaxUs": 0,
+        "callbacks": 1,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 10254,
+        "highQuality": false,
+        "hwdec": "none",
+        "mpvRenderCallMaxUs": 0,
+        "mute": true,
+        "pause": false,
+        "position": 0,
+        "renders": 1,
+        "sceneSwaps": 6,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 61,
+        "windowActive": false
+      }
+    ],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 384,
+      "HOME_SCENE_READY_MS": 425,
+      "QML_LOADED_MS": 426,
+      "externalFirstSwapMs": 399.5051383972168
+    },
+    "samples": [
+      {
+        "seconds": 0.25231313705444336,
+        "cpuTotal": 6.25,
+        "rss": 71516160
+      },
+      {
+        "seconds": 0.5027885437011719,
+        "cpuTotal": 10.15625,
+        "rss": 161583104
+      },
+      {
+        "seconds": 0.7531285285949707,
+        "cpuTotal": 2.7375,
+        "rss": 275558400
+      },
+      {
+        "seconds": 1.0033769607543945,
+        "cpuTotal": 0.0,
+        "rss": 275558400
+      },
+      {
+        "seconds": 1.2538115978240967,
+        "cpuTotal": 0.0,
+        "rss": 275558400
+      },
+      {
+        "seconds": 1.5040652751922607,
+        "cpuTotal": 0.0,
+        "rss": 275558400
+      },
+      {
+        "seconds": 1.7548232078552246,
+        "cpuTotal": 0.0,
+        "rss": 275558400
+      },
+      {
+        "seconds": 2.005089282989502,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 2.255720615386963,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 2.5059449672698975,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 2.7561757564544678,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 3.006521463394165,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 3.256821393966675,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 3.507051944732666,
+        "cpuTotal": 0.3875,
+        "rss": 275562496
+      },
+      {
+        "seconds": 3.757477045059204,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 4.007721900939941,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 4.258211612701416,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 4.508463382720947,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 4.758737564086914,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 5.009248971939087,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 5.260334730148315,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 5.5106589794158936,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 5.760881662368774,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 6.011417865753174,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 6.261620998382568,
+        "cpuTotal": 0.0,
+        "rss": 275562496
+      },
+      {
+        "seconds": 6.511876583099365,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 6.762130975723267,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 7.012444734573364,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 7.262844085693359,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 7.513467073440552,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 7.763720512390137,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 8.014113903045654,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 8.26495623588562,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 8.515618801116943,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 8.766055345535278,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 9.016427755355835,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 9.266645908355713,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 9.516854286193848,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 9.767627000808716,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 10.017999410629272,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 10.268528938293457,
+        "cpuTotal": 0.0,
+        "rss": 274505728
+      },
+      {
+        "seconds": 10.518932580947876,
+        "cpuTotal": 0.3875,
+        "rss": 173068288
+      },
+      {
+        "seconds": 10.769307374954224,
+        "cpuTotal": 0.3875,
+        "rss": 142446592
+      }
+    ],
+    "thumbnailSuccesses": 1
+  },
+  {
+    "name": "home-1000",
+    "exit": 0,
+    "killed": false,
+    "clean": true,
+    "neverActivated": true,
+    "loads": [],
+    "settled": [],
+    "commits": [],
+    "metrics": [
+      {
+        "avSyncSeconds": 0,
+        "cacheBytes": -1,
+        "callbackToRenderMaxUs": 483,
+        "callbacks": 1,
+        "controlsVisible": true,
+        "dropped": 0,
+        "elapsedMs": 5261,
+        "highQuality": false,
+        "hwdec": "none",
+        "mpvRenderCallMaxUs": 5,
+        "mute": true,
+        "pause": false,
+        "position": 0,
+        "renders": 1,
+        "sceneSwaps": 36,
+        "videoHidden": false,
+        "videoTrack": "auto",
+        "volume": 61,
+        "windowActive": false
+      }
+    ],
+    "errors": [],
+    "timings": {
+      "FIRST_SWAP_MS": 376,
+      "HOME_SCENE_READY_MS": 422,
+      "QML_LOADED_MS": 423,
+      "externalFirstSwapMs": 389.74642753601074
+    },
+    "samples": [
+      {
+        "seconds": 0.2521374225616455,
+        "cpuTotal": 5.50625,
+        "rss": 71249920
+      },
+      {
+        "seconds": 0.5027222633361816,
+        "cpuTotal": 11.71875,
+        "rss": 291241984
+      },
+      {
+        "seconds": 0.7531337738037109,
+        "cpuTotal": 7.03125,
+        "rss": 300568576
+      },
+      {
+        "seconds": 1.003462791442871,
+        "cpuTotal": 7.03125,
+        "rss": 281526272
+      },
+      {
+        "seconds": 1.2544312477111816,
+        "cpuTotal": 0.0,
+        "rss": 281526272
+      },
+      {
+        "seconds": 1.504676103591919,
+        "cpuTotal": 0.0,
+        "rss": 281526272
+      },
+      {
+        "seconds": 1.7552292346954346,
+        "cpuTotal": 0.0,
+        "rss": 281526272
+      },
+      {
+        "seconds": 2.0058929920196533,
+        "cpuTotal": 0.0,
+        "rss": 281530368
+      },
+      {
+        "seconds": 2.25620174407959,
+        "cpuTotal": 0.0,
+        "rss": 281530368
+      },
+      {
+        "seconds": 2.506448745727539,
+        "cpuTotal": 0.0,
+        "rss": 281530368
+      },
+      {
+        "seconds": 2.7570905685424805,
+        "cpuTotal": 0.0,
+        "rss": 281530368
+      },
+      {
+        "seconds": 3.0074262619018555,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 3.2577579021453857,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 3.508526086807251,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 3.7588813304901123,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 4.0092175006866455,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 4.259824275970459,
+        "cpuTotal": 0.3875,
+        "rss": 281550848
+      },
+      {
+        "seconds": 4.510883331298828,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 4.7612011432647705,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 5.01174783706665,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 5.262042760848999,
+        "cpuTotal": 0.0,
+        "rss": 281550848
+      },
+      {
+        "seconds": 5.513209342956543,
+        "cpuTotal": 0.78125,
+        "rss": 168816640
+      },
+      {
+        "seconds": 5.7637104988098145,
+        "cpuTotal": 0.0,
+        "rss": 168816640
+      },
+      {
+        "seconds": 6.014158487319946,
+        "cpuTotal": 0.0,
+        "rss": 168816640
+      },
+      {
+        "seconds": 6.264395236968994,
+        "cpuTotal": 0.0,
+        "rss": 168816640
+      }
+    ],
+    "thumbnailSuccesses": 1
+  }
+]

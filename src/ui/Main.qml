@@ -5,12 +5,12 @@ Item {
     objectName:"sceneRoot";width:960;height:540;focus:true
     property string failure:""
     readonly property bool modalOpen:sceneMenu.visible||settingsLoader.active
-    readonly property bool uiHeld:modalOpen||titleHover.hovered||controls.hovered
+    readonly property bool uiHeld:history.homeVisible||modalOpen||titleHover.hovered||controls.hovered
     onUiHeldChanged:playerWindow.setUiHeld(uiHeld)
     onModalOpenChanged:playerWindow.setPopupOpen(modalOpen)
     function entry(label,run,checked) {return {label:label,run:run,checked:checked===true}}
     function openSettings() {sceneMenu.visible=false;settingsLoader.active=true}
-    function closePopups() {sceneMenu.visible=false;settingsLoader.active=false;root.forceActiveFocus()}
+    function closePopups() {sceneMenu.visible=false;settingsLoader.active=false;if(homeLoader.item)homeLoader.item.forceActiveFocus();else root.forceActiveFocus()}
     function openUrl(text) {sceneMenu.urlText=text||"";sceneMenu.open("url",[entry("Open URL",()=>submitUrl(sceneMenu.urlText))],width/2-150,height/2+50)}
     function submitUrl(text) {if(text.trim().length>0){closePopups();mpv.open(text.trim())}}
     function menuItems(kind) {
@@ -58,6 +58,16 @@ Item {
         sourceComponent:Component {MpvRenderItem {controller:mpv;onFirstFrame:appDiagnostics.firstFrame()}}
     }
     Rectangle {anchors.fill:parent;color:"#252831";visible:playerWindow.videoHidden}
+    Loader {
+        id:homeLoader;anchors.fill:parent;z:5;active:history.homeVisible&&!playerWindow.mini
+        onLoaded:Qt.callLater(()=>{if(homeLoader.item)homeLoader.item.focusContinue()})
+        sourceComponent:Component {HomeScreen {
+            onItemMenu:(record,px,py)=>root.openHistoryMenu(record,px,py)
+        }}
+    }
+    function openHistoryMenu(record,px,py) {
+        sceneMenu.open("history",[entry("Play from start",()=>history.open(record.path,true)),entry("Open containing folder",()=>history.openFolder(record.path)),entry("Remove from history",()=>history.remove(record.file_key))],px,py)
+    }
     TitleBar {
         id:title;anchors {left:parent.left;right:parent.right;top:parent.top} z:10
         opacity:playerWindow.controlsVisible?1:0;visible:opacity>0
@@ -66,12 +76,12 @@ Item {
     }
     ControlBar {
         id:controls;anchors {horizontalCenter:parent.horizontalCenter;bottom:parent.bottom;bottomMargin:playerWindow.mini?8:18} z:10
-        opacity:playerWindow.controlsVisible?1:0;visible:opacity>0
+        opacity:playerWindow.controlsVisible?1:0;visible:opacity>0&&(!history.homeVisible||playerWindow.mini)
         Behavior on opacity {NumberAnimation {duration:140}}
         onMenuRequested:(kind,px,py)=>root.openMenu(kind,px,py)
     }
     Text {
-        anchors.centerIn:parent;visible:!playerWindow.mini&&(root.failure.length>0||mpv.duration===0)
+        anchors.centerIn:parent;visible:!playerWindow.mini&&root.failure.length>0
         text:root.failure.length>0?root.failure:"FlowPlayer\nDrop a video or press Ctrl+O";horizontalAlignment:Text.AlignHCenter;color:"#dddfe5";font.pixelSize:18
     }
     Rectangle {
@@ -86,7 +96,7 @@ Item {
     SceneMenu {
         id:sceneMenu;anchors.fill:parent
         onDismissed:root.closePopups()
-        onChosen:entry=>{sceneMenu.visible=false;root.forceActiveFocus();if(entry.run)entry.run()}
+        onChosen:entry=>{root.closePopups();if(entry.run)entry.run()}
         onUrlSubmitted:url=>root.submitUrl(url)
     }
     Loader {
@@ -96,13 +106,14 @@ Item {
     Toast {id:toast;anchors {horizontalCenter:parent.horizontalCenter;top:parent.top;topMargin:playerWindow.mini?40:58} z:150}
     Connections {
         target:mpv
+        function onFileLoaded(path) {root.failure=""}
         function onError(message) {root.failure=message;toast.show(message)}
         function onToast(message) {toast.show(message)}
         function onMetadataChanged() {if(sceneMenu.visible&&(sceneMenu.kind==="audio"||sceneMenu.kind==="sub"))sceneMenu.entries=root.menuItems(sceneMenu.kind)}
     }
     Connections {
         target:playerWindow
-        function onContextMenuRequested(position) {root.openMenu("context",position.x,position.y)}
+        function onContextMenuRequested(position) {if(!history.homeVisible)root.openMenu("context",position.x,position.y)}
         function onUrlRequested(clipboard) {root.openUrl(clipboard)}
         function onDismissPopup() {root.closePopups()}
     }

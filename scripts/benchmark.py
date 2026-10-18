@@ -20,6 +20,8 @@ if a.scenario in ('idle','lifecycle'):
 out=ROOT/'tests/results'/a.name;out.mkdir(parents=True,exist_ok=True)
 env=os.environ.copy();env.update(FLOW_METRICS='1',FLOW_QUIT_MS=str(a.seconds*1000),FLOW_SCENARIO=a.scenario,FLOW_PROFILE=a.profile,FLOW_TEST_MUTE='1',FLOW_TEST_BACKGROUND='1')
 env['FLOW_SETTINGS_FILE']=str((a.settings_file or (out/'settings.ini')).resolve())
+env['FLOW_HISTORY_DB']=str((out/'flow.db').resolve())
+env['FLOW_THUMBS_DIR']=str((out/'thumbs').resolve())
 if a.diagnostic_no_cache:env['FLOW_DIAGNOSTIC_NO_CACHE']='1'
 else:env.pop('FLOW_DIAGNOSTIC_NO_CACHE',None)
 if a.standalone:

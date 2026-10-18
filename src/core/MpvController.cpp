@@ -108,7 +108,7 @@ void MpvController::run() {
         {"volume",MPV_FORMAT_DOUBLE},{"mute",MPV_FORMAT_FLAG},{"speed",MPV_FORMAT_DOUBLE},
         {"media-title",MPV_FORMAT_STRING},{"track-list",MPV_FORMAT_NODE},{"hwdec-current",MPV_FORMAT_STRING},
         {"frame-drop-count",MPV_FORMAT_INT64},{"video-out-params",MPV_FORMAT_NODE},
-        {"idle-active",MPV_FORMAT_FLAG},
+        {"idle-active",MPV_FORMAT_FLAG},{"eof-reached",MPV_FORMAT_FLAG},
         {"demuxer-cache-state",MPV_FORMAT_NODE}
         ,{"vid",MPV_FORMAT_STRING},{"video-codec",MPV_FORMAT_STRING},
         {"container-fps",MPV_FORMAT_DOUBLE},{"video-bitrate",MPV_FORMAT_DOUBLE},
@@ -150,15 +150,19 @@ void MpvController::run() {
                 }
                 const auto name=QString::fromUtf8(p->name);
                 QMetaObject::invokeMethod(this,[this,name,v]{apply(name,v);});
+            } else if(event->event_id==MPV_EVENT_FILE_LOADED) {
+                char *value=mpv_get_property_string(mpv,"path");const QString path=QString::fromUtf8(value?value:"");mpv_free(value);
+                QMetaObject::invokeMethod(this,[this,path]{emit fileLoaded(path);});
             } else if(event->event_id==MPV_EVENT_PLAYBACK_RESTART) {
                 QMetaObject::invokeMethod(this,[this]{
-                    if(m_exactSeekTarget>=0&&handle())mpv_get_property_async(handle(),4242,"time-pos",MPV_FORMAT_DOUBLE);
+                    if(handle())mpv_get_property_async(handle(),4242,"time-pos",MPV_FORMAT_DOUBLE);
                 });
             } else if(event->event_id==MPV_EVENT_GET_PROPERTY_REPLY&&event->reply_userdata==4242&&event->error>=0) {
                 auto *property=static_cast<mpv_event_property*>(event->data);
                 if(property->format==MPV_FORMAT_DOUBLE&&property->data) {
                     const double actual=*static_cast<double*>(property->data);
                     QMetaObject::invokeMethod(this,[this,actual]{
+                        m_position=actual;emit stateChanged();emit positionSettled();
                         if(m_exactSeekTarget>=0) {emit seekCompleted(m_exactSeekTarget,actual);Log::write(QString("EXACT_SEEK target=%1 actual=%2 error=%3").arg(m_exactSeekTarget).arg(actual).arg(std::abs(actual-m_exactSeekTarget)));m_exactSeekTarget=-1;}
                     });
                 }
@@ -173,11 +177,12 @@ void MpvController::run() {
     mpv_terminate_destroy(mpv);
 }
 void MpvController::apply(const QString &n,const QVariant &v) {
+    if(n=="eof-reached") {if(v.toBool())emit playbackFinished();return;}
     if(n=="chapter-list") {m_chapters=v.toList();emit metadataChanged();return;}
     if(n=="sid"||n=="aid"||n=="sub-delay"||n=="audio-delay"||n=="sub-scale"||n=="sub-pos") {m_options[n]=v;emit metadataChanged();return;}
     if(n=="vid") {m_vid=v.toString();Log::write("VIDEO_TRACK="+m_vid);emit stateChanged();return;}
     if(n=="video-codec"||n=="container-fps"||n=="video-bitrate") {m_videoInfo[n]=v;emit stateChanged();return;}
-    if(n=="idle-active") {if(v.toBool())emit playbackIdle();return;}
+    if(n=="idle-active") {m_idle=v.toBool();if(m_idle)emit playbackIdle();return;}
     if(n=="demuxer-cache-state") {m_cacheBytes=v.toMap().value("total-bytes",-1).toLongLong();m_buffered=v.toMap().value("seekable-ranges").toList();emit cacheChanged();return;}
     if(n=="avsync") {m_avSync=v.toDouble();return;}
     if(n=="video-out-params") {
@@ -210,16 +215,32 @@ void MpvController::command(const QList<QByteArray> &args) {
     }
 }
 void MpvController::open(const QString &path) {
-    if(!m_ready||!m_renderReady) {m_pendingFile=path;return;}
+    if(m_resumeStore){emit openRequested(path);return;}
+    loadResolved(path,{});
+}
+void MpvController::loadResolved(const QString &path,const QVariantMap &options) {
+    if(!m_ready||!m_renderReady) {m_pendingFile=path;m_pendingLoadOptions=options;return;}
     const QUrl url(path);const auto file=url.isLocalFile()?url.toLocalFile():path;
     m_network=!url.scheme().isEmpty()&&!url.isLocalFile()&&url.scheme().size()>1;emit metadataChanged();
     command({"set","demuxer-max-bytes",url.scheme().startsWith("http")?"300MiB":"150MiB"});
     Log::write("OPEN_FILE "+file);
-    command({"loadfile",file.toUtf8()});
+    // Node-map options preserve paths/values containing commas and avoid a
+    // post-start resume seek. mpv copies the nodes before this call returns.
+    QByteArray name("loadfile"),input=file.toUtf8(),replace("replace"),index("-1");
+    std::vector<QByteArray> keys,values;keys.reserve(options.size());values.reserve(options.size());
+    for(auto i=options.cbegin();i!=options.cend();++i){keys.push_back(i.key().toUtf8());values.push_back(i.value().toString().toUtf8());}
+    std::vector<char*> keyPointers;std::vector<mpv_node> optionNodes;
+    for(size_t i=0;i<keys.size();++i){keyPointers.push_back(keys[i].data());mpv_node n{};n.format=MPV_FORMAT_STRING;n.u.string=values[i].data();optionNodes.push_back(n);}
+    mpv_node_list map{int(keys.size()),optionNodes.data(),keyPointers.data()};
+    mpv_node nodes[5]{};char *strings[]{name.data(),input.data(),replace.data(),index.data()};
+    for(int i=0;i<4;++i){nodes[i].format=MPV_FORMAT_STRING;nodes[i].u.string=strings[i];}nodes[4].format=MPV_FORMAT_NODE_MAP;nodes[4].u.list=&map;
+    mpv_node_list list{5,nodes,nullptr};mpv_node commandNode{};commandNode.format=MPV_FORMAT_NODE_ARRAY;commandNode.u.list=&list;
+    int rc=mpv_command_node_async(handle(),0,&commandNode);if(rc<0)emit error(QString::fromUtf8(mpv_error_string(rc)));
 }
+void MpvController::stop(){emit beforeStop();if(m_idle){emit playbackIdle();return;}command({"stop"});}
 void MpvController::setRenderReady(bool ready) {
     m_renderReady=ready;
-    if(ready&&!m_pendingFile.isEmpty()) {auto path=m_pendingFile;m_pendingFile.clear();open(path);}
+    if(ready&&!m_pendingFile.isEmpty()) {auto path=m_pendingFile;auto opts=m_pendingLoadOptions;m_pendingFile.clear();m_pendingLoadOptions.clear();loadResolved(path,opts);}
 }
 void MpvController::togglePause() {command({"cycle","pause"});}
 void MpvController::setPause(bool paused) {command({"set","pause",paused?"yes":"no"});}

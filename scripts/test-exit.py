@@ -5,6 +5,7 @@ out=ROOT/'tests/results'/args.name;out.mkdir(parents=True,exist_ok=True)
 if any(p.info['name']=='FlowPlayer.exe' for p in psutil.process_iter(['name'])):
     parser.error('FlowPlayer is already running; refusing to disturb it or share its log.')
 env=os.environ.copy();env.update(FLOW_QUIT_MS='3000',FLOW_TEST_MUTE='1',FLOW_TEST_BACKGROUND='1')
+env.update(FLOW_SETTINGS_FILE=str(out/'settings.ini'),FLOW_HISTORY_DB=str(out/'flow.db'),FLOW_THUMBS_DIR=str(out/'thumbs'))
 if args.standalone:
     for key in ['QT_PLUGIN_PATH','QT_QPA_PLATFORM_PLUGIN_PATH','QML_IMPORT_PATH','QML2_IMPORT_PATH']:env.pop(key,None)
 else:
