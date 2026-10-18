@@ -1,0 +1,9 @@
+{
+  "executableSha256": "443f580f8d49a9db0761038cec533bbd45591a011161ca7950cceef9bc20f67c",
+  "cases": 10,
+  "passed": true,
+  "smtcInitialized": true,
+  "manualVisualAcceptance": "pending",
+  "longSoak": "not run: user requested practical testing",
+  "fullAcceptance": false
+}

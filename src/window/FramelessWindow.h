@@ -66,6 +66,7 @@ signals:
     void contextMenuRequested(const QPointF &position);
     void urlRequested(const QString &clipboard);
     void dismissPopup();
+    void playlistRequested();
 protected:
     bool event(QEvent *event) override;
     bool eventFilter(QObject *watched,QEvent *event) override;
@@ -79,6 +80,7 @@ private:
     bool m_precisePlaybackTiming=false;
     void updatePlaybackTiming();
     double m_aspect=16.0/9.0;
+    bool m_hasFittedVideo=false;
     QRect m_lastNormalGeometry;
     quintptr m_nativeId=0;
     WindowStateMachine m_modes;

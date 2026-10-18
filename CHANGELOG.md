@@ -1,5 +1,13 @@
 # Changelog
 
+## Part 5 playlist, series and Windows integration
+
+- Saved prompt5.md and implemented the locked right-side slide-over inside the original scene. Added full names, current/watched/progress state, click-to-resume and session reordering with stable progress updates.
+- Added worker-scanned folders, Windows natural ordering, configurable extras filtering, real-index navigation, previous-restart policy, custom multi-file lists, resume-aware auto-advance and configurable Home/last-frame EOF behavior. Preserve modes and equal-aspect geometry; hold the existing texture during frame replacement.
+- Added per-user local IPC, native multi-select picker/drop/command-line handling, C++/WinRT SMTC on the same HWND, event-driven display-sleep requests and an optional user association script.
+- Added corrupt/unsupported/missing-file skipping, context recreation position restoration, lazy SMTC startup and a fresh deployment manifest. No decoder/scaler/cache budget was weakened to conceal a failure.
+- Added bounded unit/integration/performance evidence. Full visual and long-run acceptance remain separate; see tests/PART5_RESULTS.md for exact hashes and failures.
+
 ## Part 4 outage audit and user interaction revision
 
 - Verified tracked source, previous deployed hash and pinned SQLite sources; no user database existed at the configured path at audit start. Saved the audit and locked preferences; no unverified data-recovery claim.

@@ -1,6 +1,7 @@
 #pragma once
 #include <QString>
+#include <QStringList>
 namespace FolderScanner {
-// Worker-only, user-authorized transport neighbors; no playlist panel/advance.
+QStringList scan(const QString &path,const QStringList &ignore={"sample","trailer"});
 QString neighbor(const QString &path,int direction);
 }

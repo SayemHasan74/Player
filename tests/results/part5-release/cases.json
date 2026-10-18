@@ -1,0 +1,1252 @@
+[
+  {
+    "name": "seed-episode6",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 6.mkv"
+    ],
+    "options": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 5
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "auto-5-to-6",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 5.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 6.mkv"
+    ],
+    "options": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "1",
+        "speed": "1",
+        "start": "6.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 4
+      },
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 5
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "neighbors-and-boundaries",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 5.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 6.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 5.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 10.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 1.mkv"
+    ],
+    "options": [
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "1",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "1",
+        "speed": "1",
+        "start": "4.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "1",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 5,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 4,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 4
+      },
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 5
+      },
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 4
+      },
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 9
+      },
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 0
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "custom-reorder",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 2.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 9.mkv"
+    ],
+    "options": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv"
+        ]
+      },
+      {
+        "current": 1,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv"
+        ]
+      },
+      {
+        "current": 1,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 2,
+        "current": 0
+      },
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 2,
+        "current": 0
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "bad-files-skip",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 3.mkv"
+    ],
+    "options": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/zero.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/corrupt.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/missing.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv"
+        ]
+      },
+      {
+        "current": 1,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/zero.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/corrupt.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/missing.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv"
+        ]
+      },
+      {
+        "current": 2,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/zero.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/corrupt.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/missing.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv"
+        ]
+      },
+      {
+        "current": 3,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/zero.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/corrupt.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/missing.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv"
+        ]
+      },
+      {
+        "current": 3,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/zero.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/corrupt.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/missing.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 4,
+        "current": 3
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 2
+  },
+  {
+    "name": "single-instance",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 1.mkv",
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 8.mkv"
+    ],
+    "options": [
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "1",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 0,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 7,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 7,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 0
+      },
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 7
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "previous-restarts",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 4.mkv"
+    ],
+    "options": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 3,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 3,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 3,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 3,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 3
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "end-stays-paused",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 10.mkv"
+    ],
+    "options": [
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "1",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 9
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "end-shows-home",
+    "exit": 0,
+    "loads": [
+      "E:\\Codes\\FlowPlayer\\tests\\results\\part5-release\\series\\Episode 10.mkv"
+    ],
+    "options": [
+      {
+        "aid": "1",
+        "pause": "no",
+        "sid": "1",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      }
+    ],
+    "lists": [
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      },
+      {
+        "current": 9,
+        "paths": [
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 1.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 2.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 3.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 4.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 5.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 6.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 7.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 8.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 9.mkv",
+          "E:/Codes/FlowPlayer/tests/results/part5-release/series/Episode 10.mkv"
+        ]
+      }
+    ],
+    "panels": [
+      {
+        "loaded": true,
+        "sameScene": true,
+        "videoWidth": 1468,
+        "rows": 10,
+        "current": 9
+      }
+    ],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  },
+  {
+    "name": "resume-A-B-A",
+    "exit": 0,
+    "loads": [],
+    "options": [
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "100"
+      },
+      {
+        "aid": "auto",
+        "pause": "no",
+        "sid": "auto",
+        "speed": "1",
+        "start": "0.000",
+        "sub-delay": "0",
+        "volume": "61"
+      },
+      {
+        "aid": "2",
+        "pause": "no",
+        "sid": "2",
+        "speed": "1.25",
+        "start": "10.133",
+        "sub-delay": "0.3",
+        "volume": "61"
+      }
+    ],
+    "lists": [],
+    "panels": [],
+    "clean": true,
+    "neverActivated": true,
+    "qmlErrors": [],
+    "smtcReady": true,
+    "sleepInhibitOn": true,
+    "sleepInhibitOff": true,
+    "errorsSkipped": 0
+  }
+]

@@ -8,6 +8,7 @@ Rectangle {
     readonly property bool compact:width<620
     readonly property bool hovered:hover.hovered||seek.dragging
     signal menuRequested(string kind,real px,real py)
+    signal playlistRequested()
     width:Math.min(694,parent.width-24);height:narrow?150:106;radius:9
     gradient:Gradient {GradientStop{position:0;color:"#be55584c"} GradientStop{position:1;color:"#c54c5044"}}
     HoverHandler{id:hover}
@@ -40,7 +41,7 @@ Rectangle {
         id:actions;objectName:"actionGroup";anchors.right:parent.right;anchors.rightMargin:controls.compact?12:20;y:controls.narrow?58:16;spacing:3
         ActionButton {icon:"subtitles";width:controls.compact?28:30;hint:"Subtitles · S";onActivated:controls.menu("sub",this)}
         ActionButton {icon:"audio";width:controls.compact?28:30;hint:"Audio tracks · A";onActivated:controls.menu("audio",this)}
-        ActionButton {icon:"playlist";width:controls.compact?28:30;hint:"Playlist";onActivated:mpv.notify("No playlist")}
+        ActionButton {icon:"playlist";width:controls.compact?28:30;hint:"Playlist · L";onActivated:controls.playlistRequested()}
         ActionButton {icon:"more";width:controls.compact?28:30;hint:"More · Speed / Fullscreen / Settings";onActivated:controls.menu("context",this)}
     }
     Text {id:elapsed;x:28;width:Math.max(44,timeMetrics.advanceWidth(controls.stamp(mpv.duration)));anchors.bottom:parent.bottom;anchors.bottomMargin:15;text:controls.stamp(controls.visible?mpv.position:0);color:"#f0efdf";font.pixelSize:17}

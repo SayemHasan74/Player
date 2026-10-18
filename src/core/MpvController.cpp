@@ -153,6 +153,9 @@ void MpvController::run() {
             } else if(event->event_id==MPV_EVENT_FILE_LOADED) {
                 char *value=mpv_get_property_string(mpv,"path");const QString path=QString::fromUtf8(value?value:"");mpv_free(value);
                 QMetaObject::invokeMethod(this,[this,path]{emit fileLoaded(path);});
+            } else if(event->event_id==MPV_EVENT_END_FILE) {
+                auto *end=static_cast<mpv_event_end_file*>(event->data);
+                if(end->reason==MPV_END_FILE_REASON_ERROR){const auto message=QString("Cannot play file: %1").arg(mpv_error_string(end->error));Log::write(message);QMetaObject::invokeMethod(this,[this,message]{emit toast(message);emit fileFailed(message);});}
             } else if(event->event_id==MPV_EVENT_PLAYBACK_RESTART) {
                 QMetaObject::invokeMethod(this,[this]{
                     if(handle())mpv_get_property_async(handle(),4242,"time-pos",MPV_FORMAT_DOUBLE);
@@ -240,8 +243,11 @@ void MpvController::loadResolved(const QString &path,const QVariantMap &options)
 }
 void MpvController::stop(){m_pendingFile.clear();m_pendingLoadOptions.clear();m_exactSeekTarget=-1;emit beforeStop();command({"stop"});if(m_idle)emit playbackIdle();}
 void MpvController::setRenderReady(bool ready) {
+    const bool recovering=m_contextLost&&ready;
+    if(m_renderReady&&!ready){m_contextLost=true;m_recoveryPosition=m_position;m_recoveryPaused=m_pause;emit toast("Recreating video context");}
     m_renderReady=ready;
-    if(ready&&!m_pendingFile.isEmpty()) {auto path=m_pendingFile;auto opts=m_pendingLoadOptions;m_pendingFile.clear();m_pendingLoadOptions.clear();loadResolved(path,opts);}
+    if(ready&&!m_pendingFile.isEmpty()) {m_contextLost=false;auto path=m_pendingFile;auto opts=m_pendingLoadOptions;m_pendingFile.clear();m_pendingLoadOptions.clear();loadResolved(path,opts);}
+    else if(recovering){m_contextLost=false;seekTo(m_recoveryPosition);setPause(m_recoveryPaused);Log::write("RENDER_CONTEXT_RECOVERED position="+QString::number(m_recoveryPosition));}
 }
 void MpvController::togglePause() {command({"cycle","pause"});}
 void MpvController::setPause(bool paused) {command({"set","pause",paused?"yes":"no"});}

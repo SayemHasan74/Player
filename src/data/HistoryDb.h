@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QVariantMap>
 #include <QVariantList>
+#include <QStringList>
 #include <QHash>
 #include <functional>
 #include <deque>
@@ -17,6 +18,7 @@ public:
     ~HistoryDb() override;
     void lookup(QString path,quint64 token);
     void neighbor(QString path,int direction,quint64 token);
+    void playlist(QString path,QStringList paths,QStringList ignore,quint64 token);
     void save(QVariantMap record);
     void recent();
     void remove(QString key);
@@ -31,6 +33,7 @@ signals:
     void drained();
     void folderReady(const QString &path);
     void neighborReady(quint64 token,const QString &origin,const QString &path);
+    void playlistReady(quint64 token,const QVariantList &records);
 private:
     void enqueue(std::function<void()> work);
     void run();

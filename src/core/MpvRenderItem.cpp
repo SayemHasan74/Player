@@ -77,6 +77,9 @@ public:
         if(!(flags&MPV_RENDER_UPDATE_FRAME)&&!m_resize)return;
         mpv_render_frame_info info{};
         mpv_render_context_get_info(m_context,{MPV_RENDER_PARAM_NEXT_FRAME_INFO,&info});
+        // During loadfile mpv may invalidate its old frame before a new one is
+        // presentable. Keep the existing texture until a real frame arrives.
+        if(!m_first&&!m_resize&&!(info.flags&MPV_RENDER_FRAME_INFO_PRESENT))return;
         QQuickOpenGLUtils::resetOpenGLState();
         auto *f=framebufferObject();mpv_opengl_fbo target{int(f->handle()),f->width(),f->height(),0};
         int flip=0;

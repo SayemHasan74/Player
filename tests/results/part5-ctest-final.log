@@ -1,0 +1,14 @@
+Internal ctest changing into directory: E:/Codes/FlowPlayer/build
+Test project E:/Codes/FlowPlayer/build
+    Start 1: Playlist
+1/4 Test #1: Playlist .........................   Passed    0.03 sec
+    Start 2: WindowStateMachine
+2/4 Test #2: WindowStateMachine ...............   Passed    0.02 sec
+    Start 3: Settings
+3/4 Test #3: Settings .........................   Passed    0.03 sec
+    Start 4: History
+4/4 Test #4: History ..........................   Passed    2.31 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   2.39 sec

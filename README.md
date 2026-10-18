@@ -1,10 +1,10 @@
 # FlowPlayer — Windows media player
 
-Latest: [Part 4 outage audit](tests/PART4_AUDIT.md), [locked interaction preferences](design/interaction-preferences.md). Previous/next transport buttons now open adjacent media files; speed is in More. Plain arrows seek exactly five seconds. The physical key above Tab, Ctrl+M and the title button toggle Mini. Vertical edge resizing can collapse/expand it. The reference-based controls/home UI was rebuilt with cached drawn icons and compact rows. Visual/native acceptance and the measured pause/resume frame-drop issue remain open.
+Latest: [Part 5 results and manual checklist](tests/PART5_RESULTS.md), [locked interaction preferences](design/interaction-preferences.md). The right-side playlist slides over the existing scene without moving video or controls. Folder sorting, independent resume, auto-advance, custom ordering, single instance, SMTC and sleep prevention are implemented. Visual/native acceptance and any measured performance failures remain explicit in the report.
 
 Windows 11 x64. C++20 / CMake / MSVC 2022. Video is rendered by libmpv's OpenGL render API into a `QQuickFramebufferObject`, which Qt Quick composites with plain QML controls inside the same `QQuickWindow`. No native child video window or overlay window exists.
 
-**Part 4 resume, history and home screen are implemented; visual acceptance remains pending.** See [Part 4 results](tests/PART4_RESULTS.md) for current measurements and manual checks. Reports for earlier parts apply to their own executable hashes. Part 5 has not started.
+**Parts 1–5 implementations are present; full acceptance remains pending.** Reports for earlier parts apply to their own executable hashes; they do not certify this release.
 
 History uses SQLite **3.53.4 amalgamation**, compiled statically with WAL, synchronous FULL and schema version 1. The [official amalgamation](https://www.sqlite.org/amalgamation.html) archive and SHA-256 are pinned in scripts/dependencies.lock.json and fetched by scripts/fetch-deps.py. History lives at `%APPDATA%/FlowPlayer/flow.db`; JPEG thumbnails at `%LOCALAPPDATA%/FlowPlayer/thumbs`. The home screen shows 10 recent entries; 200 retain independent resume state. Database access, identity hashing and thumbnail work run on workers. Thumbnail jobs wait during playback to protect frame timing.
 
@@ -28,7 +28,7 @@ User revisions on 2026-10-18: resident RAM below **500 MB** is accepted, includi
 
 Qt 6.12 is the newest LTS as verified from [Qt's release announcement](https://www.qt.io/blog/qt-6.12-released) and [supported releases](https://doc.qt.io/qt-6/qt-releases.html). Windows SDK packages are Microsoft's official NuGet packages. The SDK is project-local; no IDE substitution is needed.
 
-Qt application modules are Core, Gui, Qml and Quick. `Qt6::OpenGL` is also linked for `QOpenGLFramebufferObject`, the implementation dependency required by the locked `QQuickFramebufferObject` architecture in Qt 6. It supplies no alternate UI or player. No Quick Controls are used.
+Qt application modules are Core, Gui, Qml and Quick. `Qt6::OpenGL` supplies `QOpenGLFramebufferObject`; `Qt6::Network` supplies the QLocalServer/QLocalSocket IPC explicitly requested in Part 5. Neither introduces an alternate player or UI. No Quick Controls are used. SMTC uses C++/WinRT from the pinned Windows SDK and the existing window's [desktop interop interface](https://learn.microsoft.com/en-us/windows/win32/api/systemmediatransportcontrolsinterop/nf-systemmediatransportcontrolsinterop-isystemmediatransportcontrolsinterop-getforwindow).
 
 ## Build
 
@@ -51,6 +51,60 @@ python -m venv .tools
 
 The script makes an MSVC import library from the libmpv DLL's exported C functions, configures Release with Ninja, and builds. Use `-Clean` after restoring source files with older timestamps so stale objects cannot be reused. Archive URLs and SHA-256 values are recorded in `scripts/dependencies.lock.json`; subsequent downloads must match those values.
 
+`libmpv-2.dll` belongs beside `FlowPlayer.exe`: `out/FlowPlayer/libmpv-2.dll` for the standalone package, or `build/libmpv-2.dll` for development. The scripts copy it automatically from `deps/mpv`.
+
+## Part 5: playlist and Windows integration
+
+**L** or the bottom playlist icon opens the saved reference's right-side slide-over. It overlays the existing video/controls without changing their geometry; the title buttons remain accessible. Filenames wrap fully, the current item is highlighted, completed items have a check, and saved positions appear as progress lines. Click to resume an entry. Hold an entry, drag and release over another entry to reorder for this session. Close with L, Esc, × or a click outside. The panel is Loader-created and its 140 ms slide stops completely once open. Progress changes update existing model rows instead of rebuilding the list.
+
+Opening a single local file scans its folder on the identity worker, non-recursively. Windows `StrCmpLogicalW` sorts season/episode numbers. Audio files are included too. Settings' comma-separated **playlistIgnore** list defaults to `sample,trailer`, matched as separate name tokens; explicitly opened extras remain playable. Multiple picker selections, command-line paths or dropped media files create a custom playlist in their supplied order. Reordering converts the current list into a session-only custom list. Selecting another file outside that list restores folder behavior.
+
+EOF marks the outgoing file finished before resolving the next item's own saved position. The existing video texture is retained while the next frame loads; fullscreen/Mini modes are not changed. Equal-aspect episodes keep the current normal-window size. Visual no-flash continuity still requires the manual check. At the last entry, show Home by default or enable **stayOnLastFrame**. Disabling **autoplayNext** applies the same end behavior to the current entry. Unsupported/corrupt/missing entries show a toast and skip forward without wrapping.
+
+| Input | Action |
+|---|---|
+| N / PgDn / next button | Next real playlist item |
+| P / PgUp / previous button | Previous item; after 5 s restart current when previousRestarts is on |
+| L / playlist icon | Toggle right-side playlist |
+| Left / Right | Seek exactly −5 / +5 seconds |
+| Physical key above Tab / Ctrl+M / compact title button | Toggle Mini |
+| Middle-click / F | Toggle same-window fullscreen; restore previous state |
+| Double-click video / Space | Pause/play |
+| Media Play/Pause, Stop, Next, Previous | Windows SMTC transport, including when unfocused |
+| Ctrl+O / Ctrl+U | Open file(s) / clipboard URL editor |
+
+The per-user single instance uses QLocalServer/QLocalSocket. Later launches forward all paths, then exit; the original player opens them and requests activation while preserving fullscreen. Isolated background tests bypass the production instance unless a unique FLOW_INSTANCE_NAME is supplied. SMTC attaches to the original HWND and publishes title/state; it adds no media window. Video playback requests ES_CONTINUOUS | ES_DISPLAY_REQUIRED, releasing the request on pause/stop/audio-only playback and destruction. No polling timer is used for these integrations.
+
+| Setting | Default | Behavior |
+|---|---|---|
+| audioLanguage / subtitleLanguage | en,eng | Preferred track languages |
+| autoResume | off | Resume most recent unfinished item on launch |
+| autoplayNext | on | Advance through the playlist at EOF |
+| previousRestarts | on | Previous restarts after 5 seconds |
+| stayOnLastFrame | off | Pause on final frame instead of Home at EOF |
+| playlistIgnore | sample,trailer | Clear extras excluded from folder lists |
+| lockAspectRatio | on | Native interactive resize aspect lock |
+| highQuality / hardwareDecoding | off / on | Live HQ scaler/interpolation and hwdec |
+| seekStep / exactSeekStep / largeSeekStep | 5 / 1 / 30 s | Wheel and modified arrow steps; plain arrows stay 5 s |
+| tinyPreview | off | Reveal the continuing video in Mini |
+| defaultSpeed / volume | 1 / 100 | New-file speed; volume remembered, maximum 150 |
+
+Preferences are written on a worker to `%LOCALAPPDATA%/FlowPlayer/settings.ini`; history restores per-file speed, volume, audio/subtitle tracks and subtitle delay independently. Settings is the live editor; manually edit the INI only with the player closed.
+
+Optional per-user **Open with** registration (no installer, no forced default change):
+
+```powershell
+.\scripts\register-associations.ps1
+# Remove that registration later:
+.\scripts\register-associations.ps1 -Remove
+```
+
+Choose FlowPlayer in Windows **Settings → Apps → Default apps** for double-click defaults. Quoted filenames, spaces and multiple command-line paths are supported.
+
+Practical checks: build PlaylistTests, WindowStateMachineTests, SettingsTests and HistoryTests with `build.ps1 -Target <name>`, then run `.tools\Scripts\ctest.exe --test-dir build --output-on-failure` with `deps\Qt\bin` on PATH. `scripts/test-part5.py --name <new-name>` runs ten short, isolated, muted background integration cases. It requires the Part3 fixtures and refuses to disturb an open player. The report separates these from manual tests and long-run acceptance.
+
+HDR is tone-mapped to SDR; this Windows OpenGL render path does not output native HDR. Dolby Vision uses its playable base layer. Mini deliberately keeps decoding/audio warm. Network-drive IO stays on workers but OS disconnection timeouts can delay that entry's resolution. GPU/device-loss recovery uses Qt's renderer recreation and restores the observed position; a forced device reset has not been tested. See [known limitations](KNOWN_ISSUES.md) for measured failures and pending acceptance.
+
 Spike target:
 
 ```powershell
@@ -65,7 +119,7 @@ $env:FLOW_SPIKE_LOG = "$PWD\tests\spike.log"
 
 - Command-line path, file drag/drop, Ctrl+O native Windows picker; Space and the QML button toggle pause.
 - Native caption/video drag and edge/corner resize; Windows maximize hit target supports Snap Layouts.
-- Aspect locking defaults on; `playerWindow.lockAspectRatio` is writable and persisted under `HKEY_CURRENT_USER\Software\FlowPlayer\FlowPlayer\window`. A complete settings panel is reserved for a later part.
+- Aspect locking defaults on and is controlled in Settings (`%LOCALAPPDATA%/FlowPlayer/settings.ini`). Legacy window geometry remains in the registry.
 - Opening a video fits its display dimensions within 80% of the work area and centers it. Normal geometry is remembered.
 - Minimizing pauses playback and restores the previous pause state on restore, to meet the Part 1 idle budget. This behavior needs user review if background audio is desired later.
 
@@ -169,7 +223,7 @@ See `tests/PART2_RESULTS.md` for actual results and the compact manual checklist
 
 ## Part 3: controls, tracks and settings
 
-The saved player reference guides the transport layout. The audited bar has working previous/next media-file buttons, play/pause, volume up to150, subtitles/audio/playlist/More actions and a stable lower timeline. Speed and settings are in More; fullscreen is in the title bar and More. The playlist panel remains a placeholder. Time display switches remaining/total on click. Mini uses the same controls and seek component while video and audio continue normally beneath its plain scene cover. There is no copied IINA logo, blur, shadow, separate overlay window or native popup menu.
+The saved player reference guides the transport layout. The audited bar has working previous/next media-file buttons, play/pause, volume up to150, subtitles/audio/playlist/More actions and a stable lower timeline. Speed and settings are in More; fullscreen is in the title bar and More. The playlist panel is implemented in Part 5, described above. Time display switches remaining/total on click. Mini uses the same controls and seek component while video and audio continue normally beneath its plain scene cover. There is no copied IINA logo, blur, shadow, separate overlay window or native popup menu.
 
 The shared seek bar previews the cursor/drag target, marks chapters and shows actual cached seek ranges for network sources. Dragging sends coalesced keyframe seeks at most every65ms; release sends one exact seek. Its timer runs only during a drag and does not drive video rendering. Exact seek measurements use an asynchronous post-restart property read.
 
@@ -181,9 +235,9 @@ Right-click opens the scene menu, including over native caption zones. Audio/sub
 - Subtitle file drop or menu loading uses mpv sub-add/select; SRT, ASS/SSA, VTT and image subtitle formats are handled by mpv/libass. Full styled rendering is a manual check, especially bitmap subtitle size/position limitations.
 - Matching sidecars and Subs/subs/Subtitles/Sub folders use Windows semicolon-separated paths, as specified by the [mpv manual](https://mpv.io/manual/master/#options-sub-file-paths).
 - Embedded cover art is drawn by mpv through the same framebuffer item for audio files using audio-display=embedded-first; no second image/video window is created.
-- **I** includes resolution, codec, decoder, FPS, drops, bitrate and cache. Transport neighbors are authorized and implemented; the full playlist panel and automatic next-file playback remain Part5.
+- **I** includes resolution, codec, decoder, FPS, drops, bitrate and cache. Transport neighbors are authorized and implemented; the full playlist panel and automatic next-file playback are implemented in Part5.
 
-Open **More → Settings** (or right-click → Settings) for language order, auto-resume defaultoff, autoplay-next defaulton, aspect lock, live HQ/hardware decoding, seek steps, tiny Mini preview and default speed. Auto-resume is implemented in Part4; autoplay-next remains Part5. The panel is created only when opened.
+Open **More → Settings** (or right-click → Settings) for language order, auto-resume defaultoff, autoplay-next defaulton, aspect lock, live HQ/hardware decoding, seek steps, tiny Mini preview and default speed. Auto-resume is implemented in Part4; autoplay-next is implemented in Part5. The panel is created only when opened.
 
 Part3 preferences and volume are in `%LOCALAPPDATA%/FlowPlayer/settings.ini`. The model reads at startup and flushes writes on a worker thread, including shutdown. Older registry instructions above apply to earlier builds; use the current settings panel for aspect lock and tiny preview. Legacy window geometry is still remembered separately. Automated benchmarks use isolated settings files under each result folder; they do not change your preferences.
 

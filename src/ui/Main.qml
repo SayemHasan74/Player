@@ -4,13 +4,15 @@ Item {
     id:root
     objectName:"sceneRoot";width:960;height:540;focus:true
     property string failure:""
-    readonly property bool modalOpen:sceneMenu.visible||settingsLoader.active
+    readonly property bool modalOpen:sceneMenu.visible||settingsLoader.active||playlistLoader.active
     readonly property bool uiHeld:history.homeVisible||modalOpen||titleHover.hovered||controls.hovered
     onUiHeldChanged:playerWindow.setUiHeld(uiHeld)
     onModalOpenChanged:playerWindow.setPopupOpen(modalOpen)
     function entry(label,run,checked) {return {label:label,run:run,checked:checked===true}}
     function openSettings() {sceneMenu.visible=false;settingsLoader.active=true}
-    function closePopups() {sceneMenu.visible=false;settingsLoader.active=false;if(homeLoader.item)homeLoader.item.forceActiveFocus();else root.forceActiveFocus()}
+    function closePopups() {sceneMenu.visible=false;settingsLoader.active=false;if(playlistLoader.item)playlistLoader.item.close();if(homeLoader.item)homeLoader.item.forceActiveFocus();else root.forceActiveFocus()}
+    function togglePlaylist(){if(playlistLoader.item)playlistLoader.item.close();else playlistLoader.active=true}
+    function diagnosticPlaylistChecks(){playlistLoader.active=true;return JSON.stringify({loaded:playlistLoader.item!==null,sameScene:playlistLoader.parent===root,videoWidth:root.width,rows:history.playlist.length,current:history.currentIndex})}
     function openUrl(text) {sceneMenu.urlText=text||"";sceneMenu.open("url",[entry("Open URL",()=>submitUrl(sceneMenu.urlText))],width/2-150,height/2+50)}
     function submitUrl(text) {if(text.trim().length>0){closePopups();mpv.open(text.trim())}}
     function menuItems(kind) {
@@ -80,6 +82,7 @@ Item {
         opacity:playerWindow.controlsVisible?1:0;visible:opacity>0&&(!history.homeVisible||playerWindow.mini)
         Behavior on opacity {NumberAnimation {duration:140}}
         onMenuRequested:(kind,px,py)=>root.openMenu(kind,px,py)
+        onPlaylistRequested:root.togglePlaylist()
     }
     Text {
         anchors.centerIn:parent;visible:!playerWindow.mini&&root.failure.length>0
@@ -101,6 +104,10 @@ Item {
         onUrlSubmitted:url=>root.submitUrl(url)
     }
     Loader {
+        id:playlistLoader;anchors.fill:parent;anchors.topMargin:38;z:30;active:false
+        sourceComponent:Component {PlaylistPanel {onClosed:{playlistLoader.active=false;root.forceActiveFocus()}}}
+    }
+    Loader {
         id:settingsLoader;anchors.fill:parent;z:110;active:false
         sourceComponent:Component {SettingsPanel {onClosed:root.closePopups()}}
     }
@@ -117,5 +124,6 @@ Item {
         function onContextMenuRequested(position) {if(!history.homeVisible)root.openMenu("context",position.x,position.y)}
         function onUrlRequested(clipboard) {root.openUrl(clipboard)}
         function onDismissPopup() {root.closePopups()}
+        function onPlaylistRequested() {root.togglePlaylist()}
     }
 }

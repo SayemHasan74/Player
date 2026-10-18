@@ -8,6 +8,9 @@ Item {
         {key:"subtitleLanguage",label:"Subtitle languages",type:"text"},
         {key:"autoResume",label:"Auto-resume on launch",type:"bool"},
         {key:"autoplayNext",label:"Autoplay next",type:"bool"},
+        {key:"previousRestarts",label:"Previous after 5 s restarts",type:"bool"},
+        {key:"stayOnLastFrame",label:"Keep last frame at playlist end",type:"bool"},
+        {key:"playlistIgnore",label:"Ignore extras (comma separated)",type:"text"},
         {key:"lockAspectRatio",label:"Lock aspect ratio",type:"bool"},
         {key:"highQuality",label:"High quality video",type:"bool"},
         {key:"hardwareDecoding",label:"Hardware decoding",type:"bool"},
@@ -46,7 +49,7 @@ Item {
                         }
                     }
                 }
-                Text {width:parent.width;text:"Language order: en,eng,ja,jpn\nAuto-resume and autoplay are saved for Parts 4/5.\n"+preferences.filePath;wrapMode:Text.Wrap;color:"#aeb6c0";font.pixelSize:11}
+                Text {width:parent.width;text:"Language order: en,eng,ja,jpn\nPlaylist reordering lasts for this session.\n"+preferences.filePath;wrapMode:Text.Wrap;color:"#aeb6c0";font.pixelSize:11}
             }
         }
     }

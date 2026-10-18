@@ -319,6 +319,12 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
         if((key->nativeScanCode()&0xff)==0x29&&!ctrl&&!mods.testFlag(Qt::AltModifier)&&!mods.testFlag(Qt::MetaModifier)){if(!key->isAutoRepeat())toggleMini();return true;}
         switch(key->key()) {
         case Qt::Key_Space:if(!key->isAutoRepeat())m_controller->togglePause();break;
+        case Qt::Key_L:if(!key->isAutoRepeat())emit playlistRequested();break;
+        case Qt::Key_N:case Qt::Key_PageDown:case Qt::Key_MediaNext:if(!key->isAutoRepeat())m_controller->resumeStore()->navigate(1);break;
+        case Qt::Key_P:case Qt::Key_PageUp:case Qt::Key_MediaPrevious:if(!key->isAutoRepeat())m_controller->resumeStore()->navigate(-1);break;
+        case Qt::Key_MediaPlay:case Qt::Key_MediaTogglePlayPause:if(!key->isAutoRepeat())m_controller->togglePause();break;
+        case Qt::Key_MediaPause:m_controller->setPause(true);break;
+        case Qt::Key_MediaStop:m_controller->resumeStore()->showHome();break;
         case Qt::Key_F:if(!key->isAutoRepeat())toggleFullscreen();break;
         case Qt::Key_QuoteLeft:case Qt::Key_AsciiTilde:if(!key->isAutoRepeat())toggleMini();break;
         case Qt::Key_Escape:exitFullscreen();break;
@@ -353,7 +359,10 @@ void FramelessWindow::requestMinimize() {
 }
 void FramelessWindow::fitVideo(int w,int h) {
     if(w<=0||h<=0)return;
+    const double previous=m_aspect;
     m_aspect=double(w)/h;
+    if(m_hasFittedVideo&&std::abs(previous-m_aspect)<.01)return;
+    m_hasFittedVideo=true;
     if(qEnvironmentVariableIsSet("FLOW_TEST_BACKGROUND"))return;
     if(mini()||m_modes.current().mode==WindowStateMachine::Mode::Maximized||fullscreen())return;
     const QRect work=screen()->availableGeometry();
@@ -375,9 +384,11 @@ void FramelessWindow::openNativeDialog(bool subtitle) {
         const COMDLG_FILTERSPEC filters[]{{L"Media files",L"*.mkv;*.mp4;*.webm;*.avi;*.mov;*.m4v;*.ts;*.m2ts;*.mp3;*.flac"},{L"All files",L"*.*"}};
         const COMDLG_FILTERSPEC subtitles[]{{L"Subtitle files",L"*.srt;*.ass;*.ssa;*.vtt;*.sup;*.sub;*.idx"},{L"All files",L"*.*"}};
         dialog->SetFileTypes(2,subtitle?subtitles:filters);
+        if(!subtitle){DWORD options=0;dialog->GetOptions(&options);dialog->SetOptions(options|FOS_ALLOWMULTISELECT);}
         if(SUCCEEDED(dialog->Show(reinterpret_cast<HWND>(winId())))) {
+            if(!subtitle){IShellItemArray *items=nullptr;if(SUCCEEDED(dialog->GetResults(&items))){DWORD count=0;items->GetCount(&count);QStringList paths;for(DWORD i=0;i<count;++i){IShellItem *entry=nullptr;if(SUCCEEDED(items->GetItemAt(i,&entry))){PWSTR name=nullptr;if(SUCCEEDED(entry->GetDisplayName(SIGDN_FILESYSPATH,&name))){paths.append(QString::fromWCharArray(name));CoTaskMemFree(name);}entry->Release();}}items->Release();m_controller->resumeStore()->openMany(paths);}}
             IShellItem *item=nullptr;
-            if(SUCCEEDED(dialog->GetResult(&item))) {
+            if(subtitle&&SUCCEEDED(dialog->GetResult(&item))) {
                 PWSTR name=nullptr;
                 if(SUCCEEDED(item->GetDisplayName(SIGDN_FILESYSPATH,&name))) {const auto path=QString::fromWCharArray(name);if(subtitle)m_controller->addSubtitle(path);else m_controller->open(path);CoTaskMemFree(name);}
                 item->Release();
@@ -394,12 +405,13 @@ bool FramelessWindow::event(QEvent *e) {
     }
     if(e->type()==QEvent::Drop) {
         auto *drop=static_cast<QDropEvent*>(e);if(drop->mimeData()->hasUrls()) {
-            bool opened=false;
+            QStringList media;
             for(const auto &url:drop->mimeData()->urls()) {
                 const auto extension=QFileInfo(url.path()).suffix().toLower();
                 if(QStringList{"srt","ass","ssa","vtt","sup","sub","idx"}.contains(extension))m_controller->addSubtitle(url.toString());
-                else if(!opened){m_controller->open(url.toString());opened=true;}
+                else media.append(url.isLocalFile()?url.toLocalFile():url.toString());
             }
+            if(!media.isEmpty())m_controller->resumeStore()->openMany(media);
             drop->acceptProposedAction();return true;
         }
     }

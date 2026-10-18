@@ -12,7 +12,7 @@ AppSettings::AppSettings(QObject *parent):QObject(parent) {
     m_values={{"audioLanguage","en,eng"},{"subtitleLanguage","en,eng"},{"autoResume",false},
         {"autoplayNext",true},{"lockAspectRatio",true},{"highQuality",false},{"hardwareDecoding",true},
         {"seekStep",5.0},{"exactSeekStep",1.0},{"largeSeekStep",30.0},{"tinyPreview",false},
-        {"defaultSpeed",1.0},{"volume",100.0}};
+        {"defaultSpeed",1.0},{"volume",100.0},{"previousRestarts",true},{"stayOnLastFrame",false},{"playlistIgnore","sample,trailer"}};
     QSettings file(m_path,QSettings::IniFormat);
     for(auto i=m_values.begin();i!=m_values.end();++i) {
         const auto saved=file.value(i.key(),i.value());
@@ -31,11 +31,12 @@ void AppSettings::setValue(const QString &key,const QVariant &input) {
     QVariant value=input;
     const auto current=m_values.value(key);
     if((key=="volume"||key=="defaultSpeed"||key.endsWith("Step"))&&!std::isfinite(input.toDouble()))return;
-    if(QStringList{"autoResume","autoplayNext","lockAspectRatio","highQuality","hardwareDecoding","tinyPreview"}.contains(key))value=input.toBool();
+    if(QStringList{"autoResume","autoplayNext","lockAspectRatio","highQuality","hardwareDecoding","tinyPreview","previousRestarts","stayOnLastFrame"}.contains(key))value=input.toBool();
     else if(key=="volume")value=std::clamp(input.toDouble(),0.0,150.0);
     else if(key=="defaultSpeed")value=std::clamp(input.toDouble(),0.1,16.0);
     else if(key.endsWith("Step"))value=std::clamp(input.toDouble(),0.1,600.0);
     else if(key.endsWith("Language"))value=input.toString().trimmed().left(128);
+    else if(key=="playlistIgnore")value=input.toString().trimmed().left(256);
     if(current==value)return;
     m_values[key]=value;
     {std::lock_guard lock(m_mutex);m_pending=m_values;m_dirty=true;}

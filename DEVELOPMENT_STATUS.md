@@ -1,4 +1,14 @@
-# Current checkpoint — Part 4 outage audit
+# Current checkpoint — Part 5
+
+Part 5 is authorized and saved as prompt5.md. Implemented: Windows StrCmpLogicalW folder ordering/ignore extras on worker; resume-aware auto-advance; real playlist indices; Previous-restart setting; EOF Home/stay-frame setting; Loader right-side scene slide-over with full names/watched/progress/session reorder; custom picker/drop/CLI lists; QLocalServer single instance; same-HWND C++/WinRT SMTC; event-driven display sleep prevention; bad-file skip; render-context position restoration; Open-with registration script; README and bounded tests.
+
+Final executable SHA256 728bc3bb953d89468e0d52305ebf0ea50bdb8efb8f791418fbdbc17fddfe9485. Four CTest targets pass in 2.39 s. Ten integration cases passed on 443f580f... before two QML-only title-bar-input/drag-handler fixes. Current-hash 40-second performance/panel smoke and normal startup checks are complete. All muted/non-activating/background, no desktop modes/resize/focus changes. No test player remains. Exact evidence and manual checklist: tests/PART5_RESULTS.md, tests/part5-package.json; scripts/report-part5.py regenerates them.
+
+FULL ACCEPTANCE FALSE: pause/resume adds 12 drops; peak resident 509.61 MB slightly exceeds accepted 500 MB. Hidden/playlist/resumed/covered steady intervals add zero; hidden 240 renders/240 swaps, paused 0/0 over 4.99 s (CPU 0.01875%). Normal external startup388.487 ms, local open→frame136 ms. Initial updated-deployment external1286.581 ms is separately retained under accepted deployment exception. Deployment163204075 bytes (163.20MB). Do not claim tearing/visible smoothness/native mode acceptance, five-minute zero drops or hour-long soak. Practical-test instruction explicitly limits automation; visual/physical checks remain with user. No speculative workaround or RAM profiling was added.
+
+Keep the original one-window/one-scene/FBO architecture and Mini hide-only decoder/audio behavior. Arrows exact ±5; transport previous/next are media navigation, speed in More; above-Tab key/CtrlM/button and vertical-edge release thresholds toggle Mini. Do not activate desktop test windows. Database/settings fixtures remain isolated. Do not upload SDKs/binaries/DBs/generated media. Latest source/report/evidence should be committed and pushed to origin main.
+
+## Archived checkpoint — Part 4 outage audit (superseded authorization, retained evidence)
 
 The latest user requested a full Part4 outage audit, exact reference-driven UI, ±5-second arrows, real previous/next media-file buttons, and Mini via the above-Tab key and vertical resize collapse/expansion. Preferences are locked in design/interaction-preferences.md and AGENTS.md. Only scoped transport-neighbor navigation is authorized; do not build the full Part5 playlist/panel/auto-advance.
 

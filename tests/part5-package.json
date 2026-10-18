@@ -1,0 +1,75 @@
+{
+  "part": 5,
+  "fullAcceptance": false,
+  "executableSha256": "728bc3bb953d89468e0d52305ebf0ea50bdb8efb8f791418fbdbc17fddfe9485",
+  "integrationSha256": "443f580f8d49a9db0761038cec533bbd45591a011161ca7950cceef9bc20f67c",
+  "integrationCases": 10,
+  "integrationPassed": true,
+  "unitTargetsPassed": 4,
+  "performanceSeconds": 42.72620029999962,
+  "peakResidentMB": 509.612032,
+  "resumeAddedDrops": 12,
+  "normalLaunchMs": 388.487,
+  "openToFirstVideoMs": 136.0,
+  "deployedBytes": 163204075,
+  "phases": [
+    {
+      "state": "hidden",
+      "seconds": 3.999,
+      "renders": 240,
+      "swaps": 240,
+      "addedDrops": 0,
+      "samples": 4,
+      "cpuTotalPercent": 0.4203125,
+      "adapterGpuPercent": 29.5
+    },
+    {
+      "state": "playlist",
+      "seconds": 3.991,
+      "renders": 240,
+      "swaps": 241,
+      "addedDrops": 0,
+      "samples": 4,
+      "cpuTotalPercent": 0.6765625,
+      "adapterGpuPercent": 14.0
+    },
+    {
+      "state": "paused",
+      "seconds": 4.99,
+      "renders": 0,
+      "swaps": 0,
+      "addedDrops": 0,
+      "samples": 5,
+      "cpuTotalPercent": 0.01875,
+      "adapterGpuPercent": 2.4
+    },
+    {
+      "state": "resumed",
+      "seconds": 4.004,
+      "renders": 241,
+      "swaps": 241,
+      "addedDrops": 0,
+      "samples": 4,
+      "cpuTotalPercent": 0.7203125,
+      "adapterGpuPercent": 28.5
+    },
+    {
+      "state": "covered",
+      "seconds": 4.001,
+      "renders": 240,
+      "swaps": 241,
+      "addedDrops": 0,
+      "samples": 4,
+      "cpuTotalPercent": 0.653125,
+      "adapterGpuPercent": 36.25
+    }
+  ],
+  "notTested": [
+    "visible fullscreen/drag/resize/tearing/ASS/mouse reorder/SMTC hardware input",
+    "physical device loss/disconnected drive/deletion during playback",
+    "5-minute zero-drop acceptance",
+    "60-second minimized/paused acceptance",
+    "8K or 4K AV1",
+    "one-hour soak"
+  ]
+}

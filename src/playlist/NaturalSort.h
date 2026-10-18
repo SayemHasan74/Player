@@ -1,2 +1,3 @@
 #pragma once
-// Reserved for a later authorized part: NaturalSort.
+#include <QString>
+namespace NaturalSort { bool less(const QString &a,const QString &b); }

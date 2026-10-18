@@ -1,4 +1,15 @@
-# Current limitations — Part 4
+# Current limitations — Part 5
+
+Authority: tests/PART5_RESULTS.md and tests/part5-package.json. Final package SHA256 728bc3bb953d89468e0d52305ebf0ea50bdb8efb8f791418fbdbc17fddfe9485. Part 5 features are implemented, but full acceptance is false.
+
+- Current 4K nvdec check adds 12 dropped frames at pause/resume. Steady hidden, playlist-visible, resumed and video-covered intervals add zero. This does not certify stable visible cadence or tearing. No decoder/counter suppression was used.
+- Peak resident RAM was 509.61 MB (486.00 MiB), slightly over the user's 500 MB allowance. No elevated profiling, cache-budget weakening or working-set trimming was performed. Normal startup was 388.487 ms; first updated deployment was 1286.581 ms (accepted deployment exception). Open-to-frame was 136 ms on the normal launch.
+- Four unit targets and ten integration cases passed. Integration hash 443f580f... predates two QML-only title-input/drag-handler corrections; current-hash panel/performance/startup checks passed their basic smoke conditions. Exact scopes are in the report.
+- Native fullscreen/mini/resize/tearing, actual playlist mouse reordering, ASS appearance, unfocused hardware keys, Explorer activation, physical sleep, disconnected drive, deletion during playback and forced GPU loss remain manual. SMTC initialization and sleep-request API transitions are logged, not substituted for those physical checks.
+- Five-minute and one-hour acceptance, 60-second minimized/paused measurements, 8K/4K AV1 and unavailable bitmap subtitle fixtures were not run under the user's practical-test instruction. Historical user passes apply only to the older recorded build.
+- HDR is mapped to SDR on this OpenGL path; no native HDR output. Mini keeps video/audio decode warm. Minimize pauses. Thumbnail generation defers during playback. Session playlist ordering is intentionally not persisted.
+
+## Archived Part 4 findings (older executable scopes)
 
 Latest authority: tests/PART4_AUDIT.md and tests/part4-audit-package.json. The outage audit repaired thumbnail lock/event bugs, replay state, metadata-worker blocking and pending-open/shutdown races. Input/UI preferences are implemented and documented in design/interaction-preferences.md.
 

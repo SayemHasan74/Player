@@ -98,6 +98,7 @@ signals:
     void stateChanged();
     void videoSizeChanged(int width,int height);
     void error(const QString &message);
+    void fileFailed(const QString &message);
     void renderUpdateRequested();
     void videoFramePresented();
     void playbackIdle();
@@ -127,6 +128,8 @@ private:
     QVariantMap m_videoInfo;
     QString m_vid="auto";
     bool m_renderReady=false;
+    bool m_contextLost=false,m_recoveryPaused=true;
+    double m_recoveryPosition=0;
     bool m_surfaceRequested=false;
     QString m_pendingFile;
     QVariantMap m_pendingLoadOptions;

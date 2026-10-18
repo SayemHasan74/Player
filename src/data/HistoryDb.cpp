@@ -77,6 +77,19 @@ void HistoryDb::runIdentity() {
         request();
     }
 }
+void HistoryDb::playlist(QString path,QStringList paths,QStringList ignore,quint64 token) {
+    {std::lock_guard l(m_mutex);m_identityQueue.emplace_back([this,path,paths,ignore,token]{
+        auto files=paths.isEmpty()?FolderScanner::scan(path,ignore):paths;
+        if(files.isEmpty()&&!path.isEmpty())files.append(path);
+        enqueue([this,files,token]{QVariantList rows;
+            for(const auto &file:files){QVariantMap r;
+                if(m_db){Statement s(m_db,QByteArray("SELECT ")+columns+" FROM history WHERE path=? COLLATE NOCASE ORDER BY last_played DESC LIMIT 1");s.text(1,file);if(s.step()==SQLITE_ROW)r=row(s.s);}
+                r["path"]=file;r["title"]=QFileInfo(file).fileName();rows.append(r);
+            }
+            QMetaObject::invokeMethod(this,[this,rows,token]{emit playlistReady(token,rows);});
+        });
+    });}m_identityCv.notify_one();
+}
 void HistoryDb::runMetadata() {
     SetThreadPriority(GetCurrentThread(),THREAD_MODE_BACKGROUND_BEGIN);
     for(;;){std::function<void()> job;{std::unique_lock l(m_mutex);m_metadataCv.wait(l,[this]{return m_metadataStop||!m_metadataQueue.empty();});if(m_metadataStop)break;job=std::move(m_metadataQueue.front());m_metadataQueue.pop_front();}job();}

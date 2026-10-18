@@ -6,6 +6,10 @@
 #include "data/ResumeStore.h"
 #include "window/FramelessWindow.h"
 #include "window/NativeEventFilter.h"
+#include "platform/SingleInstance.h"
+#include "platform/SleepInhibitor.h"
+#include "platform/Smtc.h"
+#include <QFileInfo>
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QSurfaceFormat>
@@ -46,6 +50,8 @@ int main(int argc,char **argv) {
     app.setFont(QFont("Segoe UI",9));
     std::setlocale(LC_NUMERIC,"C");
     CoInitializeEx(nullptr,COINIT_APARTMENTTHREADED);
+    QStringList launchPaths;for(const auto &arg:app.arguments().mid(1))launchPaths.append(arg.contains("://")?arg:QFileInfo(arg).absoluteFilePath());
+    SingleInstance instance;const int instanceResult=instance.start(launchPaths);if(instanceResult!=0){CoUninitialize();return instanceResult>0?0:4;}
     Log::start();
     Log::write(QString("START Qt=%1 PID=%2").arg(qVersion()).arg(QCoreApplication::applicationPid()));
     Log::write("QT_APP_READY_MS="+QString::number(diagnostics.clock.elapsed()));
@@ -59,12 +65,21 @@ int main(int argc,char **argv) {
         ResumeStore resume(&controller,&settings,&history);
         {
             FramelessWindow window(&controller);
+            SleepInhibitor sleep(&controller);
             QObject::connect(&window,&QQuickWindow::frameSwapped,&window,[&]{++diagnostics.swaps;},Qt::DirectConnection);
             Log::write("WINDOW_CREATED_MS="+QString::number(diagnostics.clock.elapsed()));
             NativeEventFilter native(&window);app.installNativeEventFilter(&native);
             const auto profile=qEnvironmentVariable("FLOW_PROFILE");
             {
                 window.prepareNativeFrame();window.show();
+                std::unique_ptr<Smtc> smtc;
+                QObject::connect(&controller,&MpvController::fileLoaded,&window,[&](const QString &){if(!smtc)smtc=std::make_unique<Smtc>(window.nativeId(),&controller,&resume);});
+                QStringList pendingLaunch=launchPaths;
+                QObject::connect(&instance,&SingleInstance::requested,&window,[&](const QStringList &paths){
+                    if(!qEnvironmentVariableIsSet("FLOW_TEST_BACKGROUND")){if(window.visibility()==QWindow::Minimized){if(window.fullscreen())window.showFullScreen();else window.showNormal();}window.raise();window.requestActivate();}
+                    if(paths.isEmpty())return;if(controller.ready())resume.openMany(paths);else pendingLaunch=paths;
+                    Log::write(QString("IPC_RECEIVED paths=%1").arg(paths.size()));
+                });
                 bool firstSwap=true;
                 QObject::connect(&window,&QQuickWindow::frameSwapped,&app,[&]{
                     if(!firstSwap)return;
@@ -82,12 +97,44 @@ int main(int argc,char **argv) {
                 });
                 QObject::connect(&controller,&MpvController::readyChanged,&app,[&]{
                     resume.launch(profile.isEmpty()&&app.arguments().size()==1);
-                    if(profile.isEmpty()&&app.arguments().size()>1)controller.open(app.arguments()[1]);
+                    if(profile.isEmpty()&&!pendingLaunch.isEmpty())resume.openMany(pendingLaunch);
                 });
                 // Explicit diagnostics only; never used for rendering or normal idle work.
                 bool ok=false;const int quitMs=qEnvironmentVariableIntValue("FLOW_QUIT_MS",&ok);
                 if(ok&&quitMs>0)QTimer::singleShot(quitMs,Qt::PreciseTimer,&window,&QWindow::close);
                 const auto scenario=qEnvironmentVariable("FLOW_SCENARIO");
+                if(scenario.startsWith("part5")&&scenario!="part5-perf"){
+                    QObject::connect(&resume,&ResumeStore::playlistChanged,&window,[&]{QJsonArray paths;for(const auto &item:resume.playlist())paths.append(item.toMap().value("path").toString());Log::write("PART5_LIST "+QString::fromUtf8(QJsonDocument(QJsonObject{{"paths",paths},{"current",resume.currentIndex()}}).toJson(QJsonDocument::Compact)));});
+                    auto stage=std::make_shared<int>(0);
+                    QObject::connect(&controller,&MpvController::fileLoaded,&window,[&,stage,scenario](const QString &path){
+                        const int index=(*stage)++;Log::write("PART5_LOADED "+path);
+                        if((scenario=="part5-auto"||scenario=="part5-end")&&index==0)QTimer::singleShot(700,&window,[&]{controller.seekTo(controller.duration()-.3);});
+                        else controller.setPause(true);
+                        QTimer::singleShot(400,&window,[&]{auto *root=window.contentItem()->findChild<QObject*>("sceneRoot",Qt::FindDirectChildrenOnly);QVariant result;if(root)QMetaObject::invokeMethod(root,"diagnosticPlaylistChecks",Q_RETURN_ARG(QVariant,result));Log::write("PART5_PANEL "+result.toString());});
+                        if(scenario=="part5-nav")QTimer::singleShot(850,&window,[&,index]{if(index==0)resume.navigate(1);if(index==1)resume.navigate(-1);if(index==2)resume.playIndex(resume.playlist().size()-1);if(index==3){resume.navigate(1);resume.playIndex(0);}if(index==4)resume.navigate(-1);});
+                        if(scenario=="part5-custom"&&index==0)QTimer::singleShot(700,&window,[&]{resume.reorder(0,1);resume.navigate(-1);});
+                        if(scenario=="part5-previous"&&index==0){QTimer::singleShot(600,&window,[&]{controller.seekTo(8);});QTimer::singleShot(1200,&window,[&]{resume.navigate(-1);});}
+                    });
+                    QObject::connect(&controller,&MpvController::positionSettled,&window,[&]{Log::write("PART5_SETTLED "+QString::number(controller.position(),'f',3));});
+                    QTimer::singleShot(2800,&window,[&]{Log::write(QString("PART5_STATE home=%1 current=%2 pause=%3 position=%4").arg(resume.homeVisible()).arg(resume.currentIndex()).arg(controller.pause()).arg(controller.position()));});
+                }
+                if(scenario=="part5-perf"){
+                    auto armed=std::make_shared<bool>(false);
+                    QObject::connect(&controller,&MpvController::videoFramePresented,&window,[&,armed]{if(*armed)return;*armed=true;
+                        auto mark=[&](const QString &phase){Log::write("PART5_PHASE "+QString::fromUtf8(QJsonDocument(QJsonObject{{"phase",phase},{"elapsedMs",double(diagnostics.clock.elapsed())},{"renders",double(MpvRenderItem::renderedFrames.load())},{"swaps",double(diagnostics.swaps.load())},{"dropped",double(controller.droppedFrames())},{"position",controller.position()}}).toJson(QJsonDocument::Compact)));};
+                        auto panel=[&](bool open){auto *root=window.contentItem()->findChild<QObject*>("sceneRoot",Qt::FindDirectChildrenOnly);if(!root)return;QVariant result;if(open)QMetaObject::invokeMethod(root,"diagnosticPlaylistChecks",Q_RETURN_ARG(QVariant,result));else QMetaObject::invokeMethod(root,"closePopups");};
+                        QTimer::singleShot(6000,&window,[mark]{mark("hidden_begin");});
+                        QTimer::singleShot(10000,&window,[mark,panel]{mark("hidden_end");panel(true);});
+                        QTimer::singleShot(12000,&window,[mark]{mark("playlist_begin");});
+                        QTimer::singleShot(16000,&window,[&,mark,panel]{mark("playlist_end");panel(false);controller.setPause(true);});
+                        QTimer::singleShot(18000,&window,[mark]{mark("paused_begin");});
+                        QTimer::singleShot(23000,&window,[&,mark]{mark("paused_end");controller.setPause(false);});
+                        QTimer::singleShot(27000,&window,[mark]{mark("resumed_begin");});
+                        QTimer::singleShot(31000,&window,[&,mark]{mark("resumed_end");window.setDiagnosticVideoHidden(true);});
+                        QTimer::singleShot(33000,&window,[mark]{mark("covered_begin");});
+                        QTimer::singleShot(37000,&window,[mark]{mark("covered_end");});
+                    });
+                }
                 QTimer uiHeartbeat;
                 QElapsedTimer heartbeatClock;
                 double maximumUiGapMs=0;
