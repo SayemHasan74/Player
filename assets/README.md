@@ -1,0 +1,7 @@
+# FlowPlayer icon
+
+User-selected clapperboard artwork, edited with the built-in imagegen tool. The circular film reel and square background/border were removed; the hidden clapperboard corner was reconstructed. Transparent PNG is flowplayer.png; Windows ICO is flowplayer.ico, containing16/24/32/48/64/128/256px PNG entries. Repackage with scripts/make-icon.ps1 (Windows System.Drawing, no extra dependency).
+
+Edit prompt: “Remove the entire circular film reel in the lower right, including its circle, holes and curved film tail. Reconstruct the clapperboard's rectangular lower-right corner, its slate and horizontal writing lines where the reel hid them. Preserve the reference clapperboard: thick black rounded outlines, silver-gray slate fill, raised diagonal striped top arm, rectangular striped hinge bar and simple slate divisions. Center the remaining complete clapperboard alone on a square transparent canvas with modest8% padding. Remove the square light-gray background and outer black border completely; background outside clapperboard must be actual alpha transparency. The light silver-gray fill INSIDE the clapperboard stays opaque. Crisp antialiased clean icon suitable for16 through256px. No circle, reel, badge, text, extra symbols, shadow, gradient backdrop or new design.”
+
+The PNG is embedded as qrc:/branding/flowplayer.png; ICO is embedded as Windows resource1. No runtime file lookup is needed. Windows Explorer may retain an old executable icon in its cache until the app/Explorer refreshes.

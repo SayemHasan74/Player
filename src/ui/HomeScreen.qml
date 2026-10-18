@@ -28,6 +28,7 @@ Item {
         Rectangle{anchors{right:parent.right;top:parent.top;bottom:parent.bottom}width:1;color:UiPalette.border}
         Column{
             anchors.centerIn:parent;spacing:5
+            Image{source:"qrc:/branding/flowplayer.png";width:Math.min(96,brand.width-32);height:width;sourceSize:Qt.size(192,192);fillMode:Image.PreserveAspectFit;anchors.horizontalCenter:parent.horizontalCenter}
             Text{text:"FlowPlayer";color:UiPalette.text;font.pixelSize:18;anchors.horizontalCenter:parent.horizontalCenter}
             Text{text:"0.4";color:UiPalette.muted;font.pixelSize:11;anchors.horizontalCenter:parent.horizontalCenter}
         }

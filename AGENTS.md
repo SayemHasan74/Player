@@ -1,5 +1,7 @@
 # User constraints
 
+- App branding is now authorized: use assets/flowplayer.png and the multi-resolution assets/flowplayer.ico. The user supplied a clapperboard/reel icon and requested removal of the circular reel. Keep only the clapperboard with alpha transparency; no IINA logo. Source edit/prompt recorded in assets/README.md.
+
 - Latest UI clarification: all UI surfaces, explicitly title bar and Home, use neutral iOS-style translucent gray from UiPalette.qml. Not blue-gray; blue only for active accents. Reference design/references/neutral-gray-material.png supplies colors, not Wi-Fi features. Bottom controls are 20% smaller; fullscreen immediately left of More; cursor menus open down/scroll-to-fit, bottom-button menus open up. Earlier colors and four-action limits are superseded.
 
 - Part 5 is now authorized, saved as prompt5.md. This supersedes every earlier Part 5 deferral below. Keep testing practical, muted and non-activating; visual acceptance remains manual.

@@ -1,5 +1,9 @@
 # Changelog
 
+## Clapperboard app icon
+
+- Adopted the user's clapperboard reference with the circular reel removed and transparent background. Added multi-resolution Windows ICO, executable resources, Qt window/taskbar icon and welcome-screen branding.
+
 ## UI polish — metallic gray and compact controls
 
 - Applied the user's final neutral iOS-gray clarification to every QML surface, including the title bar and Home. Centralized all QML colors in UiPalette.qml; blue is restricted to active-control accents. Saved the new color reference.

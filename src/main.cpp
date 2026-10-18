@@ -20,6 +20,7 @@
 #include <QJsonArray>
 #include <QFile>
 #include <QFont>
+#include <QIcon>
 #include <QQuickItem>
 #include <QKeyEvent>
 #include <windows.h>
@@ -47,6 +48,7 @@ int main(int argc,char **argv) {
     QSurfaceFormat surface;surface.setSwapInterval(1);QSurfaceFormat::setDefaultFormat(surface);
     QGuiApplication app(argc,argv);
     app.setOrganizationName("FlowPlayer");app.setApplicationName("FlowPlayer");
+    app.setWindowIcon(QIcon(":/branding/flowplayer.png"));
     app.setFont(QFont("Segoe UI",9));
     std::setlocale(LC_NUMERIC,"C");
     CoInitializeEx(nullptr,COINIT_APARTMENTTHREADED);
