@@ -1,0 +1,432 @@
+[
+  {
+    "seconds": 1.906,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 1.87890625,
+    "privateMiB": 0.40234375,
+    "privateWorkingSetMiB": 0.04296875,
+    "adapterGpuPercent": 26.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 957.0
+  },
+  {
+    "seconds": 2.948,
+    "cpuTotalPercent": 3.16875,
+    "workingSetMiB": 112.56640625,
+    "privateMiB": 124.6015625,
+    "privateWorkingSetMiB": 62.2578125,
+    "adapterGpuPercent": 23.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 974.0
+  },
+  {
+    "seconds": 3.991,
+    "cpuTotalPercent": 2.4625,
+    "workingSetMiB": 112.56640625,
+    "privateMiB": 124.6015625,
+    "privateWorkingSetMiB": 62.2578125,
+    "adapterGpuPercent": 2.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 984.0
+  },
+  {
+    "seconds": 5.042,
+    "cpuTotalPercent": 2.6625,
+    "workingSetMiB": 410.44140625,
+    "privateMiB": 1659.5,
+    "privateWorkingSetMiB": 340.6875,
+    "adapterGpuPercent": 7.0,
+    "adapterDecoderPercent": 16.0,
+    "adapterMemoryMiB": 2219.0
+  },
+  {
+    "seconds": 6.088,
+    "cpuTotalPercent": 0.93125,
+    "workingSetMiB": 413.83984375,
+    "privateMiB": 1662.7890625,
+    "privateWorkingSetMiB": 344.15625,
+    "adapterGpuPercent": 8.0,
+    "adapterDecoderPercent": 16.0,
+    "adapterMemoryMiB": 2219.0
+  },
+  {
+    "seconds": 7.14,
+    "cpuTotalPercent": 1.2125,
+    "workingSetMiB": 418.8671875,
+    "privateMiB": 1667.52734375,
+    "privateWorkingSetMiB": 349.078125,
+    "adapterGpuPercent": 8.0,
+    "adapterDecoderPercent": 14.0,
+    "adapterMemoryMiB": 2208.0
+  },
+  {
+    "seconds": 8.196,
+    "cpuTotalPercent": 1.0125,
+    "workingSetMiB": 421.98828125,
+    "privateMiB": 1670.66796875,
+    "privateWorkingSetMiB": 352.1953125,
+    "adapterGpuPercent": 8.0,
+    "adapterDecoderPercent": 11.0,
+    "adapterMemoryMiB": 2218.0
+  },
+  {
+    "seconds": 9.244,
+    "cpuTotalPercent": 1.11875,
+    "workingSetMiB": 425.20703125,
+    "privateMiB": 1673.8984375,
+    "privateWorkingSetMiB": 355.41015625,
+    "adapterGpuPercent": 11.0,
+    "adapterDecoderPercent": 12.0,
+    "adapterMemoryMiB": 2219.0
+  },
+  {
+    "seconds": 10.291,
+    "cpuTotalPercent": 0.8375,
+    "workingSetMiB": 428.0,
+    "privateMiB": 1676.71484375,
+    "privateWorkingSetMiB": 358.2421875,
+    "adapterGpuPercent": 7.0,
+    "adapterDecoderPercent": 12.0,
+    "adapterMemoryMiB": 2219.0
+  },
+  {
+    "seconds": 11.335,
+    "cpuTotalPercent": 0.09375,
+    "workingSetMiB": 430.97265625,
+    "privateMiB": 1679.65625,
+    "privateWorkingSetMiB": 361.17578125,
+    "adapterGpuPercent": 11.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2208.0
+  },
+  {
+    "seconds": 12.379,
+    "cpuTotalPercent": 0.65,
+    "workingSetMiB": 433.3125,
+    "privateMiB": 1682.00390625,
+    "privateWorkingSetMiB": 363.55859375,
+    "adapterGpuPercent": 16.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2218.0
+  },
+  {
+    "seconds": 13.43,
+    "cpuTotalPercent": 1.46875,
+    "workingSetMiB": 435.078125,
+    "privateMiB": 1683.66015625,
+    "privateWorkingSetMiB": 365.18359375,
+    "adapterGpuPercent": 16.0,
+    "adapterDecoderPercent": 20.0,
+    "adapterMemoryMiB": 2219.0
+  },
+  {
+    "seconds": 14.482,
+    "cpuTotalPercent": 1.30625,
+    "workingSetMiB": 437.80859375,
+    "privateMiB": 1686.38671875,
+    "privateWorkingSetMiB": 367.9140625,
+    "adapterGpuPercent": 46.0,
+    "adapterDecoderPercent": 36.0,
+    "adapterMemoryMiB": 2217.0
+  },
+  {
+    "seconds": 15.531,
+    "cpuTotalPercent": 0.65,
+    "workingSetMiB": 441.08984375,
+    "privateMiB": 1689.67578125,
+    "privateWorkingSetMiB": 371.1953125,
+    "adapterGpuPercent": 9.0,
+    "adapterDecoderPercent": 18.0,
+    "adapterMemoryMiB": 2217.0
+  },
+  {
+    "seconds": 16.584,
+    "cpuTotalPercent": 0.65,
+    "workingSetMiB": 443.890625,
+    "privateMiB": 1692.46484375,
+    "privateWorkingSetMiB": 373.99609375,
+    "adapterGpuPercent": 13.0,
+    "adapterDecoderPercent": 20.0,
+    "adapterMemoryMiB": 2227.0
+  },
+  {
+    "seconds": 17.625,
+    "cpuTotalPercent": 0.09375,
+    "workingSetMiB": 446.52734375,
+    "privateMiB": 1695.11328125,
+    "privateWorkingSetMiB": 376.6328125,
+    "adapterGpuPercent": 15.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2227.0
+  },
+  {
+    "seconds": 18.676,
+    "cpuTotalPercent": 0.8375,
+    "workingSetMiB": 449.36328125,
+    "privateMiB": 1697.9609375,
+    "privateWorkingSetMiB": 379.46875,
+    "adapterGpuPercent": 18.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2217.0
+  },
+  {
+    "seconds": 19.722,
+    "cpuTotalPercent": 0.28125,
+    "workingSetMiB": 451.05078125,
+    "privateMiB": 1699.64453125,
+    "privateWorkingSetMiB": 381.15234375,
+    "adapterGpuPercent": 12.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2212.0
+  },
+  {
+    "seconds": 20.766,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 451.05078125,
+    "privateMiB": 1699.64453125,
+    "privateWorkingSetMiB": 381.15234375,
+    "adapterGpuPercent": 12.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2222.0
+  },
+  {
+    "seconds": 21.813,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 451.0546875,
+    "privateMiB": 1699.64453125,
+    "privateWorkingSetMiB": 381.15625,
+    "adapterGpuPercent": 11.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2215.0
+  },
+  {
+    "seconds": 22.861,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 451.0546875,
+    "privateMiB": 1699.64453125,
+    "privateWorkingSetMiB": 381.15625,
+    "adapterGpuPercent": 20.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2200.0
+  },
+  {
+    "seconds": 23.91,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 451.0546875,
+    "privateMiB": 1699.64453125,
+    "privateWorkingSetMiB": 381.15625,
+    "adapterGpuPercent": 21.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2210.0
+  },
+  {
+    "seconds": 24.963,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 451.0546875,
+    "privateMiB": 1699.64453125,
+    "privateWorkingSetMiB": 381.15625,
+    "adapterGpuPercent": 24.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2210.0
+  },
+  {
+    "seconds": 26.011,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 451.0546875,
+    "privateMiB": 1699.64453125,
+    "privateWorkingSetMiB": 381.15625,
+    "adapterGpuPercent": 22.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2210.0
+  },
+  {
+    "seconds": 27.056,
+    "cpuTotalPercent": 0.8375,
+    "workingSetMiB": 452.5546875,
+    "privateMiB": 1701.0234375,
+    "privateWorkingSetMiB": 382.65625,
+    "adapterGpuPercent": 8.0,
+    "adapterDecoderPercent": 13.0,
+    "adapterMemoryMiB": 2200.0
+  },
+  {
+    "seconds": 28.108,
+    "cpuTotalPercent": 0.74375,
+    "workingSetMiB": 456.296875,
+    "privateMiB": 1704.62109375,
+    "privateWorkingSetMiB": 386.3984375,
+    "adapterGpuPercent": 9.0,
+    "adapterDecoderPercent": 14.0,
+    "adapterMemoryMiB": 2210.0
+  },
+  {
+    "seconds": 29.158,
+    "cpuTotalPercent": 0.74375,
+    "workingSetMiB": 459.4296875,
+    "privateMiB": 2058.92578125,
+    "privateWorkingSetMiB": 389.48046875,
+    "adapterGpuPercent": 20.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2393.0
+  },
+  {
+    "seconds": 30.205,
+    "cpuTotalPercent": 0.74375,
+    "workingSetMiB": 452.90625,
+    "privateMiB": 2052.40234375,
+    "privateWorkingSetMiB": 382.94921875,
+    "adapterGpuPercent": 26.0,
+    "adapterDecoderPercent": 23.0,
+    "adapterMemoryMiB": 2470.0
+  },
+  {
+    "seconds": 31.256,
+    "cpuTotalPercent": 1.2125,
+    "workingSetMiB": 455.3984375,
+    "privateMiB": 2055.29296875,
+    "privateWorkingSetMiB": 385.44140625,
+    "adapterGpuPercent": 34.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2479.0
+  },
+  {
+    "seconds": 32.304,
+    "cpuTotalPercent": 0.46875,
+    "workingSetMiB": 457.953125,
+    "privateMiB": 1890.33984375,
+    "privateWorkingSetMiB": 387.99609375,
+    "adapterGpuPercent": 35.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2474.0
+  },
+  {
+    "seconds": 33.348,
+    "cpuTotalPercent": 0.8375,
+    "workingSetMiB": 459.8828125,
+    "privateMiB": 1892.6796875,
+    "privateWorkingSetMiB": 389.921875,
+    "adapterGpuPercent": 35.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2468.0
+  },
+  {
+    "seconds": 34.397,
+    "cpuTotalPercent": 0.93125,
+    "workingSetMiB": 461.85546875,
+    "privateMiB": 1894.2578125,
+    "privateWorkingSetMiB": 391.93359375,
+    "adapterGpuPercent": 34.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2420.0
+  },
+  {
+    "seconds": 35.446,
+    "cpuTotalPercent": 0.91875,
+    "workingSetMiB": 454.59375,
+    "privateMiB": 1887.27734375,
+    "privateWorkingSetMiB": 384.6328125,
+    "adapterGpuPercent": 34.0,
+    "adapterDecoderPercent": 19.0,
+    "adapterMemoryMiB": 2399.0
+  },
+  {
+    "seconds": 36.496,
+    "cpuTotalPercent": 0.65,
+    "workingSetMiB": 456.6015625,
+    "privateMiB": 2016.76953125,
+    "privateWorkingSetMiB": 386.640625,
+    "adapterGpuPercent": 22.0,
+    "adapterDecoderPercent": 20.0,
+    "adapterMemoryMiB": 2310.0
+  },
+  {
+    "seconds": 37.548,
+    "cpuTotalPercent": 0.93125,
+    "workingSetMiB": 458.72265625,
+    "privateMiB": 2018.71484375,
+    "privateWorkingSetMiB": 388.76171875,
+    "adapterGpuPercent": 6.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2320.0
+  },
+  {
+    "seconds": 38.59,
+    "cpuTotalPercent": 0.1875,
+    "workingSetMiB": 458.7421875,
+    "privateMiB": 2018.71484375,
+    "privateWorkingSetMiB": 388.76171875,
+    "adapterGpuPercent": 50.0,
+    "adapterDecoderPercent": 95.0,
+    "adapterMemoryMiB": 2316.0
+  },
+  {
+    "seconds": 39.642,
+    "cpuTotalPercent": 0.09375,
+    "workingSetMiB": 458.765625,
+    "privateMiB": 1858.8046875,
+    "privateWorkingSetMiB": 388.78515625,
+    "adapterGpuPercent": 3.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2309.0
+  },
+  {
+    "seconds": 40.69,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 458.765625,
+    "privateMiB": 1805.765625,
+    "privateWorkingSetMiB": 388.78515625,
+    "adapterGpuPercent": 3.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2319.0
+  },
+  {
+    "seconds": 41.739,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 458.765625,
+    "privateMiB": 1805.765625,
+    "privateWorkingSetMiB": 388.78515625,
+    "adapterGpuPercent": 5.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2319.0
+  },
+  {
+    "seconds": 42.785,
+    "cpuTotalPercent": 0.09375,
+    "workingSetMiB": 458.765625,
+    "privateMiB": 1805.765625,
+    "privateWorkingSetMiB": 388.78515625,
+    "adapterGpuPercent": 10.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2309.0
+  },
+  {
+    "seconds": 43.834,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 458.765625,
+    "privateMiB": 1805.765625,
+    "privateWorkingSetMiB": 388.78515625,
+    "adapterGpuPercent": 10.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2319.0
+  },
+  {
+    "seconds": 44.895,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 458.765625,
+    "privateMiB": 1805.765625,
+    "privateWorkingSetMiB": 388.78515625,
+    "adapterGpuPercent": 19.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2319.0
+  },
+  {
+    "seconds": 45.944,
+    "cpuTotalPercent": 0.0,
+    "workingSetMiB": 458.765625,
+    "privateMiB": 1805.765625,
+    "privateWorkingSetMiB": 388.78515625,
+    "adapterGpuPercent": 20.0,
+    "adapterDecoderPercent": 0.0,
+    "adapterMemoryMiB": 2319.0
+  }
+]

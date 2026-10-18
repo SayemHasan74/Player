@@ -3,7 +3,7 @@
 - All future tests must be muted and run in the background while the user works.
 - Never activate test windows, steal focus, or automatically minimize/restore windows on the user's desktop. Tests requiring visible interaction remain manual unless the user explicitly authorizes a dedicated session.
 - Keep validation bounded. Use one short reproduction for a specific hypothesis; freeze changes before expensive acceptance runs. Do not enter repeated full benchmark/tuning loops.
-- Part 2 is explicitly authorized by the user. Part 1's remaining VP9 measurement is documented; do not claim it fixed. Do not begin Part 3.
+- Part 3 is explicitly authorized by the user. Part 1's remaining VP9 measurement is documented; do not claim it fixed. Do not begin Part 4.
 - Preserve every locked architecture and technology decision in master prompt.md.
 - Locked visual references for the later UI part are saved in design/references/: player-controls.png (user Image 1, player UI) and welcome-page.png (user Image 2, welcome page). Read design/references/README.md and inspect both originals when implementing that part. Do not start UI implementation until authorized.
 - Match those visual references as closely as possible, but do not use or copy the IINA logo. FlowPlayer will use a different, original logo; logo creation is deferred until requested.

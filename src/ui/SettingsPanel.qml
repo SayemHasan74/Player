@@ -1,3 +1,53 @@
-// Reserved for a later authorized part.
 import QtQuick
-Item {}
+Item {
+    id:settings
+    property string inputRole:"settings"
+    signal closed()
+    property var fields:[
+        {key:"audioLanguage",label:"Audio languages",type:"text"},
+        {key:"subtitleLanguage",label:"Subtitle languages",type:"text"},
+        {key:"autoResume",label:"Auto-resume on launch",type:"bool"},
+        {key:"autoplayNext",label:"Autoplay next",type:"bool"},
+        {key:"lockAspectRatio",label:"Lock aspect ratio",type:"bool"},
+        {key:"highQuality",label:"High quality video",type:"bool"},
+        {key:"hardwareDecoding",label:"Hardware decoding",type:"bool"},
+        {key:"seekStep",label:"Seek step (seconds)",type:"number"},
+        {key:"exactSeekStep",label:"Exact seek step",type:"number"},
+        {key:"largeSeekStep",label:"Large seek step",type:"number"},
+        {key:"tinyPreview",label:"Mini video preview",type:"bool"},
+        {key:"defaultSpeed",label:"Default speed",type:"number"}]
+    MouseArea {anchors.fill:parent;onClicked:settings.closed()}
+    Rectangle {
+        anchors.centerIn:parent;width:Math.min(510,parent.width-16);height:Math.min(500,parent.height-16);radius:9;color:"#fc252a32";border.color:"#596372"
+        MouseArea {anchors.fill:parent;onClicked:event=>{event.accepted=true}}
+        Text {x:16;y:12;text:"Settings";color:"#eeeeea";font.pixelSize:18}
+        ActionButton {anchors.right:parent.right;anchors.rightMargin:8;y:4;label:"×";onActivated:settings.closed()}
+        Flickable {
+            x:12;y:46;width:parent.width-24;height:Math.max(20,parent.height-56);contentHeight:column.height;clip:true;boundsBehavior:Flickable.StopAtBounds
+            Column {
+                id:column;width:parent.width;spacing:4
+                Repeater {
+                    model:settings.fields
+                    Item {
+                        id:row
+                        required property var modelData
+                        width:column.width;height:38
+                        Text {anchors {left:parent.left;verticalCenter:parent.verticalCenter} width:parent.width*.56;text:row.modelData.label;color:"#e6e8e9";font.pixelSize:13;elide:Text.ElideRight}
+                        Rectangle {
+                            anchors.right:parent.right;anchors.verticalCenter:parent.verticalCenter;width:parent.width*.42;height:32;radius:4;color:"#353c47";border.color:"#576474"
+                            TextInput {
+                                property bool textEntry:true
+                                visible:row.modelData.type!=="bool";anchors.fill:parent;anchors.margins:7;color:"#f3f2df";font.pixelSize:13;clip:true;selectByMouse:true
+                                text:String(preferences.values[row.modelData.key])
+                                onEditingFinished:{if(row.modelData.type==="text")preferences.setValue(row.modelData.key,text);else if(isFinite(Number(text)))preferences.setValue(row.modelData.key,Number(text))}
+                            }
+                            Text {visible:row.modelData.type==="bool";anchors.centerIn:parent;text:preferences.values[row.modelData.key]?"On":"Off";color:"#f3f2df";font.pixelSize:13}
+                            MouseArea {visible:row.modelData.type==="bool";anchors.fill:parent;onClicked:preferences.setValue(row.modelData.key,!preferences.values[row.modelData.key])}
+                        }
+                    }
+                }
+                Text {width:parent.width;text:"Language order: en,eng,ja,jpn\nAuto-resume and autoplay are saved for Parts 4/5.\n"+preferences.filePath;wrapMode:Text.Wrap;color:"#aeb6c0";font.pixelSize:11}
+            }
+        }
+    }
+}

@@ -14,6 +14,7 @@ class FramelessWindow final : public QQuickWindow {
     Q_PROPERTY(bool infoVisible READ infoVisible NOTIFY modeChanged)
     Q_PROPERTY(bool tinyPreview READ tinyPreview WRITE setTinyPreview NOTIFY modeChanged)
     Q_PROPERTY(bool videoHidden READ videoHidden NOTIFY modeChanged)
+    Q_PROPERTY(bool controlsVisible READ controlsVisible NOTIFY controlsVisibilityChanged)
 public:
     static constexpr int MiniHeight=160;
     explicit FramelessWindow(MpvController *controller);
@@ -40,6 +41,13 @@ public:
     bool videoHidden() const {return (mini()&&!m_tinyPreview)||m_diagnosticVideoHidden;}
     void setDiagnosticVideoHidden(bool hidden);
     void pointerActivity();
+    bool controlsVisible() const {return m_controlsVisible||mini()||m_controllerPaused;}
+    Q_INVOKABLE void setUiHeld(bool held);
+    Q_INVOKABLE void setPopupOpen(bool open) {m_popupOpen=open;}
+    bool popupOpen() const {return m_popupOpen;}
+    void setNativeHover(bool hovered) {m_nativeHover=hovered;pointerActivity();}
+    Q_INVOKABLE void openSubtitleDialog();
+    Q_INVOKABLE void requestUrl();
     bool seekAt(const QPointF &point) const;
     bool titleAt(const QPointF &point) const;
     Q_INVOKABLE void requestMinimize();
@@ -51,6 +59,10 @@ signals:
     void lockAspectRatioChanged();
     void maxHoveredChanged();
     void modeChanged();
+    void controlsVisibilityChanged();
+    void contextMenuRequested(const QPointF &position);
+    void urlRequested(const QString &clipboard);
+    void dismissPopup();
 protected:
     bool event(QEvent *event) override;
     bool eventFilter(QObject *watched,QEvent *event) override;
@@ -70,6 +82,8 @@ private:
     bool m_applyingMode=false,m_pinned=false,m_infoVisible=false,m_tinyPreview=false;
     bool m_cursorPaused=true,m_dragCandidate=false;
     bool m_diagnosticVideoHidden=false;
+    bool m_controlsVisible=true,m_uiHeld=false,m_controllerPaused=true;
+    bool m_popupOpen=false,m_nativeHover=false;
     QPointF m_pressPosition;
     QTimer m_cursorTimer;
     void rememberModeGeometry();
@@ -77,4 +91,5 @@ private:
     void toggleMode(WindowStateMachine::Mode target);
     void applyPin();
     QString inputRoleAt(const QPointF &point) const;
+    void openNativeDialog(bool subtitle);
 };

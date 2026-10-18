@@ -1,6 +1,7 @@
 #include "FramelessWindow.h"
 #include "../core/MpvController.h"
 #include "../core/Log.h"
+#include "../core/AppSettings.h"
 #include <QScreen>
 #include <QKeyEvent>
 #include <QMimeData>
@@ -16,6 +17,8 @@
 #include <QWheelEvent>
 #include <QGuiApplication>
 #include <QStyleHints>
+#include <QClipboard>
+#include <QFileInfo>
 #include <windows.h>
 #include <dwmapi.h>
 #include <shobjidl.h>
@@ -31,7 +34,7 @@ FramelessWindow::FramelessWindow(MpvController *c):m_controller(c) {
     // Keep the render API attached while hidden/minimized; destruction still
     // releases the renderer on Qt's render thread before controller teardown.
     setPersistentGraphics(true);setPersistentSceneGraph(true);
-    setMinimumSize(QSize(320,180));
+    setMinimumSize(QSize(360,240));
     QSettings settings;m_lockAspect=settings.value("window/lockAspectRatio",true).toBool();
     const auto work=screen()->availableGeometry();
     auto geometry=settings.value("window/geometry",QRect(work.center()-QPoint(480,270),QSize(960,540))).toRect();
@@ -39,9 +42,19 @@ FramelessWindow::FramelessWindow(MpvController *c):m_controller(c) {
     setGeometry(geometry);m_lastNormalGeometry=geometry;
     m_modes=WindowStateMachine(geometry);
     m_tinyPreview=settings.value("window/tinyPreview",false).toBool();
+    if(c->settings()) {
+        m_lockAspect=c->settings()->values().value("lockAspectRatio",true).toBool();
+        m_tinyPreview=c->settings()->values().value("tinyPreview",false).toBool();
+        connect(c->settings(),&AppSettings::valueChanged,this,[this](const QString &key,const QVariant &value){
+            if(key=="lockAspectRatio")setLockAspectRatio(value.toBool());
+            if(key=="tinyPreview")setTinyPreview(value.toBool());
+        });
+    }
     installEventFilter(this);
     m_cursorTimer.setSingleShot(true);m_cursorTimer.setInterval(2500);
-    connect(&m_cursorTimer,&QTimer::timeout,this,[this]{if(!mini()&&!m_controller->pause())setCursor(Qt::BlankCursor);});
+    connect(&m_cursorTimer,&QTimer::timeout,this,[this]{
+        if(!mini()&&!m_controller->pause()&&!m_uiHeld&&!m_nativeHover) {m_controlsVisible=false;setCursor(Qt::BlankCursor);emit controlsVisibilityChanged();}
+    });
     connect(this,&QWindow::screenChanged,this,[this]{
         if(fullscreen()&&!m_applyingMode) {rememberModeGeometry();applyMode();}
     });
@@ -51,7 +64,7 @@ FramelessWindow::FramelessWindow(MpvController *c):m_controller(c) {
     });
     connect(c,&MpvController::stateChanged,this,[this]{
         updatePlaybackTiming();
-        if(m_cursorPaused!=m_controller->pause()) {m_cursorPaused=m_controller->pause();pointerActivity();}
+        if(m_cursorPaused!=m_controller->pause()) {m_cursorPaused=m_controller->pause();m_controllerPaused=m_cursorPaused;pointerActivity();}
         if(m_minimizePending&&m_controller->pause()&&m_minimizeSwaps==0) {m_minimizeSwaps=2;emit m_controller->renderUpdateRequested();update();}
     });
     connect(this,&QWindow::visibilityChanged,this,[this]{updatePlaybackTiming();});
@@ -78,6 +91,7 @@ bool FramelessWindow::initializeUi(QObject *diagnostics,bool enableVideo) {
     context->setContextProperty("playerWindow",this);
     context->setContextProperty("appDiagnostics",diagnostics);
     context->setContextProperty("enableVideoSurface",enableVideo);
+    context->setContextProperty("preferences",m_controller->settings());
     QQmlComponent component(engine,QUrl("qrc:/ui/Main.qml"));
     auto *object=component.create();
     auto *root=qobject_cast<QQuickItem*>(object);
@@ -146,7 +160,7 @@ QString FramelessWindow::inputRoleAt(const QPointF &point) const {
     return visit(visit,contentItem());
 }
 bool FramelessWindow::seekAt(const QPointF &point) const {return inputRoleAt(point)=="seek";}
-bool FramelessWindow::titleAt(const QPointF &point) const {return point.y()<38&&!controlAt(point);}
+bool FramelessWindow::titleAt(const QPointF &point) const {return controlsVisible()&&point.y()<38&&!controlAt(point);}
 void FramelessWindow::rememberModeGeometry() {
     if(m_applyingMode)return;
     if(!mini()&&!fullscreen()&&m_nativeId)
@@ -185,7 +199,7 @@ void FramelessWindow::applyPin() {
 void FramelessWindow::applyMode() {
     m_applyingMode=true;
     const auto oldId=winId();
-    setMaximumHeight(16777215);setMinimumSize(mini()?QSize(520,MiniHeight):QSize(320,180));
+    setMaximumHeight(16777215);setMinimumSize(mini()?QSize(520,MiniHeight):QSize(360,240));
     if(mini())setMaximumHeight(MiniHeight);
     emit modeChanged();
     if(fullscreen()) {
@@ -235,14 +249,18 @@ void FramelessWindow::setDiagnosticVideoHidden(bool hidden) {
 }
 void FramelessWindow::pointerActivity() {
     setCursor(Qt::ArrowCursor);m_cursorTimer.stop();
-    if(!mini()&&!m_controller->pause()&&isVisible())m_cursorTimer.start();
+    if(!m_controlsVisible){m_controlsVisible=true;emit controlsVisibilityChanged();}
+    if(!mini()&&!m_controller->pause()&&!m_uiHeld&&!m_nativeHover&&isVisible())m_cursorTimer.start();
 }
+void FramelessWindow::setUiHeld(bool held) {if(m_uiHeld==held)return;m_uiHeld=held;pointerActivity();}
+void FramelessWindow::requestUrl() {emit urlRequested(QGuiApplication::clipboard()->text());}
 bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
     if(watched!=this)return false;
     if(e->type()==QEvent::MouseMove||e->type()==QEvent::Enter)pointerActivity();
     if(e->type()==QEvent::Leave){setCursor(Qt::ArrowCursor);m_cursorTimer.stop();}
     if(e->type()==QEvent::MouseButtonPress||e->type()==QEvent::MouseButtonRelease||e->type()==QEvent::MouseButtonDblClick) {
         auto *mouse=static_cast<QMouseEvent*>(e);pointerActivity();
+        if(mouse->button()==Qt::RightButton&&e->type()==QEvent::MouseButtonPress) {emit contextMenuRequested(mouse->position());return true;}
         if(mouse->button()==Qt::MiddleButton) {
             if(e->type()!=QEvent::MouseButtonRelease)toggleFullscreen();
             return true;
@@ -261,15 +279,19 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
         if((mouse->position()-m_pressPosition).manhattanLength()>=QGuiApplication::styleHints()->startDragDistance()) {m_dragCandidate=false;startSystemMove();return true;}
     }
     if(e->type()==QEvent::Wheel) {
+        if(m_popupOpen)return false;
         auto *wheel=static_cast<QWheelEvent*>(e);pointerActivity();
         const double steps=wheel->angleDelta().y()/120.0;
-        if(steps!=0) {if(seekAt(wheel->position()))m_controller->seek(steps*5);else m_controller->adjustVolume(steps*5);}
+        if(steps!=0) {if(seekAt(wheel->position()))m_controller->seek(steps*m_controller->settings()->values().value("seekStep",5).toDouble());else m_controller->adjustVolume(steps*5);}
         return true;
     }
     if(e->type()==QEvent::KeyPress) {
         auto *key=static_cast<QKeyEvent*>(e);const auto mods=key->modifiers();
         const bool ctrl=mods.testFlag(Qt::ControlModifier),shift=mods.testFlag(Qt::ShiftModifier);
         pointerActivity();
+        if(m_popupOpen&&key->key()==Qt::Key_Escape) {emit dismissPopup();return true;}
+        if(activeFocusItem()&&activeFocusItem()->property("textEntry").toBool())return false;
+        if(m_popupOpen&&(key->key()==Qt::Key_Tab||key->key()==Qt::Key_Return||key->key()==Qt::Key_Enter||key->key()==Qt::Key_Up||key->key()==Qt::Key_Down))return false;
         switch(key->key()) {
         case Qt::Key_Space:if(!key->isAutoRepeat())m_controller->togglePause();break;
         case Qt::Key_F:if(!key->isAutoRepeat())toggleFullscreen();break;
@@ -277,7 +299,14 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
         case Qt::Key_M:if(!key->isAutoRepeat()){if(ctrl)toggleMini();else m_controller->toggleMute();}break;
         case Qt::Key_T:if(!ctrl)return false;if(!key->isAutoRepeat())togglePinned();break;
         case Qt::Key_O:if(!ctrl)return false;openDialog();break;
-        case Qt::Key_Left:case Qt::Key_Right:m_controller->seek((key->key()==Qt::Key_Left?-1:1)*(ctrl?30:shift?1:5),shift);break;
+        case Qt::Key_U:if(!ctrl)return false;requestUrl();break;
+        case Qt::Key_S:if(!key->isAutoRepeat())m_controller->cycleTrack("sub");break;
+        case Qt::Key_A:if(!key->isAutoRepeat())m_controller->cycleTrack("audio");break;
+        case Qt::Key_Z:case Qt::Key_X:m_controller->setPlaybackOption("sub-delay",m_controller->playbackOptions().value("sub-delay",0).toDouble()+(key->key()==Qt::Key_Z?-.1:.1));break;
+        case Qt::Key_Left:case Qt::Key_Right: {
+            const auto values=m_controller->settings()->values();
+            m_controller->seek((key->key()==Qt::Key_Left?-1:1)*values.value(ctrl?"largeSeekStep":shift?"exactSeekStep":"seekStep",ctrl?30:shift?1:5).toDouble(),shift);break;
+        }
         case Qt::Key_Up:case Qt::Key_Down:m_controller->adjustVolume(key->key()==Qt::Key_Up?5:-5);break;
         case Qt::Key_BracketLeft:case Qt::Key_BracketRight:m_controller->adjustSpeed(key->key()==Qt::Key_BracketLeft?-.1:.1);break;
         case Qt::Key_Backspace:m_controller->resetSpeed();break;
@@ -309,20 +338,27 @@ void FramelessWindow::fitVideo(int w,int h) {
     setGeometry(QRect(work.center()-QPoint(size.width()/2,size.height()/2),size));
 }
 void FramelessWindow::openDialog() {
+    openNativeDialog(false);
+}
+void FramelessWindow::openSubtitleDialog() {openNativeDialog(true);}
+void FramelessWindow::openNativeDialog(bool subtitle) {
+    setUiHeld(true);
     IFileOpenDialog *dialog=nullptr;
     if(SUCCEEDED(CoCreateInstance(CLSID_FileOpenDialog,nullptr,CLSCTX_INPROC_SERVER,IID_PPV_ARGS(&dialog)))) {
         const COMDLG_FILTERSPEC filters[]{{L"Media files",L"*.mkv;*.mp4;*.webm;*.avi;*.mov;*.m4v;*.ts;*.m2ts;*.mp3;*.flac"},{L"All files",L"*.*"}};
-        dialog->SetFileTypes(2,filters);
+        const COMDLG_FILTERSPEC subtitles[]{{L"Subtitle files",L"*.srt;*.ass;*.ssa;*.vtt;*.sup;*.sub;*.idx"},{L"All files",L"*.*"}};
+        dialog->SetFileTypes(2,subtitle?subtitles:filters);
         if(SUCCEEDED(dialog->Show(reinterpret_cast<HWND>(winId())))) {
             IShellItem *item=nullptr;
             if(SUCCEEDED(dialog->GetResult(&item))) {
                 PWSTR name=nullptr;
-                if(SUCCEEDED(item->GetDisplayName(SIGDN_FILESYSPATH,&name))) {m_controller->open(QString::fromWCharArray(name));CoTaskMemFree(name);}
+                if(SUCCEEDED(item->GetDisplayName(SIGDN_FILESYSPATH,&name))) {const auto path=QString::fromWCharArray(name);if(subtitle)m_controller->addSubtitle(path);else m_controller->open(path);CoTaskMemFree(name);}
                 item->Release();
             }
         }
         dialog->Release();
     }
+    setUiHeld(false);
 }
 bool FramelessWindow::event(QEvent *e) {
     if((e->type()==QEvent::Move||e->type()==QEvent::Resize)&&m_nativeId&&!m_applyingMode)rememberModeGeometry();
@@ -330,7 +366,15 @@ bool FramelessWindow::event(QEvent *e) {
         auto *drag=static_cast<QDragMoveEvent*>(e);if(drag->mimeData()->hasUrls()) {drag->acceptProposedAction();return true;}
     }
     if(e->type()==QEvent::Drop) {
-        auto *drop=static_cast<QDropEvent*>(e);if(drop->mimeData()->hasUrls()) {m_controller->open(drop->mimeData()->urls().first().toString());drop->acceptProposedAction();return true;}
+        auto *drop=static_cast<QDropEvent*>(e);if(drop->mimeData()->hasUrls()) {
+            bool opened=false;
+            for(const auto &url:drop->mimeData()->urls()) {
+                const auto extension=QFileInfo(url.path()).suffix().toLower();
+                if(QStringList{"srt","ass","ssa","vtt","sup","sub","idx"}.contains(extension))m_controller->addSubtitle(url.toString());
+                else if(!opened){m_controller->open(url.toString());opened=true;}
+            }
+            drop->acceptProposedAction();return true;
+        }
     }
     if(e->type()==QEvent::WindowStateChange) {
         if(!m_applyingMode&&!fullscreen()&&!mini()&&visibility()!=QWindow::Minimized) {

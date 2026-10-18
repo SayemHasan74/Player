@@ -1,0 +1,107 @@
+{
+  "part": 3,
+  "accepted": false,
+  "manualAcceptance": "pending user tests",
+  "checks": {
+    "singlePackagedExecutable": true,
+    "unitTests": true,
+    "sceneMenusAndLazySettings": true,
+    "controlsHideAndStayShownPaused": true,
+    "programmaticUiHold": true,
+    "hiddenNoExtraSceneSwaps": true,
+    "pausedNoRendersOrSwaps": true,
+    "exactSeekWithinOne60fpsFrame": true,
+    "audioTrackChanged": true,
+    "subtitleAdjustmentsApplied": true,
+    "audioDelayApplied": true,
+    "srtAssVttDecoderEvidence": true,
+    "autoLoadedSubsDirectory": true,
+    "noDuplicateSidecars": true,
+    "chapterMetadata": true,
+    "embeddedCoverSelected": true,
+    "volumeAcrossProcessRestart": true,
+    "qualityOnIntervalNoAddedDrops": true,
+    "pauseResumeNoAddedDrops": false,
+    "allObservedResidentRamBelow500MB": true,
+    "cleanMutedNonActivating": true,
+    "noQmlErrors": true
+  },
+  "executableSha256": "3073b3e79f5d11cecaa6a83ab05fb6bc095a6689b9136fb55befd2b89ebce2e5",
+  "cases": [
+    "part3-release-controls-20261018",
+    "part3-release-tracks-20261018",
+    "part3-release-restart-20261018"
+  ],
+  "phases": {
+    "visible": {
+      "durationSeconds": 6.002,
+      "videoRenders": 360,
+      "sceneSwaps": 364,
+      "dropsBefore": 0,
+      "dropsAfter": 0,
+      "samples": 5,
+      "cpuTotalPercent": 1.3875,
+      "adapterGpuPercent": 8.4,
+      "adapterDecoderPercent": 13.8
+    },
+    "hidden": {
+      "durationSeconds": 6.212,
+      "videoRenders": 372,
+      "sceneSwaps": 372,
+      "dropsBefore": 1,
+      "dropsAfter": 1,
+      "samples": 6,
+      "cpuTotalPercent": 0.834375,
+      "adapterGpuPercent": 19.5,
+      "adapterDecoderPercent": 22.0
+    },
+    "paused": {
+      "durationSeconds": 4.992,
+      "videoRenders": 0,
+      "sceneSwaps": 0,
+      "dropsBefore": 1,
+      "dropsAfter": 1,
+      "samples": 5,
+      "cpuTotalPercent": 0.0,
+      "adapterGpuPercent": 19.6,
+      "adapterDecoderPercent": 0.0
+    },
+    "quality": {
+      "durationSeconds": 5.989,
+      "videoRenders": 359,
+      "sceneSwaps": 363,
+      "dropsBefore": 5,
+      "dropsAfter": 5,
+      "samples": 6,
+      "cpuTotalPercent": 0.8520833333333333,
+      "adapterGpuPercent": 33.0,
+      "adapterDecoderPercent": 19.666666666666668
+    }
+  },
+  "seekMeasurements": [
+    {
+      "requested": 10.123,
+      "actual": 10.133,
+      "error": 0.01
+    },
+    {
+      "requested": 4.123,
+      "actual": 4.133,
+      "error": 0.01
+    }
+  ],
+  "popupChecks": {
+    "context": 9,
+    "audio": 4,
+    "sub": 9,
+    "speed": 8,
+    "aspect": 6,
+    "settingsLoaded": true,
+    "sameScene": true
+  },
+  "maximumObservedDropsBeforeSeeks": {
+    "part3-release-controls-20261018": 5,
+    "part3-release-tracks-20261018": 7
+  },
+  "peakAllSampleResidentMB": 484.29056
+}

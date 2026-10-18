@@ -1,0 +1,281 @@
+2026-10-18T09:01:05.668Z [17596] START Qt=6.12.0 PID=5664
+2026-10-18T09:01:05.669Z [17596] QT_APP_READY_MS=18
+2026-10-18T09:01:05.912Z [17596] threaded render loop
+2026-10-18T09:01:05.912Z [17596] Using sg animation driver
+2026-10-18T09:01:05.912Z [17596] Animation Driver: using vsync: 13.34 ms
+2026-10-18T09:01:05.913Z [17596] WINDOW_CREATED_MS=262
+2026-10-18T09:01:05.919Z [17596] SHOW_CALLED_MS=269
+2026-10-18T09:01:06.027Z [11464] Animation Driver: using vsync: 13.34 ms
+2026-10-18T09:01:06.027Z [11464] Creating QRhi with backend OpenGL for window 0x4646fbfa50 (wflags 0xC20C80B)
+  Graphics API debug/validation layers: 0
+  Debug markers: 0
+  Timestamps: 0
+  Prefer software device: 0
+  Shader/pipeline cache collection: 0
+2026-10-18T09:01:06.052Z [11464] Created OpenGL context QSurfaceFormat(version 4.6, options QFlags<QSurfaceFormat::FormatOption>(DeprecatedFunctions), depthBufferSize 24, redBufferSize 8, greenBufferSize 8, blueBufferSize 8, alphaBufferSize 8, stencilBufferSize 8, samples 0, swapBehavior QSurfaceFormat::DoubleBuffer, swapInterval 1, colorSpace QColorSpace(QColorSpace::SRgb, QColorSpace::Primaries::SRgb, QColorSpace::TransferFunction::SRgb), profile  QSurfaceFormat::CompatibilityProfile)
+2026-10-18T09:01:06.053Z [11464] OpenGL VENDOR: NVIDIA Corporation RENDERER: NVIDIA GeForce RTX 3070/PCIe/SSE2 VERSION: 4.6.0 NVIDIA 617.42
+2026-10-18T09:01:06.054Z [11464] Created QRhi 0x171f4e05c90 for window 0x4646fbfa50
+2026-10-18T09:01:06.055Z [11464] Attempting to seed pipeline cache for QRhi 0x171f4e05c90 from 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-18T09:01:06.055Z [11464] Seeded pipeline cache with 5 program binaries
+2026-10-18T09:01:06.055Z [11464] MSAA sample count for the swapchain is 1. Alpha channel requested = no.
+2026-10-18T09:01:06.055Z [11464] rhi texture atlas dimensions: 2048x1024
+2026-10-18T09:01:06.055Z [17596] FIRST_SWAP_MS=404
+2026-10-18T09:01:06.108Z [17596] QML_LOADED_MS=457
+2026-10-18T09:01:07.346Z [19204] option config=no: success
+2026-10-18T09:01:07.346Z [19204] option vo=libmpv: success
+2026-10-18T09:01:07.346Z [19204] option idle=yes: success
+2026-10-18T09:01:07.346Z [19204] option keep-open=yes: success
+2026-10-18T09:01:07.346Z [19204] option terminal=no: success
+2026-10-18T09:01:07.346Z [19204] option load-scripts=no: success
+2026-10-18T09:01:07.346Z [19204] option ytdl=no: success
+2026-10-18T09:01:07.346Z [19204] option osc=no: success
+2026-10-18T09:01:07.346Z [19204] option osd-level=0: success
+2026-10-18T09:01:07.346Z [19204] option osd-font-provider=none: success
+2026-10-18T09:01:07.346Z [19204] option input-default-bindings=no: success
+2026-10-18T09:01:07.346Z [19204] option input-vo-keyboard=no: success
+2026-10-18T09:01:07.346Z [19204] option input-cursor=no: success
+2026-10-18T09:01:07.346Z [19204] option cursor-autohide=no: success
+2026-10-18T09:01:07.346Z [19204] option resume-playback=no: success
+2026-10-18T09:01:07.346Z [19204] option save-position-on-quit=no: success
+2026-10-18T09:01:07.346Z [19204] option hwdec=nvdec,d3d11va-copy: success
+2026-10-18T09:01:07.346Z [19204] option hwdec-codecs=all: success
+2026-10-18T09:01:07.346Z [19204] option hwdec-threads=1: success
+2026-10-18T09:01:07.346Z [19204] option gpu-hwdec-interop=cuda: success
+2026-10-18T09:01:07.346Z [19204] option vd-lavc-dr=yes: success
+2026-10-18T09:01:07.346Z [19204] option scale=bilinear: success
+2026-10-18T09:01:07.346Z [19204] option cscale=bilinear: success
+2026-10-18T09:01:07.346Z [19204] option dscale=bilinear: success
+2026-10-18T09:01:07.346Z [19204] option correct-downscaling=no: success
+2026-10-18T09:01:07.346Z [19204] option deband=no: success
+2026-10-18T09:01:07.346Z [19204] option interpolation=no: success
+2026-10-18T09:01:07.346Z [19204] option video-sync=audio: success
+2026-10-18T09:01:07.346Z [19204] option tone-mapping=bt.2390: success
+2026-10-18T09:01:07.347Z [19204] option hdr-compute-peak=no: success
+2026-10-18T09:01:07.347Z [19204] option cache=yes: success
+2026-10-18T09:01:07.347Z [19204] option cache-secs=20: success
+2026-10-18T09:01:07.347Z [19204] option demuxer-donate-buffer=no: success
+2026-10-18T09:01:07.347Z [19204] option demuxer-max-bytes=150MiB: success
+2026-10-18T09:01:07.347Z [19204] option demuxer-max-back-bytes=50MiB: success
+2026-10-18T09:01:07.347Z [19204] option demuxer-readahead-secs=20: success
+2026-10-18T09:01:07.347Z [19204] option ao=wasapi: success
+2026-10-18T09:01:07.347Z [19204] option audio-exclusive=no: success
+2026-10-18T09:01:07.347Z [19204] option audio-channels=auto-safe: success
+2026-10-18T09:01:07.347Z [19204] option volume-max=150: success
+2026-10-18T09:01:07.347Z [19204] option sub-auto=fuzzy: success
+2026-10-18T09:01:07.347Z [19204] option sub-file-paths=Subs;Subtitles;Sub: success
+2026-10-18T09:01:07.347Z [19204] option sub-ass=yes: success
+2026-10-18T09:01:07.347Z [19204] option blend-subtitles=no: success
+2026-10-18T09:01:07.347Z [19204] option audio-display=embedded-first: success
+2026-10-18T09:01:07.347Z [19204] option msg-level=vd=v,vo=v: success
+2026-10-18T09:01:07.352Z [19204] mpv [cplayer/v] Waiting for scripts...
+2026-10-18T09:01:07.352Z [19204] mpv [cplayer/v] Set property: alang=en,eng -> 1
+2026-10-18T09:01:07.352Z [19204] mpv [cplayer/v] Set property: speed=1 -> 1
+2026-10-18T09:01:07.352Z [19204] mpv [cplayer/v] Set property: hwdec=nvdec,d3d11va-copy -> 1
+2026-10-18T09:01:07.352Z [19204] mpv [cplayer/v] Set property: scale=bilinear -> 1
+2026-10-18T09:01:07.352Z [17596] VIDEO_TRACK=auto
+2026-10-18T09:01:07.352Z [19204] mpv [cplayer/v] Set property: cscale=bilinear -> 1
+2026-10-18T09:01:07.353Z [19204] mpv [cplayer/v] Set property: video-sync=audio -> 1
+2026-10-18T09:01:07.354Z [19204] mpv [cplayer/v] Set property: interpolation=no -> 1
+2026-10-18T09:01:07.354Z [19204] mpv [cplayer/v] Set property: slang=en,eng -> 1
+2026-10-18T09:01:07.354Z [19204] mpv [cplayer/v] Set property: volume=100 -> 1
+2026-10-18T09:01:07.355Z [19204] mpv [cplayer/v] Done loading scripts.
+2026-10-18T09:01:07.363Z [19204] mpv [libmpv_render/v] GL_VERSION='4.6.0 NVIDIA 617.42'
+2026-10-18T09:01:07.363Z [19204] mpv [libmpv_render/v] Detected desktop OpenGL 4.6.
+2026-10-18T09:01:07.363Z [19204] mpv [libmpv_render/v] GL_VENDOR='NVIDIA Corporation'
+2026-10-18T09:01:07.363Z [19204] mpv [libmpv_render/v] GL_RENDERER='NVIDIA GeForce RTX 3070/PCIe/SSE2'
+2026-10-18T09:01:07.363Z [19204] mpv [libmpv_render/v] GL_SHADING_LANGUAGE_VERSION='4.60 NVIDIA'
+2026-10-18T09:01:07.364Z [19204] mpv [libmpv_render/v] Loaded extension WGL_EXT_swap_control.
+2026-10-18T09:01:07.364Z [19204] mpv [libmpv_render/v] Loaded extension GL_KHR_debug.
+2026-10-18T09:01:07.364Z [19204] mpv [libmpv_render/v] GL_*_swap_control extension missing.
+2026-10-18T09:01:07.366Z [19204] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T09:01:07.366Z [19204] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T09:01:07.366Z [19204] mpv [libmpv_render/v] Loading hwdec driver 'cuda'
+2026-10-18T09:01:07.428Z [11464] Render context created: OpenGL, threaded Qt Quick, same scene
+2026-10-18T09:01:07.429Z [17596] OPEN_FILE E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T09:01:07.429Z [19204] mpv [cplayer/v] Set property: demuxer-max-bytes=150MiB -> 1
+2026-10-18T09:01:07.429Z [19204] mpv [cplayer/v] Running hook: auto_profiles/on_before_start_file
+2026-10-18T09:01:07.429Z [19204] mpv [cplayer/v] Failed sending hook command auto_profiles/on_before_start_file. Removing hook.
+2026-10-18T09:01:07.429Z [19204] mpv [cplayer/v] Running hook: auto_profiles/on_load
+2026-10-18T09:01:07.429Z [19204] mpv [cplayer/v] Failed sending hook command auto_profiles/on_load. Removing hook.
+2026-10-18T09:01:07.430Z [19204] mpv [ifo_dvda/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T09:01:07.430Z [19204] mpv [ifo_dvdnav/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T09:01:07.430Z [19204] mpv [bdmv/bluray/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T09:01:07.430Z [19204] mpv [file/v] Opening E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T09:01:07.430Z [19204] mpv [demux/v] Trying demuxers for level=normal.
+2026-10-18T09:01:07.430Z [19204] mpv [mkv/v] Deferring reading cues.
+2026-10-18T09:01:07.430Z [19204] mpv [mkv/v] All headers are parsed!
+2026-10-18T09:01:07.431Z [19204] mpv [demux/v] Detected file format: Matroska
+2026-10-18T09:01:07.431Z [19204] mpv [cplayer/v] Opening done: E:\Codes\FlowPlayer\tests\media\hevc-4k60-main10.mkv
+2026-10-18T09:01:07.431Z [19204] mpv [find_files/v] Loading external files in E:\Codes\FlowPlayer\tests\media\
+2026-10-18T09:01:07.431Z [19204] mpv [find_files/v] Loading external files in E:\Codes\FlowPlayer\tests\media\Subs
+2026-10-18T09:01:07.431Z [19204] mpv [cplayer/v] Running hook: auto_profiles/on_preloaded
+2026-10-18T09:01:07.431Z [19204] mpv [cplayer/v] Failed sending hook command auto_profiles/on_preloaded. Removing hook.
+2026-10-18T09:01:07.431Z [19204] mpv [cplayer/v] Running hook: auto_profiles/on_loaded
+2026-10-18T09:01:07.431Z [19204] mpv [cplayer/v] Failed sending hook command auto_profiles/on_loaded. Removing hook.
+2026-10-18T09:01:07.431Z [19204] mpv [mkv/v] select track 0
+2026-10-18T09:01:07.431Z [19204] mpv [mkv/v] select track 1
+2026-10-18T09:01:07.431Z [19204] mpv [cplayer/info] ● Video  --vid=1  (hevc 3840x2160 60 fps)
+2026-10-18T09:01:07.431Z [19204] mpv [cplayer/info] ● Audio  --aid=1  (aac 1ch 48000 Hz)
+2026-10-18T09:01:07.431Z [19204] mpv [vd/v] Container reported FPS: 60.000002
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] Codec list:
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] hevc - HEVC (High Efficiency Video Coding)
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] hevc_qsv (hevc) - HEVC video (Intel Quick Sync Video acceleration)
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] hevc_amf (hevc) - HEVC AMD AMF video decoder
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] hevc_cuvid (hevc) - Nvidia CUVID HEVC decoder
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] Opening decoder hevc
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] Looking at hwdec hevc-nvdec...
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] Trying hardware decoding via hevc-nvdec.
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] Requesting 1 threads for decoding.
+2026-10-18T09:01:07.432Z [19204] mpv [vd/v] Selected decoder: hevc - HEVC (High Efficiency Video Coding)
+2026-10-18T09:01:07.432Z [19204] mpv [vf/v] User filter list:
+2026-10-18T09:01:07.432Z [19204] mpv [vf/v] (empty)
+2026-10-18T09:01:07.432Z [19204] mpv [ad/v] Codec list:
+2026-10-18T09:01:07.432Z [19204] mpv [ad/v] aac - AAC (Advanced Audio Coding)
+2026-10-18T09:01:07.432Z [19204] mpv [ad/v] aac_fixed (aac) - AAC (Advanced Audio Coding)
+2026-10-18T09:01:07.432Z [19204] mpv [ad/v] Opening decoder aac
+2026-10-18T09:01:07.432Z [19204] mpv [ad/v] Requesting 1 threads for decoding.
+2026-10-18T09:01:07.433Z [19204] mpv [ad/v] Selected decoder: aac - AAC (Advanced Audio Coding)
+2026-10-18T09:01:07.433Z [19204] mpv [af/v] User filter list:
+2026-10-18T09:01:07.433Z [19204] mpv [af/v] (empty)
+2026-10-18T09:01:07.433Z [19204] mpv [cplayer/v] Starting playback...
+2026-10-18T09:01:07.433Z [17596] PLAYBACK_TIMER_POLICY active=1 success=1 error=0
+2026-10-18T09:01:07.433Z [17596] VIDEO_TRACK=1
+2026-10-18T09:01:07.435Z [19204] mpv [vd/v] Pixel formats supported by decoder: dxva2_vld d3d11va_vld d3d11 d3d12 vaapi vulkan cuda cuarray yuv420p10le
+2026-10-18T09:01:07.435Z [19204] mpv [vd/v] Codec profile: Main 10 (0x2)
+2026-10-18T09:01:07.437Z [19204] mpv [vd/v] Allocated a fixed pool of 13 hw surfaces.
+2026-10-18T09:01:07.437Z [19204] mpv [vd/v] Requesting pixfmt 'cuda' from decoder.
+2026-10-18T09:01:07.488Z [19204] mpv [vd/info] Using hardware decoding (nvdec).
+2026-10-18T09:01:07.488Z [19204] mpv [vd/v] Decoder format: 3840x2160 cuda[p010] auto/auto/auto/limited/auto CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.488Z [19204] mpv [vd/v] Using container aspect ratio.
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [in] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [userdeint] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [userdeint] (disabled)
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [autovflip] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [autovflip] (disabled)
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [autorotate] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [autorotate] (disabled)
+2026-10-18T09:01:07.488Z [19204] mpv [vf/v] [convert] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.493Z [19204] mpv [vf/v] [out] 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.493Z [19204] mpv [af/v] [in] 48000Hz mono 1ch floatp
+2026-10-18T09:01:07.493Z [19204] mpv [af/v] [userspeed] 48000Hz mono 1ch floatp
+2026-10-18T09:01:07.493Z [19204] mpv [af/v] [userspeed] (disabled)
+2026-10-18T09:01:07.493Z [19204] mpv [af/v] [convert] 48000Hz mono 1ch floatp
+2026-10-18T09:01:07.493Z [19204] mpv [ao/v] Trying audio driver 'wasapi'
+2026-10-18T09:01:07.493Z [19204] mpv [ao/wasapi/v] requested format: 48000 Hz, mono channels, floatp
+2026-10-18T09:01:07.499Z [19204] mpv [ao/wasapi/v] No device specified. Selecting default.
+2026-10-18T09:01:07.502Z [19204] mpv [ao/wasapi/v] Selecting device '{12b6eca9-562a-40db-a902-63a69a2a3fae}' (Headphones (realme Buds Air7))
+2026-10-18T09:01:07.502Z [19204] mpv [ao/wasapi/v] Monitoring changes in device {0.0.0.00000000}.{12b6eca9-562a-40db-a902-63a69a2a3fae}
+2026-10-18T09:01:07.508Z [19204] mpv [ao/wasapi/v] Trying mono float (32/32 bits) @ 48000hz (shared) -> close
+2026-10-18T09:01:07.508Z [19204] mpv [ao/wasapi/v] Closest match is stereo float (32/32 bits) @ 48000hz
+2026-10-18T09:01:07.508Z [19204] mpv [ao/wasapi/v] Accepted as stereo float @ 48000hz -> stereo float (32/32 bits) @ 48000hz (shared)
+2026-10-18T09:01:07.509Z [19204] mpv [ao/wasapi/v] Device period: default 10000 us, minimum 3000 us
+2026-10-18T09:01:07.513Z [19204] mpv [ao/wasapi/v] Buffer frame count: 1056 (22000 us)
+2026-10-18T09:01:07.513Z [19204] mpv [ao/wasapi/v] IAudioClock::GetFrequency gave a frequency of 384000.
+2026-10-18T09:01:07.513Z [19204] mpv [ao/wasapi/v] device buffer: 1056 samples.
+2026-10-18T09:01:07.513Z [19204] mpv [ao/wasapi/v] using soft-buffer of 9600 samples.
+2026-10-18T09:01:07.513Z [19204] mpv [cplayer/info] AO: [wasapi] 48000Hz stereo 2ch float
+2026-10-18T09:01:07.513Z [19204] mpv [cplayer/v] AO: Description: Windows WASAPI audio output (event mode)
+2026-10-18T09:01:07.514Z [19204] mpv [autoconvert/v] inserting resampler
+2026-10-18T09:01:07.514Z [19204] mpv [swresample/v] format change, reinitializing resampler
+2026-10-18T09:01:07.514Z [19204] mpv [swresample/v] 48000Hz mono floatp -> 48000Hz stereo float
+2026-10-18T09:01:07.514Z [19204] mpv [swresample/v] Remix: mono -> stereo
+2026-10-18T09:01:07.514Z [19204] mpv [af/v] [out] 48000Hz stereo 2ch float
+2026-10-18T09:01:07.518Z [19204] mpv [cplayer/info] VO: [libmpv] 3840x2160 cuda[p010]
+2026-10-18T09:01:07.518Z [19204] mpv [cplayer/v] VO: Description: render API for libmpv
+2026-10-18T09:01:07.518Z [19204] mpv [vo/libmpv/v] reconfig to 3840x2160 cuda[p010] bt.709/bt.709/bt.1886/limited/display CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:07.535Z [19204] mpv [libmpv_render/v] Window size: 1468x826 (Borders: l=0 t=0 r=0 b=0)
+2026-10-18T09:01:07.535Z [19204] mpv [libmpv_render/v] Video source: 3840x2160 (1:1)
+2026-10-18T09:01:07.535Z [19204] mpv [libmpv_render/v] Video display: (0, 0) 3840x2160 -> (0, 0) 1468x826
+2026-10-18T09:01:07.535Z [19204] mpv [libmpv_render/v] Video scale: 0.382292/0.382407
+2026-10-18T09:01:07.535Z [19204] mpv [libmpv_render/v] OSD borders: l=0 t=0 r=0 b=0
+2026-10-18T09:01:07.535Z [19204] mpv [libmpv_render/v] Video borders: l=0 t=0 r=0 b=0
+2026-10-18T09:01:07.536Z [19204] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T09:01:07.537Z [19204] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T09:01:07.540Z [19204] mpv [libmpv_render/v] Dither to 8.
+2026-10-18T09:01:07.556Z [19204] mpv [cplayer/v] first video frame after restart shown
+2026-10-18T09:01:07.561Z [17596] PART3_POPUPS invoked=1 result={"context":9,"audio":4,"sub":9,"speed":8,"aspect":6,"settingsLoaded":true,"sameScene":true}
+2026-10-18T09:01:07.562Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":0,"elapsedMs":1910,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":false,"phase":"visible_begin","position":0,"renders":2,"swaps":5,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:07.562Z [17596] FIRST_VIDEO_SWAP_MS=1910
+2026-10-18T09:01:07.562Z [17596] ACTIVE_HWDEC=nvdec
+2026-10-18T09:01:07.563Z [19204] mpv [cplayer/v] audio ready
+2026-10-18T09:01:07.563Z [19204] mpv [cplayer/v] starting audio playback
+2026-10-18T09:01:07.563Z [19204] mpv [cplayer/v] playback restart complete @ 0.000000, audio=playing, video=playing
+2026-10-18T09:01:07.565Z [19204] mpv [osd/libass/v] libass API version: 0x1705000
+2026-10-18T09:01:07.565Z [19204] mpv [osd/libass/v] libass source: meson, commit: 0.17.5-11-gf61db567e6593df3470e91594bcd4ad2d0473aff
+2026-10-18T09:01:07.565Z [19204] mpv [osd/libass/v] Shaper: FriBidi 1.0.17 (SIMPLE) HarfBuzz-ng 14.6.0 (COMPLEX)
+2026-10-18T09:01:07.565Z [19204] mpv [osd/libass/v] Setting up fonts...
+2026-10-18T09:01:07.565Z [19204] mpv [osd/libass/v] Done.
+2026-10-18T09:01:13.563Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":0,"elapsedMs":7912,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":false,"phase":"visible_end","position":6.0169999999999995,"renders":362,"swaps":369,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:15.920Z [17596] METRIC {"avSyncSeconds":1.7999999952778012e-06,"cacheBytes":79556000,"callbackToRenderMaxUs":25357,"callbacks":504,"controlsVisible":true,"dropped":0,"elapsedMs":10269,"highQuality":false,"hwdec":"nvdec","mpvRenderCallMaxUs":21160,"mute":true,"pause":false,"position":8.366999999999999,"renders":503,"sceneSwaps":510,"videoHidden":false,"videoTrack":"1","volume":100,"windowActive":false}
+2026-10-18T09:01:16.365Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":false,"dropped":1,"elapsedMs":10713,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":false,"phase":"hidden_begin","position":8.817,"renders":529,"swaps":541,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:22.576Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":false,"dropped":1,"elapsedMs":16925,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":false,"phase":"hidden_end","position":15.017,"renders":901,"swaps":913,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:22.576Z [19204] mpv [cplayer/v] Set property: pause=yes -> 1
+2026-10-18T09:01:22.576Z [17596] PLAYBACK_TIMER_POLICY active=0 success=1 error=0
+2026-10-18T09:01:24.576Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":1,"elapsedMs":18925,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":true,"phase":"paused_begin","position":15.033,"renders":905,"swaps":926,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:25.916Z [17596] METRIC {"avSyncSeconds":2.3999999954338325e-06,"cacheBytes":97637008,"callbackToRenderMaxUs":27421,"callbacks":905,"controlsVisible":true,"dropped":1,"elapsedMs":20265,"highQuality":false,"hwdec":"nvdec","mpvRenderCallMaxUs":14193,"mute":true,"pause":true,"position":15.033,"renders":905,"sceneSwaps":926,"videoHidden":false,"videoTrack":"1","volume":100,"windowActive":false}
+2026-10-18T09:01:29.568Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":1,"elapsedMs":23917,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":true,"phase":"paused_end","position":15.033,"renders":905,"swaps":926,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:29.568Z [19204] mpv [cplayer/v] Set property: pause=no -> 1
+2026-10-18T09:01:29.576Z [17596] PLAYBACK_TIMER_POLICY active=1 success=1 error=0
+2026-10-18T09:01:31.574Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":5,"elapsedMs":25923,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":false,"phase":"before_quality","position":17.017,"renders":1018,"swaps":1041,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:31.577Z [19204] mpv [cplayer/v] Set property: scale=ewa_lanczossharp -> 1
+2026-10-18T09:01:31.581Z [19204] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T09:01:31.581Z [19204] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T09:01:31.584Z [19204] mpv [libmpv_render/v] Dither to 8.
+2026-10-18T09:01:31.594Z [19204] mpv [cplayer/v] Set property: cscale=spline36 -> 1
+2026-10-18T09:01:31.594Z [19204] mpv [cplayer/v] Set property: video-sync=display-resample -> 1
+2026-10-18T09:01:31.594Z [19204] mpv [cplayer/v] Set property: interpolation=yes -> 1
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] Window size: 1468x826 (Borders: l=0 t=0 r=0 b=0)
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] Video source: 3840x2160 (1:1)
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] Video display: (0, 0) 3840x2160 -> (0, 0) 1468x826
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] Video scale: 0.382292/0.382407
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] OSD borders: l=0 t=0 r=0 b=0
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] Video borders: l=0 t=0 r=0 b=0
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T09:01:31.598Z [19204] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T09:01:31.600Z [19204] mpv [libmpv_render/v] Dither to 8.
+2026-10-18T09:01:33.077Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":5,"elapsedMs":27426,"highQuality":true,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":false,"phase":"quality_begin","position":18.517,"renders":1109,"swaps":1135,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:35.921Z [17596] METRIC {"avSyncSeconds":3.800000010351079e-06,"cacheBytes":103205808,"callbackToRenderMaxUs":66517,"callbacks":1280,"controlsVisible":true,"dropped":5,"elapsedMs":30270,"highQuality":true,"hwdec":"nvdec","mpvRenderCallMaxUs":66014,"mute":true,"pause":false,"position":21.366999999999997,"renders":1279,"sceneSwaps":1306,"videoHidden":false,"videoTrack":"1","volume":100,"windowActive":false}
+2026-10-18T09:01:39.066Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":5,"elapsedMs":33415,"highQuality":true,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":false,"phase":"quality_end","position":24.517,"renders":1468,"swaps":1498,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:39.077Z [19204] mpv [cplayer/v] Set property: scale=bilinear -> 1
+2026-10-18T09:01:39.082Z [19204] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T09:01:39.082Z [19204] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T09:01:39.084Z [19204] mpv [libmpv_render/v] Dither to 8.
+2026-10-18T09:01:39.095Z [19204] mpv [cplayer/v] Set property: cscale=bilinear -> 1
+2026-10-18T09:01:39.095Z [19204] mpv [cplayer/v] Set property: video-sync=audio -> 1
+2026-10-18T09:01:39.095Z [19204] mpv [cplayer/v] Set property: interpolation=no -> 1
+2026-10-18T09:01:39.099Z [19204] mpv [libmpv_render/v] Window size: 1468x826 (Borders: l=0 t=0 r=0 b=0)
+2026-10-18T09:01:39.099Z [19204] mpv [libmpv_render/v] Video source: 3840x2160 (1:1)
+2026-10-18T09:01:39.099Z [19204] mpv [libmpv_render/v] Video display: (0, 0) 3840x2160 -> (0, 0) 1468x826
+2026-10-18T09:01:39.099Z [19204] mpv [libmpv_render/v] Video scale: 0.382292/0.382407
+2026-10-18T09:01:39.099Z [19204] mpv [libmpv_render/v] OSD borders: l=0 t=0 r=0 b=0
+2026-10-18T09:01:39.099Z [19204] mpv [libmpv_render/v] Video borders: l=0 t=0 r=0 b=0
+2026-10-18T09:01:39.099Z [19204] mpv [libmpv_render/v] Testing FBO format rgba16f
+2026-10-18T09:01:39.100Z [19204] mpv [libmpv_render/v] Using FBO format rgba16f.
+2026-10-18T09:01:39.102Z [19204] mpv [libmpv_render/v] Dither to 8.
+2026-10-18T09:01:40.572Z [19204] mpv [cplayer/v] Set property: pause=yes -> 1
+2026-10-18T09:01:40.572Z [17596] PLAYBACK_TIMER_POLICY active=0 success=1 error=0
+2026-10-18T09:01:41.572Z [19204] mpv [mkv/v] queuing seek to 10.123000
+2026-10-18T09:01:41.572Z [19204] mpv [mkv/v] cached range 0: 8.333000 <-> 44.317000 (bof=0, eof=0)
+2026-10-18T09:01:41.572Z [19204] mpv [mkv/v] ...using this range for in-cache seek.
+2026-10-18T09:01:41.572Z [19204] mpv [mkv/v] seeking stream 0 (video) to packet 8.333000/-9223372036854775808.000000
+2026-10-18T09:01:41.572Z [19204] mpv [mkv/v] seeking stream 1 (audio) to packet 10.090667/-9223372036854775808.000000
+2026-10-18T09:01:41.572Z [19204] mpv [cplayer/v] hr-seek, skipping to 10.123000
+2026-10-18T09:01:41.576Z [19204] mpv [vd/v] Decoder format: 3840x2160 cuda[p010] auto/auto/auto/limited/auto CL=mpeg2/4/h264 crop=3840x2160+0+0 A=none
+2026-10-18T09:01:41.576Z [19204] mpv [vd/v] Using container aspect ratio.
+2026-10-18T09:01:42.090Z [19204] mpv [cplayer/v] first video frame after restart shown
+2026-10-18T09:01:42.090Z [19204] mpv [cplayer/v] audio ready
+2026-10-18T09:01:42.090Z [19204] mpv [cplayer/v] starting audio playback
+2026-10-18T09:01:42.090Z [19204] mpv [cplayer/v] playback restart complete @ 10.133000, audio=playing, video=playing (paused)
+2026-10-18T09:01:42.090Z [17596] EXACT_SEEK target=10.123 actual=10.133 error=0.01
+2026-10-18T09:01:44.062Z [17596] PART3_STAGE {"audioOnly":false,"chapters":[],"controlsVisible":true,"dropped":0,"elapsedMs":38411,"highQuality":false,"options":{"aid":1,"audio-delay":0,"sid":-1,"sub-delay":0,"sub-pos":100,"sub-scale":1},"pause":true,"phase":"seek_done","position":10.133,"renders":1563,"swaps":1596,"tracks":[{"albumart":false,"codec":"hevc","codec-desc":"H.265 / HEVC (High Efficiency Video Coding)","codec-profile":"Main 10","commentary":false,"decoder":"hevc","decoder-desc":"HEVC (High Efficiency Video Coding)","default":false,"demux-fps":60.0000024000001,"demux-h":2160,"demux-par":1,"demux-w":3840,"dependent":false,"external":false,"ff-index":0,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.000000000","ENCODER":"Lavc63.20.100 hevc_nvenc"},"original":false,"selected":true,"src-id":1,"type":"video","visual-impaired":false},{"albumart":false,"audio-channels":1,"codec":"aac","codec-desc":"AAC (Advanced Audio Coding)","codec-profile":"LC","commentary":false,"decoder":"aac","decoder-desc":"AAC (Advanced Audio Coding)","default":false,"demux-channel-count":1,"demux-channels":"mono","demux-samplerate":48000,"dependent":false,"external":false,"ff-index":1,"forced":false,"hearing-impaired":false,"id":1,"image":false,"main-selection":0,"metadata":{"DURATION":"00:06:00.021000000","ENCODER":"Lavc63.20.100 aac"},"original":false,"selected":true,"src-id":2,"type":"audio","visual-impaired":false}],"volume":100}
+2026-10-18T09:01:45.920Z [17596] METRIC {"avSyncSeconds":0,"cacheBytes":105033472,"callbackToRenderMaxUs":19643,"callbacks":1563,"controlsVisible":true,"dropped":0,"elapsedMs":40269,"highQuality":false,"hwdec":"nvdec","mpvRenderCallMaxUs":21523,"mute":true,"pause":true,"position":10.133,"renders":1563,"sceneSwaps":1596,"videoHidden":false,"videoTrack":"1","volume":100,"windowActive":false}
+2026-10-18T09:01:49.920Z [17596] CLOSE_REQUEST stop playback asynchronously before releasing the scene graph
+2026-10-18T09:01:49.920Z [19204] mpv [cplayer/v] EOF code: 4
+2026-10-18T09:01:49.922Z [19204] mpv [cplayer/v] finished playback, success (reason 2)
+2026-10-18T09:01:49.936Z [17596] VIDEO_TRACK=auto
+2026-10-18T09:01:49.936Z [17596] METRIC {"avSyncSeconds":0,"cacheBytes":105033472,"callbackToRenderMaxUs":0,"callbacks":1563,"controlsVisible":true,"dropped":0,"elapsedMs":44285,"highQuality":false,"hwdec":"nvdec","mpvRenderCallMaxUs":0,"mute":true,"pause":true,"position":10.133,"renders":1563,"sceneSwaps":1596,"videoHidden":false,"videoTrack":"auto","volume":100,"windowActive":false}
+2026-10-18T09:01:49.941Z [11464] mpv_render_context_free on render thread; GL current=1
+2026-10-18T09:01:49.985Z [11464] Total time spent on pipeline creation during the lifetime of the QRhi 0x171f4e05c90 was 0 ms
+2026-10-18T09:01:49.985Z [11464] Writing pipeline cache contents (52063 bytes) for QRhi 0x171f4e05c90 to 'C:/Users/SAM/AppData/Local/FlowPlayer/FlowPlayer/cache/qtpipelinecache-x86_64-little_endian-llp64/qqpc_opengl'
+2026-10-18T09:01:50.007Z [19204] mpv_terminate_destroy on event worker (render context must already be freed)
+2026-10-18T09:01:50.009Z [17596] CLEAN_EXIT

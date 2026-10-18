@@ -2,47 +2,46 @@ import QtQuick
 Rectangle {
     id: controls
     property string inputRole: "control"
-    width: Math.min(690,parent.width-32); height: 106; radius: 10
-    color: "#da777965"
-    function stamp(seconds) {
-        seconds=Math.max(0,Math.floor(seconds));let h=Math.floor(seconds/3600),m=Math.floor(seconds/60)%60,s=seconds%60
-        return (h>0?h+":"+String(m).padStart(2,"0"):String(m))+":"+String(s).padStart(2,"0")
-    }
-    component Action: Item {
-        property string glyph
-        property int glyphSize: 25
-        signal activated()
-        width: 36; height: 40
-        Text { anchors.centerIn: parent; text: parent.glyph; color: mouse.containsMouse?"white":"#f1f0d9"; font.pixelSize: parent.glyphSize }
-        MouseArea { id: mouse; anchors.fill: parent; hoverEnabled: true; onClicked: parent.activated(); onDoubleClicked: event => {event.accepted=true} }
-    }
+    property bool showRemaining: true
+    readonly property bool hovered: hover.hovered || seek.dragging
+    signal menuRequested(string kind, real px, real py)
+    width: Math.min(750,parent.width-24); height: width<460?150:106; radius: 9
+    gradient: Gradient { GradientStop {position:0;color:"#e02f343b"} GradientStop {position:1;color:"#ed1c2027"} }
+    border.color: "#49515b"
+    HoverHandler { id: hover }
+    function menu(kind,item) {let point=controls.mapToItem(controls.parent,Math.max(0,width-280),0);menuRequested(kind,point.x,point.y)}
+    function stamp(seconds) {seconds=Math.max(0,Math.floor(seconds));let h=Math.floor(seconds/3600),m=Math.floor(seconds/60)%60,s=seconds%60;return (h>0?h+":"+String(m).padStart(2,"0"):String(m))+":"+String(s).padStart(2,"0")}
     Row {
-        anchors {left: parent.left; leftMargin: 16; top: parent.top; topMargin: 12}
-        visible: controls.width>=480
-        Action { glyph: mpv.mute?"♪":"◖"; onActivated: mpv.toggleMute() }
+        id: volumeRow; x: 10; y: 8
+        ActionButton { label:mpv.mute?"♪":"◖";hint:"Mute · M";onActivated:mpv.toggleMute() }
         Item {
-            property string inputRole: "volume"
-            width: Math.max(45,Math.min(100,controls.width*.14)); height: 40
-            Rectangle { anchors.verticalCenter: parent.verticalCenter; width: parent.width; height: 4; radius: 2; color: "#999d8d" }
-            Rectangle { anchors.verticalCenter: parent.verticalCenter; width: parent.width*Math.min(1,mpv.volume/100); height: 4; color: "#2aa0db" }
-            Rectangle { anchors.verticalCenter: parent.verticalCenter; x: Math.min(parent.width-10,parent.width*mpv.volume/100-5); width: 14; height: 14; radius: 7; color: "#ced0bd" }
-            MouseArea { anchors.fill: parent; onPressed: event => mpv.setVolume(event.x/width*100); onPositionChanged: event => {if(pressed)mpv.setVolume(event.x/width*100)} }
+            property string inputRole:"volume";width: controls.width<600?46:84;height:36
+            Rectangle {anchors.verticalCenter:parent.verticalCenter;width:parent.width;height:4;radius:2;color:"#6b737f"}
+            Rectangle {anchors.verticalCenter:parent.verticalCenter;width:parent.width*Math.min(1,mpv.volume/150);height:4;color:"#47a5d4"}
+            Rectangle {anchors.verticalCenter:parent.verticalCenter;x:Math.max(0,Math.min(parent.width-10,parent.width*mpv.volume/150-5));width:10;height:10;radius:5;color:"#d9dcce"}
+            MouseArea {anchors.fill:parent;onPressed:event=>mpv.setVolume(event.x/width*150);onPositionChanged:event=>{if(pressed)mpv.setVolume(event.x/width*150)}}
         }
     }
     Row {
-        anchors {horizontalCenter: controls.width>=480?parent.horizontalCenter:undefined; left: controls.width<480?parent.left:undefined; leftMargin: 12; top: parent.top; topMargin: 8}
-        spacing: 6
-        Action { glyph: "◀◀"; glyphSize: 18; onActivated: mpv.seek(-5) }
-        Action { width: 44; glyph: mpv.pause?"▶":"Ⅱ"; glyphSize: 33; onActivated: {mpv.togglePause();appDiagnostics.overlayClick()} }
-        Action { glyph: "▶▶"; glyphSize: 18; onActivated: mpv.seek(5) }
+        x: (controls.width-108)/2; y:8; spacing:0
+        ActionButton {label:"◀◀";textSize:17;hint:"Previous";onActivated:mpv.notify("No playlist")}
+        ActionButton {label:mpv.pause?"▶":"Ⅱ";textSize:28;width:40;hint:"Play / Pause · Space";onActivated:{mpv.togglePause();appDiagnostics.overlayClick()}}
+        ActionButton {label:"▶▶";textSize:17;hint:"Next";onActivated:mpv.notify("No playlist")}
     }
     Row {
-        anchors {right: parent.right; rightMargin: 12; top: parent.top; topMargin: 12}
-        Action { glyph: "ⓘ"; glyphSize: 21; onActivated: playerWindow.toggleInfo() }
-        Action { glyph: playerWindow.mini?"↗":"▱"; onActivated: playerWindow.toggleMini() }
-        Action { glyph: "⛶"; onActivated: playerWindow.toggleFullscreen() }
+        anchors.right:parent.right;anchors.rightMargin:8;y:controls.width<460?50:8
+        ActionButton {width:controls.width<600?28:34;label:"♫";hint:"Audio tracks · A";onActivated:controls.menu("audio",this)}
+        ActionButton {width:controls.width<600?28:34;label:"▤";hint:"Subtitles · S";onActivated:controls.menu("sub",this)}
+        ActionButton {width:controls.width<600?28:34;label:mpv.speed.toFixed(1)+"×";textSize:12;hint:"Playback speed";onActivated:controls.menu("speed",this)}
+        ActionButton {width:controls.width<600?28:34;label:"☷";hint:"Playlist";onActivated:mpv.notify("No playlist — available in Part 5")}
+        ActionButton {width:controls.width<600?28:34;label:"⛶";hint:"Fullscreen · F";onActivated:playerWindow.toggleFullscreen()}
+        ActionButton {width:controls.width<600?28:34;label:"⋯";hint:"More / Settings";onActivated:controls.menu("context",this)}
     }
-    Text { id: elapsed; anchors {left: parent.left; leftMargin: 20; bottom: parent.bottom; bottomMargin: 13} text: controls.stamp(mpv.position); color: "#f1f0df"; font.pixelSize: 14 }
-    Text { id: remaining; anchors {right: parent.right; rightMargin: 20; bottom: parent.bottom; bottomMargin: 13} text: "−"+controls.stamp(mpv.duration-mpv.position); color: "#f1f0df"; font.pixelSize: 14 }
-    SeekBar { anchors {left: elapsed.right; leftMargin: 12; right: remaining.left; rightMargin: 12; bottom: parent.bottom; bottomMargin: 9} height: 28 }
+    Text {id:elapsed;x:16;anchors.bottom:parent.bottom;anchors.bottomMargin:13;text:controls.stamp(controls.visible?mpv.position:0);color:"#efefdf";font.pixelSize:13}
+    Text {
+        id:remaining;anchors.right:parent.right;anchors.rightMargin:16;anchors.bottom:parent.bottom;anchors.bottomMargin:13
+        text:controls.showRemaining?"−"+controls.stamp(controls.visible?mpv.duration-mpv.position:0):controls.stamp(mpv.duration);color:"#efefdf";font.pixelSize:13
+        MouseArea {anchors.fill:parent;onClicked:controls.showRemaining=!controls.showRemaining}
+    }
+    SeekBar {id:seek;anchors.left:elapsed.right;anchors.leftMargin:10;anchors.right:remaining.left;anchors.rightMargin:10;anchors.bottom:parent.bottom;anchors.bottomMargin:9;height:28}
 }

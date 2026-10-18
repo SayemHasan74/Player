@@ -1,6 +1,7 @@
 #include "core/MpvController.h"
 #include "core/MpvRenderItem.h"
 #include "core/Log.h"
+#include "core/AppSettings.h"
 #include "window/FramelessWindow.h"
 #include "window/NativeEventFilter.h"
 #include <QGuiApplication>
@@ -10,8 +11,10 @@
 #include <QTimer>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QFile>
 #include <QFont>
+#include <QQuickItem>
 #include <windows.h>
 #include <objbase.h>
 #include <clocale>
@@ -22,6 +25,7 @@ class Diagnostics final : public QObject {
 public:
     QElapsedTimer clock;
     bool hadFrame=false;
+    std::atomic<quint64> swaps{0};
     Diagnostics() {clock.start();}
     Q_INVOKABLE void firstFrame() {if(!hadFrame) {hadFrame=true;Log::write("FIRST_VIDEO_SWAP_MS="+QString::number(clock.elapsed()));}}
     Q_INVOKABLE void overlayClick() {Log::write("OVERLAY_CLICK");}
@@ -45,9 +49,11 @@ int main(int argc,char **argv) {
     MpvRenderItem::diagnosticsEnabled=qEnvironmentVariableIsSet("FLOW_METRICS");
     int exitCode=0;
     {
-        MpvController controller;
+        AppSettings settings;
+        MpvController controller;controller.configure(&settings);
         {
             FramelessWindow window(&controller);
+            QObject::connect(&window,&QQuickWindow::frameSwapped,&window,[&]{++diagnostics.swaps;},Qt::DirectConnection);
             Log::write("WINDOW_CREATED_MS="+QString::number(diagnostics.clock.elapsed()));
             NativeEventFilter native(&window);app.installNativeEventFilter(&native);
             const auto profile=qEnvironmentVariable("FLOW_PROFILE");
@@ -75,6 +81,50 @@ int main(int argc,char **argv) {
                 bool ok=false;const int quitMs=qEnvironmentVariableIntValue("FLOW_QUIT_MS",&ok);
                 if(ok&&quitMs>0)QTimer::singleShot(quitMs,Qt::PreciseTimer,&window,&QWindow::close);
                 const auto scenario=qEnvironmentVariable("FLOW_SCENARIO");
+                if(scenario=="part3-controls"||scenario=="part3-tracks") {
+                    auto armed=std::make_shared<bool>(false);
+                    QObject::connect(&controller,&MpvController::videoFramePresented,&window,[&,armed,scenario]{
+                        if(*armed)return;*armed=true;
+                        auto mark=[&](const QString &phase) {
+                            QJsonObject state{{"phase",phase},{"elapsedMs",double(diagnostics.clock.elapsed())},
+                                {"position",controller.position()},{"dropped",double(controller.droppedFrames())},
+                                {"renders",double(MpvRenderItem::renderedFrames.load())},{"swaps",double(diagnostics.swaps.load())},
+                                {"controlsVisible",window.controlsVisible()},{"pause",controller.pause()},
+                                {"highQuality",controller.highQuality()},{"volume",controller.volume()},
+                                {"audioOnly",controller.audioOnly()},{"tracks",QJsonArray::fromVariantList(controller.tracks())},
+                                {"chapters",QJsonArray::fromVariantList(controller.chapters())},
+                                {"options",QJsonObject::fromVariantMap(controller.playbackOptions())}};
+                            Log::write("PART3_STAGE "+QString::fromUtf8(QJsonDocument(state).toJson(QJsonDocument::Compact)));
+                        };
+                        if(scenario=="part3-controls") {
+                            auto *root=window.contentItem()->findChild<QObject*>("sceneRoot",Qt::FindDirectChildrenOnly);
+                            QVariant result;
+                            const bool invoked=root&&QMetaObject::invokeMethod(root,"diagnosticPopupChecks",Q_RETURN_ARG(QVariant,result));
+                            Log::write(QString("PART3_POPUPS invoked=%1 result=%2").arg(invoked).arg(result.toString()));
+                            window.setUiHeld(true);mark("visible_begin");
+                            QTimer::singleShot(6000,Qt::PreciseTimer,&window,[&,mark]{mark("visible_end");window.setUiHeld(false);});
+                            QTimer::singleShot(8800,Qt::PreciseTimer,&window,[mark]{mark("hidden_begin");});
+                            QTimer::singleShot(15000,Qt::PreciseTimer,&window,[&,mark]{mark("hidden_end");controller.setPause(true);});
+                            QTimer::singleShot(17000,Qt::PreciseTimer,&window,[mark]{mark("paused_begin");});
+                            QTimer::singleShot(22000,Qt::PreciseTimer,&window,[&,mark]{mark("paused_end");controller.setPause(false);});
+                            QTimer::singleShot(24000,Qt::PreciseTimer,&window,[&,mark]{mark("before_quality");window.setUiHeld(true);controller.setHighQuality(true);});
+                            QTimer::singleShot(25500,Qt::PreciseTimer,&window,[mark]{mark("quality_begin");});
+                            QTimer::singleShot(31500,Qt::PreciseTimer,&window,[&,mark]{mark("quality_end");controller.setHighQuality(false);window.setUiHeld(false);});
+                            QTimer::singleShot(33000,Qt::PreciseTimer,&window,[&]{controller.setPause(true);});
+                            QTimer::singleShot(34000,Qt::PreciseTimer,&window,[&]{controller.seekTo(10.123,true);});
+                            QTimer::singleShot(36500,Qt::PreciseTimer,&window,[mark]{mark("seek_done");});
+                        } else {
+                            mark("tracks_loaded");
+                            QTimer::singleShot(1000,Qt::PreciseTimer,&window,[&]{controller.cycleTrack("audio");controller.selectTrack("sub",2);});
+                            QTimer::singleShot(2500,Qt::PreciseTimer,&window,[&]{controller.setPlaybackOption("sub-delay",.1);controller.setPlaybackOption("audio-delay",.1);controller.setPlaybackOption("sub-scale",1.2);controller.setPlaybackOption("sub-pos",90);});
+                            QTimer::singleShot(4000,Qt::PreciseTimer,&window,[&]{controller.addSubtitle("tests/fixtures/part3/sample.vtt");controller.setVolume(73);});
+                            QTimer::singleShot(6000,Qt::PreciseTimer,&window,[&,mark]{mark("tracks_switched");controller.setPause(true);});
+                            QTimer::singleShot(7000,Qt::PreciseTimer,&window,[&]{controller.seekTo(4.123,true);});
+                            QTimer::singleShot(9000,Qt::PreciseTimer,&window,[&,mark]{mark("subtitle_seek");controller.setPause(false);controller.open("tests/media/part3-cover.mp3");});
+                            QTimer::singleShot(13000,Qt::PreciseTimer,&window,[mark]{mark("cover_loaded");});
+                        }
+                    });
+                }
                 if(scenario=="part2-warm-mini") {
                     // Presentation-only smoke: never fullscreen, raise, minimize,
                     // move or resize the background window on the user's desktop.
@@ -113,6 +163,8 @@ int main(int argc,char **argv) {
                             {"mute",controller.mute()},{"windowActive",window.isActive()},
                             {"videoTrack",controller.videoTrack()},
                             {"videoHidden",window.videoHidden()},
+                            {"controlsVisible",window.controlsVisible()},{"sceneSwaps",double(diagnostics.swaps.load())},
+                            {"volume",controller.volume()},{"highQuality",controller.highQuality()},
                             {"callbackToRenderMaxUs",double(MpvRenderItem::callbackDelayMaxUs.exchange(0))},
                             {"mpvRenderCallMaxUs",double(MpvRenderItem::renderCallMaxUs.exchange(0))},
                             {"renders",double(MpvRenderItem::renderedFrames.load())},{"callbacks",double(MpvRenderItem::updateCallbacks.load())},

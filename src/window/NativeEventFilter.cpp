@@ -11,6 +11,13 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
     auto *msg=static_cast<MSG*>(opaque);
     if(!m_window->nativeId()||msg->hwnd!=reinterpret_cast<HWND>(m_window->nativeId()))return false;
     switch(msg->message) {
+    case WM_NCRBUTTONDOWN:case WM_CONTEXTMENU: {
+        POINT point{GET_X_LPARAM(msg->lParam),GET_Y_LPARAM(msg->lParam)};
+        if(msg->lParam==-1) {point.x=m_window->width()/2;point.y=m_window->height()/2;}
+        else {ScreenToClient(msg->hwnd,&point);point.x=qRound(point.x/m_window->devicePixelRatio());point.y=qRound(point.y/m_window->devicePixelRatio());}
+        m_window->contextMenuRequested(QPointF(point.x,point.y));*result=0;return true;
+    }
+    case WM_NCRBUTTONUP:*result=0;return true;
     case WM_NCMBUTTONDOWN:case WM_NCMBUTTONDBLCLK:m_window->toggleFullscreen();*result=0;return true;
     case WM_NCMBUTTONUP:*result=0;return true;
     case WM_NCLBUTTONDBLCLK:
@@ -35,7 +42,7 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
         *result=0;return true;
     }
     case WM_NCHITTEST: {
-        if(m_window->fullscreen()){*result=HTCLIENT;return true;}
+        if(m_window->fullscreen()||m_window->popupOpen()){*result=HTCLIENT;return true;}
         POINT p{GET_X_LPARAM(msg->lParam),GET_Y_LPARAM(msg->lParam)};ScreenToClient(msg->hwnd,&p);
         RECT rect;GetClientRect(msg->hwnd,&rect);
         const auto dpr=m_window->devicePixelRatio();const int edge=qRound(6*dpr);
@@ -47,15 +54,15 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
             }
         }
         const QPointF logical(p.x/dpr,p.y/dpr);
-        if(!m_window->mini()&&logical.y()<38&&logical.x()>=m_window->width()-84&&logical.x()<m_window->width()-42) {*result=HTMAXBUTTON;return true;}
+        if(m_window->controlsVisible()&&!m_window->mini()&&logical.y()<38&&logical.x()>=m_window->width()-84&&logical.x()<m_window->width()-42) {*result=HTMAXBUTTON;return true;}
         *result=m_window->titleAt(logical)?HTCAPTION:HTCLIENT;return true;
     }
     case WM_NCMOUSEMOVE: {
-        m_window->pointerActivity();
+        m_window->setNativeHover(true);
         m_window->setMaxHovered(msg->wParam==HTMAXBUTTON);
         TRACKMOUSEEVENT track{sizeof(track),TME_LEAVE|TME_NONCLIENT,msg->hwnd,0};TrackMouseEvent(&track);break;
     }
-    case WM_NCMOUSELEAVE:m_window->setMaxHovered(false);break;
+    case WM_NCMOUSELEAVE:m_window->setNativeHover(false);m_window->setMaxHovered(false);break;
     case WM_NCLBUTTONDOWN:if(msg->wParam==HTMAXBUTTON){*result=0;return true;}break;
     case WM_NCLBUTTONUP:if(msg->wParam==HTMAXBUTTON){m_window->toggleMaximized();*result=0;return true;}break;
     case WM_SIZING: {

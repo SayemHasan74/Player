@@ -1,5 +1,14 @@
 # Changelog
 
+## Part 3 controls, tracks and settings — manual acceptance pending
+
+- Saved prompt3.md and retained the single native window/Qt Quick scene in every mode, including hide-only Mini playback.
+- Added the dark reference-based transport surface, shared drag/hover/chapter/network-cache seek bar, remaining/total toggle, track/speed menus, playlist placeholder and single-message toasts.
+- Added in-scene right-click/URL menus and a Loader-created settings panel, including keyboard-safe text editing and scrolling in Mini. No native popup or second video/overlay window is used.
+- Added coordinated 2.5-second controls/title/cursor auto-hide, hover/menu/drag holds, 140 ms fades, subtitle loading/cycling/adjustments, audio selection/delay, embedded cover art, cache info and live quality/hardware options.
+- Added worker-written INI settings, volume persistence and settings unit tests. Corrected subtitle search folder separators for Windows per the mpv manual. Auto-resume and autoplay settings are saved only; their behavior remains for Parts 4/5.
+- Removed an invisible cache-info binding that caused periodic scene swaps after controls hid. Basic evidence and remaining limitations are reported in tests/PART3_RESULTS.md; visual/fullscreen/subtitle styling acceptance remains user testing.
+
 ## Part 2 Mini revision — user approved hide-only playback
 
 - Removed decoder disabling, video track reselection and Mini-related engine commands. Video/audio and decoding continue normally beneath the existing scene's cover, avoiding the rejected decoder restart path.

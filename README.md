@@ -2,7 +2,7 @@
 
 Windows 11 x64. C++20 / CMake / MSVC 2022. Video is rendered by libmpv's OpenGL render API into a `QQuickFramebufferObject`, which Qt Quick composites with plain QML controls inside the same `QQuickWindow`. No native child video window or overlay window exists.
 
-**Parts 1 and 2 are implemented; Part 2 visual/transition acceptance is pending.** See [Part 2 results](tests/PART2_RESULTS.md) for current measurements, limitations and manual checks. [Part 1 results](tests/RESULTS.md) describe the earlier executable, including its two VP9 drops. No Part 3 functionality is implemented.
+**Part 3 controls, tracks and settings are implemented; visual acceptance remains pending.** See [Part 3 results](tests/PART3_RESULTS.md) for current measurements and manual checks. Reports for Parts 1 and 2 apply to their earlier executables. No Part 4 work is implemented.
 
 User revisions on 2026-10-18: resident RAM below **500 MB** is accepted, including cache; the earlier 150/300 MB limits are superseded. A first-deployment-only startup exception is accepted; subsequent fully closed launches must stay below 500 ms. All five manual checks were reported passed. Their original executable hash is retained in `tests/manual-results.json`. No elevated RAM profiling is needed.
 
@@ -161,4 +161,38 @@ $env:FLOW_TEST_MUTE = '1'
 .\out\FlowPlayer\FlowPlayer.exe 'E:\path\to\video.mkv'
 ```
 
-See `tests/PART2_RESULTS.md` for actual results and the compact manual checklist. The Part 1 report describes the earlier packaged executable, not this new build. No Part 3 work is included.
+See `tests/PART2_RESULTS.md` for actual results and the compact manual checklist. The Part 1 report describes the earlier packaged executable, not this new build. This Part 2 section documents the earlier baseline; see the Part 3 section below for current controls/settings.
+
+## Part 3: controls, tracks and settings
+
+The saved player reference guides the transport layout. The new dark gradient bar has previous/next placeholders, play/pause, audio/subtitle/speed menus, volume up to150, playlist placeholder, fullscreen and More/Settings. Time display switches remaining/total on click. Mini uses the same controls and seek component while video and audio continue normally beneath its plain scene cover. There is no copied IINA logo, blur, shadow, separate overlay window or native popup menu.
+
+The shared seek bar previews the cursor/drag target, marks chapters and shows actual cached seek ranges for network sources. Dragging sends coalesced keyframe seeks at most every65ms; release sends one exact seek. Its timer runs only during a drag and does not drive video rendering. Exact seek measurements use an asynchronous post-restart property read.
+
+Controls/title/cursor hide after2.5seconds with one140ms opacity fade, remain shown paused/inMini, and stay shown over controls, during dragging and while a scene menu/settings/URL editor is open. Mouse movement reveals them. Hidden cache-info text does not keep updating the scene. A single toast replaces the prior message and dismisses itself.
+
+Right-click opens the scene menu, including over native caption zones. Audio/subtitle lists, adjustments, speed, aspect, information and Settings all remain in the same QtQuick scene in fullscreen. Lists/settings scroll to fit Mini. Menus support arrows/Enter/Esc; editable fields preserve normal typing and text-selection shortcuts. Ctrl+U opens the in-scene URL editor with clipboard text; nothing reads the clipboard before that action.
+
+- **S** cycles subtitle tracks/off; **A** cycles audio tracks; **Z/X** adjust subtitle delay by−/+0.1seconds.
+- Subtitle file drop or menu loading uses mpv sub-add/select; SRT, ASS/SSA, VTT and image subtitle formats are handled by mpv/libass. Full styled rendering is a manual check, especially bitmap subtitle size/position limitations.
+- Matching sidecars and Subs/subs/Subtitles/Sub folders use Windows semicolon-separated paths, as specified by the [mpv manual](https://mpv.io/manual/master/#options-sub-file-paths).
+- Embedded cover art is drawn by mpv through the same framebuffer item for audio files using audio-display=embedded-first; no second image/video window is created.
+- **I** includes resolution, codec, decoder, FPS, drops, bitrate and cache. Playlist navigation/panel remain placeholders for Part5.
+
+Open **More → Settings** (or right-click → Settings) for language order, auto-resume defaultoff, autoplay-next defaulton, aspect lock, live HQ/hardware decoding, seek steps, tiny Mini preview and default speed. Auto-resume/autoplay behavior is reserved for Parts4/5. The panel is created only when opened.
+
+Part3 preferences and volume are in `%LOCALAPPDATA%/FlowPlayer/settings.ini`. The model reads at startup and flushes writes on a worker thread, including shutdown. Older registry instructions above apply to earlier builds; use the current settings panel for aspect lock and tiny preview. Legacy window geometry is still remembered separately. Automated benchmarks use isolated settings files under each result folder; they do not change your preferences.
+
+Build/check/deploy from `E:\Codes\FlowPlayer`:
+
+```powershell
+.\scripts\build.ps1 -Target FlowPlayer
+.\scripts\build.ps1 -Target SettingsTests
+$env:PATH = "$PWD\deps\Qt\bin;$env:PATH"
+.\.tools\Scripts\ctest.exe --test-dir build --output-on-failure
+.\scripts\deploy.ps1
+$env:FLOW_TEST_MUTE = '1'
+.\out\FlowPlayer\FlowPlayer.exe 'E:\path\to\video.mkv'
+```
+
+`generate-part3-media.ps1` creates the multi-audio/subtitle/chapter and MP3-cover fixtures after the Part1 media script. PGS/VobSub samples are not generated and remain manual. Test reports distinguish real measurements from unperformed visual/audio checks; zero counters after a seek are never treated as evidence of zero earlier drops.

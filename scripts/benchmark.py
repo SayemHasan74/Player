@@ -10,6 +10,7 @@ parser.add_argument('--scenario',default='')
 parser.add_argument('--profile',default='')
 parser.add_argument('--exe',type=pathlib.Path,default=ROOT/'build/FlowPlayer.exe')
 parser.add_argument('--standalone',action='store_true')
+parser.add_argument('--settings-file',type=pathlib.Path,help='Explicit isolated settings file for restart verification')
 parser.add_argument('--diagnostic-no-cache',action='store_true',help='Diagnostic memory baseline, never an acceptance result')
 a=parser.parse_args()
 if any(p.info['name']=='FlowPlayer.exe' for p in psutil.process_iter(['name'])):
@@ -18,6 +19,7 @@ if a.scenario in ('idle','lifecycle'):
     parser.error('Minimize/restore is manual while the user works. Use --scenario pause for background idle measurement.')
 out=ROOT/'tests/results'/a.name;out.mkdir(parents=True,exist_ok=True)
 env=os.environ.copy();env.update(FLOW_METRICS='1',FLOW_QUIT_MS=str(a.seconds*1000),FLOW_SCENARIO=a.scenario,FLOW_PROFILE=a.profile,FLOW_TEST_MUTE='1',FLOW_TEST_BACKGROUND='1')
+env['FLOW_SETTINGS_FILE']=str((a.settings_file or (out/'settings.ini')).resolve())
 if a.diagnostic_no_cache:env['FLOW_DIAGNOSTIC_NO_CACHE']='1'
 else:env.pop('FLOW_DIAGNOSTIC_NO_CACHE',None)
 if a.standalone:
