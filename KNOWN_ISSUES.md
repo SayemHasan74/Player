@@ -19,3 +19,12 @@
 - Twenty consecutive clean exits, with render context freed before mpv termination.
 
 See tests/RESULTS.md and the retained JSON evidence for complete numbers. Part 2 is not implemented. Generated binaries, downloaded SDKs and media are excluded from Git; see README.md to build locally.
+
+# Part 2 current limitations
+
+Part 2 implementation is available; tests/PART2_RESULTS.md is the authoritative current report. The Part 1 numbers above apply only to its earlier executable.
+
+- State-model unit tests and the short background functional check passed. Real fullscreen UI, tearing, flashes, audible continuity, rapid native transitions and multi-monitor/DPI behavior remain user tests by explicit request.
+- The final decoder-disable/restore/pause smoke recorded 67 raw dropped frames: zero before decoder disable, 60 at the paused sample after restore and 67 at exit. mpv logged a track refresh seek and an Audio/Video desynchronisation warning during restoration. Mini restore has an unresolved playback regression; do not claim a zero-drop or seamless transition pass.
+- Transient peak resident working set was 512.09 MB including cache, above the user-approved 500 MB limit. No further RAM profiling was performed.
+- Silent files keep decoding behind Mini's cover so their playback clock does not stop. With selected audio, vid=no is applied as requested.

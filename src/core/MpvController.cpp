@@ -4,6 +4,8 @@
 #include <QSettings>
 #include <stdexcept>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 namespace {
 QVariant nodeValue(const mpv_node &n) {
     switch(n.format) {
@@ -82,11 +84,17 @@ void MpvController::run() {
         {"frame-drop-count",MPV_FORMAT_INT64},{"video-out-params",MPV_FORMAT_NODE},
         {"idle-active",MPV_FORMAT_FLAG},
         {"demuxer-cache-state",MPV_FORMAT_NODE}
+        ,{"vid",MPV_FORMAT_STRING},{"video-codec",MPV_FORMAT_STRING},
+        {"container-fps",MPV_FORMAT_DOUBLE},{"video-bitrate",MPV_FORMAT_DOUBLE}
     };
     for(const auto &[name,format]:properties) mpv_observe_property(mpv,0,name,format);
     mpv_set_wakeup_callback(mpv,wakeup,this);
     m_handle=mpv;
-    QMetaObject::invokeMethod(this,[this]{m_ready=true;emit readyChanged();});
+    QMetaObject::invokeMethod(this,[this]{
+        m_ready=true;
+        if(m_miniVideoDisabled)command({"set","vid","no"});
+        emit readyChanged();
+    });
     while(!m_stop) {
         {std::unique_lock lock(m_mutex);m_wakeup.wait(lock,[this]{return m_pending||m_stop;});m_pending=false;}
         if(m_stop)break;
@@ -120,11 +128,14 @@ void MpvController::run() {
     mpv_terminate_destroy(mpv);
 }
 void MpvController::apply(const QString &n,const QVariant &v) {
+    if(n=="vid") {m_vid=v.toString();Log::write("VIDEO_TRACK="+m_vid);emit stateChanged();return;}
+    if(n=="video-codec"||n=="container-fps"||n=="video-bitrate") {m_videoInfo[n]=v;emit stateChanged();return;}
     if(n=="idle-active") {if(v.toBool())emit playbackIdle();return;}
     if(n=="demuxer-cache-state") {m_cacheBytes=v.toMap().value("total-bytes",-1).toLongLong();return;}
     if(n=="avsync") {m_avSync=v.toDouble();return;}
     if(n=="video-out-params") {
         const auto parameters=v.toMap();const int w=parameters.value("dw").toInt(),h=parameters.value("dh").toInt();
+        m_videoInfo["width"]=w;m_videoInfo["height"]=h;emit stateChanged();
         if(w>0&&h>0&&(w!=m_width||h!=m_height)) {m_width=w;m_height=h;emit videoSizeChanged(w,h);}
         return;
     }
@@ -135,7 +146,7 @@ void MpvController::apply(const QString &n,const QVariant &v) {
     else if(n=="mute")m_mute=v.toBool();
     else if(n=="speed")m_speed=v.toDouble();
     else if(n=="media-title")m_title=v.toString();
-    else if(n=="track-list")m_tracks=v.toList();
+    else if(n=="track-list") {m_tracks=v.toList();setMiniVideoDisabled(m_miniRequested);}
     else if(n=="hwdec-current") {m_hwdec=v.toString();Log::write("ACTIVE_HWDEC="+m_hwdec);}
     else if(n=="frame-drop-count")m_dropped=v.toLongLong();
     emit stateChanged();
@@ -166,4 +177,33 @@ void MpvController::setHighQuality(bool on) {
     command({"set","cscale",on?"spline36":"bilinear"});
     command({"set","video-sync",on?"display-resample":"audio"});
     command({"set","interpolation",on?"yes":"no"});emit stateChanged();
+}
+void MpvController::seek(double seconds,bool exact) {
+    command({"seek",QByteArray::number(seconds),exact?"relative+exact":"relative"});
+    emit toast(QString("Seek %1%2 s").arg(seconds>=0?"+":"").arg(seconds));
+}
+void MpvController::seekTo(double seconds) {command({"seek",QByteArray::number(std::clamp(seconds,0.0,m_duration)),"absolute+exact"});}
+void MpvController::adjustVolume(double delta) {setVolume(m_volume+delta);}
+void MpvController::setVolume(double value) {
+    value=std::clamp(value,0.0,150.0);command({"set","volume",QByteArray::number(value)});emit toast(QString("Volume %1%").arg(qRound(value)));
+}
+void MpvController::toggleMute() {command({"cycle","mute"});}
+void MpvController::adjustSpeed(double delta) {
+    const double value=std::clamp(std::round((m_speed+delta)*10)/10,0.1,16.0);
+    command({"set","speed",QByteArray::number(value)});emit toast(QString("Speed %1×").arg(value,0,'f',1));
+}
+void MpvController::resetSpeed() {command({"set","speed","1"});emit toast("Speed 1.0×");}
+void MpvController::frameStep(bool backward) {if(m_pause)command({backward?"frame-back-step":"frame-step"});}
+void MpvController::setMiniVideoDisabled(bool disabled) {
+    m_miniRequested=disabled;
+    // With no selected audio there is no playback clock after vid=no. Keep
+    // silent-video playback alive under Mini's cover rather than freezing it.
+    bool audio=false;
+    for(const auto &entry:m_tracks) {const auto track=entry.toMap();if(track.value("type")=="audio"&&track.value("selected").toBool())audio=true;}
+    disabled=disabled&&audio;
+    if(disabled==m_miniVideoDisabled)return;
+    m_miniVideoDisabled=disabled;
+    if(disabled) {m_savedVid=(m_vid=="no"?QString("auto"):m_vid);command({"set","vid","no"});}
+    else command({"set","vid",m_savedVid.toUtf8()});
+    Log::write(QString("MINI_VIDEO disabled=%1 saved=%2 position=%3").arg(disabled).arg(m_savedVid).arg(m_position));
 }

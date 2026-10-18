@@ -1,8 +1,8 @@
-# FlowPlayer — Part 1 foundation
+# FlowPlayer — Windows media player
 
 Windows 11 x64. C++20 / CMake / MSVC 2022. Video is rendered by libmpv's OpenGL render API into a `QQuickFramebufferObject`, which Qt Quick composites with plain QML controls inside the same `QQuickWindow`. No native child video window or overlay window exists.
 
-**Part 1 implementation is present; acceptance remains blocked by two VP9 dropped frames in the 320-second test.** HEVC/H.264, RAM, normal startup, pause and shutdown checks passed on the packaged executable. See [tests/RESULTS.md](tests/RESULTS.md) for measurements and scope. No Part 2 functionality is implemented.
+**Parts 1 and 2 are implemented; Part 2 visual/transition acceptance is pending.** See [Part 2 results](tests/PART2_RESULTS.md) for current measurements, limitations and manual checks. [Part 1 results](tests/RESULTS.md) describe the earlier executable, including its two VP9 drops. No Part 3 functionality is implemented.
 
 User revisions on 2026-10-18: resident RAM below **500 MB** is accepted, including cache; the earlier 150/300 MB limits are superseded. A first-deployment-only startup exception is accepted; subsequent fully closed launches must stay below 500 ms. All five manual checks were reported passed. Their original executable hash is retained in `tests/manual-results.json`. No elevated RAM profiling is needed.
 
@@ -114,4 +114,51 @@ Remove-Item Env:FLOW_TEST_BACKGROUND -ErrorAction SilentlyContinue
 
 Render integration follows [mpv-examples/libmpv/qt_opengl](https://github.com/mpv-player/mpv-examples/tree/master/libmpv/qt_opengl) and its [Qt Quick FBO example](https://github.com/mpv-player/mpv-examples/tree/master/libmpv/qml), adapted for event-thread ownership and render-thread teardown. The Qt Widgets host in the former is not used. The official libmpv headers are authoritative for render-context timing and lifetime.
 
-Stub modules reserve the complete requested structure. History, playlists, mini/fullscreen state transitions, SMTC and later UI panels remain unimplemented until their authorized parts.
+Stub modules reserve the complete requested structure. History, playlists, SMTC, the welcome page and later UI panels remain unimplemented until their authorized parts. Part 2 fills in mini/fullscreen state transitions and basic controls.
+
+## Part 2: modes and input
+
+The same `FramelessWindow`/HWND, mpv controller, render context and QML scene serve Windowed, Maximized, Fullscreen and Mini. Fullscreen uses Qt's `showFullScreen()` plus the current monitor's full native rectangle; it does not request an exclusive display mode. Mini uses native z-order changes rather than recreating the window through Qt flags. Geometry is recorded in Qt logical coordinates with screen name and DPI in each state snapshot. If the original monitor disappears or its work area shrinks, restoration clamps to an available screen.
+
+The title bar and temporary transport bar follow `design/references/player-controls.png`; no IINA logo is used. The welcome page and final Part 3 styling are deferred. Video, title bar, seek bars, info and toasts are ordinary items in this one scene in every mode.
+
+| Input | Action |
+|---|---|
+| Middle-click anywhere, F, fullscreen button | Toggle fullscreen and restore the previous mode/geometry |
+| Esc | Exit fullscreen to the previous mode |
+| Ctrl+M, compact/restore button | Toggle Mini and restore the previous mode/geometry |
+| Ctrl+T, pin | Always on top; Mini is always on top regardless |
+| Space; double-click video/empty area | Pause/play; buttons and title bar do not toggle pause on double-click |
+| Double-click title background | Maximize/restore (restore Mini/fullscreen first) |
+| Left/Right | Seek 5 seconds |
+| Shift+Left/Right | Seek 1 second exactly |
+| Ctrl+Left/Right | Seek 30 seconds |
+| Up/Down; wheel outside seek bar | Volume +/-5 |
+| Wheel over seek bar | Seek +/-5 seconds per notch |
+| M | Mute |
+| [ / ]; Backspace | Speed +/-0.1; reset 1.0 |
+| Comma / period while paused | Frame back/forward |
+| I | Resolution, codec, decoder, FPS, dropped-frame count and bitrate |
+| Ctrl+O; file drop; command line | Open a file |
+
+Mini is initially 420 x 64 logical pixels at the work area's bottom-right and remembers its position/width. Only horizontal resize is enabled. Its title and seek bar remain interactive; the same video item stays alive underneath an opaque plain-QML cover. With an audio track selected, `vid=no` disables video decoding while the audio timeline continues; restoring reselects the saved video track without issuing an application seek or pausing audio. mpv may refresh-seek and discard frames while bringing video back into sync. Silent files retain hidden decoding because disabling their only selected stream would stop playback. The default-off tiny-preview setting keeps video decoding enabled. With the app closed, enable it using:
+
+```powershell
+Set-ItemProperty HKCU:\Software\FlowPlayer\FlowPlayer\window -Name tinyPreview -Type String -Value true
+```
+
+The cursor inactivity timer is single-shot, 2.5 seconds. It is stopped while paused, in Mini, or after the pointer leaves. There is no render polling timer. The original swap interval remains 1; visible tearing and transition smoothness must still be checked on the actual display.
+
+Build and run Part 2 from `E:\Codes\FlowPlayer`:
+
+```powershell
+.\scripts\build.ps1 -Target FlowPlayer
+.\scripts\build.ps1 -Target WindowStateMachineTests
+$env:PATH = "$PWD\deps\Qt\bin;$env:PATH"
+.\.tools\Scripts\ctest.exe --test-dir build --output-on-failure
+.\scripts\deploy.ps1
+$env:FLOW_TEST_MUTE = '1'
+.\out\FlowPlayer\FlowPlayer.exe 'E:\path\to\video.mkv'
+```
+
+See `tests/PART2_RESULTS.md` for actual results and the compact manual checklist. The Part 1 report describes the earlier packaged executable, not this new build. No Part 3 work is included.

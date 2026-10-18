@@ -1,11 +1,18 @@
 #pragma once
 #include <QQuickWindow>
 #include <QSettings>
+#include <QTimer>
+#include "WindowStateMachine.h"
 class MpvController;
 class FramelessWindow final : public QQuickWindow {
     Q_OBJECT
     Q_PROPERTY(bool lockAspectRatio READ lockAspectRatio WRITE setLockAspectRatio NOTIFY lockAspectRatioChanged)
     Q_PROPERTY(bool maxHovered READ maxHovered NOTIFY maxHoveredChanged)
+    Q_PROPERTY(bool mini READ mini NOTIFY modeChanged)
+    Q_PROPERTY(bool fullscreen READ fullscreen NOTIFY modeChanged)
+    Q_PROPERTY(bool pinned READ pinned NOTIFY modeChanged)
+    Q_PROPERTY(bool infoVisible READ infoVisible NOTIFY modeChanged)
+    Q_PROPERTY(bool tinyPreview READ tinyPreview WRITE setTinyPreview NOTIFY modeChanged)
 public:
     explicit FramelessWindow(MpvController *controller);
     ~FramelessWindow() override;
@@ -17,6 +24,20 @@ public:
     void setMaxHovered(bool value);
     void fitVideo(int width,int height);
     Q_INVOKABLE void toggleMaximized();
+    Q_INVOKABLE void toggleFullscreen();
+    Q_INVOKABLE void exitFullscreen();
+    Q_INVOKABLE void toggleMini();
+    Q_INVOKABLE void togglePinned();
+    Q_INVOKABLE void toggleInfo();
+    bool mini() const {return m_modes.current().mode==WindowStateMachine::Mode::Mini;}
+    bool fullscreen() const {return m_modes.current().mode==WindowStateMachine::Mode::Fullscreen;}
+    bool pinned() const {return m_pinned;}
+    bool infoVisible() const {return m_infoVisible;}
+    bool tinyPreview() const {return m_tinyPreview;}
+    void setTinyPreview(bool enabled);
+    void pointerActivity();
+    bool seekAt(const QPointF &point) const;
+    bool titleAt(const QPointF &point) const;
     Q_INVOKABLE void requestMinimize();
     Q_INVOKABLE void openDialog();
     double videoAspect() const {return m_aspect;}
@@ -25,8 +46,10 @@ public:
 signals:
     void lockAspectRatioChanged();
     void maxHoveredChanged();
+    void modeChanged();
 protected:
     bool event(QEvent *event) override;
+    bool eventFilter(QObject *watched,QEvent *event) override;
     void closeEvent(QCloseEvent *event) override;
 private:
     MpvController *m_controller;
@@ -39,4 +62,14 @@ private:
     double m_aspect=16.0/9.0;
     QRect m_lastNormalGeometry;
     quintptr m_nativeId=0;
+    WindowStateMachine m_modes;
+    bool m_applyingMode=false,m_pinned=false,m_infoVisible=false,m_tinyPreview=false;
+    bool m_cursorPaused=true,m_dragCandidate=false;
+    QPointF m_pressPosition;
+    QTimer m_cursorTimer;
+    void rememberModeGeometry();
+    void applyMode();
+    void toggleMode(WindowStateMachine::Mode target);
+    void applyPin();
+    QString inputRoleAt(const QPointF &point) const;
 };

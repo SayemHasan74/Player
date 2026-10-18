@@ -1,5 +1,14 @@
 # Changelog
 
+## Part 2 window modes and input — implementation, manual acceptance pending
+
+- Saved prompt2.md after pushing the Part 1 project and visual references to GitHub.
+- Added an explicit window state machine with nested previous-state snapshots, independent windowed/Mini geometries and automated deterministic/random round-trip tests.
+- Added same-window Qt fullscreen, monitor-size native positioning, compact always-on-top Mini, native/client middle-click handling, title controls and complete Part 2 keyboard/wheel/double-click routing.
+- Mini disables video decoding when a selected audio track can maintain playback. Silent videos retain hidden decoding so their timeline cannot freeze. The tiny-preview setting defaults off.
+- Added reference-inspired plain QML transport/volume/seek controls, diagnostics, temporary toasts and a one-shot inactivity cursor timer. Preserved OpenGL, threaded rendering, swap interval 1 and the existing framebuffer item.
+- Automated checks remain muted/background and do not fullscreen, raise, minimize, drag or resize windows on the user's desktop. Visual interaction, tearing and audible continuity remain user tests; see tests/PART2_RESULTS.md.
+
 ## Part 1 foundation — acceptance pending
 
 - Added pinned, project-local Qt/libmpv/SDK dependency fetching, MSVC build, render-API spike, application and trimmed deployment scripts.

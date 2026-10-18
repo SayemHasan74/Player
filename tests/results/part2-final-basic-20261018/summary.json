@@ -1,0 +1,88 @@
+{
+  "file": "tests\\media\\hevc-4k60-main10.mkv",
+  "executable": "E:\\Codes\\FlowPlayer\\out\\FlowPlayer\\FlowPlayer.exe",
+  "executableSha256": "2a05a30a4625cbd3b1313c48df9357db08a9da5e559f6f7b42f8f3b9e607d0f9",
+  "testMode": "muted, non-activating bottom window; desktop interaction not tested",
+  "exitCode": 0,
+  "wallSeconds": 39.56924189999995,
+  "samples": 23,
+  "logicalProcessors": 16,
+  "gpuScope": "whole adapter, includes desktop and other applications",
+  "cpuTotalPercent": {
+    "mean": 0.5266304347826087,
+    "max": 3.91875,
+    "min": 0.0
+  },
+  "workingSetMiB": {
+    "mean": 401.7189198369565,
+    "max": 488.36328125,
+    "min": 317.94140625
+  },
+  "privateMiB": {
+    "mean": 1723.7007472826087,
+    "max": 2703.078125,
+    "min": 1553.625
+  },
+  "privateWorkingSetMiB": {
+    "mean": 332.4228940217391,
+    "max": 419.0390625,
+    "min": 248.62109375
+  },
+  "adapterGpuPercent": {
+    "mean": 13.130434782608695,
+    "max": 99.0,
+    "min": 2.0
+  },
+  "adapterDecoderPercent": {
+    "mean": 16.956521739130434,
+    "max": 95.0,
+    "min": 0.0
+  },
+  "timings": {
+    "QT_APP_READY_MS": 284,
+    "WINDOW_CREATED_MS": 515,
+    "SHOW_CALLED_MS": 521,
+    "FIRST_SWAP_MS": 666,
+    "QML_LOADED_MS": 704,
+    "FIRST_VIDEO_SWAP_MS": 2308,
+    "externalLaunchToFirstSwapMs": 4050.833,
+    "openToFirstVideoSwapMs": 182.0
+  },
+  "mpvFirst": {
+    "avSyncSeconds": 1.860000000214468e-05,
+    "cacheBytes": 976912,
+    "callbackToRenderMaxUs": 22343,
+    "callbacks": 363,
+    "dropped": 0,
+    "elapsedMs": 10544,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 21402,
+    "mute": true,
+    "pause": false,
+    "position": 8.17950576700004,
+    "renders": 363,
+    "videoTrack": "no",
+    "windowActive": false
+  },
+  "mpvLast": {
+    "avSyncSeconds": 2.100000007915215e-06,
+    "cacheBytes": 104010048,
+    "callbackToRenderMaxUs": 25029,
+    "callbacks": 1240,
+    "dropped": 67,
+    "elapsedMs": 35552,
+    "hwdec": "nvdec",
+    "mpvRenderCallMaxUs": 16868,
+    "mute": true,
+    "pause": false,
+    "position": 29.232999999999997,
+    "renders": 1240,
+    "videoTrack": "1",
+    "windowActive": false
+  },
+  "cleanExit": true,
+  "diagnosticOnly": false,
+  "mutedThroughoutSamples": true,
+  "neverActivated": true,
+  "completedRequestedDuration": true
+}

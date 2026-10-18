@@ -1,0 +1,37 @@
+{
+  "implementationChecks": {
+    "stateUnitTests": true,
+    "qmlLoaded": true,
+    "firstVideoFrame": true,
+    "vidNoObserved": true,
+    "videoRestored": true,
+    "cleanExitRenderFreedFirst": true,
+    "mutedAndNonActivating": true,
+    "noAvSyncWarning": false
+  },
+  "manualAcceptance": "pending user tests",
+  "playbackAcceptance": "not established; drops observed after video restore",
+  "executableSha256": "2a05a30a4625cbd3b1313c48df9357db08a9da5e559f6f7b42f8f3b9e607d0f9",
+  "phases": {
+    "video": {
+      "samples": 4,
+      "cpuTotalPercent": 0.7453125,
+      "adapterGpuPercent": 7.0,
+      "adapterDecoderPercent": 12.25
+    },
+    "video disabled": {
+      "samples": 4,
+      "cpuTotalPercent": 0.0,
+      "adapterGpuPercent": 8.0,
+      "adapterDecoderPercent": 0.0
+    },
+    "paused": {
+      "samples": 2,
+      "cpuTotalPercent": 0.0,
+      "adapterGpuPercent": 12.0,
+      "adapterDecoderPercent": 0.0
+    }
+  },
+  "rawDroppedFrames": 67,
+  "peakWorkingSetMB": 512.086016
+}

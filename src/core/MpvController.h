@@ -22,6 +22,8 @@ class MpvController final : public QObject {
     Q_PROPERTY(QString hwdecCurrent READ hwdecCurrent NOTIFY stateChanged)
     Q_PROPERTY(qint64 droppedFrames READ droppedFrames NOTIFY stateChanged)
     Q_PROPERTY(bool highQuality READ highQuality WRITE setHighQuality NOTIFY stateChanged)
+    Q_PROPERTY(QVariantMap videoInfo READ videoInfo NOTIFY stateChanged)
+    Q_PROPERTY(QString videoTrack READ videoTrack NOTIFY stateChanged)
 public:
     explicit MpvController(QObject *parent=nullptr);
     ~MpvController() override;
@@ -39,12 +41,23 @@ public:
     QString hwdecCurrent() const {return m_hwdec;}
     qint64 droppedFrames() const {return m_dropped;}
     bool highQuality() const {return m_highQuality;}
+    QVariantMap videoInfo() const {return m_videoInfo;}
+    QString videoTrack() const {return m_vid;}
     qint64 cacheBytes() const {return m_cacheBytes;}
     double avSync() const {return m_avSync;}
     Q_INVOKABLE void open(const QString &path);
     Q_INVOKABLE void togglePause();
     Q_INVOKABLE void setPause(bool paused);
     Q_INVOKABLE void setHighQuality(bool enabled);
+    Q_INVOKABLE void seek(double seconds,bool exact=false);
+    Q_INVOKABLE void seekTo(double seconds);
+    Q_INVOKABLE void adjustVolume(double delta);
+    Q_INVOKABLE void setVolume(double value);
+    Q_INVOKABLE void toggleMute();
+    Q_INVOKABLE void adjustSpeed(double delta);
+    Q_INVOKABLE void resetSpeed();
+    Q_INVOKABLE void frameStep(bool backward);
+    void setMiniVideoDisabled(bool disabled);
     void setRenderReady(bool ready);
     void command(const QList<QByteArray> &arguments);
 signals:
@@ -55,6 +68,7 @@ signals:
     void renderUpdateRequested();
     void videoFramePresented();
     void playbackIdle();
+    void toast(const QString &message);
 private:
     void run();
     void apply(const QString &name,const QVariant &value);
@@ -73,6 +87,9 @@ private:
     int m_width=0,m_height=0;
     QString m_title="FlowPlayer",m_hwdec="none";
     QVariantList m_tracks;
+    QVariantMap m_videoInfo;
+    QString m_vid="auto",m_savedVid="auto";
+    bool m_miniVideoDisabled=false,m_miniRequested=false;
     bool m_renderReady=false;
     QString m_pendingFile;
 };

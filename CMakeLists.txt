@@ -18,13 +18,22 @@ qt_add_executable(FlowPlayer WIN32
     src/core/MpvRenderItem.cpp src/core/MpvRenderItem.h
     src/window/FramelessWindow.cpp src/window/FramelessWindow.h
     src/window/NativeEventFilter.cpp src/window/NativeEventFilter.h)
+target_sources(FlowPlayer PRIVATE src/window/WindowStateMachine.cpp src/window/WindowStateMachine.h)
 target_link_libraries(FlowPlayer PRIVATE Qt6::Core Qt6::Gui Qt6::Qml Qt6::Quick Qt6::OpenGL mpv dwmapi ole32 shell32 uuid delayimp)
 target_link_options(FlowPlayer PRIVATE "/DELAYLOAD:libmpv-2.dll")
 target_link_options(FlowPlayer PRIVATE "/MAP:${CMAKE_BINARY_DIR}/FlowPlayer.map")
 target_compile_definitions(FlowPlayer PRIVATE NOMINMAX WIN32_LEAN_AND_MEAN)
 set_source_files_properties(src/ui/Main.qml PROPERTIES QT_RESOURCE_ALIAS "ui/Main.qml")
+set_source_files_properties(src/ui/TitleBar.qml PROPERTIES QT_RESOURCE_ALIAS "ui/TitleBar.qml")
+set_source_files_properties(src/ui/ControlBar.qml PROPERTIES QT_RESOURCE_ALIAS "ui/ControlBar.qml")
+set_source_files_properties(src/ui/SeekBar.qml PROPERTIES QT_RESOURCE_ALIAS "ui/SeekBar.qml")
 qt_add_qml_module(FlowPlayer
     URI FlowPlayerUi VERSION 1.0 NO_PLUGIN
     RESOURCE_PREFIX "/" NO_RESOURCE_TARGET_PATH
-    QML_FILES src/ui/Main.qml)
+    QML_FILES src/ui/Main.qml src/ui/TitleBar.qml src/ui/ControlBar.qml src/ui/SeekBar.qml)
+enable_testing()
+add_executable(WindowStateMachineTests tests/window-state-machine.cpp src/window/WindowStateMachine.cpp)
+target_link_libraries(WindowStateMachineTests PRIVATE Qt6::Core)
+target_include_directories(WindowStateMachineTests PRIVATE src/window)
+add_test(NAME WindowStateMachine COMMAND WindowStateMachineTests)
 add_custom_command(TARGET FlowPlayer POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different "${MPV_ROOT}/libmpv-2.dll" "$<TARGET_FILE_DIR:FlowPlayer>")
