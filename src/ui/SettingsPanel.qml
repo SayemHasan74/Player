@@ -21,9 +21,9 @@ Item {
         {key:"defaultSpeed",label:"Default speed",type:"number"}]
     MouseArea {anchors.fill:parent;onClicked:settings.closed()}
     Rectangle {
-        anchors.centerIn:parent;width:Math.min(510,parent.width-16);height:Math.min(500,parent.height-16);radius:9;color:"#fc252a32";border.color:"#596372"
+        anchors.centerIn:parent;width:Math.min(510,parent.width-16);height:Math.min(500,parent.height-16);radius:9;color:UiPalette.surface;border.color:UiPalette.border
         MouseArea {anchors.fill:parent;onClicked:event=>{event.accepted=true}}
-        Text {x:16;y:12;text:"Settings";color:"#eeeeea";font.pixelSize:18}
+        Text {x:16;y:12;text:"Settings";color:UiPalette.text;font.pixelSize:18}
         ActionButton {anchors.right:parent.right;anchors.rightMargin:8;y:4;label:"×";onActivated:settings.closed()}
         Flickable {
             x:12;y:46;width:parent.width-24;height:Math.max(20,parent.height-56);contentHeight:column.height;clip:true;boundsBehavior:Flickable.StopAtBounds
@@ -35,21 +35,21 @@ Item {
                         id:row
                         required property var modelData
                         width:column.width;height:38
-                        Text {anchors {left:parent.left;verticalCenter:parent.verticalCenter} width:parent.width*.56;text:row.modelData.label;color:"#e6e8e9";font.pixelSize:13;elide:Text.ElideRight}
+                        Text {anchors {left:parent.left;verticalCenter:parent.verticalCenter} width:parent.width*.56;text:row.modelData.label;color:UiPalette.text;font.pixelSize:13;elide:Text.ElideRight}
                         Rectangle {
-                            anchors.right:parent.right;anchors.verticalCenter:parent.verticalCenter;width:parent.width*.42;height:32;radius:4;color:"#353c47";border.color:"#576474"
+                            anchors.right:parent.right;anchors.verticalCenter:parent.verticalCenter;width:parent.width*.42;height:32;radius:4;color:UiPalette.surface;border.color:UiPalette.border
                             TextInput {
                                 property bool textEntry:true
-                                visible:row.modelData.type!=="bool";anchors.fill:parent;anchors.margins:7;color:"#f3f2df";font.pixelSize:13;clip:true;selectByMouse:true
+                                visible:row.modelData.type!=="bool";anchors.fill:parent;anchors.margins:7;color:UiPalette.text;font.pixelSize:13;clip:true;selectByMouse:true
                                 text:String(preferences.values[row.modelData.key])
                                 onEditingFinished:{if(row.modelData.type==="text")preferences.setValue(row.modelData.key,text);else if(isFinite(Number(text)))preferences.setValue(row.modelData.key,Number(text))}
                             }
-                            Text {visible:row.modelData.type==="bool";anchors.centerIn:parent;text:preferences.values[row.modelData.key]?"On":"Off";color:"#f3f2df";font.pixelSize:13}
+                            Text {visible:row.modelData.type==="bool";anchors.centerIn:parent;text:preferences.values[row.modelData.key]?"On":"Off";color:UiPalette.text;font.pixelSize:13}
                             MouseArea {visible:row.modelData.type==="bool";anchors.fill:parent;onClicked:preferences.setValue(row.modelData.key,!preferences.values[row.modelData.key])}
                         }
                     }
                 }
-                Text {width:parent.width;text:"Language order: en,eng,ja,jpn\nPlaylist reordering lasts for this session.\n"+preferences.filePath;wrapMode:Text.Wrap;color:"#aeb6c0";font.pixelSize:11}
+                Text {width:parent.width;text:"Language order: en,eng,ja,jpn\nPlaylist reordering lasts for this session.\n"+preferences.filePath;wrapMode:Text.Wrap;color:UiPalette.muted;font.pixelSize:11}
             }
         }
     }

@@ -2,10 +2,10 @@ import QtQuick
 Rectangle {
     id: bar
     height: 38
-    color: playerWindow.mini ? "#252831" : "#b322252a"
+    gradient:Gradient {GradientStop{position:0;color:UiPalette.surfaceTop} GradientStop{position:1;color:UiPalette.surfaceBottom}}
     Text {
         anchors { left: parent.left; leftMargin: 14; right: buttons.left; rightMargin: 8; verticalCenter: parent.verticalCenter }
-        text: mpv.title; color: "#f0f0e7"; font.pixelSize: 13; elide: Text.ElideRight
+        text: mpv.title; color: UiPalette.text; font.pixelSize: 13; elide: Text.ElideRight
     }
     Row {
         id: buttons
@@ -16,8 +16,8 @@ Rectangle {
                 required property int modelData
                 property string inputRole: "button"
                 width: playerWindow.mini ? 36 : 42; height: 38
-                color: hit.containsMouse || (modelData===4 && playerWindow.maxHovered) ? (modelData===5 ? "#b83341" : "#596067") : "transparent"
-                PlayerIcon {anchors.centerIn:parent;width:17;height:17;tint:(parent.modelData===0&&(playerWindow.pinned||playerWindow.mini))?"#73b6da":"#f0efdf";name:["pin",playerWindow.mini?"restore":"mini","fullscreen","minimize","maximize","close"][parent.modelData]}
+                color: hit.containsMouse || (modelData===4 && playerWindow.maxHovered) ? (modelData===5 ? UiPalette.hover : UiPalette.hover) : "transparent"
+                PlayerIcon {anchors.centerIn:parent;width:17;height:17;tint:(parent.modelData===0&&(playerWindow.pinned||playerWindow.mini))?UiPalette.accent:UiPalette.text;name:["pin",playerWindow.mini?"restore":"mini",playerWindow.fullscreen?"exitFullscreen":"fullscreen","minimize",(playerWindow.maximized||playerWindow.fullscreen||playerWindow.mini)?"restore":"maximize","close"][parent.modelData]}
                 MouseArea {
                     id: hit; anchors.fill: parent; hoverEnabled: true
                     onClicked: {

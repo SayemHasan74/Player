@@ -10,6 +10,7 @@ class FramelessWindow final : public QQuickWindow {
     Q_PROPERTY(bool maxHovered READ maxHovered NOTIFY maxHoveredChanged)
     Q_PROPERTY(bool mini READ mini NOTIFY modeChanged)
     Q_PROPERTY(bool fullscreen READ fullscreen NOTIFY modeChanged)
+    Q_PROPERTY(bool maximized READ maximized NOTIFY modeChanged)
     Q_PROPERTY(bool pinned READ pinned NOTIFY modeChanged)
     Q_PROPERTY(bool infoVisible READ infoVisible NOTIFY modeChanged)
     Q_PROPERTY(bool tinyPreview READ tinyPreview WRITE setTinyPreview NOTIFY modeChanged)
@@ -37,6 +38,7 @@ public:
     Q_INVOKABLE void toggleInfo();
     bool mini() const {return m_modes.current().mode==WindowStateMachine::Mode::Mini;}
     bool fullscreen() const {return m_modes.current().mode==WindowStateMachine::Mode::Fullscreen;}
+    bool maximized() const {return m_modes.current().mode==WindowStateMachine::Mode::Maximized;}
     bool pinned() const {return m_pinned;}
     bool infoVisible() const {return m_infoVisible;}
     bool tinyPreview() const {return m_tinyPreview;}

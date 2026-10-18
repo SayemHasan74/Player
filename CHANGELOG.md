@@ -1,5 +1,13 @@
 # Changelog
 
+## UI polish — metallic gray and compact controls
+
+- Applied the user's final neutral iOS-gray clarification to every QML surface, including the title bar and Home. Centralized all QML colors in UiPalette.qml; blue is restricted to active-control accents. Saved the new color reference.
+
+- Unified player surfaces with a shared translucent neutral-gray palette; removed olive/cream tint. Scaled the bottom controls to 80% and kept their existing single-scene input/seek behavior.
+- Added fullscreen immediately left of More; added state-aware exit-fullscreen/maximize/restore icons to both control locations.
+- Right-click menus now extend downward from the cursor, clamped inside the window. Bottom-bar menus retain an explicit upward anchor.
+
 ## Part 5 playlist, series and Windows integration
 
 - Saved prompt5.md and implemented the locked right-side slide-over inside the original scene. Added full names, current/watched/progress state, click-to-resume and session reordering with stable progress updates.

@@ -1,5 +1,7 @@
 # FlowPlayer — Windows media player
 
+Latest UI revision: the bottom bar is 20% smaller (about 555×85 px at normal width), with neutral iOS-style translucent gray shared by EVERY surface, including title bar, Home, menus, settings, playlist, tooltips and toasts. Backgrounds have no blue tint; blue is an active-control accent. Fullscreen is immediately left of More. Fullscreen/maximize icons change to their corresponding exit/restore icons. Right-click menus start at the cursor and scroll to fit the space below, opening above only when too close to the bottom edge; bottom-control menus open above their button. Earlier cream/olive controls, teal/purple Home colors and four-action geometry below describe older layouts. See [UI revision checks](tests/UI_POLISH.md).
+
 Latest: [Part 5 results and manual checklist](tests/PART5_RESULTS.md), [locked interaction preferences](design/interaction-preferences.md). The right-side playlist slides over the existing scene without moving video or controls. Folder sorting, independent resume, auto-advance, custom ordering, single instance, SMTC and sleep prevention are implemented. Visual/native acceptance and any measured performance failures remain explicit in the report.
 
 Windows 11 x64. C++20 / CMake / MSVC 2022. Video is rendered by libmpv's OpenGL render API into a `QQuickFramebufferObject`, which Qt Quick composites with plain QML controls inside the same `QQuickWindow`. No native child video window or overlay window exists.

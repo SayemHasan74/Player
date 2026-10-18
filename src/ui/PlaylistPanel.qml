@@ -13,9 +13,9 @@ Item {
         width:Math.min(340,Math.max(260,root.width*.32),root.width-28);height:root.height
         x:root.opened?root.width-width:root.width
         Behavior on x {NumberAnimation {duration:140}}
-        color:"#ed303238";clip:true
+        color:UiPalette.surface;clip:true
         MouseArea {anchors.fill:parent;onClicked:event=>{event.accepted=true}}
-        Text {x:16;y:12;text:"PLAYLIST";color:"#b9bcc1";font.pixelSize:12;font.letterSpacing:1}
+        Text {x:16;y:12;text:"PLAYLIST";color:UiPalette.muted;font.pixelSize:12;font.letterSpacing:1}
         ActionButton {anchors.right:parent.right;y:0;label:"×";hint:"Close · L";onActivated:root.close()}
         ListView {
             id:list;x:0;y:44;width:panel.width;height:Math.max(0,panel.height-94);clip:true
@@ -29,11 +29,11 @@ Item {
                 property bool reordering:false
                 property bool suppressClick:false
                 width:list.width;height:Math.max(43,name.implicitHeight+18)
-                color:reordering?"#687584":current?"#50545f":hover.hovered?"#3e424a":"transparent"
+                color:reordering?UiPalette.hover:current?UiPalette.selection:hover.hovered?UiPalette.hover:"transparent"
                 HoverHandler {id:hover;onHoveredChanged:if(hovered)detail.text=row.record.title||row.record.path}
-                Text {x:10;y:12;width:18;text:row.current?"▶":row.record.finished?"✓":"";color:"#e8eadf";font.pixelSize:11}
-                Text {id:name;x:31;y:9;width:row.width-45;text:row.record.title||row.record.path;wrapMode:Text.WrapAnywhere;color:row.current?"#ffffff":"#d1d4d9";font.pixelSize:12}
-                Rectangle {x:31;anchors.bottom:parent.bottom;width:(parent.width-45)*Math.min(1,Number(row.record.position||0)/Math.max(1,Number(row.record.duration||0)));height:2;color:row.record.finished?"#8faaa0":"#79b4cf"}
+                Text {x:10;y:12;width:18;text:row.current?"▶":row.record.finished?"✓":"";color:UiPalette.text;font.pixelSize:11}
+                Text {id:name;x:31;y:9;width:row.width-45;text:row.record.title||row.record.path;wrapMode:Text.WrapAnywhere;color:row.current?UiPalette.text:UiPalette.text;font.pixelSize:12}
+                Rectangle {x:31;anchors.bottom:parent.bottom;width:(parent.width-45)*Math.min(1,Number(row.record.position||0)/Math.max(1,Number(row.record.duration||0)));height:2;color:row.record.finished?UiPalette.muted:UiPalette.accent}
                 MouseArea {
                     anchors.fill:parent;preventStealing:row.reordering
                     onPressed:row.suppressClick=false
@@ -44,7 +44,7 @@ Item {
                 }
             }
         }
-        Text {id:detail;x:12;anchors.bottom:count.top;anchors.bottomMargin:4;width:parent.width-24;maximumLineCount:2;elide:Text.ElideRight;wrapMode:Text.WrapAnywhere;text:history.currentIndex>=0&&history.playlist.length>history.currentIndex?history.playlist[history.currentIndex].title:"Open a file to build a playlist";color:"#b9bec6";font.pixelSize:10}
-        Text {id:count;x:12;anchors.bottom:parent.bottom;anchors.bottomMargin:8;text:history.playlist.length+" files · hold and drag to reorder";color:"#989fa9";font.pixelSize:10}
+        Text {id:detail;x:12;anchors.bottom:count.top;anchors.bottomMargin:4;width:parent.width-24;maximumLineCount:2;elide:Text.ElideRight;wrapMode:Text.WrapAnywhere;text:history.currentIndex>=0&&history.playlist.length>history.currentIndex?history.playlist[history.currentIndex].title:"Open a file to build a playlist";color:UiPalette.muted;font.pixelSize:10}
+        Text {id:count;x:12;anchors.bottom:parent.bottom;anchors.bottomMargin:8;text:history.playlist.length+" files · hold and drag to reorder";color:UiPalette.muted;font.pixelSize:10}
     }
 }

@@ -1,5 +1,9 @@
 # Locked user preferences — Part 4 audit
 
+- Final color clarification: use neutral iOS-style translucent GRAY, not blue-gray. Apply it to every surface, explicitly including the top title bar, Home, bottom bar, context menus, tooltips, settings, playlist and toasts. Pale neutral text; blue is an active-control accent only. Reference: design/references/neutral-gray-material.png. The blue seen behind the reference material is not a requested blue background. Preserve the no-blur/no-shader rule; this is a color/material reference, not Wi-Fi UI functionality.
+
+- Latest UI revision: neutral translucent metallic-gray control surfaces and neutral icons/text throughout; shared colors for the bottom bar, scene menus, title, settings, toasts and playlist. Bottom bar is 80% of its original dimensions. Add a dedicated fullscreen button immediately before More, keeping More. Fullscreen and maximize/restore icons reflect the actual window state. Right-click menus start at the cursor and extend downward when space permits; bottom-bar menus open upward and all popups stay within the scene. This supersedes the earlier cream/olive colors and four-action limit.
+
 - Playback Left/Right seeks exactly -5/+5 seconds. Home-screen arrows navigate history. Text fields and menus retain their own keys.
 - The controls beside play/pause mean previous/next media file, never playback speed. Folder-neighbor navigation is explicitly authorized by this revision; the full playlist panel and auto-advance remain Part 5.
 - The key physically above Tab (grave/backtick on US keyboards), the title button and Ctrl+M toggle compact mode.

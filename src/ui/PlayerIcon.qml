@@ -3,7 +3,7 @@ import QtQuick.Window
 Canvas {
     id:icon
     property string name:"play"
-    property color tint:"#f0efdf"
+    property color tint:UiPalette.text
     width:24;height:24
     canvasSize:Qt.size(Math.ceil(width*Screen.devicePixelRatio),Math.ceil(height*Screen.devicePixelRatio))
     onNameChanged:requestPaint()
@@ -31,6 +31,7 @@ Canvas {
         case "playlist":box(3,3,17,15);line([6,7,17,7]);line([6,11,14,11]);line([6,15,11,15]);polygon([15,13,23,18,15,23]);break
         case "more":c.beginPath();c.arc(12,12,10,0,Math.PI*2);c.stroke();for(let x of [7,12,17]){c.beginPath();c.arc(x,12,1,0,Math.PI*2);c.fill()}break
         case "fullscreen":line([3,9,3,3,9,3]);line([15,3,21,3,21,9]);line([21,15,21,21,15,21]);line([9,21,3,21,3,15]);break
+        case "exitFullscreen":line([3,9,9,9,9,3]);line([15,3,15,9,21,9]);line([21,15,15,15,15,21]);line([9,21,9,15,3,15]);break
         case "mini":box(3,5,18,14);c.fillRect(5,14,14,3);break
         case "restore":box(3,8,13,13);line([8,8,8,3,21,3,21,16,16,16]);break
         case "pin":line([8,3,16,3,15,10,19,15,5,15,9,10,8,3]);line([12,15,12,22]);break

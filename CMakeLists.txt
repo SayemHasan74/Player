@@ -36,13 +36,14 @@ set_source_files_properties(src/ui/Main.qml PROPERTIES QT_RESOURCE_ALIAS "ui/Mai
 set_source_files_properties(src/ui/TitleBar.qml PROPERTIES QT_RESOURCE_ALIAS "ui/TitleBar.qml")
 set_source_files_properties(src/ui/ControlBar.qml PROPERTIES QT_RESOURCE_ALIAS "ui/ControlBar.qml")
 set_source_files_properties(src/ui/SeekBar.qml PROPERTIES QT_RESOURCE_ALIAS "ui/SeekBar.qml")
-foreach(component ActionButton SceneMenu SettingsPanel Toast HomeScreen PlayerIcon PlaylistPanel)
+set_source_files_properties(src/ui/UiPalette.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+foreach(component ActionButton SceneMenu SettingsPanel Toast HomeScreen PlayerIcon PlaylistPanel UiPalette)
     set_source_files_properties(src/ui/${component}.qml PROPERTIES QT_RESOURCE_ALIAS "ui/${component}.qml")
 endforeach()
 qt_add_qml_module(FlowPlayer
     URI FlowPlayerUi VERSION 1.0 NO_PLUGIN
     RESOURCE_PREFIX "/" NO_RESOURCE_TARGET_PATH
-    QML_FILES src/ui/Main.qml src/ui/TitleBar.qml src/ui/ControlBar.qml src/ui/SeekBar.qml src/ui/ActionButton.qml src/ui/SceneMenu.qml src/ui/SettingsPanel.qml src/ui/Toast.qml src/ui/HomeScreen.qml src/ui/PlayerIcon.qml src/ui/PlaylistPanel.qml)
+    QML_FILES src/ui/Main.qml src/ui/TitleBar.qml src/ui/ControlBar.qml src/ui/SeekBar.qml src/ui/ActionButton.qml src/ui/SceneMenu.qml src/ui/SettingsPanel.qml src/ui/Toast.qml src/ui/HomeScreen.qml src/ui/PlayerIcon.qml src/ui/PlaylistPanel.qml src/ui/UiPalette.qml)
 enable_testing()
 add_executable(PlaylistTests tests/playlist.cpp src/playlist/FolderScanner.cpp src/playlist/NaturalSort.cpp)
 target_link_libraries(PlaylistTests PRIVATE Qt6::Core shlwapi)

@@ -45,7 +45,7 @@ Item {
         if(kind==="aspect")for(let value of ["auto","16:9","4:3","21:9","fill"])rows.push(entry(value,()=>mpv.setAspect(value)))
         return rows
     }
-    function openMenu(kind,px,py) {sceneMenu.open(kind,menuItems(kind),px,py)}
+    function openMenu(kind,px,py,above) {sceneMenu.open(kind,menuItems(kind),px,py,above)}
     function diagnosticLayoutChecks(){return JSON.stringify({layouts:controls.diagnosticLayout(),homeSameScene:homeLoader.parent===root,menusSameScene:sceneMenu.parent===root})}
     // Bounded in-process diagnostic: no native mode changes, screenshots or focus activation.
     function diagnosticPopupChecks() {
@@ -60,7 +60,7 @@ Item {
         anchors.fill:parent;active:mpv.ready&&mpv.surfaceRequested&&enableVideoSurface
         sourceComponent:Component {MpvRenderItem {controller:mpv;onFirstFrame:appDiagnostics.firstFrame()}}
     }
-    Rectangle {anchors.fill:parent;color:"#252831";visible:playerWindow.videoHidden}
+    Rectangle {anchors.fill:parent;color:UiPalette.background;visible:playerWindow.videoHidden}
     Loader {
         id:homeLoader;anchors.fill:parent;z:5;active:history.homeVisible&&!playerWindow.mini
         onLoaded:Qt.callLater(()=>{if(homeLoader.item)homeLoader.item.focusContinue()})
@@ -81,19 +81,19 @@ Item {
         id:controls;anchors {horizontalCenter:parent.horizontalCenter;bottom:parent.bottom;bottomMargin:playerWindow.mini?8:18} z:10
         opacity:playerWindow.controlsVisible?1:0;visible:opacity>0&&(!history.homeVisible||playerWindow.mini)
         Behavior on opacity {NumberAnimation {duration:140}}
-        onMenuRequested:(kind,px,py)=>root.openMenu(kind,px,py)
+        onMenuRequested:(kind,px,py)=>root.openMenu(kind,px,py,true)
         onPlaylistRequested:root.togglePlaylist()
     }
     Text {
         anchors.centerIn:parent;visible:!playerWindow.mini&&root.failure.length>0
-        text:root.failure.length>0?root.failure:"FlowPlayer\nDrop a video or press Ctrl+O";horizontalAlignment:Text.AlignHCenter;color:"#dddfe5";font.pixelSize:18
+        text:root.failure.length>0?root.failure:"FlowPlayer\nDrop a video or press Ctrl+O";horizontalAlignment:Text.AlignHCenter;color:UiPalette.text;font.pixelSize:18
     }
     Rectangle {
         property string inputRole:"info"
         anchors {left:parent.left;top:parent.top;margins:46} z:20
-        visible:playerWindow.infoVisible;width:Math.min(root.width-24,info.implicitWidth+24);height:Math.min(root.height-50,info.implicitHeight+20);radius:5;color:"#ec20262d";clip:true
+        visible:playerWindow.infoVisible;width:Math.min(root.width-24,info.implicitWidth+24);height:Math.min(root.height-50,info.implicitHeight+20);radius:5;color:UiPalette.surface;clip:true
         Text {
-            id:info;x:12;y:10;color:"#f1f0df";font.pixelSize:13
+            id:info;x:12;y:10;color:UiPalette.text;font.pixelSize:13
             text:playerWindow.infoVisible?((mpv.videoInfo.width||0)+" × "+(mpv.videoInfo.height||0)+"\n"+(mpv.videoInfo["video-codec"]||"Audio")+" · "+mpv.hwdecCurrent+"\n"+Number(mpv.videoInfo["container-fps"]||0).toFixed(2)+" fps · "+mpv.droppedFrames+" dropped\n"+(Number(mpv.videoInfo["video-bitrate"]||0)/1000000).toFixed(2)+" Mbps · Cache "+(Math.max(0,mpv.cacheBytes)/1048576).toFixed(1)+" MiB"):""
         }
     }

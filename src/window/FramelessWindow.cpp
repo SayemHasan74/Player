@@ -26,7 +26,7 @@
 #include <shobjidl.h>
 #include <algorithm>
 FramelessWindow::FramelessWindow(MpvController *c):m_controller(c) {
-    setTitle("FlowPlayer");setColor(QColor("#121417"));
+    setTitle("FlowPlayer");setColor(QColor("#29292b"));
     setFlags(Qt::Window|Qt::FramelessWindowHint|Qt::WindowMinimizeButtonHint|Qt::WindowMaximizeButtonHint|Qt::WindowCloseButtonHint);
     if(qEnvironmentVariableIsSet("FLOW_TEST_BACKGROUND")) {
         setFlag(Qt::WindowDoesNotAcceptFocus);
