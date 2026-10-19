@@ -4,7 +4,7 @@ Rectangle {
     objectName:"playbackControls"
     property string inputRole:"control"
     property bool showRemaining:true
-    readonly property real uiScale:0.8
+    readonly property real uiScale:0.64
     readonly property bool narrow:layout.width<460
     readonly property bool compact:layout.width<620
     readonly property bool hovered:hover.hovered||seek.dragging
@@ -19,7 +19,7 @@ Rectangle {
     FontMetrics{id:timeMetrics;font:elapsed.font}
     function diagnosticLayout(){
         let results=[]
-        for(let size of [288,416,555.2]){controls.width=size;volumeRow.forceLayout();transport.forceLayout();actions.forceLayout();results.push({width:size,volumeClear:volumeRow.x+volumeRow.width<=transport.x,actionsClear:controls.narrow||transport.x+transport.width<=actions.x,seekWidth:seek.width})}
+        for(let size of [240,336,444.16]){controls.width=size;volumeRow.forceLayout();transport.forceLayout();actions.forceLayout();results.push({width:size,volumeClear:volumeRow.x+volumeRow.width<=transport.x,actionsClear:controls.narrow||transport.x+transport.width<=actions.x,seekWidth:seek.width})}
         controls.width=Qt.binding(()=>Math.min(694*controls.uiScale,controls.parent.width-24));return results
     }
     Item {

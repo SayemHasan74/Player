@@ -72,7 +72,7 @@ FramelessWindow::FramelessWindow(MpvController *c):m_controller(c) {
     connect(this,&QWindow::visibilityChanged,this,[this]{updatePlaybackTiming();});
     connect(this,&QQuickWindow::frameSwapped,this,[this]{
         if(m_minimizePending&&m_minimizeSwaps>0) {
-            if(--m_minimizeSwaps==0) {m_minimizePending=false;m_minimizePrepared=true;showMinimized();}
+            if(--m_minimizeSwaps==0)commitMinimize();
             else update();
         }
         if(m_wasMinimized&&visibility()!=QWindow::Minimized&&isExposed()) {
@@ -102,6 +102,10 @@ bool FramelessWindow::initializeUi(QObject *diagnostics,bool enableVideo) {
     root->setParent(contentItem());
     root->setParentItem(contentItem());
     root->setSize(size());
+    // Repeater delegates belong to the visual tree; their QObject ownership
+    // does not have to descend from the title row.
+    auto findButton=[](auto &&self,QQuickItem *item)->QQuickItem*{if(item->objectName()=="maximizeButton")return item;for(auto *child:item->childItems())if(auto *found=self(self,child))return found;return nullptr;};
+    m_maximizeButton=findButton(findButton,root);
     connect(this,&QWindow::widthChanged,root,[root](int width){root->setWidth(width);});
     connect(this,&QWindow::heightChanged,root,[root](int height){root->setHeight(height);});
     return true;
@@ -166,6 +170,10 @@ QString FramelessWindow::inputRoleAt(const QPointF &point) const {
     return role=="home"&&point.y()<38?QString():role;
 }
 bool FramelessWindow::seekAt(const QPointF &point) const {return inputRoleAt(point)=="seek";}
+bool FramelessWindow::maximizeButtonAt(const QPointF &point) const {
+    return m_maximizeButton&&m_maximizeButton->isVisible()&&m_maximizeButton->isEnabled()&&m_maximizeButton->opacity()>0&&m_maximizeButton->contains(m_maximizeButton->mapFromScene(point));
+}
+QRectF FramelessWindow::maximizeButtonRect() const {return m_maximizeButton?m_maximizeButton->mapRectToScene(m_maximizeButton->boundingRect()):QRectF();}
 bool FramelessWindow::titleAt(const QPointF &point) const {return controlsVisible()&&point.y()<38&&!controlAt(point);}
 void FramelessWindow::rememberModeGeometry() {
     if(m_applyingMode||m_interactiveSizing)return;
@@ -209,8 +217,14 @@ void FramelessWindow::toggleMaximized() {
     if(mini()){toggleMini();return;}
     rememberModeGeometry();
     const bool maximize=m_modes.current().mode!=WindowStateMachine::Mode::Maximized;
+    const QRect normal=m_modes.windowedGeometry();
+    // Native move/resize notifications are synchronous during ShowWindow.
+    // Never let the intermediate rectangle replace the saved restore bounds.
+    m_applyingMode=true;
     m_modes.setBaseMode(maximize?WindowStateMachine::Mode::Maximized:WindowStateMachine::Mode::Windowed);
-    if(maximize)showMaximized();else {showNormal();setGeometry(m_modes.windowedGeometry());}
+    if(maximize)showMaximized();else {showNormal();setGeometry(normal);m_lastNormalGeometry=normal;}
+    m_applyingMode=false;
+    m_modes.observe(geometry(),screen()->name(),devicePixelRatio());
     emit modeChanged();
 }
 void FramelessWindow::applyPin() {
@@ -252,7 +266,7 @@ void FramelessWindow::applyMode() {
         if(m_modes.current().mode==WindowStateMachine::Mode::Maximized) {setGeometry(m_modes.windowedGeometry());showMaximized();}
         else setGeometry(desired);
     }
-    applyPin();m_applyingMode=false;pointerActivity();
+    applyPin();m_applyingMode=false;updateControlTimer();
     emit m_controller->renderUpdateRequested();update();
     Log::write(QString("WINDOW_MODE mode=%1 previous=%2 geometry=%3,%4,%5,%6 hwndUnchanged=%7 depth=%8")
         .arg(int(m_modes.current().mode)).arg(m_modes.previous()?int(m_modes.previous()->mode):-1)
@@ -270,18 +284,19 @@ void FramelessWindow::setDiagnosticVideoHidden(bool hidden) {
     Log::write(QString("MINI_VIDEO_COVER hidden=%1 track=%2 position=%3").arg(hidden).arg(m_controller->videoTrack()).arg(m_controller->position()));
 }
 void FramelessWindow::pointerActivity() {
-    setCursor(Qt::ArrowCursor);m_cursorTimer.stop();
+    setCursor(Qt::ArrowCursor);
     if(!m_controlsVisible){m_controlsVisible=true;emit controlsVisibilityChanged();}
-    if(!mini()&&!m_controller->pause()&&!m_uiHeld&&!m_nativeHover&&isVisible())m_cursorTimer.start();
+    updateControlTimer();
 }
-void FramelessWindow::setUiHeld(bool held) {if(m_uiHeld==held)return;m_uiHeld=held;pointerActivity();}
+void FramelessWindow::updateControlTimer(){m_cursorTimer.stop();if(m_controlsVisible&&!mini()&&!m_controller->pause()&&!m_uiHeld&&!m_nativeHover&&isVisible())m_cursorTimer.start();}
+void FramelessWindow::setUiHeld(bool held) {if(m_uiHeld==held)return;m_uiHeld=held;updateControlTimer();}
 void FramelessWindow::requestUrl() {emit urlRequested(QGuiApplication::clipboard()->text());}
 bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
     if(watched!=this)return false;
-    if(e->type()==QEvent::MouseMove||e->type()==QEvent::Enter)pointerActivity();
+    if(e->type()==QEvent::MouseMove)pointerActivity();
     if(e->type()==QEvent::Leave){setCursor(Qt::ArrowCursor);m_cursorTimer.stop();}
     if(e->type()==QEvent::MouseButtonPress||e->type()==QEvent::MouseButtonRelease||e->type()==QEvent::MouseButtonDblClick) {
-        auto *mouse=static_cast<QMouseEvent*>(e);pointerActivity();
+        auto *mouse=static_cast<QMouseEvent*>(e);
         if(mouse->button()==Qt::RightButton&&e->type()==QEvent::MouseButtonPress) {if(inputRoleAt(mouse->position())=="home")return false;emit contextMenuRequested(mouse->position());return true;}
         if(mouse->button()==Qt::MiddleButton) {
             if(e->type()!=QEvent::MouseButtonRelease)toggleFullscreen();
@@ -302,7 +317,7 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
     }
     if(e->type()==QEvent::Wheel) {
         if(m_popupOpen)return false;
-        auto *wheel=static_cast<QWheelEvent*>(e);pointerActivity();
+        auto *wheel=static_cast<QWheelEvent*>(e);
         const double steps=wheel->angleDelta().y()/120.0;
         if(steps!=0) {if(seekAt(wheel->position()))m_controller->seek(steps*m_controller->settings()->values().value("seekStep",5).toDouble());else m_controller->adjustVolume(steps*5);}
         return true;
@@ -310,8 +325,9 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
     if(e->type()==QEvent::KeyPress) {
         auto *key=static_cast<QKeyEvent*>(e);const auto mods=key->modifiers();
         const bool ctrl=mods.testFlag(Qt::ControlModifier),shift=mods.testFlag(Qt::ShiftModifier);
-        pointerActivity();
-        if(m_popupOpen&&key->key()==Qt::Key_Escape) {emit dismissPopup();return true;}
+        // Escape is global, including menu and text-entry focus. Keep it ahead
+        // of every focus guard; it must pause and minimize in one action.
+        if(key->key()==Qt::Key_Escape){if(!key->isAutoRepeat()){emit dismissPopup();pauseAndMinimize();}return true;}
         if(activeFocusItem()&&activeFocusItem()->property("textEntry").toBool())return false;
         if(m_controller->resumeStore()&&m_controller->resumeStore()->homeVisible()&&!mini()&&
            (key->key()==Qt::Key_Return||key->key()==Qt::Key_Enter||key->key()==Qt::Key_Space||key->key()==Qt::Key_Up||key->key()==Qt::Key_Down||key->key()==Qt::Key_Left||key->key()==Qt::Key_Right))return false;
@@ -327,7 +343,6 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
         case Qt::Key_MediaStop:m_controller->resumeStore()->showHome();break;
         case Qt::Key_F:if(!key->isAutoRepeat())toggleFullscreen();break;
         case Qt::Key_QuoteLeft:case Qt::Key_AsciiTilde:if(!key->isAutoRepeat())toggleMini();break;
-        case Qt::Key_Escape:exitFullscreen();break;
         case Qt::Key_M:if(!key->isAutoRepeat()){if(ctrl)toggleMini();else m_controller->toggleMute();}break;
         case Qt::Key_T:if(!ctrl)return false;if(!key->isAutoRepeat())togglePinned();break;
         case Qt::Key_O:if(!ctrl)return false;openDialog();break;
@@ -350,9 +365,19 @@ bool FramelessWindow::eventFilter(QObject *watched,QEvent *e) {
     }
     return false;
 }
-void FramelessWindow::requestMinimize() {
+void FramelessWindow::requestMinimize(){minimize(false);}
+void FramelessWindow::pauseAndMinimize(){minimize(true);}
+void FramelessWindow::commitMinimize(){
+    m_minimizePending=false;m_minimizeSwaps=0;
+    // Background validation records the request without changing the desktop.
+    if(qEnvironmentVariableIsSet("FLOW_TEST_BACKGROUND")){Log::write(QString("BACKGROUND_MINIMIZE_SUPPRESSED resumeOnRestore=%1").arg(m_resumeAfterMinimize));return;}
+    m_minimizePrepared=true;setWindowStates(windowStates()|Qt::WindowMinimized);setVisible(true);
+}
+void FramelessWindow::minimize(bool stayPaused) {
+    if(stayPaused){m_resumeAfterMinimize=false;m_controller->setPause(true);}
     if(visibility()==QWindow::Minimized||m_minimizePending)return;
-    m_resumeAfterMinimize=!m_controller->pause();
+    if(!stayPaused)m_resumeAfterMinimize=!m_controller->pause();
+    if(!m_controller->ready()||m_controller->idleActive()||!isExposed()){commitMinimize();return;}
     m_minimizePending=true;
     if(m_controller->pause()) {m_minimizeSwaps=2;emit m_controller->renderUpdateRequested();update();}
     else m_controller->setPause(true);

@@ -1,5 +1,7 @@
 # FlowPlayer — Windows media player
 
+Latest final pass: **Escape pauses and minimizes from every player mode**, including when a menu or text field has focus; restoring from the taskbar leaves playback paused. Arrow-key seeking/volume changes keep auto-hidden controls hidden; mouse movement reveals them. Maximize/restore uses paired native capture/release and guarded restore geometry. The entire bottom bar is another20% smaller: cumulative scale0.64, maximum approximately444×68px. See [Final Pass](<Final Pass.md>) and [validation](tests/FINAL_PASS.md). Earlier Esc behavior and 555×85 sizing below are historical.
+
 Latest UI revision: the bottom bar is 20% smaller (about 555×85 px at normal width), with neutral iOS-style translucent gray shared by EVERY surface, including title bar, Home, menus, settings, playlist, tooltips and toasts. Backgrounds have no blue tint; blue is an active-control accent. Fullscreen is immediately left of More. Fullscreen/maximize icons change to their corresponding exit/restore icons. Right-click menus start at the cursor and scroll to fit the space below, opening above only when too close to the bottom edge; bottom-control menus open above their button. Earlier cream/olive controls, teal/purple Home colors and four-action geometry below describe older layouts. See [UI revision checks](tests/UI_POLISH.md).
 
 Latest: [Part 5 results and manual checklist](tests/PART5_RESULTS.md), [locked interaction preferences](design/interaction-preferences.md). The right-side playlist slides over the existing scene without moving video or controls. Folder sorting, independent resume, auto-advance, custom ordering, single instance, SMTC and sleep prevention are implemented. Visual/native acceptance and any measured performance failures remain explicit in the report.
@@ -57,7 +59,7 @@ The script makes an MSVC import library from the libmpv DLL's exported C functio
 
 ## Part 5: playlist and Windows integration
 
-**L** or the bottom playlist icon opens the saved reference's right-side slide-over. It overlays the existing video/controls without changing their geometry; the title buttons remain accessible. Filenames wrap fully, the current item is highlighted, completed items have a check, and saved positions appear as progress lines. Click to resume an entry. Hold an entry, drag and release over another entry to reorder for this session. Close with L, Esc, × or a click outside. The panel is Loader-created and its 140 ms slide stops completely once open. Progress changes update existing model rows instead of rebuilding the list.
+**L** or the bottom playlist icon opens the saved reference's right-side slide-over. It overlays the existing video/controls without changing their geometry; the title buttons remain accessible. Filenames wrap fully, the current item is highlighted, completed items have a check, and saved positions appear as progress lines. Click to resume an entry. Hold an entry, drag and release over another entry to reorder for this session. Close with L, × or a click outside; Escape pauses and minimizes. The panel is Loader-created and its 140 ms slide stops completely once open. Progress changes update existing model rows instead of rebuilding the list.
 
 Opening a single local file scans its folder on the identity worker, non-recursively. Windows `StrCmpLogicalW` sorts season/episode numbers. Audio files are included too. Settings' comma-separated **playlistIgnore** list defaults to `sample,trailer`, matched as separate name tokens; explicitly opened extras remain playable. Multiple picker selections, command-line paths or dropped media files create a custom playlist in their supplied order. Reordering converts the current list into a session-only custom list. Selecting another file outside that list restores folder behavior.
 
@@ -185,7 +187,7 @@ The title bar and temporary transport bar follow `design/references/player-contr
 | Input | Action |
 |---|---|
 | Middle-click anywhere, F, fullscreen button | Toggle fullscreen and restore the previous mode/geometry |
-| Esc | Exit fullscreen to the previous mode |
+| Esc | Pause and minimize to the taskbar from every mode; restore stays paused |
 | Ctrl+M, compact/restore button | Toggle Mini and restore the previous mode/geometry |
 | Ctrl+T, pin | Always on top; Mini is always on top regardless |
 | Space; double-click video/empty area | Pause/play; buttons and title bar do not toggle pause on double-click |
@@ -231,7 +233,7 @@ The shared seek bar previews the cursor/drag target, marks chapters and shows ac
 
 Controls/title/cursor hide after2.5seconds with one140ms opacity fade, remain shown paused/inMini, and stay shown over controls, during dragging and while a scene menu/settings/URL editor is open. Mouse movement reveals them. Hidden cache-info text does not keep updating the scene. A single toast replaces the prior message and dismisses itself.
 
-Right-click opens the scene menu, including over native caption zones. Audio/subtitle lists, adjustments, speed, aspect, information and Settings all remain in the same QtQuick scene in fullscreen. Lists/settings scroll to fit Mini. Menus support arrows/Enter/Esc; editable fields preserve normal typing and text-selection shortcuts. Ctrl+U opens the in-scene URL editor with clipboard text; nothing reads the clipboard before that action.
+Right-click opens the scene menu, including over native caption zones. Audio/subtitle lists, adjustments, speed, aspect, information and Settings all remain in the same QtQuick scene in fullscreen. Lists/settings scroll to fit Mini. Menus support arrows/Enter; Escape globally pauses and minimizes, including from text fields. Editable fields preserve normal typing and text-selection shortcuts. Ctrl+U opens the in-scene URL editor with clipboard text; nothing reads the clipboard before that action.
 
 - **S** cycles subtitle tracks/off; **A** cycles audio tracks; **Z/X** adjust subtitle delay by−/+0.1seconds.
 - Subtitle file drop or menu loading uses mpv sub-add/select; SRT, ASS/SSA, VTT and image subtitle formats are handled by mpv/libass. Full styled rendering is a manual check, especially bitmap subtitle size/position limitations.

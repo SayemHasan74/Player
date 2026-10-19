@@ -1,5 +1,6 @@
 #include "WindowStateMachine.h"
 #include "CompactResizePolicy.h"
+#include "NativeButtonPress.h"
 #include <iostream>
 #include <random>
 #include <cstdlib>
@@ -24,7 +25,7 @@ int main() {
         model.toggle(Mode::Fullscreen,full,mini);const auto fullscreen=model.current();
         model.toggle(Mode::Mini,full,mini);model.observe(QRect(20,30,600,160),"secondary",1.5);const auto small=model.current();
         model.toggle(Mode::Fullscreen,full,mini);require(model.previous()&&*model.previous()==small,"mini fullscreen previous mini");
-        model.exitFullscreen();require(model.current()==small,"escape restores mini geometry");
+        model.exitFullscreen();require(model.current()==small,"explicit fullscreen exit restores mini geometry");
         model.toggle(Mode::Mini,full,mini);require(model.current()==fullscreen,"mini restores fullscreen origin");
         model.exitFullscreen();require(model.current().geometry==windowed,"nested returns original window geometry");
         model.toggle(Mode::Mini,full,mini);require(model.current().geometry==small.geometry,"mini independently remembers position and width");
@@ -45,11 +46,21 @@ int main() {
     }
     Model rapid(windowed);for(int i=0;i<20;++i)rapid.toggle(Mode::Fullscreen,full,mini);
     require(rapid.current().mode==Mode::Windowed&&rapid.current().geometry==windowed,"twenty rapid fullscreen transitions");
-    rapid.exitFullscreen();require(rapid.depth()==0,"escape outside fullscreen no op");
+    rapid.exitFullscreen();require(rapid.depth()==0,"explicit fullscreen exit outside fullscreen is no op");
     require(CompactResizePolicy::collapse(false,200)&&!CompactResizePolicy::collapse(false,201),"compact collapse boundary");
     require(CompactResizePolicy::expand(true,240)&&!CompactResizePolicy::expand(true,239),"compact expansion hysteresis");
     rapid.toggle(Mode::Mini,full,mini);const QRect expanded(12,34,800,450);rapid.resizeToWindowed(expanded);
     require(rapid.current().mode==Mode::Windowed&&rapid.current().geometry==expanded&&rapid.depth()==0,"manual compact expansion starts normal geometry");
     rapid.toggle(Mode::Mini,full,mini);rapid.toggle(Mode::Mini,full,mini);require(rapid.current().geometry==expanded,"button still restores expanded geometry exactly");
+    NativeButtonPress maxButton;
+    require(!maxButton.release(true),"unpaired native maximize release ignored");
+    maxButton.press();require(maxButton.release(true),"captured client release activates native maximize");
+    require(!maxButton.release(true),"duplicate native release does not restore immediately");
+    maxButton.press();require(!maxButton.release(false),"drag outside maximize cancels activation");
+    maxButton.press();maxButton.cancel();require(!maxButton.release(true),"capture loss cancels maximize click");
+    Model maximized(windowed);maximized.setBaseMode(Mode::Maximized);maximized.observe(QRect(0,0,1920,1040));
+    require(maximized.windowedGeometry()==windowed,"maximize observations preserve normal bounds");
+    const QRect restore=maximized.windowedGeometry();maximized.setBaseMode(Mode::Windowed);maximized.observe(restore);
+    require(maximized.current().geometry==windowed,"captured restore rectangle returns exact normal size");
     std::cout<<"PASS: "<<checks<<" checks; all mode round trips, nesting, geometry/DPI and 100 random sequences of 200 actions\n";
 }

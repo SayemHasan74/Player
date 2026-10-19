@@ -1,5 +1,12 @@
 # Changelog
 
+## Final pass — window button, keyboard behavior and smaller controls
+
+- Paired native maximize-button presses with captured client/non-client releases, canceling outside/duplicate/canceled releases. Hit-testing follows the QML visual delegate rather than hard-coded coordinates. Guarded native geometry callbacks so maximize/restore cannot overwrite normal restore bounds.
+- Escape now takes priority over menu/text-entry focus, pauses and minimizes while preserving window-state flags, and leaves playback paused on restore. Empty Home can minimize without waiting for nonexistent video frames.
+- Removed keyboard-triggered control reveal. Arrow seek/volume changes keep hidden controls hidden; mouse movement reveals them. UI-hold changes update the hide timer without revealing controls.
+- Scaled the entire bottom UI another20%, to0.64 of the original (approximately444×68px). Added isolated-log background input diagnostics and safe executable-only deployment without terminating a running player.
+
 ## Clapperboard app icon
 
 - Adopted the user's clapperboard reference with the circular reel removed and transparent background. Added multi-resolution Windows ICO, executable resources, Qt window/taskbar icon and welcome-screen branding.

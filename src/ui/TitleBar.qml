@@ -14,6 +14,7 @@ Rectangle {
             model: [0,1,2,3,4,5]
             Rectangle {
                 required property int modelData
+                objectName:modelData===4?"maximizeButton":""
                 property string inputRole: "button"
                 width: playerWindow.mini ? 36 : 42; height: 38
                 color: hit.containsMouse || (modelData===4 && playerWindow.maxHovered) ? (modelData===5 ? UiPalette.hover : UiPalette.hover) : "transparent"

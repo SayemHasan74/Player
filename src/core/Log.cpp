@@ -17,7 +17,7 @@ std::thread worker;
 void handler(QtMsgType, const QMessageLogContext &, const QString &text) { Log::write(text); }
 }
 void Log::start() {
-    const QString directory=QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/FlowPlayer/logs";
+    const QString directory=qEnvironmentVariable("FLOW_LOG_DIRECTORY",QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation)+"/FlowPlayer/logs");
     worker=std::thread([directory] {
         QDir().mkpath(directory);
         const auto path=directory+"/flowplayer.log";

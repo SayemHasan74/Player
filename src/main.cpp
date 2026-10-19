@@ -23,6 +23,7 @@
 #include <QIcon>
 #include <QQuickItem>
 #include <QKeyEvent>
+#include <QMouseEvent>
 #include <windows.h>
 #include <objbase.h>
 #include <clocale>
@@ -105,6 +106,23 @@ int main(int argc,char **argv) {
                 bool ok=false;const int quitMs=qEnvironmentVariableIntValue("FLOW_QUIT_MS",&ok);
                 if(ok&&quitMs>0)QTimer::singleShot(quitMs,Qt::PreciseTimer,&window,&QWindow::close);
                 const auto scenario=qEnvironmentVariable("FLOW_SCENARIO");
+                if(scenario=="final-pass"){
+                    auto armed=std::make_shared<bool>(false);
+                    QObject::connect(&controller,&MpvController::videoFramePresented,&window,[&,armed]{if(*armed)return;*armed=true;
+                        auto mark=[&](const QString &phase){Log::write("FINAL_PASS "+QString::fromUtf8(QJsonDocument(QJsonObject{{"phase",phase},{"visible",window.controlsVisible()},{"pause",controller.pause()},{"position",controller.position()},{"volume",controller.volume()},{"popup",window.popupOpen()},{"textFocus",window.activeFocusItem()&&window.activeFocusItem()->property("textEntry").toBool()}}).toJson(QJsonDocument::Compact)));};
+                        auto key=[&](int code){QKeyEvent event(QEvent::KeyPress,code,Qt::NoModifier);QCoreApplication::sendEvent(&window,&event);};
+                        auto *root=window.contentItem()->findChild<QObject*>("sceneRoot",Qt::FindDirectChildrenOnly);QVariant layout;
+                        if(root)QMetaObject::invokeMethod(root,"diagnosticLayoutChecks",Q_RETURN_ARG(QVariant,layout));Log::write("FINAL_LAYOUT "+layout.toString());
+                        const auto button=window.maximizeButtonRect();Log::write(QString("FINAL_MAX_HIT center=%1 outside=%2").arg(button.isValid()&&window.maximizeButtonAt(button.center())).arg(window.maximizeButtonAt(QPointF(100,100))));
+                        QTimer::singleShot(3000,&window,[key,mark]{mark("hidden_before");key(Qt::Key_Right);mark("right_sent");});
+                        QTimer::singleShot(3400,&window,[key,mark]{mark("right_done");key(Qt::Key_Left);});
+                        QTimer::singleShot(3800,&window,[key,mark]{mark("left_done");key(Qt::Key_Up);});
+                        QTimer::singleShot(4100,&window,[key,mark]{mark("up_done");key(Qt::Key_Down);});
+                        QTimer::singleShot(4400,&window,[&,mark]{mark("down_done");QMouseEvent move(QEvent::MouseMove,QPointF(100,100),QPointF(100,100),Qt::NoButton,Qt::NoButton,Qt::NoModifier);QCoreApplication::sendEvent(&window,&move);mark("mouse_moved");});
+                        QTimer::singleShot(4700,&window,[&,key,mark]{auto *root=window.contentItem()->findChild<QObject*>("sceneRoot",Qt::FindDirectChildrenOnly);if(root)QMetaObject::invokeMethod(root,"openUrl",Q_ARG(QVariant,QVariant("https://example.invalid/test")));mark("url_focus");key(Qt::Key_Escape);});
+                        QTimer::singleShot(5300,&window,[mark]{mark("escape_done");});
+                    });
+                }
                 if(scenario.startsWith("part5")&&scenario!="part5-perf"){
                     QObject::connect(&resume,&ResumeStore::playlistChanged,&window,[&]{QJsonArray paths;for(const auto &item:resume.playlist())paths.append(item.toMap().value("path").toString());Log::write("PART5_LIST "+QString::fromUtf8(QJsonDocument(QJsonObject{{"paths",paths},{"current",resume.currentIndex()}}).toJson(QJsonDocument::Compact)));});
                     auto stage=std::make_shared<int>(0);

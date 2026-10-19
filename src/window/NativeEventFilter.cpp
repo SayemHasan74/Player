@@ -12,6 +12,7 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
     auto *msg=static_cast<MSG*>(opaque);
     if(!m_window->nativeId()||msg->hwnd!=reinterpret_cast<HWND>(m_window->nativeId()))return false;
     switch(msg->message) {
+    case WM_CAPTURECHANGED:case WM_CANCELMODE:m_maxPress.cancel();break;
     case WM_ENTERSIZEMOVE:m_window->beginInteractiveResize();break;
     case WM_EXITSIZEMOVE:m_window->endInteractiveResize();break;
     case WM_NCRBUTTONDOWN:case WM_CONTEXTMENU: {
@@ -24,7 +25,8 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
     case WM_NCMBUTTONDOWN:case WM_NCMBUTTONDBLCLK:m_window->toggleFullscreen();*result=0;return true;
     case WM_NCMBUTTONUP:*result=0;return true;
     case WM_NCLBUTTONDBLCLK:
-        if(msg->wParam==HTCAPTION){m_window->toggleMaximized();*result=0;return true;}break;
+        if(msg->wParam==HTCAPTION){m_window->toggleMaximized();*result=0;return true;}
+        if(msg->wParam==HTMAXBUTTON){m_maxPress.press();SetCapture(msg->hwnd);*result=0;return true;}break;
     case WM_SYSCOMMAND:if((msg->wParam&0xFFF0)==SC_MINIMIZE){m_window->requestMinimize();*result=0;return true;}break;
     case WM_NCCALCSIZE:*result=0;return true;
     case WM_ERASEBKGND:*result=1;return true;
@@ -57,7 +59,7 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
             }
         }
         const QPointF logical(p.x/dpr,p.y/dpr);
-        if(m_window->controlsVisible()&&!m_window->mini()&&logical.y()<38&&logical.x()>=m_window->width()-84&&logical.x()<m_window->width()-42) {*result=HTMAXBUTTON;return true;}
+        if(m_window->controlsVisible()&&!m_window->mini()&&m_window->maximizeButtonAt(logical)) {*result=HTMAXBUTTON;return true;}
         *result=m_window->titleAt(logical)?HTCAPTION:HTCLIENT;return true;
     }
     case WM_NCMOUSEMOVE: {
@@ -66,8 +68,18 @@ bool NativeEventFilter::nativeEventFilter(const QByteArray &type,void *opaque,qi
         TRACKMOUSEEVENT track{sizeof(track),TME_LEAVE|TME_NONCLIENT,msg->hwnd,0};TrackMouseEvent(&track);break;
     }
     case WM_NCMOUSELEAVE:m_window->setNativeHover(false);m_window->setMaxHovered(false);break;
-    case WM_NCLBUTTONDOWN:if(msg->wParam==HTMAXBUTTON){*result=0;return true;}break;
-    case WM_NCLBUTTONUP:if(msg->wParam==HTMAXBUTTON){m_window->toggleMaximized();*result=0;return true;}break;
+    case WM_NCLBUTTONDOWN:if(msg->wParam==HTMAXBUTTON){m_maxPress.press();SetCapture(msg->hwnd);*result=0;return true;}break;
+    case WM_LBUTTONUP:case WM_NCLBUTTONUP:
+        if(m_maxPress.pressed()){
+            POINT point{GET_X_LPARAM(msg->lParam),GET_Y_LPARAM(msg->lParam)};
+            if(msg->message==WM_NCLBUTTONUP)ScreenToClient(msg->hwnd,&point);
+            const auto dpr=m_window->devicePixelRatio();
+            const bool activate=m_maxPress.release(m_window->maximizeButtonAt(QPointF(point.x/dpr,point.y/dpr)));
+            if(GetCapture()==msg->hwnd)ReleaseCapture();
+            m_window->setMaxHovered(false);
+            if(activate)m_window->toggleMaximized();
+            *result=0;return true;
+        }break;
     case WM_SIZING: {
         m_window->noteInteractiveResize(int(msg->wParam));
         if(m_window->mini())break;

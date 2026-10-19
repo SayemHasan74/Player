@@ -2,6 +2,7 @@
 #include <QQuickWindow>
 #include <QSettings>
 #include <QTimer>
+#include <QPointer>
 #include "WindowStateMachine.h"
 class MpvController;
 class FramelessWindow final : public QQuickWindow {
@@ -50,12 +51,15 @@ public:
     Q_INVOKABLE void setUiHeld(bool held);
     Q_INVOKABLE void setPopupOpen(bool open) {m_popupOpen=open;}
     bool popupOpen() const {return m_popupOpen;}
-    void setNativeHover(bool hovered) {m_nativeHover=hovered;pointerActivity();}
+    void setNativeHover(bool hovered) {m_nativeHover=hovered;if(hovered)pointerActivity();else updateControlTimer();}
     Q_INVOKABLE void openSubtitleDialog();
     Q_INVOKABLE void requestUrl();
     bool seekAt(const QPointF &point) const;
     bool titleAt(const QPointF &point) const;
     Q_INVOKABLE void requestMinimize();
+    Q_INVOKABLE void pauseAndMinimize();
+    bool maximizeButtonAt(const QPointF &point) const;
+    QRectF maximizeButtonRect() const;
     Q_INVOKABLE void openDialog();
     double videoAspect() const {return m_aspect;}
     quintptr nativeId() const {return m_nativeId;}
@@ -91,6 +95,7 @@ private:
     bool m_diagnosticVideoHidden=false;
     bool m_controlsVisible=true,m_uiHeld=false,m_controllerPaused=true;
     bool m_popupOpen=false,m_nativeHover=false;
+    QPointer<QQuickItem> m_maximizeButton;
     QPointF m_pressPosition;
     bool m_interactiveSizing=false;
     int m_resizeEdge=0;
@@ -102,4 +107,7 @@ private:
     void applyPin();
     QString inputRoleAt(const QPointF &point) const;
     void openNativeDialog(bool subtitle);
+    void updateControlTimer();
+    void minimize(bool stayPaused);
+    void commitMinimize();
 };
