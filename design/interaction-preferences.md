@@ -1,5 +1,7 @@
 # Locked user preferences — Part 4 audit
 
+- 2026-10-23: more transparent TOP and BOTTOM bars (~30% transparency), retaining neutral gray. Compact no-file startup Home560x360. Maximize click must act instead of only showing the little Windows box; use normal Qt/QML mouse delivery with Snap HTMAXBUTTON hover, replacing the earlier separate native-capture mechanism. User requested deployment cleanup and latest GitHub push. See Pending UI Preferences.txt and tests/OCT23_UI.md.
+
 - Final Pass is implemented: global Escape pauses/minimizes from every mode and focus context; taskbar restore stays paused. Keyboard arrow seek/volume must not reveal auto-hidden controls; mouse movement reveals controls while playing. Correct native maximize/restore press/release and saved geometry. Bottom controls shrink another20% after the previous20% reduction, cumulative0.64 of the original (about444×68). Earlier Esc-dismiss/fullscreen-exit instructions and scale0.8 are superseded. See Final Pass.md and tests/FINAL_PASS.md.
 
 - Final color clarification: use neutral iOS-style translucent GRAY, not blue-gray. Apply it to every surface, explicitly including the top title bar, Home, bottom bar, context menus, tooltips, settings, playlist and toasts. Pale neutral text; blue is an active-control accent only. Reference: design/references/neutral-gray-material.png. The blue seen behind the reference material is not a requested blue background. Preserve the no-blur/no-shader rule; this is a color/material reference, not Wi-Fi UI functionality.

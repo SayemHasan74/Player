@@ -5,6 +5,10 @@ QtObject {
     // naturally; no blue background tint, blur or shader effect.
     readonly property color surfaceTop:"#e348484a"
     readonly property color surfaceBottom:"#e3333335"
+    // More transparent playback bars; darker neutral gray keeps pale text
+    // readable when bright video is visible underneath.
+    readonly property color barTop:"#b3303032"
+    readonly property color barBottom:"#b3202022"
     readonly property color surface:"#e33b3b3d"
     readonly property color background:"#29292b"
     readonly property color border:"#68686b"

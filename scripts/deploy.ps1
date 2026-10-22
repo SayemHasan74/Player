@@ -26,6 +26,6 @@ Copy-Item -LiteralPath "$root\deps\Qt\plugins\imageformats\qjpeg.dll" -Destinati
 }
 # Only the Windows platform plugin is needed. Do not deploy Widgets, multimedia, WebEngine or unused QML modules.
 @('[Paths]','Plugins=.','QmlImports=qml') | Set-Content -LiteralPath "$out\qt.conf" -Encoding ascii
-$manifest=[ordered]@{part=5;revision='final-pass';accepted=$false;manualAcceptance='pending';executableSha256=(Get-FileHash -LiteralPath "$out\FlowPlayer.exe" -Algorithm SHA256).Hash.ToLowerInvariant();qt='6.12.0';msvc='19.44.35228';libmpv='dde0671072';sqlite='3.53.4';report='tests/FINAL_PASS.md';previousUiReport='tests/UI_POLISH.md';previousPartReport='tests/PART5_RESULTS.md'}
+$manifest=[ordered]@{part=5;revision='caption-transparency-compact-startup';accepted=$false;manualAcceptance='pending';executableSha256=(Get-FileHash -LiteralPath "$out\FlowPlayer.exe" -Algorithm SHA256).Hash.ToLowerInvariant();qt='6.12.0';msvc='19.44.35228';libmpv='dde0671072';sqlite='3.53.4';report='tests/OCT23_UI.md';previousUiReport='tests/FINAL_PASS.md';previousPartReport='tests/PART5_RESULTS.md'}
 $manifest | ConvertTo-Json | Set-Content -LiteralPath "$out\build-manifest.json" -Encoding utf8
 Write-Output $out

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-10-23 — caption click routing, transparent bars and compact startup
+
+- Replaced custom native maximize capture with non-client-to-client mouse forwarding into the normal Qt/QML button path. Retained HTMAXBUTTON hover for Snap Layouts; verified native/client releases each activate once and outside/duplicate releases do not.
+- Increased top/bottom bar transparency from about11% to30%, keeping neutral gray and pale foregrounds. Other menus keep their existing opacity.
+- Set default no-file welcome size to560x360 logical pixels instead of the last large video rectangle. Deployed the combined build, refreshed the desktop shortcut and removed the obsolete previous executable.
+
 ## Final pass — window button, keyboard behavior and smaller controls
 
 - Paired native maximize-button presses with captured client/non-client releases, canceling outside/duplicate/canceled releases. Hit-testing follows the QML visual delegate rather than hard-coded coordinates. Guarded native geometry callbacks so maximize/restore cannot overwrite normal restore bounds.

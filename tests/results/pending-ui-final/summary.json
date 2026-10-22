@@ -1,0 +1,122 @@
+{
+  "executableSha256": "b292b3c4bcfeaf9bf41c08ddc75959bfc6dc6ad382a0aa79cb3aab7a67793f91",
+  "passed": true,
+  "stages": {
+    "hidden_before": {
+      "pause": false,
+      "phase": "hidden_before",
+      "popup": false,
+      "position": 3.017,
+      "textFocus": false,
+      "visible": false,
+      "volume": 100
+    },
+    "right_sent": {
+      "pause": false,
+      "phase": "right_sent",
+      "popup": false,
+      "position": 3.017,
+      "textFocus": false,
+      "visible": false,
+      "volume": 100
+    },
+    "right_done": {
+      "pause": false,
+      "phase": "right_done",
+      "popup": false,
+      "position": 8.067,
+      "textFocus": false,
+      "visible": false,
+      "volume": 100
+    },
+    "left_done": {
+      "pause": false,
+      "phase": "left_done",
+      "popup": false,
+      "position": 3.2169999999999996,
+      "textFocus": false,
+      "visible": false,
+      "volume": 100
+    },
+    "up_done": {
+      "pause": false,
+      "phase": "up_done",
+      "popup": false,
+      "position": 3.517,
+      "textFocus": false,
+      "visible": false,
+      "volume": 105
+    },
+    "down_done": {
+      "pause": false,
+      "phase": "down_done",
+      "popup": false,
+      "position": 3.8169999999999997,
+      "textFocus": false,
+      "visible": false,
+      "volume": 100
+    },
+    "mouse_moved": {
+      "pause": false,
+      "phase": "mouse_moved",
+      "popup": false,
+      "position": 3.8169999999999997,
+      "textFocus": false,
+      "visible": true,
+      "volume": 100
+    },
+    "url_focus": {
+      "pause": false,
+      "phase": "url_focus",
+      "popup": true,
+      "position": 4.1,
+      "textFocus": true,
+      "visible": true,
+      "volume": 100
+    },
+    "escape_done": {
+      "pause": true,
+      "phase": "escape_done",
+      "popup": false,
+      "position": 4.117,
+      "textFocus": false,
+      "visible": true,
+      "volume": 100
+    }
+  },
+  "layout": {
+    "layouts": [
+      {
+        "width": 240,
+        "volumeClear": true,
+        "actionsClear": true,
+        "seekWidth": 202
+      },
+      {
+        "width": 336,
+        "volumeClear": true,
+        "actionsClear": true,
+        "seekWidth": 352
+      },
+      {
+        "width": 444.16,
+        "volumeClear": true,
+        "actionsClear": true,
+        "seekWidth": 521
+      }
+    ],
+    "homeSameScene": true,
+    "menusSameScene": true
+  },
+  "captionRoute": {
+    "nativeRelease": true,
+    "clientRelease": true,
+    "outsideReleaseCanceled": true,
+    "duplicateReleaseIgnored": true
+  },
+  "cleanExit": true,
+  "neverActivated": true,
+  "nativeDesktopMinimize": "suppressed; production request/pause policy checked",
+  "nativeMaximizeRestore": "desktop geometry and Windows Snap flyout remain manual; actual QML click route checked without OS capture",
+  "errors": []
+}

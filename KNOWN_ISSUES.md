@@ -1,5 +1,7 @@
 # Current limitations — Part 5
 
+Current2026-10-23 caption/transparency/startup revision: tests/OCT23_UI.md, hashb292b3c4.... Native caption-to-QML click routing now passes event-delivery checks; the user-reported small-box/nonresponsive-button bug is not labeled physically confirmed fixed until the user checks the actual Windows interaction. Prior performance findings remain scoped below.
+
 Latest behavioral build9f3d634a... is covered by tests/FINAL_PASS.md: maximize/restore handling, global Escape, hidden-arrow behavior and scale0.64 controls. Bounded input checks passed; physical native maximize/minimize/fullscreen checks remain manual. No broad playback/RAM/soak acceptance was rerun or transferred from older hashes.
 
 Latest UI-only revision is documented in tests/UI_POLISH.md (hash5fc73d5b...). It changes palette/layout/menu anchors/state icons; it does not resolve or re-certify the older playback/performance findings below. Their hashes remain explicit.

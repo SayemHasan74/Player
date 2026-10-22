@@ -114,6 +114,14 @@ int main(int argc,char **argv) {
                         auto *root=window.contentItem()->findChild<QObject*>("sceneRoot",Qt::FindDirectChildrenOnly);QVariant layout;
                         if(root)QMetaObject::invokeMethod(root,"diagnosticLayoutChecks",Q_RETURN_ARG(QVariant,layout));Log::write("FINAL_LAYOUT "+layout.toString());
                         const auto button=window.maximizeButtonRect();Log::write(QString("FINAL_MAX_HIT center=%1 outside=%2").arg(button.isValid()&&window.maximizeButtonAt(button.center())).arg(window.maximizeButtonAt(QPointF(100,100))));
+                        QTimer::singleShot(300,&window,[&]{
+                            const auto center=window.maximizeButtonRect().center();const auto dpr=window.devicePixelRatio();POINT point{qRound(center.x()*dpr),qRound(center.y()*dpr)};ClientToScreen(reinterpret_cast<HWND>(window.nativeId()),&point);
+                            auto nc=[&](UINT type){MSG message{};message.hwnd=reinterpret_cast<HWND>(window.nativeId());message.message=type;message.wParam=HTMAXBUTTON;message.lParam=MAKELPARAM(point.x,point.y);qintptr result=0;native.nativeEventFilter("windows_generic_MSG",&message,&result);};
+                            auto release=[&](QPointF where){QMouseEvent event(QEvent::MouseButtonRelease,where,window.mapToGlobal(where),Qt::LeftButton,Qt::NoButton,Qt::NoModifier);QCoreApplication::sendEvent(&window,&event);};
+                            Log::write("CAPTION_ROUTE begin");nc(WM_NCLBUTTONDOWN);nc(WM_NCLBUTTONUP);nc(WM_NCLBUTTONUP);Log::write("CAPTION_ROUTE nc_release_done");
+                            nc(WM_NCLBUTTONDOWN);release(center);Log::write("CAPTION_ROUTE client_release_done");
+                            nc(WM_NCLBUTTONDOWN);QMouseEvent move(QEvent::MouseMove,QPointF(100,100),window.mapToGlobal(QPointF(100,100)),Qt::NoButton,Qt::LeftButton,Qt::NoModifier);QCoreApplication::sendEvent(&window,&move);release(QPointF(100,100));Log::write("CAPTION_ROUTE outside_release_done");
+                        });
                         QTimer::singleShot(3000,&window,[key,mark]{mark("hidden_before");key(Qt::Key_Right);mark("right_sent");});
                         QTimer::singleShot(3400,&window,[key,mark]{mark("right_done");key(Qt::Key_Left);});
                         QTimer::singleShot(3800,&window,[key,mark]{mark("left_done");key(Qt::Key_Up);});

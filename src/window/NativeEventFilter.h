@@ -1,6 +1,6 @@
 #pragma once
 #include <QAbstractNativeEventFilter>
-#include "NativeButtonPress.h"
+#include <QPoint>
 class FramelessWindow;
 class NativeEventFilter final : public QAbstractNativeEventFilter {
 public:
@@ -8,5 +8,5 @@ public:
     bool nativeEventFilter(const QByteArray &,void *,qintptr *) override;
 private:
     FramelessWindow *m_window;
-    NativeButtonPress m_maxPress;
+    void forwardMaximizeMouse(unsigned int clientMessage,const QPoint &clientPosition);
 };

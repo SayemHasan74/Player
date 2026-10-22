@@ -40,6 +40,8 @@ FramelessWindow::FramelessWindow(MpvController *c):m_controller(c) {
     QSettings settings;m_lockAspect=settings.value("window/lockAspectRatio",true).toBool();
     const auto work=screen()->availableGeometry();
     auto geometry=settings.value("window/geometry",QRect(work.center()-QPoint(480,270),QSize(960,540))).toRect();
+    const bool welcomeLaunch=QCoreApplication::arguments().size()==1&&(!c->settings()||!c->settings()->values().value("autoResume",false).toBool());
+    if(welcomeLaunch){const auto size=QSize(560,360).boundedTo(work.size());geometry=QRect(work.center()-QPoint(size.width()/2,size.height()/2),size);}
     if(!work.intersects(geometry))geometry.moveCenter(work.center());
     setGeometry(geometry);m_lastNormalGeometry=geometry;
     m_modes=WindowStateMachine(geometry);
@@ -213,6 +215,7 @@ void FramelessWindow::toggleFullscreen() {toggleMode(WindowStateMachine::Mode::F
 void FramelessWindow::exitFullscreen() {if(fullscreen()){m_modes.exitFullscreen();applyMode();}}
 void FramelessWindow::toggleMini() {toggleMode(WindowStateMachine::Mode::Mini);}
 void FramelessWindow::toggleMaximized() {
+    if(qEnvironmentVariableIsSet("FLOW_TEST_BACKGROUND")){Log::write("BACKGROUND_MAXIMIZE_SUPPRESSED");return;}
     if(fullscreen()){exitFullscreen();return;}
     if(mini()){toggleMini();return;}
     rememberModeGeometry();

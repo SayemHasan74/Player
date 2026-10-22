@@ -12,7 +12,7 @@ Rectangle {
     signal playlistRequested()
     width:Math.min(694*uiScale,parent.width-24);height:(narrow?150:106)*uiScale;radius:9*uiScale
     border.color:UiPalette.border
-    gradient:Gradient {GradientStop{position:0;color:UiPalette.surfaceTop} GradientStop{position:1;color:UiPalette.surfaceBottom}}
+    gradient:Gradient {GradientStop{position:0;color:UiPalette.barTop} GradientStop{position:1;color:UiPalette.barBottom}}
     HoverHandler{id:hover}
     function menu(kind,item){let p=item.mapToItem(controls.parent,0,0);menuRequested(kind,p.x,p.y)}
     function stamp(seconds){seconds=Math.max(0,Math.floor(seconds));let h=Math.floor(seconds/3600),m=Math.floor(seconds/60)%60,s=seconds%60;return (h>0?h+":"+String(m).padStart(2,"0"):String(m))+":"+String(s).padStart(2,"0")}

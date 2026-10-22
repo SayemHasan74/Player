@@ -2,7 +2,7 @@ import QtQuick
 Rectangle {
     id: bar
     height: 38
-    gradient:Gradient {GradientStop{position:0;color:UiPalette.surfaceTop} GradientStop{position:1;color:UiPalette.surfaceBottom}}
+    gradient:Gradient {GradientStop{position:0;color:UiPalette.barTop} GradientStop{position:1;color:UiPalette.barBottom}}
     Text {
         anchors { left: parent.left; leftMargin: 14; right: buttons.left; rightMargin: 8; verticalCenter: parent.verticalCenter }
         text: mpv.title; color: UiPalette.text; font.pixelSize: 13; elide: Text.ElideRight

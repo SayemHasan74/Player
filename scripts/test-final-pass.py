@@ -26,8 +26,13 @@ assert stages['url_focus']['popup'] and stages['url_focus']['textFocus'],stages
 assert stages['escape_done']['pause'] and not stages['escape_done']['popup'],stages
 assert 'BACKGROUND_MINIMIZE_SUPPRESSED resumeOnRestore=0' in log
 assert 'FINAL_MAX_HIT center=1 outside=0' in log
+if 'CAPTION_ROUTE begin' in log:
+    captions=log.split('CAPTION_ROUTE begin',1)[1].split('CAPTION_ROUTE outside_release_done',1)[0]
+    assert captions.count('BACKGROUND_MAXIMIZE_SUPPRESSED')==2,captions
+    assert captions.split('CAPTION_ROUTE nc_release_done',1)[0].count('BACKGROUND_MAXIMIZE_SUPPRESSED')==1,captions
+    assert captions.split('CAPTION_ROUTE client_release_done',1)[1].count('BACKGROUND_MAXIMIZE_SUPPRESSED')==0,captions
 layout=json.loads(next(line.split('FINAL_LAYOUT ',1)[1] for line in log.splitlines() if 'FINAL_LAYOUT ' in line))
 assert all(r['volumeClear'] and r['actionsClear'] and r['seekWidth']>0 for r in layout['layouts']),layout
 assert 'WINDOW_ACTIVE=1' not in log
-result={'executableSha256':hashlib.sha256(exe.read_bytes()).hexdigest(),'passed':True,'stages':stages,'layout':layout,'cleanExit':True,'neverActivated':True,'nativeDesktopMinimize':'suppressed; production request/pause policy checked','nativeMaximizeRestore':'manual; capture pairing tested in unit target','errors':errors}
+result={'executableSha256':hashlib.sha256(exe.read_bytes()).hexdigest(),'passed':True,'stages':stages,'layout':layout,'captionRoute':{'nativeRelease':True,'clientRelease':True,'outsideReleaseCanceled':True,'duplicateReleaseIgnored':True} if 'CAPTION_ROUTE begin' in log else None,'cleanExit':True,'neverActivated':True,'nativeDesktopMinimize':'suppressed; production request/pause policy checked','nativeMaximizeRestore':'desktop geometry and Windows Snap flyout remain manual; actual QML click route checked without OS capture','errors':errors}
 (out/'summary.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2))

@@ -1,5 +1,7 @@
 # User constraints
 
+- 2026-10-23: Pending UI Preferences.txt is authorized and implemented. User clarified maximize click shows a small box but does nothing; route HTMAXBUTTON clicks into normal Qt client mouse/QML handling, without independent native capture/direct release toggle. Preserve Snap hover. Top and bottom bars use about70% opaque neutral gray (about30% transparent); other menus retain their existing opacity. Default no-file Home is560x360. User requested replacement deployment, obsolete executable removal and GitHub push. No additional broad benchmarks.
+
 - Final Pass.md is now authorized for implementation: Escape globally pauses and minimizes (including menus/text focus), without auto-resuming on restore; playback arrow seek/volume keys do not reveal hidden controls. Mouse movement reveals controls. Fix native maximize/restore press capture and preserve restore geometry. Bottom UI shrinks another20%, cumulative scale0.64. This supersedes earlier Esc/fullscreen behavior and bottom-bar scale0.8. Background validation must suppress actual desktop minimize/resize; isolate logs with FLOW_LOG_DIRECTORY while a user player is open.
 
 - App branding is now authorized: use assets/flowplayer.png and the multi-resolution assets/flowplayer.ico. The user supplied a clapperboard/reel icon and requested removal of the circular reel. Keep only the clapperboard with alpha transparency; no IINA logo. Source edit/prompt recorded in assets/README.md.

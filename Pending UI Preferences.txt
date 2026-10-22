@@ -1,0 +1,14 @@
+Pending UI preferences — 2026-10-22
+
+Implementation authorized on 2026-10-23, together with a compact startup window and deployment cleanup.
+
+1. Square maximize/restore button
+   The user reports that the square title-bar button still does not work properly. Revisit and fix its maximize/restore behavior; do not treat the earlier fix as a confirmed resolution.
+
+2. More transparent player bars
+   Make BOTH the top title bar and the bottom playback-control bar more transparent than they are now. Preserve the existing neutral gray color preference.
+
+3. Compact startup window
+   Make the no-file welcome/startup window approximately IINA-sized rather than reusing a large video window. Implemented default size:560x360 logical pixels.
+
+Status: revised Qt caption-button click routing, more transparent top/bottom bars and compact startup window implemented together. Build replaced, desktop shortcut refreshed and obsolete executable backup removed. Validation and manual-check limits: tests/OCT23_UI.md.
