@@ -1,20 +1,66 @@
-# FlowPlayer — Windows media player
+<p align="center">
+  <img src="assets/flowplayer.png" width="96" alt="FlowPlayer clapperboard icon">
+</p>
 
-Latest (2026-10-23): maximize clicks now go through Qt's normal button path, replacing the previous separate native capture code. Top and bottom bars are about30% transparent neutral gray. The default no-file welcome window is compact560×360. The combined build has replaced the previous executable; the desktop shortcut points to `out/FlowPlayer/FlowPlayer.exe`, and the obsolete backup was removed. See [current checks and remaining manual confirmation](tests/OCT23_UI.md).
+<h1 align="center">FlowPlayer</h1>
 
-Latest final pass: **Escape pauses and minimizes from every player mode**, including when a menu or text field has focus; restoring from the taskbar leaves playback paused. Arrow-key seeking/volume changes keep auto-hidden controls hidden; mouse movement reveals them. Maximize/restore uses paired native capture/release and guarded restore geometry. The entire bottom bar is another20% smaller: cumulative scale0.64, maximum approximately444×68px. See [Final Pass](<Final Pass.md>) and [validation](tests/FINAL_PASS.md). Earlier Esc behavior and 555×85 sizing below are historical.
+<p align="center"><strong>Your videos. Your place. One clean player.</strong></p>
+<p align="center">An IINA-inspired media player built for Windows 11, with translucent gray controls, per-file resume, and a playlist that stays out of the way.</p>
 
-Latest UI revision: the bottom bar is 20% smaller (about 555×85 px at normal width), with neutral iOS-style translucent gray shared by EVERY surface, including title bar, Home, menus, settings, playlist, tooltips and toasts. Backgrounds have no blue tint; blue is an active-control accent. Fullscreen is immediately left of More. Fullscreen/maximize icons change to their corresponding exit/restore icons. Right-click menus start at the cursor and scroll to fit the space below, opening above only when too close to the bottom edge; bottom-control menus open above their button. Earlier cream/olive controls, teal/purple Home colors and four-action geometry below describe older layouts. See [UI revision checks](tests/UI_POLISH.md).
+<p align="center">
+  <a href="https://github.com/SayemHasan74/Player"><img alt="Platform: Windows 11 x64" src="https://img.shields.io/badge/Windows_11-x64-0078D4"></a>
+  <img alt="C++20" src="https://img.shields.io/badge/C%2B%2B-20-00599C">
+  <img alt="Qt Quick 6" src="https://img.shields.io/badge/Qt_Quick-6-41CD52">
+  <img alt="Powered by libmpv" src="https://img.shields.io/badge/playback-libmpv-694C9F">
+</p>
 
-Latest: [Part 5 results and manual checklist](tests/PART5_RESULTS.md), [locked interaction preferences](design/interaction-preferences.md). The right-side playlist slides over the existing scene without moving video or controls. Folder sorting, independent resume, auto-advance, custom ordering, single instance, SMTC and sleep prevention are implemented. Visual/native acceptance and any measured performance failures remain explicit in the report.
+<p align="center">
+  <a href="#what-makes-flowplayer-different">Features</a> ·
+  <a href="#get-started">Get started</a> ·
+  <a href="KNOWN_ISSUES.md">Known issues</a> ·
+  <a href="https://github.com/SayemHasan74/Player/issues">Feedback</a>
+</p>
 
-Windows 11 x64. C++20 / CMake / MSVC 2022. Video is rendered by libmpv's OpenGL render API into a `QQuickFramebufferObject`, which Qt Quick composites with plain QML controls inside the same `QQuickWindow`. No native child video window or overlay window exists.
+## What makes FlowPlayer different
 
-**Parts 1–5 implementations are present; full acceptance remains pending.** Reports for earlier parts apply to their own executable hashes; they do not certify this release.
+- **A calm interface.** Neutral, translucent gray title and playback bars, compact controls, and auto-hide that lets the video take the screen.
+- **One player in every mode.** Windowed, fullscreen, and Mini share the same Qt Quick scene. Controls and menus stay in that scene alongside the video.
+- **Pick up where you left off.** Independent resume positions and track preferences for each file, plus a recent-history Home screen with thumbnails and progress.
+- **A playlist over your video.** The right-side panel overlays the player without squeezing the picture. Folder ordering, episode navigation, and per-item progress keep a series organized.
+- **Tracks and subtitles within reach.** Audio and subtitle selection, external subtitles through libass, delay adjustments, playback speed, and a chapter-aware seek bar.
+- **Built for Windows.** Frameless resizing, Snap Layout support, media keys, System Media Transport Controls, and single-instance file opening.
+- **libmpv at the core.** Hardware-decoding support, asynchronous commands, background history work, and callback-driven video rendering.
 
-History uses SQLite **3.53.4 amalgamation**, compiled statically with WAL, synchronous FULL and schema version 1. The [official amalgamation](https://www.sqlite.org/amalgamation.html) archive and SHA-256 are pinned in scripts/dependencies.lock.json and fetched by scripts/fetch-deps.py. History lives at `%APPDATA%/FlowPlayer/flow.db`; JPEG thumbnails at `%LOCALAPPDATA%/FlowPlayer/thumbs`. The home screen shows 10 recent entries; 200 retain independent resume state. Database access, identity hashing and thumbnail work run on workers. Thumbnail jobs wait during playback to protect frame timing.
+## Get started
 
-User revisions on 2026-10-18: resident RAM below **500 MB** is accepted, including cache; the earlier 150/300 MB limits are superseded. A first-deployment-only startup exception is accepted; subsequent fully closed launches must stay below 500 ms. All five manual checks were reported passed. Their original executable hash is retained in `tests/manual-results.json`. No elevated RAM profiling is needed.
+FlowPlayer currently uses a **source-build and portable-folder workflow**. See [Build](#build) for the pinned toolchain and setup. After building and deploying:
+
+```powershell
+# Open the compact welcome screen:
+.\out\FlowPlayer\FlowPlayer.exe
+# Or open a video directly:
+.\out\FlowPlayer\FlowPlayer.exe 'D:\Videos\movie.mkv'
+```
+
+Drag a file into the window, or press **Ctrl+O** to open one. Use **Space** to pause/play, **Left/Right** to seek five seconds, **F** for fullscreen, and **L** for the playlist. **Escape pauses and minimizes**; restoring keeps playback paused. Arrow keys leave auto-hidden controls hidden; mouse movement reveals them.
+
+## Project status
+
+FlowPlayer is in active development. The five planned implementation stages are present, but complete visual and performance acceptance is still pending. Hardware-decoding support does not guarantee tear-free playback on every system; measured failures and unverified behavior are tracked in [Known issues](KNOWN_ISSUES.md).
+
+The latest UI update adds more transparent title/playback bars, revised maximize-button click routing, and a **560 × 360** default welcome window. See the [latest validation report](tests/OCT23_UI.md) for checks and remaining manual confirmation. Older reports apply only to their recorded executable hashes.
+
+## Help shape FlowPlayer
+
+If this is the kind of Windows player you want to use, **give the repository a star** to follow its progress. Bug reports and focused improvements are welcome through [Issues](https://github.com/SayemHasan74/Player/issues) and [pull requests](https://github.com/SayemHasan74/Player/pulls).
+
+For a useful bug report, include your Windows version, GPU/driver, build commit, reproduction steps, and the relevant log excerpt. Remove private filenames, URLs, or other personal details before posting logs. For playback issues, include the codec and resolution when available.
+
+## Technical documentation
+
+C++20 / CMake / MSVC 2022. libmpv renders into a `QQuickFramebufferObject`; Qt Quick composites video and QML controls inside one `QQuickWindow`. There is no separate native video or overlay window.
+
+SQLite history, file identity hashing, and thumbnail generation run on workers. History is stored at `%APPDATA%/FlowPlayer/flow.db`; thumbnails and logs live under `%LOCALAPPDATA%/FlowPlayer`. History retains 200 entries while Home shows the latest 10. Thumbnail generation waits during playback to protect frame timing.
 
 ## Exact dependencies
 
